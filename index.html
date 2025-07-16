@@ -75,17 +75,6 @@
             }
         }
         
-        @keyframes slideInRight {
-            from {
-                opacity: 0;
-                transform: translateX(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-        
         @keyframes scaleIn {
             from {
                 opacity: 0;
@@ -134,6 +123,17 @@
             background: var(--primary-blue-light);
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(30, 64, 175, 0.3);
+        }
+
+        .btn-disabled {
+            background: #cbd5e1; /* Tailwind gray-300 */
+            color: #64748b; /* Tailwind gray-600 */
+            border: none;
+            border-radius: 8px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: not-allowed;
         }
         
         .btn-secondary {
@@ -250,6 +250,17 @@
             <p class="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
                 Comprehensive practice tests based on the official Sindh University entry test syllabus. 
                 Prepare with confidence using our expertly designed assessment platform.
+            </p>
+        </div>
+
+        <!-- Notice -->
+        <div class="bg-blue-50 border border-blue-300 text-blue-700 px-6 py-4 rounded-xl mb-12 flex items-center justify-center animate-fadeInUp" style="animation-delay: 0.3s;">
+            <i data-lucide="lock" class="w-8 h-8 mr-3 text-blue-600"></i> <!-- Lock icon, larger size, and darker blue color -->
+            <p class="font-medium text-center">
+                <span class="font-bold">IMPORTANT NOTICE:</span> All mock tests are password protected. For the password, please contact us on WhatsApp: 
+                <a href="https://wa.me/923480358640" target="_blank" rel="noopener noreferrer" class="text-blue-800 underline hover:text-blue-600">
+                    +92 348 0358640
+                </a>
             </p>
         </div>
 
@@ -392,6 +403,11 @@
                 mockTests.forEach((test, index) => {
                     const difficultyColor = getDifficultyColor(test.difficulty);
                     
+                    // Determine button text and class based on test ID
+                    const buttonText = test.id === 1 ? 'Start Test' : 'Coming Soon';
+                    const buttonClass = test.id === 1 ? 'btn-primary' : 'btn-disabled';
+                    const buttonIcon = test.id === 1 ? 'play' : 'hourglass'; // Use 'hourglass' for coming soon
+
                     const card = $(`
                         <div class="card-professional p-6 cursor-pointer mock-test-card animate-scaleIn" 
                              style="animation-delay: ${0.8 + index * 0.1}s;" data-test-id="${test.id}">
@@ -424,9 +440,9 @@
                                 </div>
                             </div>
                             
-                            <button class="w-full btn-primary start-test-btn" data-test-id="${test.id}">
-                                <i data-lucide="play" class="w-4 h-4 mr-2 inline"></i>
-                                Start Test
+                            <button class="w-full ${buttonClass} start-test-btn" data-test-id="${test.id}" ${test.id !== 1 ? 'disabled' : ''}>
+                                <i data-lucide="${buttonIcon}" class="w-4 h-4 mr-2 inline"></i>
+                                ${buttonText}
                             </button>
                         </div>
                     `);
@@ -464,8 +480,8 @@
                         // Redirect to uos-quiz1.html for Mock Test 1
                         window.location.href = 'uos-quiz1.html'; 
                     } else {
-                        // Show success message for other tests (or implement their specific links)
-                        showNotification(`${test.title} is ready! Good luck with your preparation!`, 'success');
+                        // Show "Coming Soon" message for other tests
+                        showNotification(`${test.title}: Coming Soon! Stay tuned for more updates.`, 'info');
                     }
                 }, 1500);
             }
@@ -507,10 +523,10 @@
             // Initialize the page
             generateMockTestCards();
 
-            // Welcome message
-            setTimeout(() => {
-                showNotification('Welcome to UOS Mock Test Portal! Select any test to begin.', 'info');
-            }, 1000);
+            // Welcome message - Removed as it might conflict with the new notice
+            // setTimeout(() => {
+            //     showNotification('Welcome to UOS Mock Test Portal! Select any test to begin.', 'info');
+            // }, 1000);
 
             // Performance monitoring
             console.log('%c🎓 University of Sindh Mock Test Portal', 'color: #1e40af; font-size: 20px; font-weight: bold;');

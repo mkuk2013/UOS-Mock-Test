@@ -1,0 +1,1833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+<link rel="manifest" href="site.webmanifest" />
+    <title>UOS Mock Test 2- Advanced Testing Platform</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        /* Modern Color Palette */
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #0f172a;
+            --accent: #f59e0b;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --error: #ef4444;
+            --surface: #ffffff;
+            --background: #f8fafc;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+        }
+        
+        /* Modern Gradients */
+        .gradient-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-hero {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+        
+        /* Modern Animations */
+        @keyframes slide-in {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes fade-in {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-slide-in { animation: slide-in 0.5s ease-out; }
+        .animate-fade-in { animation: fade-in 0.6s ease-out; }
+        
+        /* Glass Morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Modern Card Design */
+        .modern-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Question Navigation */
+        .question-nav {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+            gap: 8px;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .question-nav-item {
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .question-nav-item.not-attempted {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .question-nav-item.answered {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border-color: #10b981;
+        }
+        
+        .question-nav-item.current {
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            color: white;
+            border-color: #6366f1;
+            transform: scale(1.1);
+        }
+        
+        .question-nav-item:hover:not(.current) {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Enhanced Option Styles */
+        .option-container {
+            display: grid;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .option-item {
+            position: relative;
+            padding: 16px 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .option-item:hover {
+            border-color: rgba(99, 102, 241, 0.5);
+            background: rgba(99, 102, 241, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .option-item.selected {
+            border-color: #6366f1;
+            background: rgba(99, 102, 241, 0.2);
+        }
+        
+        .option-item input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        
+        .option-label {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: white; 
+        }
+        
+        .option-marker {
+            width: 24px;
+            height: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+            margin-right: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .option-item.selected .option-marker {
+            border-color: white;
+            background: white;
+        }
+        
+        .option-item.selected .option-marker::after {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #6366f1;
+        }
+        
+        /* Modern Button Styles */
+        .btn-modern {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+            color: white;
+            padding: 14px 28px;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #64748b 0%, #475569 100%);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 26px;
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #475569 0%, #334155 100%);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(100, 116, 139, 0.4);
+        }
+        
+        .btn-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 14px 28px;
+        }
+        
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+        }
+
+        .question-header h2 {
+            color: white;
+        }
+        
+        .main-timer {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* --- LIGHT MODE STYLES --- */
+        body.light-mode {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        body.light-mode .text-white,
+        body.light-mode .text-white\/70,
+        body.light-mode .text-white\/80 {
+            color: var(--text-primary) !important;
+        }
+        
+        body.light-mode .btn-primary,
+        body.light-mode .btn-success,
+        body.light-mode .gradient-primary .text-white,
+        body.light-mode .question-nav-item.answered,
+        body.light-mode .question-nav-item.current,
+        body.light-mode .review-indicator,
+        body.light-mode .option-item.selected .option-marker::after {
+            color: white !important;
+        }
+        
+        body.light-mode .glass {
+            background: rgba(255, 255, 255, 0.8);
+            border-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        body.light-mode .modern-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-color: rgba(0, 0, 0, 0.1);
+            color: var(--text-primary);
+        }
+        
+        body.light-mode .question-nav {
+            background: rgba(255, 255, 255, 0.3);
+        }
+        
+        body.light-mode .question-nav-item.not-attempted {
+            background: rgba(0, 0, 0, 0.1);
+            color: var(--text-secondary);
+            border-color: rgba(0, 0, 0, 0.2);
+        }
+        
+        body.light-mode .option-label {
+            color: var(--text-primary);
+        }
+
+        body.light-mode .option-item {
+            border-color: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.8);
+        }
+        
+        body.light-mode .option-marker {
+            border-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        body.light-mode .option-item.selected {
+            border-color: var(--primary);
+            background: rgba(99, 102, 241, 0.2);
+        }
+        
+        body.light-mode .option-item.selected .option-label {
+             color: var(--text-primary);
+        }
+        
+        body.light-mode .option-item.selected .option-marker {
+            border-color: var(--primary);
+            background: var(--primary);
+        }
+
+        body.light-mode .question-header h2 {
+            color: var(--text-primary);
+        }
+
+        body.light-mode .main-timer {
+            color: red; /* Changed to red */
+            background-color: #e2e8f0;
+        }
+        
+        body.light-mode .btn-secondary {
+            background: linear-gradient(135deg, #e2e8f0 0%, #cbd5e1 100%);
+            color: var(--text-primary);
+            border-color: rgba(0, 0, 0, 0.3);
+        }
+        
+        body.light-mode .btn-secondary:hover {
+            background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+            border-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        /* --- DARK MODE SUPPORT (Default) --- */
+        body.dark-mode {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+        
+        body.dark-mode .modern-card {
+            background: rgba(30, 41, 59, 0.95);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        body.dark-mode .main-timer {
+            color: red; /* Changed to red */
+        }
+
+        /* --- REVIEW MODE STYLES --- */
+        .review-mode .option-item.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.2);
+        }
+        
+        .review-mode .option-item.incorrect {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.2);
+        }
+        
+        .review-mode .option-item.user-answer {
+            border-color: var(--warning);
+            background: rgba(245, 158, 11, 0.2);
+        }
+        
+        .review-mode .option-item.not-attempted-option {
+            border-color: #94a3b8;
+            background: rgba(148, 163, 184, 0.2);
+        }
+        
+        body.light-mode .review-mode .option-label {
+            color: var(--text-primary);
+        }
+        
+        .review-indicator {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .review-indicator.correct { background: var(--success); color: white; }
+        .review-indicator.incorrect { background: var(--error); color: white; }
+        .review-indicator.user-answer { background: var(--warning); color: white; }
+        .review-indicator.not-attempted { background: #94a3b8; color: white; }
+        
+        /* Not Attempted Message */
+        .not-attempted-message {
+            text-align: center;
+            padding: 20px;
+            background: rgba(148, 163, 184, 0.1);
+            border: 2px dashed #94a3b8;
+            border-radius: 16px;
+            margin-top: 24px;
+            color: #9ca3af;
+            font-style: italic;
+        }
+        
+        body.light-mode .not-attempted-message {
+            background: rgba(148, 163, 184, 0.1);
+            color: var(--text-secondary);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .question-nav { grid-template-columns: repeat(auto-fit, minmax(40px, 1fr)); }
+            .question-nav-item { width: 40px; height: 40px; font-size: 0.75rem; }
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(135deg, #4f46e5 0%, #5b21b6 100%); }
+
+        /* Custom Modal Styles */
+        .custom-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        .custom-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        .custom-modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            transform: translateY(-20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+        .custom-modal.show .custom-modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        .custom-modal-content h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        .custom-modal-content p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        .custom-modal-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    
+    <div id="passwordScreen" class="fixed inset-0 gradient-hero flex items-center justify-center z-50">
+        <div class="modern-card p-8 max-w-md w-full mx-4 text-center animate-fade-in">
+            <div class="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="lock" class="w-10 h-10 text-white"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-white mb-2">Secure Test Access</h2>
+            <p class="text-white/80 mb-6">Enter your test password to begin the mock examination</p>
+            <div class="space-y-4">
+                <input type="password" id="passwordInput" 
+                       class="w-full p-4 border-2 bg-transparent text-white border-gray-500 rounded-xl focus:outline-none focus:border-indigo-400 transition-colors placeholder-gray-400" 
+                       placeholder="Enter test password">
+                <button id="startButton" class="btn-modern btn-primary w-full">
+                    <i data-lucide="play-circle" class="w-5 h-5 mr-2"></i>
+                    Start Mock Test
+                </button>
+            </div>
+            <p id="passwordError" class="text-red-400 mt-4 hidden">
+                <i data-lucide="alert-circle" class="w-4 h-4 inline mr-1"></i>
+                Incorrect password. Please try again.
+            </p>
+        </div>
+    </div>
+
+    <div id="testInterface" class="hidden">
+        <header class="glass fixed w-full top-0 z-40 py-4">
+            <div class="container mx-auto px-6">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <!-- Logo updated to uos-logo.png -->
+                        <img src="uos-logo.png" alt="UOS Logo" class="w-10 h-10 rounded-full" onerror="this.onerror=null;this.src='https://placehold.co/40x40/6366f1/ffffff?text=UOS';"> 
+                        <div>
+                            <h1 class="text-lg font-bold text-white">UOS Mock Test</h1>
+                            <p class="text-sm text-white/70">Batch 2k26 - Test 2</p>
+                        </div>
+                    </div>
+                    
+                    <button id="themeToggle" class="p-2 rounded-full bg-white/20 text-white hover:bg-white/30 transition-colors">
+                        <i data-lucide="moon" class="w-4 h-4"></i>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="pt-24 pb-8">
+            <div class="container mx-auto px-6">
+                <div class="grid lg:grid-cols-4 gap-8">
+                    
+                    <div class="lg:col-span-3">
+                        <div class="modern-card p-8 animate-fade-in">
+                            <div class="question-header flex flex-col sm:flex-row items-start sm:items-center justify-between mb-6 gap-4">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-10 h-10 gradient-primary rounded-full flex items-center justify-center flex-shrink-0">
+                                        <span class="text-white font-bold" id="questionNumber">1</span>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-xl font-bold" id="questionTitle">Question 1 of 100</h2>
+                                        <p class="text-sm text-gray-500" id="questionSubject">English - Grammar</p>
+                                    </div>
+                                </div>
+                                <div id="mainTimer" class="main-timer text-lg font-bold flex items-center py-2 px-4 rounded-lg">
+                                     <i data-lucide="clock" class="w-5 h-5 mr-2"></i>
+                                     <span id="timerText">Time Left: 90:00</span>
+                                </div>
+                            </div>
+                            
+                            <div class="bg-gray-100 p-6 rounded-xl mb-6 border-l-4 border-indigo-500">
+                                <p id="questionText" class="text-lg leading-relaxed text-gray-800">
+                                    Choose the correct synonym for the word "abundant":
+                                </p>
+                            </div>
+                            
+                            <div class="option-container" id="optionsContainer">
+                                </div>
+                            
+                            <div class="flex items-center justify-between mt-8">
+                                <button id="prevButton" class="btn-modern btn-secondary" disabled>
+                                    <i data-lucide="chevron-left" class="w-4 h-4 mr-2"></i>
+                                    Previous
+                                </button>
+                                
+                                <div class="flex items-center space-x-4">
+                                    <button id="clearButton" class="btn-modern btn-secondary">
+                                        <i data-lucide="x-circle" class="w-4 h-4 mr-2"></i>
+                                        Clear
+                                    </button>
+                                    <button id="nextButton" class="btn-modern btn-primary">
+                                        Next
+                                        <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-1">
+                        <div class="glass rounded-2xl p-6 mb-6 animate-slide-in">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-lg font-bold text-white flex items-center">
+                                    <i data-lucide="grid-3x3" class="w-5 h-5 mr-2"></i>
+                                    Questions
+                                </h3>
+                                <button id="submitTestBtn" class="btn-modern btn-success text-sm px-4 py-2">
+                                    <i data-lucide="send" class="w-4 h-4 mr-1"></i>
+                                    Submit
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-3 gap-2 mb-4 text-xs">
+                                <div class="flex items-center text-white/70">
+                                    <div class="w-3 h-3 bg-white/20 rounded mr-2"></div>
+                                    <span>Not Attempted</span>
+                                </div>
+                                <div class="flex items-center text-white/70">
+                                    <div class="w-3 h-3 bg-green-500 rounded mr-2"></div>
+                                    <span>Answered</span>
+                                </div>
+                                <div class="flex items-center text-white/70">
+                                    <div class="w-3 h-3 bg-indigo-500 rounded mr-2"></div>
+                                    <span>Current</span>
+                                </div>
+                            </div>
+                            
+                            <div class="question-nav" id="questionNav">
+                                </div>
+                        </div>
+                        
+                        <div class="glass rounded-2xl p-6 animate-slide-in" style="animation-delay: 0.2s;">
+                            <h3 class="text-lg font-bold text-white mb-4 flex items-center">
+                                <i data-lucide="bar-chart-3" class="w-5 h-5 mr-2"></i>
+                                Progress
+                            </h3>
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white/70">Answered</span>
+                                    <span class="text-white font-bold" id="progressAnswered">0/100</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white/70">Remaining</span>
+                                    <span class="text-white font-bold" id="progressRemaining">100</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-white/70">Completion</span>
+                                    <span class="text-white font-bold" id="progressPercentage">0%</span>
+                                </div>
+                                
+                                <div class="w-full bg-white/20 rounded-full h-2">
+                                    <div class="bg-gradient-to-r from-green-400 to-blue-500 h-2 rounded-full transition-all duration-500" 
+                                         id="progressBar" style="width: 0%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="resultModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="modern-card p-8 max-w-2xl w-full mx-4 text-center animate-fade-in">
+            <div class="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
+                <i data-lucide="trophy" class="w-10 h-10 text-white"></i>
+            </div>
+            <h2 class="text-3xl font-bold text-gray-800 mb-4" id="resultTitle">Test Completed!</h2>
+            <p class="text-gray-600 mb-8" id="resultMessage">Congratulations on completing the mock test. Here are your results:</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                <div class="text-center p-4 bg-green-50 rounded-xl">
+                    <div class="text-2xl font-bold text-green-600" id="correctAnswers">0</div>
+                    <div class="text-sm text-green-700">Correct</div>
+                </div>
+                <div class="text-center p-4 bg-red-50 rounded-xl">
+                    <div class="text-2xl font-bold text-red-600" id="incorrectAnswers">0</div>
+                    <div class="text-sm text-red-700">Incorrect</div>
+                </div>
+                <div class="text-center p-4 bg-gray-50 rounded-xl">
+                    <div class="text-2xl font-bold text-gray-600" id="notAttempted">0</div>
+                    <div class="text-sm text-gray-700">Not Attempted</div>
+                </div>
+                <div class="text-center p-4 bg-blue-50 rounded-xl">
+                    <div class="text-2xl font-bold text-blue-600" id="finalScore">0%</div>
+                    <div class="text-sm text-blue-700">Score</div>
+                </div>
+            </div>
+            
+            <div id="qualificationStatus" class="mb-6 p-4 rounded-xl">
+                </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button id="reviewAnswersBtn" class="btn-modern btn-secondary">
+                    <i data-lucide="eye" class="w-4 h-4 mr-2"></i>
+                    Review Answers
+                </button>
+                <button id="restartTestBtn" class="btn-modern btn-primary">
+                    <i data-lucide="refresh-cw" class="w-4 h-4 mr-2"></i>
+                    Restart Test
+                </button>
+                <button id="printResultBtn" class="btn-modern btn-success">
+                    <i data-lucide="printer" class="w-4 h-4 mr-2"></i>
+                    Print Result
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="loadingModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+        <div class="modern-card p-8 text-center max-w-sm mx-4">
+            <div class="w-16 h-16 gradient-primary rounded-full flex items-center justify-center mx-auto mb-4 animate-pulse">
+                <i data-lucide="loader" class="w-8 h-8 text-white animate-spin"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-800 mb-2">Processing...</h3>
+            <p class="text-gray-600">Please wait while we prepare your results</p>
+        </div>
+    </div>
+
+    <!-- Custom Confirmation Modal -->
+    <div id="confirmationModal" class="custom-modal hidden">
+        <div class="custom-modal-content modern-card">
+            <h3 id="confirmationTitle"></h3>
+            <p id="confirmationMessage"></p>
+            <div class="custom-modal-buttons">
+                <button id="confirmYes" class="btn-modern btn-primary">Yes</button>
+                <button id="confirmNo" class="btn-modern btn-secondary">No</button>
+            </div>
+        </div>
+    </div>
+    
+    <footer class="glass text-white/70 text-center py-4 px-6 mt-8">
+        <p class="text-sm">&copy; 2025 Copyright UOS Mock Test Series</p>
+        <p class="text-xs mt-1">Powered By <strong><a href="https://mock-test-hub.netlify.app">Mock Test Hub</a></strong></p>
+    </footer>
+
+    <script>
+        $(document).ready(function() {
+            // Initialize Lucide icons
+            lucide.createIcons();
+
+            // Test configuration
+            const TEST_CONFIG = {
+                password: "uosbatch2k26",
+                totalQuestions: 100,
+                timeLimit: 90 * 60, // 90 minutes in seconds
+                subjects: ["English", "General Science", "General Knowledge", "Mathematics", "Intelligence"],
+                minimumPassingPercentage: 25 // 25% minimum marks required
+            };
+
+            // Test state
+            let currentQuestion = 0;
+            let timeLeft = TEST_CONFIG.timeLimit;
+            let userAnswers = Array(TEST_CONFIG.totalQuestions).fill(null);
+            let questions = []; // This will be populated by generateQuestions()
+            let timerInterval;
+            let testStartTime;
+            let isReviewMode = false;
+
+            // Function to show custom confirmation modal
+            function showConfirmationModal(title, message, onConfirm) {
+                $('#confirmationTitle').text(title);
+                $('#confirmationMessage').text(message);
+                $('#confirmationModal').removeClass('hidden').addClass('show');
+                
+                $('#confirmYes').off('click').on('click', function() {
+                    $('#confirmationModal').removeClass('show').addClass('hidden');
+                    onConfirm(true);
+                });
+                
+                $('#confirmNo').off('click').on('click', function() {
+                    $('#confirmationModal').removeClass('show').addClass('hidden');
+                    onConfirm(false);
+                });
+            }
+
+            // Generate 100 dummy questions
+            function generateQuestions() {
+                // FIX: Assign the array to the global 'questions' variable
+                questions = [
+                  {
+                    "id": 1,
+                    "subject": "English",
+                    "question": "Synonym of BRIEF is _____________?",
+                    "options": ["Small", "Short", "Little", "Limited"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 2,
+                    "subject": "English",
+                    "question": "Synonym of ALERT is _____________?",
+                    "options": ["Intelligent", "Energetic", "Observant", "Watchful"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 3,
+                    "subject": "English",
+                    "question": "Synonym of negligent is _________?",
+                    "options": ["careless", "turn", "decide", "want"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 4,
+                    "subject": "English",
+                    "question": "Synonym of Kidnap is ------ ?",
+                    "options": ["Appaling", "Abduct", "Renounce", "All the above"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 5,
+                    "subject": "English",
+                    "question": "Synonym of ” prevalence ” is _________?",
+                    "options": ["Felony", "Transgression", "Commonness", "Sabotage"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 6,
+                    "subject": "English",
+                    "question": "Antonym of ARTIFICIAL is ______________?",
+                    "options": ["Red", "Solid", "Truthful", "Natural"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 7,
+                    "subject": "English",
+                    "question": "Antonym of EXPAND is _____________?",
+                    "options": ["Congest", "Condense", "Conclude", "Convert"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 8,
+                    "subject": "English",
+                    "question": "Antonym of DEVIANT is _____________?",
+                    "options": ["Bent", "Devious", "Regular", "Atypical"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 9,
+                    "subject": "English",
+                    "question": "Antonym of Friend is _____________?",
+                    "options": ["Enemy", "Brother", "companion", "None of the above"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 10,
+                    "subject": "English",
+                    "question": "Antonym of MINOR is ____________ ?",
+                    "options": ["Big", "Tall", "Major", "Heavy"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 11,
+                    "subject": "English",
+                    "question": "Which spelling is correct?",
+                    "options": ["Encyclopedia", "Encyeklopedia", "Ensyclopedia", "Encycloopedia"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 12,
+                    "subject": "English",
+                    "question": "Identify the correct Spellings:",
+                    "options": ["Temparary", "Temperary", "Temporary", "Temprary"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 13,
+                    "subject": "English",
+                    "question": "Choose the word that is spelled correctly?",
+                    "options": ["Magistrate", "Magisterate", "Magistarate", "Maggistrate"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 14,
+                    "subject": "English",
+                    "question": "Choose the word that is spelled correctly?",
+                    "options": ["Parlementarian", "Parlementerian", "Parliamentarian", "Parliamenterian"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 15,
+                    "subject": "English",
+                    "question": "Choose the word that is spelled Correctly?",
+                    "options": ["Secretary", "Secertary", "Secartary", "None of these"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 16,
+                    "subject": "English",
+                    "question": "The whole nation was ______ the President?",
+                    "options": ["after", "for", "farther", "behind"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 17,
+                    "subject": "English",
+                    "question": "Sania resign form job ______ January?",
+                    "options": ["in", "on", "at", "None of these"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 18,
+                    "subject": "English",
+                    "question": "He is jealous ______________ her success?",
+                    "options": ["in", "on", "of", "about"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 19,
+                    "subject": "English",
+                    "question": "Maryam cares ________ the environment?",
+                    "options": ["of", "in", "about", "on"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 20,
+                    "subject": "English",
+                    "question": "The jug is full ____ milk?",
+                    "options": ["of", "about", "by", "with"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 21,
+                    "subject": "English",
+                    "question": "Active Voice Change into Passive; Mr. Ali asked him a question.",
+                    "options": ["He was asked a question Mr. Ali.", "He was asked a question to Mr. Ali.", "He was asked a question by Mr. Ali.", "A question was being asked by Mr. Ali."],
+                    "correct": 2
+                  },
+                  {
+                    "id": 22,
+                    "subject": "English",
+                    "question": "Active Voice Change into Passive; Have you taken a rest?",
+                    "options": ["Have a rest been taken by you?", "Have a rest taken by you.", "Had a rest taken by you?", "Have a rest be take by you?"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 23,
+                    "subject": "English",
+                    "question": "Active Voice Change into Passive; They held a meeting very early.",
+                    "options": ["A meeting was hold by them very early.", "A meeting will be held by them very early.", "A meeting is held by them very early", "A meeting was held by them very early."],
+                    "correct": 3
+                  },
+                  {
+                    "id": 24,
+                    "subject": "English",
+                    "question": "Active Voice Change into Passive; The teacher may punish you.",
+                    "options": ["You should be punished by the teacher.", "You shall have been punished by the teacher.", "You will be punished by the teacher.", "You may be punished by the teacher."],
+                    "correct": 3
+                  },
+                  {
+                    "id": 25,
+                    "subject": "English",
+                    "question": "Active Voice Change into Passive; People speak English all over the world.",
+                    "options": ["English is spoken all over the world.", "English is spoken by people.", "English was spoken by people.", "English was spoken all over the world."],
+                    "correct": 0
+                  },
+                  {
+                    "id": 26,
+                    "subject": "English",
+                    "question": "Change the narration of (He said to the Judge, “I did not commit this crime.”)",
+                    "options": ["He told the Judge that he did not commit the crime.", "He told the judge that he had not committed the crime.", "He told the judge that he had not committed that crime.", "He told the judge that he had not committed this crime"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 27,
+                    "subject": "English",
+                    "question": "Change the narration. Aliya said, “I have already written a letter to my family.”",
+                    "options": ["Aliya said that she had already written a letter to her family.", "Aliya said that she has already written a letter to her family.", "Aliya said that she has already been written a letter to her family.", "Aliya said that she had already been written a letter to her family."],
+                    "correct": 0
+                  },
+                  {
+                    "id": 28,
+                    "subject": "English",
+                    "question": "Change the narration. He said, ”The sun is stationary”.",
+                    "options": ["He said the sun is stationary.", "He said that the sun is stationary.", "He said that the sun was stationary.", "None of these"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 29,
+                    "subject": "English",
+                    "question": "Change the narration. I asked him where he would stay.",
+                    "options": ["I said to him “Where you will stay ?“", "I asked him “Where will you stay?”", "I said to him “Where I will stay ?“", "I said to him “Where will I stay ?”"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 30,
+                    "subject": "English",
+                    "question": "He said to me, “I expect you to attend the function.”",
+                    "options": ["He told me that he had expected me to attend the function.", "He told me that he expected me to attend the function.", "He told me that he expected me to attended the function.", "He told me that he expected me to have attended the function."],
+                    "correct": 1
+                  },
+                  {
+                    "id": 31,
+                    "subject": "General Knowledge",
+                    "question": "What does the CPEC stands for ?",
+                    "options": ["China Pakistan Electrical Coal", "China Pakistan Electronics Corporation", "China Pakistan Economic Corridor", "China Portagal Economical Corporation"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 32,
+                    "subject": "General Knowledge",
+                    "question": "What is the Capital city of Bangladesh?",
+                    "options": ["New Delhi", "Beijing", "Neypidya", "Dhaka"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 33,
+                    "subject": "General Knowledge",
+                    "question": "Which pass connects Pakistan with Afghanistan?",
+                    "options": ["Gomal Pass", "Khyber Pass", "Tochi Pass", "Khunjerab Pass"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 34,
+                    "subject": "General Knowledge",
+                    "question": "Who was the founder of Daily English Newspaper Dawn?",
+                    "options": ["Liaquat Ali Khan", "Z.A Sulehri", "Quaid-e-Azam", "None of them"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 35,
+                    "subject": "General Knowledge",
+                    "question": "The Muslims came to Sindh in 712 A.D.under the leadership of?",
+                    "options": ["Mahmood Ghaznavi", "Zaheer-ud-Din Baber", "Muhammad Bin Qasim", "NOT"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 36,
+                    "subject": "General Knowledge",
+                    "question": "The name of poet whose collection of poetry is called “Shah jo Risalu”?",
+                    "options": ["Khushal Khan Khattak", "Waris Shah", "Makhdum Muhammad Hashim", "Shah Abdul Latif Bhatai"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 37,
+                    "subject": "General Knowledge",
+                    "question": "What was the old name of Hyderabad?",
+                    "options": ["Shal Kot", "Neeron Kot", "Ramkot", "Akmol Pur"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 38,
+                    "subject": "General Knowledge",
+                    "question": "Shrine of Lal Shahbaz Qalandar located in which district?",
+                    "options": ["Sehwan", "Hyderabad", "Jamshoro", "None of these"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 39,
+                    "subject": "General Knowledge",
+                    "question": "Which country hosted the champion trophy 2025?",
+                    "options": ["Pakistan", "India", "Australia", "England"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 40,
+                    "subject": "General Knowledge",
+                    "question": "One of the oldest University of Pakistan Located in Sindh ______?",
+                    "options": ["University of Sindh", "Karachi University", "Liaquat Medical University", "Agriculture University"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 41,
+                    "subject": "General Knowledge",
+                    "question": "What is the capital of France?",
+                    "options": ["London", "Rome", "Berlin", "Paris"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 42,
+                    "subject": "General Knowledge",
+                    "question": "What is the date of birth of Quaid-e-Azam”",
+                    "options": ["December 25, 1876", "September 11, 1878", "December 21, 1876", "September 25, 1878"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 43,
+                    "subject": "General Knowledge",
+                    "question": "What is the largest ocean on Earth?",
+                    "options": ["Arctic Ocean", "Indian Ocean", "Pacific Ocean", "Atlantic Ocean"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 44,
+                    "subject": "General Knowledge",
+                    "question": "Which country is known as the \"Land of the Rising Sun\"?",
+                    "options": ["China", "Japan", "South Korea", "Vietnam"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 45,
+                    "subject": "General Knowledge",
+                    "question": "Who is the Current Foreign Minister of Pakistan?",
+                    "options": ["Bilawal Bhutto Zardari", "Shah Mehmood Qureshi", "Khawaja Asif", "None of These"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 46,
+                    "subject": "General Knowledge",
+                    "question": "How many districts are in Sindh ?",
+                    "options": ["25", "27", "29", "30"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 47,
+                    "subject": "General Knowledge",
+                    "question": "Senate of Pakistan comprises of how many members?",
+                    "options": ["50", "63", "87", "100"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 48,
+                    "subject": "General Knowledge",
+                    "question": "Which country is the world’s largest producer of coffee ?",
+                    "options": ["Taiwan", "UK", "Brazil", "Switzerland"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 49,
+                    "subject": "General Knowledge",
+                    "question": "Which is the highest mountain in the world?",
+                    "options": ["K_2", "Everest", "Nanga Parbat", "Siachen"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 50,
+                    "subject": "General Knowledge",
+                    "question": "Tarbela dam is situated in _________ ?",
+                    "options": ["Kashmir", "KPK", "FATA", "Gilgit Baltistan"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 51,
+                    "subject": "Science",
+                    "question": "Which is the outermost planet in the solar system?",
+                    "options": ["Mercury", "Pluto", "Neptune", "Uranus"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 52,
+                    "subject": "Science",
+                    "question": "The SI unit of charge is __________?",
+                    "options": ["Ampere", "Coulomb", "Ohm", "Volt"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 53,
+                    "subject": "Science",
+                    "question": "The most abundant element in the universe is __________.",
+                    "options": ["Oxygen", "Carbon Dioxide", "Silicon", "Hydrogen"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 54,
+                    "subject": "Science",
+                    "question": "Deficiency of Vitamin-A results in __________?",
+                    "options": ["Night blindness", "rickets", "hair fall", "scurvy"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 55,
+                    "subject": "Science",
+                    "question": "The fluid part of blood is known as __________?",
+                    "options": ["plasma", "platelets", "blood cells", "None of these"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 56,
+                    "subject": "Science",
+                    "question": "Oxidation is a chemical reaction involving the __________?",
+                    "options": ["Gain of Electrons", "Loss of Electrons", "Gain of Protons", "Loss of Protons"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 57,
+                    "subject": "Science",
+                    "question": "Digestion of food is completed in the __________?",
+                    "options": ["small intestine", "large intestine", "stomach", "Liver"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 58,
+                    "subject": "Science",
+                    "question": "The SI unit of Heat is________?",
+                    "options": ["Mercury", "Newton", "Volt", "Joule"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 59,
+                    "subject": "Science",
+                    "question": "ECG is used for the diagnosis of aliments of ?",
+                    "options": ["Brain", "Heart", "Kidneys", "Lungs"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 60,
+                    "subject": "Science",
+                    "question": "How many bones are there in a newly born infant?",
+                    "options": ["206", "230", "280", "300"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 61,
+                    "subject": "Science",
+                    "question": "Malaria is a disease which effects the____________?",
+                    "options": ["Heart", "Lungs", "Kidneys", "Spleen"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 62,
+                    "subject": "Science",
+                    "question": "All matter is made of ___________?",
+                    "options": ["Air", "Water", "Vibrations", "Atoms"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 63,
+                    "subject": "Science",
+                    "question": "____________ have no charge?",
+                    "options": ["Neutrons", "Protons", "Electrons", "None of These"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 64,
+                    "subject": "Science",
+                    "question": "Electron was discovered by?",
+                    "options": ["Michael Faraday", "Yuri Gagarin", "J.J Thomson", "James Maxwell"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 65,
+                    "subject": "Science",
+                    "question": "Sunlight is a Great Source of ____________?",
+                    "options": ["vitamin C", "vitamin D", "vitamin E", "Vitamin K"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 66,
+                    "subject": "Science",
+                    "question": "The longest bone in human body is___________?",
+                    "options": ["Ulna", "Femur", "Humerus", "Tibia"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 67,
+                    "subject": "Science",
+                    "question": "Dr. Abdul Qadeer Khan, the nuclear scientist of Pakistan and pioneer of first atomic bomb of Muslim World died on_________?",
+                    "options": ["10th October, 2021", "9th October, 2021", "8th October, 2021", "None of these"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 68,
+                    "subject": "Science",
+                    "question": "Chemical formula for Water is _______ ?",
+                    "options": ["NaAlO2", "Al2O3", "CaSiO3", "H2O"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 69,
+                    "subject": "Science",
+                    "question": "What is the chemical formula for Sulfuric acid?",
+                    "options": ["C2H6O", "H2SO4", "C2H4O2", "CaSO4"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 70,
+                    "subject": "Science",
+                    "question": "The branch of science which deals with the properties of matter and energy is called__________?",
+                    "options": ["Biology", "Geography", "Physics", "Chemistry"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 71,
+                    "subject": "Math",
+                    "question": "Ali purchased a plot for Rs. 8,000. He sells the plot to Sajid at a profit of 20%. Sajid in turn sells that plot to Zahid at a loss of 20%. The plot costs Zahid ?",
+                    "options": ["Rs. 12,000", "Rs. 10,000", "Rs. 8670", "Rs. 7680"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 72,
+                    "subject": "Math",
+                    "question": "The average of first 10 odd numbers is_____________?",
+                    "options": ["10", "9", "12", "17"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 73,
+                    "subject": "Math",
+                    "question": "The average age 9 members of a committee are the same as it was 2 years ago, because an old number has been replaced by a younger number. Find how much younger is the new member than the old number?",
+                    "options": ["7 years", "11 years", "18 years", "27 years"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 74,
+                    "subject": "Math",
+                    "question": "The average of 10 numbers is 23. If each number is increased by 4, what will the new average?",
+                    "options": ["22", "27", "25", "29"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 75,
+                    "subject": "Math",
+                    "question": "Shayan bought 65 books for Rs.1150 from one shop and 50 books for Rs.920 from another. What is the average price he paid per book ?",
+                    "options": ["Rs.18", "Rs.20", "Rs.16", "Rs.22"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 76,
+                    "subject": "Math",
+                    "question": "Find the average of all the numbers between 6 and 34 which are divisible by 5.",
+                    "options": ["18", "20", "24", "30"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 77,
+                    "subject": "Math",
+                    "question": "The average of first five multiples of 3 is____________?",
+                    "options": ["3", "15", "12", "9"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 78,
+                    "subject": "Math",
+                    "question": "A dealer marks his goods 20% above cost price. He then allows some discount on it and makes a profit of 8%. The rate of discount is:",
+                    "options": ["12%", "10%", "6%", "4%"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 79,
+                    "subject": "Math",
+                    "question": "A trader bought a car at 20% discount on its original price. He sold it at a 40% increase on the price he bought it. What percent of profit did he make on the original price?",
+                    "options": ["10%", "11%", "12%", "15%"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 80,
+                    "subject": "Math",
+                    "question": "Find two number whose sum is 28 and the difference is 4 _____________?",
+                    "options": ["12,16", "18,10", "15,13", "14,12"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 81,
+                    "subject": "Math",
+                    "question": "Today is Emaan’s birthday. After one year, she will become two times as she was ten years ago. current age of Emaan?",
+                    "options": ["18", "19", "20", "21"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 82,
+                    "subject": "Math",
+                    "question": "If 3 men or 4 women can construct a wall in 43 days, then the number of days that 7 men and 5 women take to construct it is :",
+                    "options": ["12 days", "14 days", "16 days", "18 days"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 83,
+                    "subject": "Math",
+                    "question": "If 10 workers can make 10 tables in 10 days, then how many days would it take for 5 workers to make 5 tables?",
+                    "options": ["1", "5", "10", "25"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 84,
+                    "subject": "Math",
+                    "question": "If 6 men take 9 days to complete a work, how many men can complete the work in 3 days?",
+                    "options": ["2 men", "12 men", "9 men", "18 men"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 85,
+                    "subject": "Math",
+                    "question": "What percent of 120 are 90?",
+                    "options": ["25%", "50%", "75%", "33%"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 86,
+                    "subject": "Math",
+                    "question": "Find the number which when multiplied by 15 is increased by 196.",
+                    "options": ["14", "20", "26", "28"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 87,
+                    "subject": "Math",
+                    "question": "64309 – 8703 + 798 – 437 = ________?",
+                    "options": ["55606", "55697", "55967", "73373"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 88,
+                    "subject": "Math",
+                    "question": "22004 – 29303 + 101299 – 59532 = _________?",
+                    "options": ["44000", "24500", "26000", "34500"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 89,
+                    "subject": "Math",
+                    "question": "The average age of a husband, wife and their child 3 years ago was 27 years and that of wife and the child 5 years ago was 20 years. The present age of the husband is___________?",
+                    "options": ["35 years", "40 year", "30 year", "None of these"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 90,
+                    "subject": "IQ",
+                    "question": "year is to month as week is to…..?",
+                    "options": ["Hour", "day", "fortnight", "minute"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 91,
+                    "subject": "IQ",
+                    "question": "Blindness is to eye as deafness is to …..?",
+                    "options": ["brain", "nose", "head", "ear"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 92,
+                    "subject": "IQ",
+                    "question": "food is to eat as water is to …..?",
+                    "options": ["wash", "dirt", "drink", "fire"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 93,
+                    "subject": "IQ",
+                    "question": "Teacher is to students as doctor is to …..?",
+                    "options": ["Medicine", "Drugs", "Patients", "hospital"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 94,
+                    "subject": "IQ",
+                    "question": "hot is to steam as cold is to …..?",
+                    "options": ["Ice", "Water", "weather", "NOT"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 95,
+                    "subject": "IQ",
+                    "question": "What will come at the place of question mark ? 1, 9, 25, 49, ? , 121.",
+                    "options": ["100", "91", "64", "81"],
+                    "correct": 3
+                  },
+                  {
+                    "id": 96,
+                    "subject": "IQ",
+                    "question": "What will come at the place of question mark ? 4, 7, 12, 19, 28, ?",
+                    "options": ["49", "39", "36", "30"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 97,
+                    "subject": "IQ",
+                    "question": "What will come at the place of question mark ? 10, 100, 200, 310, ?",
+                    "options": ["430", "420", "410", "400"],
+                    "correct": 0
+                  },
+                  {
+                    "id": 98,
+                    "subject": "IQ",
+                    "question": "Find the missing term: 2, 3, 5, 7, 11, ?, 17.",
+                    "options": ["12", "13", "14", "15"],
+                    "correct": 1
+                  },
+                  {
+                    "id": 99,
+                    "subject": "IQ",
+                    "question": "\"Glove\" is related to \"Hand\" in the same way as \"Cap\" is related to. ?",
+                    "options": ["Foot", "Neck", "Head", "NoT"],
+                    "correct": 2
+                  },
+                  {
+                    "id": 100,
+                    "subject": "IQ",
+                    "question": "Drama is related to director as magazine is to …..?",
+                    "options": ["publisher", "printer", "reader", "editor"],
+                    "correct": 3
+                  }
+                ];
+            }
+
+            // Password validation
+            $("#startButton").on("click", function() {
+                const password = $("#passwordInput").val();
+                if (password === TEST_CONFIG.password) {
+                    $("#passwordScreen").fadeOut(300, function() {
+                        $(this).remove();
+                    });
+                    $("#testInterface").removeClass("hidden");
+                    initializeTest();
+                } else {
+                    $("#passwordError").removeClass("hidden");
+                    $("#passwordInput").addClass("border-red-500").focus();
+                }
+            });
+
+            $("#passwordInput").on("keypress", function(e) {
+                if (e.which === 13) { // Enter key
+                    $("#startButton").click();
+                }
+            }).on("input", function() {
+                $("#passwordError").addClass("hidden");
+                $(this).removeClass("border-red-500");
+            });
+
+            // Initialize test
+            function initializeTest() {
+                generateQuestions();
+                generateQuestionNavigation();
+                loadQuestion(0);
+                startTimer();
+                testStartTime = new Date();
+                updateProgress();
+            }
+
+            // Updated timer function
+            function startTimer() {
+                timerInterval = setInterval(function() {
+                    timeLeft--;
+                    if (timeLeft < 0) {
+                        clearInterval(timerInterval);
+                        submitTest();
+                        return;
+                    }
+                    
+                    const totalMinutes = Math.floor(timeLeft / 60);
+                    const seconds = timeLeft % 60;
+                    
+                    const timeDisplay = `Time Left: ${totalMinutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                    
+                    $("#timerText").text(timeDisplay);
+                    
+                }, 1000);
+            }
+
+            // Load question
+            function loadQuestion(index) {
+                if (index >= 0 && index < TEST_CONFIG.totalQuestions) {
+                    currentQuestion = index;
+                    const q = questions[currentQuestion];
+                    
+                    // Check if question data exists
+                    if (!q) {
+                        console.error("Question data not found for index:", index);
+                        return;
+                    }
+
+                    $("#questionNumber").text(q.id);
+                    $("#questionTitle").html(`Question ${q.id} of ${TEST_CONFIG.totalQuestions}`);
+                    $("#questionSubject").text(q.subject);
+                    $("#questionText").text(q.question);
+                    
+                    const optionsContainer = $("#optionsContainer");
+                    optionsContainer.empty();
+                    
+                    const wasNotAttempted = isReviewMode && userAnswers[currentQuestion] === null;
+                    
+                    if (wasNotAttempted) {
+                        const notAttemptedMessage = $(`
+                            <div class="not-attempted-message">
+                                <i data-lucide="help-circle" class="w-6 h-6 mx-auto mb-2"></i>
+                                <p class="font-semibold">This question was not attempted</p>
+                                <p class="text-sm mt-1">You did not select any answer for this question.</p>
+                            </div>
+                        `);
+                        optionsContainer.append(notAttemptedMessage);
+                        
+                        q.options.forEach((option, i) => {
+                            const isCorrect = i === q.correct;
+                            let optionClass = 'option-item not-attempted-option';
+                            let reviewIndicator = '';
+                            
+                            if (isCorrect) {
+                                optionClass += ' correct';
+                                reviewIndicator = '<div class="review-indicator correct">✓</div>';
+                            }
+                            
+                            const optionElement = $(`
+                                <div class="${optionClass}" data-option="${i}">
+                                    <input type="radio" name="answer" value="${i}" disabled>
+                                    <div class="option-label">
+                                        <div class="option-marker"></div>
+                                        <span>${option}</span>
+                                    </div>
+                                    ${reviewIndicator}
+                                </div>
+                            `);
+                            optionsContainer.append(optionElement);
+                        });
+                    } else {
+                        q.options.forEach((option, i) => {
+                            const isSelected = userAnswers[currentQuestion] === i;
+                            const isCorrect = i === q.correct;
+                            const isUserAnswer = userAnswers[currentQuestion] === i;
+                            
+                            let optionClass = 'option-item';
+                            let reviewIndicator = '';
+                            
+                            if (isReviewMode) {
+                                if (isCorrect) {
+                                    optionClass += ' correct';
+                                    reviewIndicator = '<div class="review-indicator correct">✓</div>';
+                                }
+                                if (isUserAnswer && !isCorrect) {
+                                    optionClass += ' incorrect user-answer';
+                                    reviewIndicator = '<div class="review-indicator incorrect">✗</div>';
+                                }
+                                if (isUserAnswer && isCorrect) {
+                                    reviewIndicator = '<div class="review-indicator correct">✓</div>';
+                                }
+                            } else if (isSelected) {
+                                optionClass += ' selected';
+                            }
+                            
+                            const optionElement = $(`
+                                <div class="${optionClass}" data-option="${i}">
+                                    <input type="radio" name="answer" value="${i}" ${isSelected ? 'checked' : ''} ${isReviewMode ? 'disabled' : ''}>
+                                    <div class="option-label">
+                                        <div class="option-marker"></div>
+                                        <span>${option}</span>
+                                    </div>
+                                    ${reviewIndicator}
+                                </div>
+                            `);
+                            optionsContainer.append(optionElement);
+                        });
+                    }
+                    
+                    lucide.createIcons();
+                    updateNavigationButtons();
+                    updateQuestionNavigation();
+                }
+            }
+
+            // Generate question navigation
+            function generateQuestionNavigation() {
+                const nav = $("#questionNav");
+                nav.empty();
+                for (let i = 0; i < TEST_CONFIG.totalQuestions; i++) {
+                    const navItem = $(`<div class="question-nav-item not-attempted" data-question="${i}">${i + 1}</div>`);
+                    nav.append(navItem);
+                }
+            }
+
+            // Update question navigation
+            function updateQuestionNavigation() {
+                $(".question-nav-item").removeClass("current answered not-attempted");
+                for (let i = 0; i < TEST_CONFIG.totalQuestions; i++) {
+                    const item = $(`.question-nav-item[data-question="${i}"]`);
+                    if (i === currentQuestion) {
+                        item.addClass("current");
+                    } else if (userAnswers[i] !== null) {
+                        item.addClass("answered");
+                    } else {
+                        item.addClass("not-attempted");
+                    }
+                }
+            }
+
+            // Update navigation buttons
+            function updateNavigationButtons() {
+                $("#prevButton").prop("disabled", currentQuestion === 0);
+                
+                if (isReviewMode) {
+                    $("#nextButton").html('Next <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>');
+                    $("#clearButton").hide();
+                } else {
+                    $("#clearButton").show();
+                    if (currentQuestion === TEST_CONFIG.totalQuestions - 1) {
+                        $("#nextButton").html('<i data-lucide="send" class="w-4 h-4 mr-2"></i>Submit Test');
+                    } else {
+                        $("#nextButton").html('Next <i data-lucide="chevron-right" class="w-4 h-4 ml-2"></i>');
+                    }
+                }
+                
+                lucide.createIcons();
+            }
+
+            // Update progress
+            function updateProgress() {
+                const answered = userAnswers.filter(answer => answer !== null).length;
+                const remaining = TEST_CONFIG.totalQuestions - answered;
+                const percentage = Math.round((answered / TEST_CONFIG.totalQuestions) * 100);
+                
+                $("#progressAnswered").text(`${answered}/${TEST_CONFIG.totalQuestions}`);
+                $("#progressRemaining").text(remaining);
+                $("#progressPercentage").text(`${percentage}%`);
+                $("#progressBar").css("width", `${percentage}%`);
+            }
+
+            // Event handlers
+            $(document).on("click", ".option-item", function() {
+                if (isReviewMode) return;
+                const optionIndex = parseInt($(this).data("option"));
+                userAnswers[currentQuestion] = optionIndex;
+                $(".option-item").removeClass("selected");
+                $(this).addClass("selected");
+                $(this).find("input").prop("checked", true);
+                updateProgress();
+                updateQuestionNavigation();
+            });
+
+            $(document).on("click", ".question-nav-item", function() {
+                const questionIndex = parseInt($(this).data("question"));
+                loadQuestion(questionIndex);
+            });
+
+            $("#prevButton").on("click", function() {
+                if (currentQuestion > 0) {
+                    loadQuestion(currentQuestion - 1);
+                }
+            });
+
+            $("#nextButton").on("click", function() {
+                if (isReviewMode) {
+                    if (currentQuestion < TEST_CONFIG.totalQuestions - 1) {
+                        loadQuestion(currentQuestion + 1);
+                    }
+                } else {
+                    if (currentQuestion < TEST_CONFIG.totalQuestions - 1) {
+                        loadQuestion(currentQuestion + 1);
+                    } else {
+                        showConfirmationModal("Submit Test", "Are you sure you want to submit the test? This action cannot be undone.", function(confirmed) {
+                            if (confirmed) {
+                                submitTest();
+                            }
+                        });
+                    }
+                }
+            });
+
+            $("#clearButton").on("click", function() {
+                if (isReviewMode) return;
+                userAnswers[currentQuestion] = null;
+                $(".option-item").removeClass("selected");
+                $("input[name='answer']").prop("checked", false);
+                updateProgress();
+                updateQuestionNavigation();
+            });
+
+            $("#submitTestBtn").on("click", function() {
+                if (isReviewMode) return;
+                showConfirmationModal("Submit Test", "Are you sure you want to submit the test? This action cannot be undone.", function(confirmed) {
+                    if (confirmed) {
+                        submitTest();
+                    }
+                });
+            });
+
+            // Submit test
+            function submitTest() {
+                clearInterval(timerInterval);
+                $("#loadingModal").removeClass("hidden").addClass("flex");
+                setTimeout(() => {
+                    calculateResults();
+                    $("#loadingModal").addClass("hidden").removeClass("flex");
+                    $("#testInterface").fadeOut(300, function() {
+                        $("#resultModal").removeClass("hidden").addClass("flex");
+                    });
+                }, 2000);
+            }
+
+            // Calculate results
+            function calculateResults() {
+                let correct = 0;
+                let incorrect = 0;
+                let notAttempted = 0;
+                
+                for (let i = 0; i < TEST_CONFIG.totalQuestions; i++) {
+                    if (userAnswers[i] === null) {
+                        notAttempted++;
+                    } else if (userAnswers[i] === questions[i].correct) {
+                        correct++;
+                    } else {
+                        incorrect++;
+                    }
+                }
+                
+                const score = Math.round((correct / TEST_CONFIG.totalQuestions) * 100);
+                const isQualified = score >= TEST_CONFIG.minimumPassingPercentage;
+                
+                $("#correctAnswers").text(correct);
+                $("#incorrectAnswers").text(incorrect);
+                $("#notAttempted").text(notAttempted);
+                $("#finalScore").text(`${score}%`);
+                
+                const qualificationDiv = $("#qualificationStatus");
+                if (isQualified) {
+                    $("#resultTitle").text("Congratulations! Test Passed!");
+                    $("#resultMessage").text("You have successfully qualified for the entry test. Well done!");
+                    qualificationDiv.html(`<div class="bg-green-100 border-2 border-green-500 text-green-800 font-bold p-4 rounded-xl"><i data-lucide="check-circle" class="w-6 h-6 inline mr-2"></i>QUALIFIED - You have achieved the minimum 25% marks required</div>`);
+                } else {
+                    $("#resultTitle").text("Test Not Qualified");
+                    $("#resultMessage").text("Unfortunately, you did not achieve the minimum required marks.");
+                    qualificationDiv.html(`<div class="bg-red-100 border-2 border-red-500 text-red-800 font-bold p-4 rounded-xl"><i data-lucide="x-circle" class="w-6 h-6 inline mr-2"></i>NOT QUALIFIED - Minimum 25% marks required (You scored ${score}%)</div>`);
+                }
+                
+                lucide.createIcons();
+            }
+
+            // Theme toggle
+            $("#themeToggle").on("click", function() {
+                const body = $("body");
+                if (body.hasClass("light-mode")) {
+                    body.removeClass("light-mode").addClass("dark-mode");
+                    $(this).find("i").attr("data-lucide", "moon");
+                } else {
+                    body.removeClass("dark-mode").addClass("light-mode");
+                    $(this).find("i").attr("data-lucide", "sun");
+                }
+                lucide.createIcons();
+            });
+
+            // Result modal buttons
+            $("#reviewAnswersBtn").on("click", function() {
+                isReviewMode = true;
+                $("#resultModal").addClass("hidden").removeClass("flex");
+                $("#testInterface").fadeIn(300);
+                $("body").addClass("review-mode");
+                
+                $("#submitTestBtn").hide();
+                $("#mainTimer").hide();
+                
+                $("header h1").text("Review Mode - UOS Mock Test");
+                
+                loadQuestion(0);
+            });
+
+            $("#restartTestBtn").on("click", function() {
+                showConfirmationModal("Restart Test", "Are you sure you want to restart the test?", function(confirmed) {
+                    if (confirmed) {
+                        location.reload();
+                    }
+                });
+            });
+
+            $("#printResultBtn").on("click", function() {
+                window.print();
+            });
+
+            // Initialize
+            console.log('%c🚀 UOS Mock Test Platform - Advanced Edition', 'color: #6366f1; font-size: 18px; font-weight: bold;');
+            $("body").addClass("light-mode"); // Changed to light-mode by default
+        });
+    </script>
+</body>
+</html>

@@ -228,7 +228,8 @@
     <header class="bg-white/10 backdrop-blur-md border-b border-white/20 animate-fadeInUp">
         <div class="container mx-auto px-8 py-8">
             <div class="flex items-center justify-center space-x-3">
-                <img src="uos-logo.png" alt="University of Sindh Logo" class="h-24 w-24 object-contain">
+                <!-- Fallback for logo image -->
+                <img src="uos-logo.png" alt="University of Sindh Logo" onerror="this.onerror=null;this.src='uos-logo.png';" class="h-24 w-24 object-contain">
                 <div class="text-center">
                     <h1 class="text-3xl md:text-4xl font-bold text-white mb-2 animate-slideInLeft">
                         University of Sindh
@@ -375,7 +376,8 @@
             // Initialize Lucide icons
             lucide.createIcons();
             
-            // Mock test data with 100 questions each
+            // Mock test data with 100 questions each.
+            // All tests are now set as 'active'.
             const mockTests = [
                 { id: 1, title: 'Mock Test 1', questions: 100, duration: '90 minutes', difficulty: 'Beginner' },
                 { id: 2, title: 'Mock Test 2', questions: 100, duration: '90 minutes', difficulty: 'Beginner' },
@@ -392,15 +394,15 @@
             // Generate mock test cards
             function generateMockTestCards() {
                 const grid = $('#mockTestsGrid');
+                grid.empty(); // Clear existing cards
                 
                 mockTests.forEach((test, index) => {
                     const difficultyColor = getDifficultyColor(test.difficulty);
                     
-                    // Determine button text and class based on test ID
-                    const isTestActive = test.id === 1 || test.id === 2; // Check if the test is 1 or 2
-                    const buttonText = isTestActive ? 'Start Test' : 'Coming Soon';
-                    const buttonClass = isTestActive ? 'btn-primary' : 'btn-disabled';
-                    const buttonIcon = isTestActive ? 'play' : 'hourglass';
+                    // All tests are now active
+                    const buttonText = 'Start Test';
+                    const buttonClass = 'btn-primary';
+                    const buttonIcon = 'play';
 
                     const card = $(`
                         <div class="card-professional p-6 cursor-pointer mock-test-card animate-scaleIn" 
@@ -434,7 +436,7 @@
                                 </div>
                             </div>
                             
-                            <button class="w-full ${buttonClass} start-test-btn" data-test-id="${test.id}" ${!isTestActive ? 'disabled' : ''}>
+                            <button class="w-full ${buttonClass} start-test-btn" data-test-id="${test.id}">
                                 <i data-lucide="${buttonIcon}" class="w-4 h-4 mr-2 inline"></i>
                                 ${buttonText}
                             </button>
@@ -470,16 +472,8 @@
                 setTimeout(() => {
                     $('#loadingModal').addClass('hidden').removeClass('flex');
                     
-                    if (testId === 1) {
-                        // Redirect to uos-quiz1.html for Mock Test 1
-                        window.location.href = 'uos-quiz1.html'; 
-                    } else if (testId === 2) {
-                        // Redirect to uos-quiz2.html for Mock Test 2
-                        window.location.href = 'uos-quiz2.html';
-                    } else {
-                        // Show "Coming Soon" message for other tests
-                        showNotification(`${test.title}: Coming Soon! Stay tuned for more updates.`, 'info');
-                    }
+                    // Redirect to the correct HTML file based on testId
+                    window.location.href = `uos-quiz${testId}.html`; 
                 }, 1500);
             }
 
@@ -519,11 +513,6 @@
 
             // Initialize the page
             generateMockTestCards();
-
-            // Welcome message - Removed as it might conflict with the new notice
-            // setTimeout(() => {
-            //     showNotification('Welcome to UOS Mock Test Portal! Select any test to begin.', 'info');
-            // }, 1000);
 
             // Performance monitoring
             console.log('%c🎓 University of Sindh Mock Test Portal', 'color: #1e40af; font-size: 20px; font-weight: bold;');

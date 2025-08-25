@@ -603,7 +603,7 @@
                         <img src="uos-logo.png" alt="UOS Logo" class="w-10 h-10 rounded-full"> 
                         <div>
                             <h1 class="text-lg font-bold text-white">UOS Mock Test</h1>
-                            <p class="text-sm text-white/70">Batch 2k26 - Test 2</p>
+                            <p class="text-sm text-white/70">Batch 2k26 - Test 5</p>
                         </div>
                     </div>
                     
@@ -790,7 +790,7 @@
     <div id="pdfContent" class="pdf-content">
         <div class="pdf-header">
             <h1 style="color: #6366f1; font-size: 24px; margin: 0;">UOS Mock Test - Results Report</h1>
-            <p style="margin: 5px 0;">Batch 2k26 - Test 2</p>
+            <p style="margin: 5px 0;">Batch 2k26 - Test 5</p>
             <p style="margin: 5px 0; font-size: 14px; color: #666;">Generated on: <span id="pdfDate"></span></p>
         </div>
         
@@ -886,707 +886,708 @@
 
             // Generate 100 dummy questions without a loop for initial generation
             function generateQuestions() {
-                questions = [
+                     questions = [
+  // English Grammar (25 Questions)
   {
-                    "id": 1,
-                    "subject": "English",
-                    "question": "Synonym of BRIEF is _____________?",
-                    "options": ["Small", "Short", "Little", "Limited"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 2,
-                    "subject": "English",
-                    "question": "Synonym of ALERT is _____________?",
-                    "options": ["Intelligent", "Energetic", "Observant", "Watchful"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 3,
-                    "subject": "English",
-                    "question": "Synonym of negligent is _________?",
-                    "options": ["careless", "turn", "decide", "want"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 4,
-                    "subject": "English",
-                    "question": "Synonym of Kidnap is ------ ?",
-                    "options": ["Appaling", "Abduct", "Renounce", "All the above"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 5,
-                    "subject": "English",
-                    "question": "Synonym of ” prevalence ” is _________?",
-                    "options": ["Felony", "Transgression", "Commonness", "Sabotage"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 6,
-                    "subject": "English",
-                    "question": "Antonym of ARTIFICIAL is ______________?",
-                    "options": ["Red", "Solid", "Truthful", "Natural"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 7,
-                    "subject": "English",
-                    "question": "Antonym of EXPAND is _____________?",
-                    "options": ["Congest", "Condense", "Conclude", "Convert"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 8,
-                    "subject": "English",
-                    "question": "Antonym of DEVIANT is _____________?",
-                    "options": ["Bent", "Devious", "Regular", "Atypical"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 9,
-                    "subject": "English",
-                    "question": "Antonym of Friend is _____________?",
-                    "options": ["Enemy", "Brother", "companion", "None of the above"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 10,
-                    "subject": "English",
-                    "question": "Antonym of MINOR is ____________ ?",
-                    "options": ["Big", "Tall", "Major", "Heavy"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 11,
-                    "subject": "English",
-                    "question": "Which spelling is correct?",
-                    "options": ["Encyclopedia", "Encyeklopedia", "Ensyclopedia", "Encycloopedia"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 12,
-                    "subject": "English",
-                    "question": "Identify the correct Spellings:",
-                    "options": ["Temparary", "Temperary", "Temporary", "Temprary"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 13,
-                    "subject": "English",
-                    "question": "Choose the word that is spelled correctly?",
-                    "options": ["Magistrate", "Magisterate", "Magistarate", "Maggistrate"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 14,
-                    "subject": "English",
-                    "question": "Choose the word that is spelled correctly?",
-                    "options": ["Parlementarian", "Parlementerian", "Parliamentarian", "Parliamenterian"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 15,
-                    "subject": "English",
-                    "question": "Choose the word that is spelled Correctly?",
-                    "options": ["Secretary", "Secertary", "Secartary", "None of these"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 16,
-                    "subject": "English",
-                    "question": "The whole nation was ______ the President?",
-                    "options": ["after", "for", "farther", "behind"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 17,
-                    "subject": "English",
-                    "question": "Sania resign form job ______ January?",
-                    "options": ["in", "on", "at", "None of these"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 18,
-                    "subject": "English",
-                    "question": "He is jealous ______________ her success?",
-                    "options": ["in", "on", "of", "about"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 19,
-                    "subject": "English",
-                    "question": "Maryam cares ________ the environment?",
-                    "options": ["of", "in", "about", "on"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 20,
-                    "subject": "English",
-                    "question": "The jug is full ____ milk?",
-                    "options": ["of", "about", "by", "with"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 21,
-                    "subject": "English",
-                    "question": "Active Voice Change into Passive; Mr. Ali asked him a question.",
-                    "options": ["He was asked a question Mr. Ali.", "He was asked a question to Mr. Ali.", "He was asked a question by Mr. Ali.", "A question was being asked by Mr. Ali."],
-                    "correct": 2
-                  },
-                  {
-                    "id": 22,
-                    "subject": "English",
-                    "question": "Active Voice Change into Passive; Have you taken a rest?",
-                    "options": ["Have a rest been taken by you?", "Have a rest taken by you.", "Had a rest taken by you?", "Have a rest be take by you?"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 23,
-                    "subject": "English",
-                    "question": "Active Voice Change into Passive; They held a meeting very early.",
-                    "options": ["A meeting was hold by them very early.", "A meeting will be held by them very early.", "A meeting is held by them very early", "A meeting was held by them very early."],
-                    "correct": 3
-                  },
-                  {
-                    "id": 24,
-                    "subject": "English",
-                    "question": "Active Voice Change into Passive; The teacher may punish you.",
-                    "options": ["You should be punished by the teacher.", "You shall have been punished by the teacher.", "You will be punished by the teacher.", "You may be punished by the teacher."],
-                    "correct": 3
-                  },
-                  {
-                    "id": 25,
-                    "subject": "English",
-                    "question": "Active Voice Change into Passive; People speak English all over the world.",
-                    "options": ["English is spoken all over the world.", "English is spoken by people.", "English was spoken by people.", "English was spoken all over the world."],
-                    "correct": 0
-                  },
-                  {
-                    "id": 26,
-                    "subject": "English",
-                    "question": "Change the narration of (He said to the Judge, “I did not commit this crime.”)",
-                    "options": ["He told the Judge that he did not commit the crime.", "He told the judge that he had not committed the crime.", "He told the judge that he had not committed that crime.", "He told the judge that he had not committed this crime"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 27,
-                    "subject": "English",
-                    "question": "Change the narration. Aliya said, “I have already written a letter to my family.”",
-                    "options": ["Aliya said that she had already written a letter to her family.", "Aliya said that she has already written a letter to her family.", "Aliya said that she has already been written a letter to her family.", "Aliya said that she had already been written a letter to her family."],
-                    "correct": 0
-                  },
-                  {
-                    "id": 28,
-                    "subject": "English",
-                    "question": "Change the narration. He said, ”The sun is stationary”.",
-                    "options": ["He said the sun is stationary.", "He said that the sun is stationary.", "He said that the sun was stationary.", "None of these"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 29,
-                    "subject": "English",
-                    "question": "Change the narration. I asked him where he would stay.",
-                    "options": ["I said to him “Where you will stay ?“", "I asked him “Where will you stay?”", "I said to him “Where I will stay ?“", "I said to him “Where will I stay ?”"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 30,
-                    "subject": "English",
-                    "question": "He said to me, “I expect you to attend the function.”",
-                    "options": ["He told me that he had expected me to attend the function.", "He told me that he expected me to attend the function.", "He told me that he expected me to attended the function.", "He told me that he expected me to have attended the function."],
-                    "correct": 1
-                  },
-                  {
-                    "id": 31,
-                    "subject": "General Knowledge",
-                    "question": "What does the CPEC stands for ?",
-                    "options": ["China Pakistan Electrical Coal", "China Pakistan Electronics Corporation", "China Pakistan Economic Corridor", "China Portagal Economical Corporation"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 32,
-                    "subject": "General Knowledge",
-                    "question": "What is the Capital city of Bangladesh?",
-                    "options": ["New Delhi", "Beijing", "Neypidya", "Dhaka"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 33,
-                    "subject": "General Knowledge",
-                    "question": "Which pass connects Pakistan with Afghanistan?",
-                    "options": ["Gomal Pass", "Khyber Pass", "Tochi Pass", "Khunjerab Pass"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 34,
-                    "subject": "General Knowledge",
-                    "question": "Who was the founder of Daily English Newspaper Dawn?",
-                    "options": ["Liaquat Ali Khan", "Z.A Sulehri", "Quaid-e-Azam", "None of them"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 35,
-                    "subject": "General Knowledge",
-                    "question": "The Muslims came to Sindh in 712 A.D.under the leadership of?",
-                    "options": ["Mahmood Ghaznavi", "Zaheer-ud-Din Baber", "Muhammad Bin Qasim", "NOT"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 36,
-                    "subject": "General Knowledge",
-                    "question": "The name of poet whose collection of poetry is called “Shah jo Risalu”?",
-                    "options": ["Khushal Khan Khattak", "Waris Shah", "Makhdum Muhammad Hashim", "Shah Abdul Latif Bhatai"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 37,
-                    "subject": "General Knowledge",
-                    "question": "What was the old name of Hyderabad?",
-                    "options": ["Shal Kot", "Neeron Kot", "Ramkot", "Akmol Pur"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 38,
-                    "subject": "General Knowledge",
-                    "question": "Shrine of Lal Shahbaz Qalandar located in which district?",
-                    "options": ["Sehwan", "Hyderabad", "Jamshoro", "None of these"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 39,
-                    "subject": "General Knowledge",
-                    "question": "Which country hosted the champion trophy 2025?",
-                    "options": ["Pakistan", "India", "Australia", "England"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 40,
-                    "subject": "General Knowledge",
-                    "question": "One of the oldest University of Pakistan Located in Sindh ______?",
-                    "options": ["University of Sindh", "Karachi University", "Liaquat Medical University", "Agriculture University"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 41,
-                    "subject": "General Knowledge",
-                    "question": "What is the capital of France?",
-                    "options": ["London", "Rome", "Berlin", "Paris"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 42,
-                    "subject": "General Knowledge",
-                    "question": "What is the date of birth of Quaid-e-Azam”",
-                    "options": ["December 25, 1876", "September 11, 1878", "December 21, 1876", "September 25, 1878"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 43,
-                    "subject": "General Knowledge",
-                    "question": "What is the largest ocean on Earth?",
-                    "options": ["Arctic Ocean", "Indian Ocean", "Pacific Ocean", "Atlantic Ocean"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 44,
-                    "subject": "General Knowledge",
-                    "question": "Which country is known as the \"Land of the Rising Sun\"?",
-                    "options": ["China", "Japan", "South Korea", "Vietnam"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 45,
-                    "subject": "General Knowledge",
-                    "question": "Who is the Current Foreign Minister of Pakistan?",
-                    "options": ["Bilawal Bhutto Zardari", "Shah Mehmood Qureshi", "Khawaja Asif", "None of These"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 46,
-                    "subject": "General Knowledge",
-                    "question": "How many districts are in Sindh ?",
-                    "options": ["25", "27", "29", "30"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 47,
-                    "subject": "General Knowledge",
-                    "question": "Senate of Pakistan comprises of how many members?",
-                    "options": ["50", "63", "87", "100"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 48,
-                    "subject": "General Knowledge",
-                    "question": "Which country is the world’s largest producer of coffee ?",
-                    "options": ["Taiwan", "UK", "Brazil", "Switzerland"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 49,
-                    "subject": "General Knowledge",
-                    "question": "Which is the highest mountain in the world?",
-                    "options": ["K_2", "Everest", "Nanga Parbat", "Siachen"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 50,
-                    "subject": "General Knowledge",
-                    "question": "Tarbela dam is situated in _________ ?",
-                    "options": ["Kashmir", "KPK", "FATA", "Gilgit Baltistan"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 51,
-                    "subject": "Science",
-                    "question": "Which is the outermost planet in the solar system?",
-                    "options": ["Mercury", "Pluto", "Neptune", "Uranus"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 52,
-                    "subject": "Science",
-                    "question": "The SI unit of charge is __________?",
-                    "options": ["Ampere", "Coulomb", "Ohm", "Volt"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 53,
-                    "subject": "Science",
-                    "question": "The most abundant element in the universe is __________.",
-                    "options": ["Oxygen", "Carbon Dioxide", "Silicon", "Hydrogen"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 54,
-                    "subject": "Science",
-                    "question": "Deficiency of Vitamin-A results in __________?",
-                    "options": ["Night blindness", "rickets", "hair fall", "scurvy"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 55,
-                    "subject": "Science",
-                    "question": "The fluid part of blood is known as __________?",
-                    "options": ["plasma", "platelets", "blood cells", "None of these"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 56,
-                    "subject": "Science",
-                    "question": "Oxidation is a chemical reaction involving the __________?",
-                    "options": ["Gain of Electrons", "Loss of Electrons", "Gain of Protons", "Loss of Protons"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 57,
-                    "subject": "Science",
-                    "question": "Digestion of food is completed in the __________?",
-                    "options": ["small intestine", "large intestine", "stomach", "Liver"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 58,
-                    "subject": "Science",
-                    "question": "The SI unit of Heat is________?",
-                    "options": ["Mercury", "Newton", "Volt", "Joule"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 59,
-                    "subject": "Science",
-                    "question": "ECG is used for the diagnosis of aliments of ?",
-                    "options": ["Brain", "Heart", "Kidneys", "Lungs"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 60,
-                    "subject": "Science",
-                    "question": "How many bones are there in a newly born infant?",
-                    "options": ["206", "230", "280", "300"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 61,
-                    "subject": "Science",
-                    "question": "Malaria is a disease which effects the____________?",
-                    "options": ["Heart", "Lungs", "Kidneys", "Spleen"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 62,
-                    "subject": "Science",
-                    "question": "All matter is made of ___________?",
-                    "options": ["Air", "Water", "Vibrations", "Atoms"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 63,
-                    "subject": "Science",
-                    "question": "____________ have no charge?",
-                    "options": ["Neutrons", "Protons", "Electrons", "None of These"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 64,
-                    "subject": "Science",
-                    "question": "Electron was discovered by?",
-                    "options": ["Michael Faraday", "Yuri Gagarin", "J.J Thomson", "James Maxwell"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 65,
-                    "subject": "Science",
-                    "question": "Sunlight is a Great Source of ____________?",
-                    "options": ["vitamin C", "vitamin D", "vitamin E", "Vitamin K"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 66,
-                    "subject": "Science",
-                    "question": "The longest bone in human body is___________?",
-                    "options": ["Ulna", "Femur", "Humerus", "Tibia"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 67,
-                    "subject": "Science",
-                    "question": "Dr. Abdul Qadeer Khan, the nuclear scientist of Pakistan and pioneer of first atomic bomb of Muslim World died on_________?",
-                    "options": ["10th October, 2021", "9th October, 2021", "8th October, 2021", "None of these"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 68,
-                    "subject": "Science",
-                    "question": "Chemical formula for Water is _______ ?",
-                    "options": ["NaAlO2", "Al2O3", "CaSiO3", "H2O"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 69,
-                    "subject": "Science",
-                    "question": "What is the chemical formula for Sulfuric acid?",
-                    "options": ["C2H6O", "H2SO4", "C2H4O2", "CaSO4"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 70,
-                    "subject": "Science",
-                    "question": "The branch of science which deals with the properties of matter and energy is called__________?",
-                    "options": ["Biology", "Geography", "Physics", "Chemistry"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 71,
-                    "subject": "Math",
-                    "question": "Ali purchased a plot for Rs. 8,000. He sells the plot to Sajid at a profit of 20%. Sajid in turn sells that plot to Zahid at a loss of 20%. The plot costs Zahid ?",
-                    "options": ["Rs. 12,000", "Rs. 10,000", "Rs. 8670", "Rs. 7680"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 72,
-                    "subject": "Math",
-                    "question": "The average of first 10 odd numbers is_____________?",
-                    "options": ["10", "9", "12", "17"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 73,
-                    "subject": "Math",
-                    "question": "The average age 9 members of a committee are the same as it was 2 years ago, because an old number has been replaced by a younger number. Find how much younger is the new member than the old number?",
-                    "options": ["7 years", "11 years", "18 years", "27 years"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 74,
-                    "subject": "Math",
-                    "question": "The average of 10 numbers is 23. If each number is increased by 4, what will the new average?",
-                    "options": ["22", "27", "25", "29"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 75,
-                    "subject": "Math",
-                    "question": "Shayan bought 65 books for Rs.1150 from one shop and 50 books for Rs.920 from another. What is the average price he paid per book ?",
-                    "options": ["Rs.18", "Rs.20", "Rs.16", "Rs.22"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 76,
-                    "subject": "Math",
-                    "question": "Find the average of all the numbers between 6 and 34 which are divisible by 5.",
-                    "options": ["18", "20", "24", "30"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 77,
-                    "subject": "Math",
-                    "question": "The average of first five multiples of 3 is____________?",
-                    "options": ["3", "15", "12", "9"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 78,
-                    "subject": "Math",
-                    "question": "A dealer marks his goods 20% above cost price. He then allows some discount on it and makes a profit of 8%. The rate of discount is:",
-                    "options": ["12%", "10%", "6%", "4%"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 79,
-                    "subject": "Math",
-                    "question": "A trader bought a car at 20% discount on its original price. He sold it at a 40% increase on the price he bought it. What percent of profit did he make on the original price?",
-                    "options": ["10%", "11%", "12%", "15%"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 80,
-                    "subject": "Math",
-                    "question": "Find two number whose sum is 28 and the difference is 4 _____________?",
-                    "options": ["12,16", "18,10", "15,13", "14,12"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 81,
-                    "subject": "Math",
-                    "question": "Today is Emaan’s birthday. After one year, she will become two times as she was ten years ago. current age of Emaan?",
-                    "options": ["18", "19", "20", "21"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 82,
-                    "subject": "Math",
-                    "question": "If 3 men or 4 women can construct a wall in 43 days, then the number of days that 7 men and 5 women take to construct it is :",
-                    "options": ["12 days", "14 days", "16 days", "18 days"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 83,
-                    "subject": "Math",
-                    "question": "If 10 workers can make 10 tables in 10 days, then how many days would it take for 5 workers to make 5 tables?",
-                    "options": ["1", "5", "10", "25"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 84,
-                    "subject": "Math",
-                    "question": "If 6 men take 9 days to complete a work, how many men can complete the work in 3 days?",
-                    "options": ["2 men", "12 men", "9 men", "18 men"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 85,
-                    "subject": "Math",
-                    "question": "What percent of 120 are 90?",
-                    "options": ["25%", "50%", "75%", "33%"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 86,
-                    "subject": "Math",
-                    "question": "Find the number which when multiplied by 15 is increased by 196.",
-                    "options": ["14", "20", "26", "28"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 87,
-                    "subject": "Math",
-                    "question": "64309 – 8703 + 798 – 437 = ________?",
-                    "options": ["55606", "55697", "55967", "73373"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 88,
-                    "subject": "Math",
-                    "question": "22004 – 29303 + 101299 – 59532 = _________?",
-                    "options": ["44000", "24500", "26000", "34500"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 89,
-                    "subject": "Math",
-                    "question": "The average age of a husband, wife and their child 3 years ago was 27 years and that of wife and the child 5 years ago was 20 years. The present age of the husband is___________?",
-                    "options": ["35 years", "40 year", "30 year", "None of these"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 90,
-                    "subject": "IQ",
-                    "question": "year is to month as week is to…..?",
-                    "options": ["Hour", "day", "fortnight", "minute"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 91,
-                    "subject": "IQ",
-                    "question": "Blindness is to eye as deafness is to …..?",
-                    "options": ["brain", "nose", "head", "ear"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 92,
-                    "subject": "IQ",
-                    "question": "food is to eat as water is to …..?",
-                    "options": ["wash", "dirt", "drink", "fire"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 93,
-                    "subject": "IQ",
-                    "question": "Teacher is to students as doctor is to …..?",
-                    "options": ["Medicine", "Drugs", "Patients", "hospital"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 94,
-                    "subject": "IQ",
-                    "question": "hot is to steam as cold is to …..?",
-                    "options": ["Ice", "Water", "weather", "NOT"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 95,
-                    "subject": "IQ",
-                    "question": "What will come at the place of question mark ? 1, 9, 25, 49, ? , 121.",
-                    "options": ["100", "91", "64", "81"],
-                    "correct": 3
-                  },
-                  {
-                    "id": 96,
-                    "subject": "IQ",
-                    "question": "What will come at the place of question mark ? 4, 7, 12, 19, 28, ?",
-                    "options": ["49", "39", "36", "30"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 97,
-                    "subject": "IQ",
-                    "question": "What will come at the place of question mark ? 10, 100, 200, 310, ?",
-                    "options": ["430", "420", "410", "400"],
-                    "correct": 0
-                  },
-                  {
-                    "id": 98,
-                    "subject": "IQ",
-                    "question": "Find the missing term: 2, 3, 5, 7, 11, ?, 17.",
-                    "options": ["12", "13", "14", "15"],
-                    "correct": 1
-                  },
-                  {
-                    "id": 99,
-                    "subject": "IQ",
-                    "question": "\"Glove\" is related to \"Hand\" in the same way as \"Cap\" is related to. ?",
-                    "options": ["Foot", "Neck", "Head", "NoT"],
-                    "correct": 2
-                  },
-                  {
-                    "id": 100,
-                    "subject": "IQ",
-                    "question": "Drama is related to director as magazine is to …..?",
-                    "options": ["publisher", "printer", "reader", "editor"],
-                    "correct": 3
-                  }
+    "id": 1,
+    "subject": "English",
+    "question": "Choose the correct synonym for 'Verdict':",
+    "options": ["Decision", "Request", "Proposal", "Question"],
+    "correct": 0
+  },
+  {
+    "id": 2,
+    "subject": "English",
+    "question": "Identify the correct spelling:",
+    "options": ["Recieve", "Receive", "Receeve", "Recive"],
+    "correct": 1
+  },
+  {
+    "id": 3,
+    "subject": "English",
+    "question": "Choose the correct form of the verb: She __ to the market every Sunday.",
+    "options": ["Go", "Goes", "Going", "Gone"],
+    "correct": 1
+  },
+  {
+    "id": 4,
+    "subject": "English",
+    "question": "Which word is an antonym of 'Big'?",
+    "options": ["Large", "Huge", "Small", "Great"],
+    "correct": 2
+  },
+  {
+    "id": 5,
+    "subject": "English",
+    "question": "Identify the correct sentence:",
+    "options": ["He don’t like to study.", "He doesn’t likes to study.", "He doesn’t like to study.", "He don’t likes to study."],
+    "correct": 2
+  },
+  {
+    "id": 6,
+    "subject": "English",
+    "question": "What is the plural of 'Child'?",
+    "options": ["Childs", "Children", "Childes", "Childrens"],
+    "correct": 1
+  },
+  {
+    "id": 7,
+    "subject": "English",
+    "question": "Choose the correct preposition: She is good __ singing.",
+    "options": ["At", "In", "On", "With"],
+    "correct": 0
+  },
+  {
+    "id": 8,
+    "subject": "English",
+    "question": "Which is a pronoun in this sentence: 'They went to the park'?",
+    "options": ["Went", "Park", "They", "To"],
+    "correct": 2
+  },
+  {
+    "id": 9,
+    "subject": "English",
+    "question": "What is the past tense of 'Run'?",
+    "options": ["Runned", "Ran", "Running", "Runs"],
+    "correct": 1
+  },
+  {
+    "id": 10,
+    "subject": "English",
+    "question": "Choose the correct article: __ apple is on the table.",
+    "options": ["A", "An", "The", "No article"],
+    "correct": 1
+  },
+  {
+    "id": 11,
+    "subject": "English",
+    "question": "Which sentence is in the passive voice?",
+    "options": ["She writes a letter.", "A letter is written by her.", "She is writing a letter.", "She will write a letter."],
+    "correct": 1
+  },
+  {
+    "id": 12,
+    "subject": "English",
+    "question": "Choose the correct synonym for 'Happy':",
+    "options": ["Sad", "Joyful", "Angry", "Tired"],
+    "correct": 1
+  },
+  {
+    "id": 13,
+    "subject": "English",
+    "question": "Identify the adverb in the sentence: 'She sings beautifully.'",
+    "options": ["She", "Sings", "Beautifully", "None"],
+    "correct": 2
+  },
+  {
+    "id": 14,
+    "subject": "English",
+    "question": "Which word is a noun?",
+    "options": ["Run", "Big", "Table", "Quickly"],
+    "correct": 2
+  },
+  {
+    "id": 15,
+    "subject": "English",
+    "question": "Choose the correct form: I __ never been to Paris.",
+    "options": ["Has", "Have", "Had", "Having"],
+    "correct": 1
+  },
+  {
+    "id": 16,
+    "subject": "English",
+    "question": "What is the superlative form of 'Good'?",
+    "options": ["Better", "Best", "Gooder", "Goodest"],
+    "correct": 1
+  },
+  {
+    "id": 17,
+    "subject": "English",
+    "question": "Choose the correct conjunction: I can go to the park __ stay home.",
+    "options": ["And", "But", "Or", "So"],
+    "correct": 2
+  },
+  {
+    "id": 18,
+    "subject": "English",
+    "question": "Which sentence is correct?",
+    "options": ["Me and him went to the store.", "He and I went to the store.", "Him and I went to the store.", "He and me went to the store."],
+    "correct": 1
+  },
+  {
+    "id": 19,
+    "subject": "English",
+    "question": "What is the meaning of the idiom 'Break the ice'?",
+    "options": ["To start a conversation", "To end a conversation", "To fight", "To cry"],
+    "correct": 0
+  },
+  {
+    "id": 20,
+    "subject": "English",
+    "question": "Choose the correct synonym for 'Courage':",
+    "options": ["Fear", "Bravery", "Weakness", "Doubt"],
+    "correct": 1
+  },
+  {
+    "id": 21,
+    "subject": "English",
+    "question": "Which word is misspelled in this sentence: 'The accomodation was excellent.'",
+    "options": ["Was", "Excellent", "Accomodation", "The"],
+    "correct": 2
+  },
+  {
+    "id": 22,
+    "subject": "English",
+    "question": "Choose the correct form: They __ playing football yesterday.",
+    "options": ["Was", "Were", "Are", "Is"],
+    "correct": 1
+  },
+  {
+    "id": 23,
+    "subject": "English",
+    "question": "What is the opposite of 'Arrive'?",
+    "options": ["Leave", "Stay", "Come", "Reach"],
+    "correct": 0
+  },
+  {
+    "id": 24,
+    "subject": "English",
+    "question": "Which is a collective noun?",
+    "options": ["Dog", "Team", "Car", "Book"],
+    "correct": 1
+  },
+  {
+    "id": 25,
+    "subject": "English",
+    "question": "Choose the correct sentence:",
+    "options": ["She don’t have no books.", "She doesn’t have any books.", "She don’t has any books.", "She doesn’t has no books."],
+    "correct": 1
+  },
+  {
+    "id": 26,
+    "subject": "General Knowledge",
+    "question": "What is the capital of Pakistan?",
+    "options": ["Karachi", "Lahore", "Islamabad", "Peshawar"],
+    "correct": 2
+  },
+  {
+    "id": 27,
+    "subject": "General Knowledge",
+    "question": "Who was the first Prime Minister of Pakistan?",
+    "options": ["Quaid-e-Azam", "Liaquat Ali Khan", "Zulfikar Ali Bhutto", "Ayub Khan"],
+    "correct": 1
+  },
+  {
+    "id": 28,
+    "subject": "General Knowledge",
+    "question": "Which river is known as the lifeline of Pakistan?",
+    "options": ["Indus", "Jhelum", "Chenab", "Ravi"],
+    "correct": 0
+  },
+  {
+    "id": 29,
+    "subject": "General Knowledge",
+    "question": "What is the currency of Japan?",
+    "options": ["Yuan", "Yen", "Won", "Dollar"],
+    "correct": 1
+  },
+  {
+    "id": 30,
+    "subject": "General Knowledge",
+    "question": "Which planet is known as the Red Planet?",
+    "options": ["Jupiter", "Mars", "Venus", "Mercury"],
+    "correct": 1
+  },
+  {
+    "id": 31,
+    "subject": "General Knowledge",
+    "question": "Who wrote the national anthem of Pakistan?",
+    "options": ["Allama Iqbal", "Hafeez Jullundhri", "Faiz Ahmed Faiz", "Ahmed Faraz"],
+    "correct": 1
+  },
+  {
+    "id": 32,
+    "subject": "General Knowledge",
+    "question": "What is the largest desert in the world?",
+    "options": ["Sahara", "Gobi", "Kalahari", "Antarctic"],
+    "correct": 3
+  },
+  {
+    "id": 33,
+    "subject": "General Knowledge",
+    "question": "Which country is known as the Land of the Rising Sun?",
+    "options": ["China", "Japan", "Korea", "Thailand"],
+    "correct": 1
+  },
+  {
+    "id": 34,
+    "subject": "General Knowledge",
+    "question": "What is the highest mountain in Pakistan?",
+    "options": ["Nanga Parbat", "K2", "Rakaposhi", "Tirich Mir"],
+    "correct": 1
+  },
+  {
+    "id": 35,
+    "subject": "General Knowledge",
+    "question": "Who is the founder of Pakistan?",
+    "options": ["Liaquat Ali Khan", "Allama Iqbal", "Quaid-e-Azam", "Sir Syed Ahmed Khan"],
+    "correct": 2
+  },
+  {
+    "id": 36,
+    "subject": "General Knowledge",
+    "question": "Which city is known as the 'City of Lights' in Pakistan?",
+    "options": ["Lahore", "Karachi", "Islamabad", "Quetta"],
+    "correct": 1
+  },
+  {
+    "id": 37,
+    "subject": "General Knowledge",
+    "question": "What is the largest ocean in the world?",
+    "options": ["Atlantic", "Indian", "Pacific", "Arctic"],
+    "correct": 2
+  },
+  {
+    "id": 38,
+    "subject": "General Knowledge",
+    "question": "Which gas is most abundant in Earth’s atmosphere?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    "correct": 1
+  },
+  {
+    "id": 39,
+    "subject": "General Knowledge",
+    "question": "What is the national flower of Pakistan?",
+    "options": ["Rose", "Jasmine", "Sunflower", "Tulip"],
+    "correct": 1
+  },
+  {
+    "id": 40,
+    "subject": "General Knowledge",
+    "question": "Which country hosted the 2022 FIFA World Cup?",
+    "options": ["Brazil", "Qatar", "Russia", "Germany"],
+    "correct": 1
+  },
+  {
+    "id": 41,
+    "subject": "General Knowledge",
+    "question": "What is the chemical symbol for Gold?",
+    "options": ["Au", "Ag", "Fe", "Pb"],
+    "correct": 0
+  },
+  {
+    "id": 42,
+    "subject": "General Knowledge",
+    "question": "Which continent is the smallest by land area?",
+    "options": ["Australia", "Antarctica", "Asia", "Africa"],
+    "correct": 0
+  },
+  {
+    "id": 43,
+    "subject": "General Knowledge",
+    "question": "Who was the first woman Prime Minister of Pakistan?",
+    "options": ["Fatima Jinnah", "Benazir Bhutto", "Hina Rabbani Khar", "Asma Jahangir"],
+    "correct": 1
+  },
+  {
+    "id": 44,
+    "subject": "General Knowledge",
+    "question": "What is the longest river in the world?",
+    "options": ["Nile", "Amazon", "Yangtze", "Mississippi"],
+    "correct": 0
+  },
+  {
+    "id": 45,
+    "subject": "General Knowledge",
+    "question": "Which animal is the national emblem of Pakistan?",
+    "options": ["Markhor", "Snow Leopard", "Lion", "Tiger"],
+    "correct": 0
+  },
+  {
+    "id": 46,
+    "subject": "General Knowledge",
+    "question": "What is the official language of Sindh University?",
+    "options": ["Urdu", "Sindhi", "English", "Both A and C"],
+    "correct": 3
+  },
+  {
+    "id": 47,
+    "subject": "General Knowledge",
+    "question": "Which country is known as the 'Land of a Thousand Lakes'?",
+    "options": ["Finland", "Canada", "Sweden", "Norway"],
+    "correct": 0
+  },
+  {
+    "id": 48,
+    "subject": "General Knowledge",
+    "question": "What is the largest province of Pakistan by area?",
+    "options": ["Punjab", "Sindh", "Balochistan", "Khyber Pakhtunkhwa"],
+    "correct": 2
+  },
+  {
+    "id": 49,
+    "subject": "General Knowledge",
+    "question": "Which element is essential for human life and found in water?",
+    "options": ["Carbon", "Oxygen", "Nitrogen", "Sulfur"],
+    "correct": 1
+  },
+  {
+    "id": 50,
+    "subject": "General Knowledge",
+    "question": "What is the name of Pakistan’s national airline?",
+    "options": ["Air Blue", "PIA", "Serene Air", "Shaheen Air"],
+    "correct": 1
+  },
+  {
+    "id": 51,
+    "subject": "Everyday Science",
+    "question": "What is the primary source of energy for Earth?",
+    "options": ["Moon", "Sun", "Stars", "Wind"],
+    "correct": 1
+  },
+  {
+    "id": 52,
+    "subject": "Everyday Science",
+    "question": "Which gas is used in balloons to make them float?",
+    "options": ["Oxygen", "Helium", "Nitrogen", "Carbon Dioxide"],
+    "correct": 1
+  },
+  {
+    "id": 53,
+    "subject": "Everyday Science",
+    "question": "What is the boiling point of water at sea level?",
+    "options": ["50°C", "100°C", "150°C", "200°C"],
+    "correct": 1
+  },
+  {
+    "id": 54,
+    "subject": "Everyday Science",
+    "question": "Which organ pumps blood in the human body?",
+    "options": ["Brain", "Heart", "Liver", "Kidney"],
+    "correct": 1
+  },
+  {
+    "id": 55,
+    "subject": "Everyday Science",
+    "question": "What is the chemical formula for water?",
+    "options": ["CO2", "H2O", "O2", "H2SO4"],
+    "correct": 1
+  },
+  {
+    "id": 56,
+    "subject": "Everyday Science",
+    "question": "Which planet is closest to the Sun?",
+    "options": ["Venus", "Mercury", "Earth", "Mars"],
+    "correct": 1
+  },
+  {
+    "id": 57,
+    "subject": "Everyday Science",
+    "question": "What is the main source of Vitamin C?",
+    "options": ["Milk", "Citrus fruits", "Bread", "Meat"],
+    "correct": 1
+  },
+  {
+    "id": 58,
+    "subject": "Everyday Science",
+    "question": "Which instrument is used to measure temperature?",
+    "options": ["Barometer", "Thermometer", "Hydrometer", "Anemometer"],
+    "correct": 1
+  },
+  {
+    "id": 59,
+    "subject": "Everyday Science",
+    "question": "What gas do plants absorb during photosynthesis?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Hydrogen"],
+    "correct": 2
+  },
+  {
+    "id": 60,
+    "subject": "Everyday Science",
+    "question": "What is the speed of light in a vacuum?",
+    "options": ["300,000 km/s", "150,000 km/s", "500,000 km/s", "100,000 km/s"],
+    "correct": 0
+  },
+  {
+    "id": 61,
+    "subject": "Everyday Science",
+    "question": "Which blood group is known as the universal donor?",
+    "options": ["A+", "B+", "AB+", "O-"],
+    "correct": 3
+  },
+  {
+    "id": 62,
+    "subject": "Everyday Science",
+    "question": "What is the main component of the Sun?",
+    "options": ["Oxygen", "Hydrogen", "Nitrogen", "Carbon"],
+    "correct": 1
+  },
+  {
+    "id": 63,
+    "subject": "Everyday Science",
+    "question": "Which is the hardest substance in the human body?",
+    "options": ["Bone", "Tooth enamel", "Skin", "Muscle"],
+    "correct": 1
+  },
+  {
+    "id": 64,
+    "subject": "Everyday Science",
+    "question": "What is the unit of electric current?",
+    "options": ["Volt", "Watt", "Ampere", "Ohm"],
+    "correct": 2
+  },
+  {
+    "id": 65,
+    "subject": "Everyday Science",
+    "question": "Which gas is responsible for the greenhouse effect?",
+    "options": ["Oxygen", "Nitrogen", "Carbon Dioxide", "Helium"],
+    "correct": 2
+  },
+  {
+    "id": 66,
+    "subject": "Everyday Science",
+    "question": "What is the pH of pure water?",
+    "options": ["5", "7", "9", "11"],
+    "correct": 1
+  },
+  {
+    "id": 67,
+    "subject": "Everyday Science",
+    "question": "Which planet has the most moons?",
+    "options": ["Jupiter", "Saturn", "Uranus", "Neptune"],
+    "correct": 1
+  },
+  {
+    "id": 68,
+    "subject": "Everyday Science",
+    "question": "What is the process by which plants make food?",
+    "options": ["Respiration", "Photosynthesis", "Digestion", "Fermentation"],
+    "correct": 1
+  },
+  {
+    "id": 69,
+    "subject": "Everyday Science",
+    "question": "Which metal is liquid at room temperature?",
+    "options": ["Iron", "Mercury", "Gold", "Silver"],
+    "correct": 1
+  },
+  {
+    "id": 70,
+    "subject": "Everyday Science",
+    "question": "What is the primary source of energy for the human body?",
+    "options": ["Protein", "Carbohydrates", "Fats", "Vitamins"],
+    "correct": 1
+  },
+  {
+    "id": 71,
+    "subject": "Basic Mathematics",
+    "question": "What is 15% of 200?",
+    "options": ["20", "25", "30", "35"],
+    "correct": 2
+  },
+  {
+    "id": 72,
+    "subject": "Basic Mathematics",
+    "question": "Solve: 2x + 5 = 11",
+    "options": ["x = 2", "x = 3", "x = 4", "x = 5"],
+    "correct": 1
+  },
+  {
+    "id": 73,
+    "subject": "Basic Mathematics",
+    "question": "What is the square of 7?",
+    "options": ["14", "49", "21", "28"],
+    "correct": 1
+  },
+  {
+    "id": 74,
+    "subject": "Basic Mathematics",
+    "question": "What is the value of 2 + 3 × 4?",
+    "options": ["20", "14", "11", "18"],
+    "correct": 1
+  },
+  {
+    "id": 75,
+    "subject": "Basic Mathematics",
+    "question": "What is the LCM of 6 and 8?",
+    "options": ["12", "24", "16", "48"],
+    "correct": 1
+  },
+  {
+    "id": 76,
+    "subject": "Basic Mathematics",
+    "question": "If a = 5 and b = 3, what is a² - b²?",
+    "options": ["16", "8", "25", "9"],
+    "correct": 0
+  },
+  {
+    "id": 77,
+    "subject": "Basic Mathematics",
+    "question": "What is the perimeter of a rectangle with length 5 cm and width 3 cm?",
+    "options": ["15 cm", "16 cm", "8 cm", "10 cm"],
+    "correct": 1
+  },
+  {
+    "id": 78,
+    "subject": "Basic Mathematics",
+    "question": "What is 0.75 as a fraction?",
+    "options": ["1/2", "3/4", "2/3", "4/5"],
+    "correct": 1
+  },
+  {
+    "id": 79,
+    "subject": "Basic Mathematics",
+    "question": "What is the value of 2³?",
+    "options": ["6", "8", "12", "16"],
+    "correct": 1
+  },
+  {
+    "id": 80,
+    "subject": "Basic Mathematics",
+    "question": "If 3x = 12, what is x?",
+    "options": ["2", "3", "4", "5"],
+    "correct": 2
+  },
+  {
+    "id": 81,
+    "subject": "Basic Mathematics",
+    "question": "What is the area of a circle with radius 7 cm? (Use π = 22/7)",
+    "options": ["154 cm²", "44 cm²", "77 cm²", "22 cm²"],
+    "correct": 0
+  },
+  {
+    "id": 82,
+    "subject": "Basic Mathematics",
+    "question": "What is the sum of angles in a triangle?",
+    "options": ["90°", "180°", "360°", "270°"],
+    "correct": 1
+  },
+  {
+    "id": 83,
+    "subject": "Basic Mathematics",
+    "question": "What is 1/3 of 90?",
+    "options": ["20", "30", "25", "15"],
+    "correct": 1
+  },
+  {
+    "id": 84,
+    "subject": "Basic Mathematics",
+    "question": "What is the value of 5! (factorial)?",
+    "options": ["20", "60", "120", "100"],
+    "correct": 2
+  },
+  {
+    "id": 85,
+    "subject": "Basic Mathematics",
+    "question": "If a car travels 60 km in 2 hours, what is its speed?",
+    "options": ["20 km/h", "30 km/h", "40 km/h", "50 km/h"],
+    "correct": 1
+  },
+  {
+    "id": 86,
+    "subject": "Basic Mathematics",
+    "question": "What is the value of √16?",
+    "options": ["2", "4", "8", "16"],
+    "correct": 1
+  },
+  {
+    "id": 87,
+    "subject": "Basic Mathematics",
+    "question": "What is 25% of 400?",
+    "options": ["50", "75", "100", "125"],
+    "correct": 2
+  },
+  {
+    "id": 88,
+    "subject": "Basic Mathematics",
+    "question": "What is the value of 7 + 3 × (4 - 2)?",
+    "options": ["13", "17", "10", "15"],
+    "correct": 0
+  },
+  {
+    "id": 89,
+    "subject": "Basic Mathematics",
+    "question": "What is the HCF of 12 and 18?",
+    "options": ["3", "6", "9", "12"],
+    "correct": 1
+  },
+  {
+    "id": 90,
+    "subject": "Basic Mathematics",
+    "question": "If x + 7 = 12, what is x?",
+    "options": ["4", "5", "6", "7"],
+    "correct": 1
+  },
+  {
+    "id": 91,
+    "subject": "IQ",
+    "question": "Which number comes next in the sequence: 2, 4, 8, 16, _?",
+    "options": ["24", "32", "28", "20"],
+    "correct": 1
+  },
+  {
+    "id": 92,
+    "subject": "IQ",
+    "question": "If CAT is coded as 3120, how is DOG coded?",
+    "options": ["4157", "4167", "4156", "4168"],
+    "correct": 1
+  },
+  {
+    "id": 93,
+    "subject": "IQ",
+    "question": "Which shape completes the pattern: Circle, Square, Triangle, Circle, Square, _?",
+    "options": ["Circle", "Square", "Triangle", "Hexagon"],
+    "correct": 2
+  },
+  {
+    "id": 94,
+    "subject": "IQ",
+    "question": "If all roses are flowers and some flowers are red, which statement is true?",
+    "options": ["All roses are red.", "Some roses are red.", "Some flowers are not red.", "No roses are red."],
+    "correct": 2
+  },
+  {
+    "id": 95,
+    "subject": "IQ",
+    "question": "Which is the odd one out: 3, 7, 11, 13, 17?",
+    "options": ["3", "7", "11", "13", "17"],
+    "correct": 1
+  },
+  {
+    "id": 96,
+    "subject": "IQ",
+    "question": "If today is Monday, what day will it be after 10 days?",
+    "options": ["Tuesday", "Wednesday", "Thursday", "Friday"],
+    "correct": 2
+  },
+  {
+    "id": 97,
+    "subject": "IQ",
+    "question": "Which letter comes next: A, C, I, I, K, _?",
+    "options": ["I", "J", "K", "L"],
+    "correct": 3
+  },
+  {
+    "id": 98,
+    "subject": "IQ",
+    "question": "If 5 = 10, 6 = 12, 7 = 14, what is 8?",
+    "options": ["15", "16", "17", "18"],
+    "correct": 1
+  },
+  {
+    "id": 99,
+    "subject": "IQ",
+    "question": "Which word does not belong: Apple, Banana, Carrot, Orange?",
+    "options": ["Apple", "Banana", "Carrot", "Orange"],
+    "correct": 2
+  },
+  {
+    "id": 100,
+    "subject": "IQ",
+    "question": "If a clock shows 3:00, what time will it show after 5 hours?",
+    "options": ["7:00", "8:00", "9:00", "10:00"],
+    "correct": 1
+  }
 ];
 
             }

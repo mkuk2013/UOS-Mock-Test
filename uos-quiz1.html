@@ -65,6 +65,52 @@
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
         }
 
+        /* Ensure proper centering on all devices */
+        .text-center-mobile {
+            text-align: center;
+        }
+        
+        .btn-full-width-mobile {
+            width: 100%;
+        }
+        
+        .flex-column-mobile {
+            flex-direction: column;
+        }
+        
+        .align-items-center-mobile {
+            align-items: center;
+        }
+        
+        .justify-content-center-mobile {
+            justify-content: center;
+        }
+        
+        /* Responsive card adjustments */
+        .card {
+            margin-bottom: 15px;
+        }
+        
+        /* Responsive option cards */
+        .option-card {
+            transition: all 0.3s ease;
+            margin: 8px 0;
+        }
+        
+        /* Responsive button adjustments */
+        .btn-custom {
+            margin: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-theme="dark"] .header-gradient {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        }
+
         .question-palette {
             max-height: 80px;
             overflow-x: auto;
@@ -361,6 +407,49 @@
             .MathJax {
                 font-size: 1em !important;
             }
+            
+            /* Center buttons only on mobile */
+            .card-footer .btn-custom {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            .modal-footer .btn-custom, .modal-footer .retake-btn {
+                width: 100%;
+                margin: 5px 0;
+            }
+            
+            /* Center navigation buttons on mobile */
+            .text-md-end {
+                text-align: center !important;
+            }
+        }
+        
+        /* Additional mobile-specific styles for better responsiveness */
+        @media (max-width: 576px) {
+            .header-gradient h1 {
+                font-size: 1.2rem;
+                text-align: center;
+            }
+            
+            .timer {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+            
+            .question-number {
+                min-width: 30px;
+                height: 30px;
+                font-size: 10px;
+                margin: 0 2px;
+            }
+            
+            .btn-custom {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
         }
     </style>
 </head>
@@ -1444,6 +1533,7 @@
             $('#passwordModal').modal('show');
             generateQuestionPalette();
             initializeTheme();
+            adjustForMobile(); // Add mobile adjustments on load
             
             // Check if required libraries are loaded
             setTimeout(() => {
@@ -1537,11 +1627,10 @@
             // Update options
             let optionsHTML = '';
             question.options.forEach((option, index) => {
-                const optionLetter = String.fromCharCode(65 + index);
                 const isSelected = answers[questionNum] === (index + 1) ? 'selected' : '';
                 optionsHTML += `
                     <div class="option-card ${isSelected}" onclick="selectOption(${index + 1})">
-                        <strong>${optionLetter}.</strong> ${option}
+                        ${option}
                     </div>
                 `;
             });
@@ -1835,12 +1924,12 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <p><strong>Your Answer:</strong> 
-                                            ${userAnswer ? String.fromCharCode(64 + userAnswer) + '. ' + question.options[userAnswer - 1] : 'Not Attempted'}
+                                            ${userAnswer ? question.options[userAnswer - 1] : 'Not Attempted'}
                                         </p>
                                     </div>
                                     <div class="col-md-6">
                                         <p><strong>Correct Answer:</strong> 
-                                            ${String.fromCharCode(64 + question.correct)}. ${question.options[question.correct - 1]}
+                                            ${question.options[question.correct - 1]}
                                         </p>
                                     </div>
                                 </div>
@@ -2318,6 +2407,51 @@
                 themeIcon.className = 'fas fa-moon';
             }
         }
+
+        // Initialize Test
+        $(document).ready(function() {
+            $('#passwordModal').modal('show');
+            generateQuestionPalette();
+            initializeTheme();
+            
+            // Check if required libraries are loaded
+            setTimeout(() => {
+                if (!checkLibraries()) {
+                    console.warn('Some required libraries failed to load. PDF generation may not work properly.');
+                }
+            }, 3000);
+        });
+
+        // Mobile responsive adjustments
+        function adjustForMobile() {
+            const isMobile = window.innerWidth <= 768;
+            
+            // Adjust question palette for mobile
+            const questionPalette = document.getElementById('questionPalette');
+            if (questionPalette) {
+                if (isMobile) {
+                    questionPalette.style.padding = '6px';
+                } else {
+                    questionPalette.style.padding = '10px';
+                }
+            }
+            
+            // Adjust option cards for mobile
+            const optionCards = document.querySelectorAll('.option-card');
+            optionCards.forEach(card => {
+                if (isMobile) {
+                    card.style.padding = '12px 15px';
+                    card.style.margin = '6px 0';
+                } else {
+                    card.style.padding = '15px 20px';
+                    card.style.margin = '10px 0';
+                }
+            });
+        }
+
+        // Initialize mobile adjustments
+        window.addEventListener('resize', adjustForMobile);
+        window.addEventListener('load', adjustForMobile);
 
         // Keyboard Navigation
         document.addEventListener('keydown', function(e) {

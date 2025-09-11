@@ -450,7 +450,8 @@
             }
         }
     </style>
-   
+        }
+    </style>
 </head>
 <body>
     <!-- PDF Progress Modal -->
@@ -2285,32 +2286,32 @@
                             checkPageOverflow(15); // Increased overflow check spacing
                             
                             const isSelected = userAnswer === (optIndex + 1);
-                            const isCorrectOption = optIndex === question.correct;
+                            const isCorrectOption = (optIndex + 1) === question.correct;
                             
                             // Calculate option text height first to properly size containers
                             const optionText = cleanLatexText(option);
                             const optionLines = doc.splitTextToSize(optionText, pageWidth - 2 * margin - 20);
                             const optionHeight = (optionLines.length * lineHeight) + 4;
                             
-                            // Highlight correct options with green background (always visible)
-                            // Also highlight user's selections
-                            if (isCorrectOption) {
-                                // Always highlight correct answers with green background
-                                // Using a lighter green to simulate transparency since we can't use setFillAlpha
-                                doc.setFillColor(192, 224, 207); // Light green color
-                                doc.rect(margin + 5, yPos - 2, pageWidth - 2 * margin - 10, optionHeight, 'F');
-                            } else if (isSelected) {
-                                // Highlight incorrect user selections with red background
-                                // Using a lighter red to simulate transparency since we can't use setFillAlpha
-                                doc.setFillColor(240, 200, 205); // Light red color
-                                doc.rect(margin + 5, yPos - 2, pageWidth - 2 * margin - 10, optionHeight, 'F');
+                            // Highlight selected and correct options with better styling
+                            if (isSelected || isCorrectOption) {
+                                let highlightColor;
+                                if (isCorrectOption && isSelected) {
+                                    highlightColor = [25, 135, 84, 0.3]; // Green for correct selected
+                                } else if (isCorrectOption) {
+                                    highlightColor = [25, 135, 84, 0.2]; // Light green for correct
+                                } else if (isSelected) {
+                                    highlightColor = [220, 53, 69, 0.2]; // Light red for incorrect selected
+                                }
+                                
+                                if (highlightColor) {
+                                    doc.setFillColor(highlightColor[0], highlightColor[1], highlightColor[2]);
+                                    // Fixed container sizing based on actual text height to prevent overlapping
+                                    doc.rect(margin + 5, yPos - 2, pageWidth - 2 * margin - 10, optionHeight, 'F');
+                                }
                             }
                             
-                            // Reset to default after drawing
-                            doc.setFillColor(0);
-                            
-                            // Make correct answers bold for better visibility
-                            doc.setFont('helvetica', isCorrectOption ? 'bold' : (isSelected ? 'bold' : 'normal'));
+                            doc.setFont('helvetica', isSelected ? 'bold' : 'normal');
                             
                             // No symbols as requested
                             optionLines.forEach((line, lineIndex) => {

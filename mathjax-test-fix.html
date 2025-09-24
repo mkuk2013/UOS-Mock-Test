@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>MathJax Test Fix</title>
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']],
+                processEscapes: true,
+                processEnvironments: true
+            },
+            options: {
+                ignoreHtmlClass: "tex2jax_ignore",
+                processHtmlClass: "tex2jax_process"
+            }
+        };
+    </script>
+    <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .math-example {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border-left: 4px solid #007bff;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>MathJax Rendering Test</h1>
+        
+        <p>This page tests MathJax rendering with the same configuration as your quiz.</p>
+        
+        <div class="math-example">
+            <h3>Inline Math Example:</h3>
+            <p>The quadratic formula is \( x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \).</p>
+        </div>
+        
+        <div class="math-example">
+            <h3>Display Math Example:</h3>
+            <p>The Pythagorean theorem:</p>
+            \[ a^2 + b^2 = c^2 \]
+        </div>
+        
+        <div class="math-example">
+            <h3>Complex Expression from Your Quiz:</h3>
+            \[ \sqrt{248+\sqrt{52+\sqrt{144}}} \]
+        </div>
+        
+        <div class="math-example">
+            <h3>Algebraic Equation:</h3>
+            <p>If \( \frac{x}{4}=\frac{y}{2} \), then \( x=2y \)</p>
+        </div>
+        
+        <div class="math-example">
+            <h3>Fraction and Root Expression:</h3>
+            \[ \sqrt{\frac{1}{4}}+\sqrt[3]{\frac{1}{8}} \]
+        </div>
+        
+        <div style="text-align: center; margin-top: 20px;">
+            <button onclick="refreshMathJax()">Refresh MathJax</button>
+        </div>
+    </div>
+
+    <script>
+        function refreshMathJax() {
+            if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+                MathJax.typesetPromise().then(() => {
+                    alert('MathJax refreshed successfully!');
+                }).catch((err) => {
+                    alert('MathJax refresh failed: ' + err.message);
+                });
+            } else {
+                alert('MathJax not available');
+            }
+        }
+        
+        // Auto-refresh MathJax after page load
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                if (typeof MathJax !== 'undefined' && MathJax.typesetPromise) {
+                    MathJax.typesetPromise().then(() => {
+                        console.log('Auto MathJax rendering completed');
+                    });
+                }
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

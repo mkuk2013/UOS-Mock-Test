@@ -5,20 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>UOS Mock Test Batch 2k26 - Test 1</title>
     
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://tailwindcss.com"></script>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- MathJax -->
     <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     
-    <!-- jsPDF with enhanced features -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
@@ -65,61 +60,15 @@
             background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
         }
 
-        /* Ensure proper centering on all devices */
-        .text-center-mobile {
-            text-align: center;
-        }
-        
-        .btn-full-width-mobile {
-            width: 100%;
-        }
-        
-        .flex-column-mobile {
-            flex-direction: column;
-        }
-        
-        .align-items-center-mobile {
-            align-items: center;
-        }
-        
-        .justify-content-center-mobile {
-            justify-content: center;
-        }
-        
-        /* Responsive card adjustments */
-        .card {
-            margin-bottom: 15px;
-        }
-        
-        /* Responsive option cards */
-        .option-card {
-            transition: all 0.3s ease;
-            margin: 8px 0;
-        }
-        
-        /* Responsive button adjustments */
-        .btn-custom {
-            margin: 4px;
-            transition: all 0.3s ease;
-        }
-
-        .header-gradient {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        [data-theme="dark"] .header-gradient {
-            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
-        }
-
         .question-palette {
             max-height: 80px;
             overflow-x: auto;
             overflow-y: hidden;
             white-space: nowrap;
             margin-top: 15px;
-            padding: 10px; /* Add padding */
-            background: rgba(0,0,0,0.03); /* Light background */
-            border-radius: 8px; /* Rounded corners */
+            padding: 10px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 8px;
         }
 
         [data-theme="dark"] .question-palette {
@@ -135,8 +84,8 @@
             color: #495057;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin: 0 3px; /* Add horizontal margin for spacing */
-            font-weight: 500; /* Make numbers bolder */
+            margin: 0 3px;
+            font-weight: 500;
         }
 
         [data-theme="dark"] .question-number {
@@ -155,7 +104,7 @@
             color: white;
             border-color: var(--primary-color);
             font-weight: bold;
-            transform: scale(1.1); /* Slightly enlarge current question */
+            transform: scale(1.1);
         }
 
         .question-number.answered {
@@ -194,12 +143,12 @@
         .option-card {
             border: 2px solid #e9ecef;
             border-radius: 10px;
-            padding: 15px 20px; /* Increased padding for better spacing */
-            margin: 10px 0; /* Increased margin for better separation */
+            padding: 15px 20px;
+            margin: 10px 0;
             cursor: pointer;
             transition: all 0.3s ease;
             background: white;
-            position: relative; /* For better positioning */
+            position: relative;
         }
 
         [data-theme="dark"] .option-card {
@@ -217,7 +166,7 @@
         .option-card.selected {
             border-color: var(--primary-color);
             background: rgba(13, 110, 253, 0.1);
-            font-weight: 500; /* Make selected options bolder */
+            font-weight: 500;
         }
 
         .btn-custom {
@@ -230,23 +179,12 @@
             border: none;
             position: relative;
             overflow: hidden;
-            margin: 5px; /* Add margin for better spacing between buttons */
+            margin: 5px;
         }
 
         .btn-custom:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-        }
-
-        .floating-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
         }
 
         .result-card {
@@ -255,18 +193,6 @@
             border-radius: 20px;
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-        .card-header {
-            padding: 25px; /* Increase padding for better spacing */
-        }
-
-        .card-footer {
-            padding: 20px; /* Increase padding for better spacing */
-            background-color: #f8f9fa;
-        }
-
-        [data-theme="dark"] .card-footer {
-            background-color: #343a40;
         }
 
         .review-correct {
@@ -282,11 +208,6 @@
         .review-unattempted {
             background: rgba(108, 117, 125, 0.1);
             border-left: 4px solid var(--secondary-color);
-        }
-
-        .modal-custom {
-            background: rgba(0,0,0,0.8);
-            backdrop-filter: blur(10px);
         }
 
         .loading-spinner {
@@ -313,147 +234,53 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* MathJax Styling */
-        .MathJax {
-            font-size: 1.1em !important;
-        }
+        .MathJax { font-size: 1.1em !important; }
+        .question-content .MathJax { font-size: 1.2em !important; }
 
-        .question-content .MathJax {
-            font-size: 1.2em !important;
-        }
-
-        /* PDF Progress Modal */
         .pdf-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; justify-content: center;
+            align-items: center; z-index: 9999;
         }
 
         .pdf-progress-content {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            max-width: 400px;
-            width: 90%;
+            background: white; padding: 30px; border-radius: 15px; text-align: center;
+            max-width: 400px; width: 90%;
         }
 
         .progress-bar-custom {
-            width: 100%;
-            height: 20px;
-            background: #e9ecef;
-            border-radius: 10px;
-            overflow: hidden;
-            margin: 20px 0;
+            width: 100%; height: 20px; background: #e9ecef; border-radius: 10px;
+            overflow: hidden; margin: 20px 0;
         }
 
         .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.3s ease;
+            height: 100%; background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%; transition: width 0.3s ease;
         }
 
         .retake-btn {
-            background: linear-gradient(45deg, #28a745, #20c997);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 30px;
-            font-size: 16px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            background: linear-gradient(45deg, #28a745, #20c997); color: white; border: none;
+            padding: 15px 35px; border-radius: 30px; font-size: 16px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
             transition: all 0.3s ease;
         }
 
         .retake-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(40, 167, 69, 0.6);
+            transform: translateY(-3px); box-shadow: 0 10px 30px rgba(40, 167, 69, 0.6);
             background: linear-gradient(45deg, #218838, #1e7e34);
         }
 
         @media (max-width: 768px) {
-            .question-palette {
-                max-height: 60px;
-            }
-            
-            .question-number {
-                min-width: 35px;
-                height: 35px;
-                font-size: 12px;
-            }
-            
-            .timer {
-                font-size: 14px;
-                padding: 8px 16px;
-            }
-            
-            .floating-btn {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-            }
-
-            .MathJax {
-                font-size: 1em !important;
-            }
-            
-            /* Center buttons only on mobile */
-            .card-footer .btn-custom {
-                width: 100%;
-                margin: 5px 0;
-            }
-            
-            .modal-footer .btn-custom, .modal-footer .retake-btn {
-                width: 100%;
-                margin: 5px 0;
-            }
-            
-            /* Center navigation buttons on mobile */
-            .text-md-end {
-                text-align: center !important;
-            }
-        }
-        
-        /* Additional mobile-specific styles for better responsiveness */
-        @media (max-width: 576px) {
-            .header-gradient h1 {
-                font-size: 1.2rem;
-                text-align: center;
-            }
-            
-            .timer {
-                font-size: 12px;
-                padding: 6px 12px;
-            }
-            
-            .question-number {
-                min-width: 30px;
-                height: 30px;
-                font-size: 10px;
-                margin: 0 2px;
-            }
-            
-            .btn-custom {
-                padding: 10px 20px;
-                font-size: 0.9rem;
-            }
+            .question-palette { max-height: 60px; }
+            .question-number { min-width: 35px; height: 35px; font-size: 12px; }
+            .timer { font-size: 14px; padding: 8px 16px; }
+            .MathJax { font-size: 1em !important; }
+            .card-footer .btn-custom, .modal-footer .btn-custom, .modal-footer .retake-btn { width: 100%; margin: 5px 0; }
+            .text-md-end { text-align: center !important; }
         }
     </style>
-   
 </head>
 <body>
-    <!-- PDF Progress Modal -->
     <div class="pdf-progress" id="pdfProgress">
         <div class="pdf-progress-content">
             <h4><i class="fas fa-file-pdf text-danger me-2"></i>Generating PDF Report</h4>
@@ -465,7 +292,6 @@
         </div>
     </div>
 
-    <!-- Password Modal -->
     <div class="modal fade" id="passwordModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -477,8 +303,7 @@
                         <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
                         <h6>Enter Password to Access Test</h6>
                     </div>
-                    <input type="password" class="form-control text-center" id="passwordInput" 
-                           placeholder="Enter Password" maxlength="20">
+                    <input type="password" class="form-control text-center" id="passwordInput" placeholder="Enter Password" maxlength="20">
                     <div class="invalid-feedback" id="passwordError"></div>
                 </div>
                 <div class="modal-footer justify-content-center">
@@ -490,9 +315,7 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div id="mainContent" style="display: none;">
-        <!-- Header -->
         <header class="header-gradient text-white py-4 shadow-lg">
             <div class="container">
                 <div class="row align-items-center">
@@ -511,68 +334,51 @@
             </div>
         </header>
 
-        <!-- Main Test Area -->
         <main class="container my-4">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card shadow-lg border-0" id="questionCard">
-                        <div class="card-header bg-primary text-white">
-                            <div class="row align-items-center">
-                                <div class="col-md-6">
-                                    <h5 class="mb-0">Question <span id="currentQuestionNum">1</span> of 100</h5>
-                                </div>
-                                <div class="col-md-6 text-md-end">
-                                    <button class="btn btn-warning btn-sm" onclick="toggleFlag()" id="flagBtn">
-                                        <i class="fas fa-flag me-1"></i>Flag
-                                    </button>
-                                </div>
-                            </div>
+            <div class="card shadow-lg border-0" id="questionCard">
+                <div class="card-header bg-primary text-white">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h5 class="mb-0">Question <span id="currentQuestionNum">1</span> of 100</h5>
                         </div>
-                        <div class="card-body p-4">
-                            <div id="questionContent" class="question-content">
-                                <!-- Question content will be loaded here -->
-                            </div>
-                            <div id="optionsContent" class="mt-4">
-                                <!-- Options will be loaded here -->
-                            </div>
+                        <div class="col-md-6 text-md-end">
+                            <button class="btn btn-warning btn-sm" onclick="toggleFlag()" id="flagBtn">
+                                <i class="fas fa-flag me-1"></i>Flag
+                            </button>
                         </div>
-                        <div class="card-footer">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <button class="btn btn-secondary btn-custom" onclick="previousQuestion()" id="prevBtn">
-                                        <i class="fas fa-chevron-left me-2"></i>Previous
-                                    </button>
-                                </div>
-                                <div class="col-md-6 text-md-end">
-                                    <button class="btn btn-primary btn-custom" onclick="nextQuestion()" id="nextBtn">
-                                        Next<i class="fas fa-chevron-right ms-2"></i>
-                                    </button>
-                                    <button class="btn btn-success btn-custom" onclick="submitTest()" id="submitBtn" style="display: none;">
-                                        <i class="fas fa-paper-plane me-2"></i>Submit Test
-                                    </button>
-                                </div>
-                            </div>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div id="questionContent" class="question-content"></div>
+                    <div id="optionsContent" class="mt-4"></div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-secondary btn-custom" onclick="previousQuestion()" id="prevBtn">
+                                <i class="fas fa-chevron-left me-2"></i>Previous
+                            </button>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <button class="btn btn-primary btn-custom" onclick="nextQuestion()" id="nextBtn">
+                                Next<i class="fas fa-chevron-right ms-2"></i>
+                            </button>
+                            <button class="btn btn-success btn-custom" onclick="submitTest()" id="submitBtn" style="display: none;">
+                                <i class="fas fa-paper-plane me-2"></i>Submit
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
         </main>
 
-        <!-- Question Palette moved to bottom -->
         <div class="container-fluid bg-light py-3 mt-4" data-theme-bg="secondary">
             <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <h6 class="mb-2"><i class="fas fa-list-ol me-2"></i>Question Palette</h6>
-                        <div class="question-palette" id="questionPalette">
-                            <!-- Question numbers will be generated by JavaScript -->
-                        </div>
-                    </div>
-                </div>
+                <h6 class="mb-2"><i class="fas fa-list-ol me-2"></i>Question Palette</h6>
+                <div class="question-palette" id="questionPalette"></div>
             </div>
         </div>
 
-        <!-- Result Modal -->
         <div class="modal fade" id="resultModal" tabindex="-1" data-bs-backdrop="static">
             <div class="modal-dialog modal-lg modal-dialog-centered">
                 <div class="modal-content">
@@ -581,27 +387,18 @@
                     </div>
                     <div class="modal-body">
                         <div class="result-card text-center">
-                            <div id="resultContent">
-                                <!-- Result content will be loaded here -->
-                            </div>
+                            <div id="resultContent"></div>
                         </div>
                     </div>
                     <div class="modal-footer justify-content-center">
-                        <button class="btn btn-info btn-custom me-2" onclick="showReview()">
-                            <i class="fas fa-eye me-2"></i>Review Answers
-                        </button>
-                        <button class="btn btn-success btn-custom me-2" onclick="generateCompletePDF()">
-                            <i class="fas fa-download me-2"></i>Save Complete Report as PDF
-                        </button>
-                        <button class="retake-btn" onclick="retakeTest()">
-                            <i class="fas fa-redo me-2"></i>Retake Test
-                        </button>
+                        <button class="btn btn-info btn-custom" onclick="showReview()"><i class="fas fa-eye me-2"></i>Review</button>
+                        <button class="btn btn-success btn-custom" onclick="generateCompletePDF()"><i class="fas fa-download me-2"></i>Save PDF</button>
+                        <button class="retake-btn" onclick="retakeTest()"><i class="fas fa-redo me-2"></i>Retake Test</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Review Modal -->
         <div class="modal fade" id="reviewModal" tabindex="-1">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -610,974 +407,192 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
                     <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
-                        <div id="reviewContent">
-                            <!-- Review content will be loaded here -->
-                        </div>
+                        <div id="reviewContent"></div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
         <footer class="bg-dark text-white text-center py-3 mt-5">
-            <p class="mb-0">© 2025 Copyright UOS Mock Test Series Powered By Mock Test Hub</p>
+            <p class="mb-0">© 2025 Copyright UOS Mock Test Series | Powered By Mock Test Hub</p>
         </footer>
     </div>
 
-    <!-- Theme Toggle Floating Button -->
-    <button class="btn btn-primary floating-btn d-none d-md-block" onclick="toggleTheme()" title="Toggle Theme">
-        <i class="fas fa-adjust"></i>
-    </button>
-
-    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <script>
         // Global Variables
         let currentQuestion = 1;
-        let totalQuestions = 100;
+        const totalQuestions = 100;
         let answers = {};
         let flaggedQuestions = new Set();
-        let timeRemaining = 90 * 60; // 90 minutes in seconds
+        let timeRemaining = 90 * 60; // 90 minutes
         let timerInterval;
         let testStartTime;
         let testEndTime;
-        let currentTheme = 'light';
+        let passwordModalInstance;
 
         // MathJax Configuration
         window.MathJax = {
             tex: {
                 inlineMath: [['\\(', '\\)'], ['$', '$']],
-                displayMath: [['\\[', '\\]'], ['$$', '$$']],
-                processEscapes: true,
-                processEnvironments: true
+                displayMath: [['\\[', '\\]'], ['$$', '$$']]
             },
-            options: {
-                ignoreHtmlClass: "tex2jax_ignore",
-                processHtmlClass: "tex2jax_process"
-            },
-            svg: {
-                fontCache: 'global'
-            }
+            svg: { fontCache: 'global' }
         };
 
-        // Check if required libraries are loaded
-        function checkLibraries() {
-            let allLoaded = true;
-            
-            if (typeof window.jspdf === 'undefined' || typeof window.jspdf.jsPDF === 'undefined') {
-                console.error('jsPDF library not loaded');
-                allLoaded = false;
-            } else {
-                console.log('jsPDF library loaded successfully');
-            }
-            
-            if (typeof window.html2canvas === 'undefined') {
-                console.error('html2canvas library not loaded');
-                allLoaded = false;
-            } else {
-                console.log('html2canvas library loaded successfully');
-            }
-            
-            return allLoaded;
-        }
-        
-        // Test PDF Generation (for debugging)
-        function testPDFGeneration() {
-            console.log('Testing PDF generation libraries...');
-            
-            if (!checkLibraries()) {
-                alert('Required libraries are not loaded. Please check the console for details.');
-                return;
-            }
-            
-            try {
-                const { jsPDF } = window.jspdf;
-                const doc = new jsPDF();
-                doc.text('Test PDF generation successful!', 10, 10);
-                doc.save('test.pdf');
-                console.log('Test PDF generated successfully');
-                alert('Test PDF generated successfully! Check your downloads folder.');
-            } catch (error) {
-                console.error('Error in test PDF generation:', error);
-                alert('Error in test PDF generation: ' + error.message);
-            }
-        }
-        
-        // Exact 100 Questions Data - Section-wise organized as provided
-       const questionsData = {
-  "English": [
-    {
-      "id": 1,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "1. Choose the correct SYNONYMS of the words from the given options: OMIT",
-      "options": ["A. Recluse", "B. Mistake", "C. Destroy", "D. Neglect"],
-      "correct": 3
-    },
-    {
-      "id": 2,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "2. Choose the correct SYNONYMS of the words from the given options: IMMACULATE",
-      "options": ["A. Dirty", "B. Pure", "C. Filthy", "D. Neutral"],
-      "correct": 1
-    },
-    {
-      "id": 3,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "3. Choose the correct SYNONYMS of the words from the given options: PERFECT",
-      "options": ["A. Bad", "B. Inactive", "C. Faultless", "D. Workless"],
-      "correct": 2
-    },
-    {
-      "id": 4,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "4. Choose the correct SYNONYMS of the words from the given options: ORAL",
-      "options": ["A. Unnatural", "B. Spoken", "C. Formal", "D. Written"],
-      "correct": 1
-    },
-    {
-      "id": 5,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "5. Choose the correct SYNONYMS of the words from the given options: SYNTAX",
-      "options": ["A. A point", "B. Grammar", "C. Hope", "D. Noise"],
-      "correct": 1
-    },
-    {
-      "id": 6,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "6. Choose the correct ANTONYMS of the words from the given options: CLARITY",
-      "options": ["A. Exaggeration", "B. Candour", "C. Confusion", "D. Reserve"],
-      "correct": 2
-    },
-    {
-      "id": 7,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "7. Choose the correct ANTONYMS of the words from the given options: CONFESS",
-      "options": ["A. Deny", "B. Refuse", "C. Contest", "D. Contend"],
-      "correct": 0
-    },
-    {
-      "id": 8,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "8. Choose the correct ANTONYMS of the words from the given options: ABHOR",
-      "options": ["A. Love", "B. Likeness", "C. Attractives", "D. loathe"],
-      "correct": 0
-    },
-    {
-      "id": 9,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "9. Choose the correct ANTONYMS of the words from the given options: FIXED",
-      "options": ["A. Hesitant", "B. Correctes", "C. Loose parat", "D. Delay"],
-      "correct": 2
-    },
-    {
-      "id": 10,
-      "subject": "English",
-      "topic": "Vocabulary",
-      "question": "10. Choose the correct ANTONYMS of the words from the given options: VOILENT",
-      "options": ["A. Tame", "B. Humble", "C. Gentle", "D. Harmless"],
-      "correct": 2
-    },
-    {
-      "id": 11,
-      "subject": "English",
-      "topic": "Prepositions",
-      "question": "11. Choose the correct PREPOSITION to complete the sentence: I am going to join my duties ____ a week.",
-      "options": ["A. For", "B. In", "C. At", "D. To"],
-      "correct": 1
-    },
-    {
-      "id": 12,
-      "subject": "English",
-      "topic": "Prepositions",
-      "question": "12. Choose the correct PREPOSITION to complete the sentence: Sattar is ____ vacation.",
-      "options": ["A. With", "B. On", "C. For", "D. In"],
-      "correct": 1
-    },
-    {
-      "id": 13,
-      "subject": "English",
-      "topic": "Prepositions",
-      "question": "13. Choose the correct PREPOSITION to complete the sentence: Look ____ the Sky.",
-      "options": ["A. On", "B. By", "C. In", "D. At"],
-      "correct": 3
-    },
-    {
-      "id": 14,
-      "subject": "English",
-      "topic": "Prepositions",
-      "question": "14. Choose the correct PREPOSITION to complete the sentence: She is old ____ her age.",
-      "options": ["A. To", "B. For", "C. Of", "D. At"],
-      "correct": 2
-    },
-    {
-      "id": 15,
-      "subject": "English",
-      "topic": "Prepositions",
-      "question": "15. Choose the correct PREPOSITION to complete the sentence: A plane is ____ to fly.",
-      "options": ["A. With", "B. About", "C. At", "D. By"],
-      "correct": 1
-    },
-    {
-      "id": 16,
-      "subject": "English",
-      "topic": "Spelling",
-      "question": "16. Choose the correctly spelled word from the given options.",
-      "options": ["A. Affedevit", "B. Afidevit", "C. Affidevit", "D. Affidavit"],
-      "correct": 3
-    },
-    {
-      "id": 17,
-      "subject": "English",
-      "topic": "Spelling",
-      "question": "17. Choose the correctly spelled word from the given options.",
-      "options": ["A. Centrefuge", "B. Centrefuge", "C. Centifuse", "D. Centrifuge"],
-      "correct": 3
-    },
-    {
-      "id": 18,
-      "subject": "English",
-      "topic": "Spelling",
-      "question": "18. Choose the correctly spelled word from the given options.",
-      "options": ["A. Deference", "B. Defferance", "C. Defference", "D. Defference"],
-      "correct": 0
-    },
-    {
-      "id": 19,
-      "subject": "English",
-      "topic": "Spelling",
-      "question": "19. Choose the correctly spelled word from the given options.",
-      "options": ["A. Enterpreneur", "B. Entreorenure", "C. Entrepreneur", "D. Enterprenure"],
-      "correct": 2
-    },
-    {
-      "id": 20,
-      "subject": "English",
-      "topic": "Spelling",
-      "question": "20. Choose the correctly spelled word from the given options.",
-      "options": ["A. Bureacracy", "B. Bereaucracy", "C. Buereacracy", "D. Bureaucracy"],
-      "correct": 3
-    },
-    {
-      "id": 21,
-      "subject": "English",
-      "topic": "Narration",
-      "question": "21. Choose the correct narration of following sentences: He said to me, \"I am ready\".",
-      "options": ["A. He told to me that he is ready.", "B. He told me that he was ready.", "C. He told me that I am ready.", "D. He told me that I will ready."],
-      "correct": 1
-    },
-    {
-      "id": 22,
-      "subject": "English",
-      "topic": "Narration",
-      "question": "22. Choose the correct narration of following sentences: Karim says, \"I shall go there\".",
-      "options": ["A. Karim said that he went there.", "B. Karim says that he will go there.", "C. Karim says that he went there.", "D. Karim said that I will go there."],
-      "correct": 1
-    },
-    {
-      "id": 23,
-      "subject": "English",
-      "topic": "Narration",
-      "question": "23. Choose the correct narration of following sentences: Sultan will say to me, \"I am your classmate\".",
-      "options": ["A. Sultan will tell me that he is my classmate.", "B. Sultan will tell me that he was my classmate.", "C. Sultan will tell me that he will be my classmate.", "D. Sultan said me that he is my classmate."],
-      "correct": 0
-    },
-    {
-      "id": 24,
-      "subject": "English",
-      "topic": "Narration",
-      "question": "24. Choose the correct narration of following sentences: He said to you, \"You may go out\".",
-      "options": ["A. He told you that you might be go out.", "B. He said you that you might be go out.", "C. He told you that you may go out.", "D. He told you that you might go out."],
-      "correct": 3
-    },
-    {
-      "id": 25,
-      "subject": "English",
-      "topic": "Narration",
-      "question": "25. Choose the correct narration of following sentences: He said to me, \"I had to finish this first.\"",
-      "options": ["A. He told me that he has to finish this first.", "B. He told me that he have to finish this first.", "C. He told me that he had had to finish this first.", "D. He told me that he had to finish this first."],
-      "correct": 2
-    },
-    {
-      "id": 26,
-      "subject": "English",
-      "topic": "Voice",
-      "question": "26. Choose the correct Active & Passive voice of following sentences: My father loves me.",
-      "options": ["A. I loved my father.", "B. I was loved by my father.", "C. I were loved by my father.", "D. I am loved by my father."],
-      "correct": 3
-    },
-    {
-      "id": 27,
-      "subject": "English",
-      "topic": "Voice",
-      "question": "27. Choose the correct Active & Passive voice of following sentences: My friends are watching the match.",
-      "options": ["A. The match is watched by my friends.", "B. The match had being watched by my friends.", "C. The match is being watched by my friends.", "D. The match has being watched by my friends."],
-      "correct": 2
-    },
-    {
-      "id": 28,
-      "subject": "English",
-      "topic": "Voice",
-      "question": "28. Choose the correct Active & Passive voice of following sentences: Sahil spoke the lie.",
-      "options": ["A. The lie was spoke by Sahil.", "B. The lie spoken by Sahil.", "C. Lie was spoken by Sahil.", "D. The lie was spoken by Sahil."],
-      "correct": 3
-    },
-    {
-      "id": 29,
-      "subject": "English",
-      "topic": "Voice",
-      "question": "29. Choose the correct Active & Passive voice of following sentences: Somebody had already adopted him.",
-      "options": ["A. He have been already adopted.", "B. He had already been adopted.", "C. He had already adopted.", "D. He has been already adopted."],
-      "correct": 1
-    },
-    {
-      "id": 30,
-      "subject": "English",
-      "topic": "Voice",
-      "question": "30. Choose the correct Active & Passive voice of following sentences: I must help him.",
-      "options": ["A. He must helped by me.", "B. I must held him.", "C. He must get help from me.", "D. He must be helped by me."],
-      "correct": 3
-    }
-  ],
-  "General Knowledge": [
-    {
-      "id": 31,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "31. The largest river in the world is:",
-      "options": ["A. Indus River", "B. Nile River", "C. Amazon River", "D. Jhelum River"],
-      "correct": 2
-    },
-    {
-      "id": 32,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "32. The last Mughal emperor was:",
-      "options": ["A. Aurang Zeb Alamgir", "B. Jalal-ul-din Akbar", "C. Bahadur Shah Zafar", "D. Zaheer-din Babur"],
-      "correct": 2
-    },
-    {
-      "id": 33,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "33. Shalimar Gardens are located in:",
-      "options": ["A. Delhi", "B. Thatta", "C. Lahore", "D. Agra"],
-      "correct": 2
-    },
-    {
-      "id": 34,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "34. The Karakoram Connect Pakistan with:",
-      "options": ["A. Afghanistan", "B. China", "C. Iran", "D. Turkey"],
-      "correct": 1
-    },
-    {
-      "id": 35,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "35. The current champion of Asia Cup:",
-      "options": ["A. India", "B. Sri lanka", "C. Pakistan", "D. Banladesh"],
-      "correct": 1
-    },
-    {
-      "id": 36,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "36. Muhammad Bin Qasim entered in Sindh from which region of Sindh?",
-      "options": ["A. Mansura", "B. Debal", "C. Manora", "D. Bhambhore"],
-      "correct": 1
-    },
-    {
-      "id": 37,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "37. Karoonjhar Mountains located in:",
-      "options": ["A. Sehwan", "B. Thatta", "C. Tharparkar", "D. Rohri"],
-      "correct": 2
-    },
-    {
-      "id": 38,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "38. Hamal lake located in:",
-      "options": ["A. Qambar", "B. Dadu", "C. Sehwan", "D. Hyderabad"],
-      "correct": 0
-    },
-    {
-      "id": 39,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "39. Lowest point of Asia:",
-      "options": ["A. Caspian Sea", "B. Dead Sea", "C. Lake Assal", "D. Lake Eyre"],
-      "correct": 1
-    },
-    {
-      "id": 40,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "40. Largest producer of Tea is:",
-      "options": ["A. Brazil", "B. China", "C. Pakistan", "D. India"],
-      "correct": 1
-    },
-    {
-      "id": 41,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "41. South Pole is located in:",
-      "options": ["A. Africa", "B. Australia", "C. Greenland", "D. Antarctica"],
-      "correct": 3
-    },
-    {
-      "id": 42,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "42. \"Kwacha\" is currency of:",
-      "options": ["A. Togo", "B. Zambia", "C. Maldives", "D. Taiwan"],
-      "correct": 1
-    },
-    {
-      "id": 43,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "43. Capital city of South Korea is:",
-      "options": ["A. Pyongyang", "B. Bishkek", "C. Male", "D. Seoul"],
-      "correct": 3
-    },
-    {
-      "id": 44,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "44. Land of Golden Fleece is known as:",
-      "options": ["A. Australia", "B. Bangladesh", "C. Scotland", "D. Thailand"],
-      "correct": 0
-    },
-    {
-      "id": 45,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "45. Who wrote \"The Struggle for Pakistan\"?",
-      "options": ["A. Aitzaz Ahsan", "B. Akbar S. Ahmed", "C. Main Ata Rabani", "D. Ayesha Jalal"],
-      "correct": 3
-    },
-    {
-      "id": 46,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "46. Border between Pakistan and Afghanistan is known as:",
-      "options": ["A. Silk line", "B. Safak line", "C. Durand Line", "D. Gojal Line"],
-      "correct": 2
-    },
-    {
-      "id": 47,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "47. The constitution of 1973 consists of ____ Articles.",
-      "options": ["A. 234", "B. 250", "C. 270", "D. 280"],
-      "correct": 3
-    },
-    {
-      "id": 48,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "48. In 1911, who was the Viceroy of India?",
-      "options": ["A. Lord Rippon", "B. Lord Hardinge", "C. Lord Curzon", "D. Lord Canning"],
-      "correct": 1
-    },
-    {
-      "id": 49,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "49. The main occupation of the people of Indus valley was:",
-      "options": ["A. Trade", "B. Fishing", "C. Hunting", "D. None of these"],
-      "correct": 0
-    },
-    {
-      "id": 50,
-      "subject": "General Knowledge",
-      "topic": "World & History",
-      "question": "50. LNG stands for",
-      "options": ["A. Liquid Natural Gas", "B. Liquefied Natural Gas", "C. Lithogram Natural Gas", "D. None"],
-      "correct": 1
-    }
-  ],
-  "General Science": [
-    {
-      "id": 51,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "51. Chemical Symbol of Potassium:",
-      "options": ["A. Mg", "B. Pa", "C. Au", "D. K"],
-      "correct": 3
-    },
-    {
-      "id": 52,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "52. Shortest day on",
-      "options": ["A. Neptune", "B. Venus", "C. Saturn", "D. Jupiter"],
-      "correct": 3
-    },
-    {
-      "id": 53,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "53. What is the maximum length of a day on the poles?",
-      "options": ["A. 6 months", "B. one year", "C. 8 months", "D. 2 year"],
-      "correct": 0
-    },
-    {
-      "id": 54,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "54. Earthquakes rarely occur in:",
-      "options": ["A. Brazil", "B. Alaska", "C. Mexico", "D. Russia"],
-      "correct": 0
-    },
-    {
-      "id": 55,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "55. Oxygen in the upper atmosphere is converted in",
-      "options": ["A. Hydrogen", "B. Ozone", "C. Nitrogen", "D. CO2"],
-      "correct": 1
-    },
-    {
-      "id": 56,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "56. The instruments used for measuring humidity in air is:",
-      "options": ["A. Pantograph", "B. Hygrograph", "C. Hydrograph", "D. Barograph"],
-      "correct": 1
-    },
-    {
-      "id": 57,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "57. The nearest relatives of man are:",
-      "options": ["A. New world monkey", "B. Apes", "C. Old world monkey", "D. Lemurs."],
-      "correct": 1
-    },
-    {
-      "id": 58,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "58. Wisdom teeth normally grow during the of:",
-      "options": ["A. 17-30 years", "B. 12-15 years", "C. 30-40 years", "D. 40-45 years"],
-      "correct": 0
-    },
-    {
-      "id": 59,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "59. Saliva in man is:",
-      "options": ["A. Acidic", "B. Alkaline", "C. Neutral", "D. None of these"],
-      "correct": 1
-    },
-    {
-      "id": 60,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "60. The largest part of the human brain is:",
-      "options": ["A. Cerebellum", "B. Cerebrum", "C. Mid-brain", "D. Medulla"],
-      "correct": 1
-    },
-    {
-      "id": 61,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "61. The mammal which lay eggs is:",
-      "options": ["A. Bat", "B. Duck-billed platypus", "C. Squirrel", "D. Kangaroo"],
-      "correct": 1
-    },
-    {
-      "id": 62,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "62. Snake bite first affects the:",
-      "options": ["A. Lungs", "B. Brain", "C. Nervous system", "D. Blood Circulation"],
-      "correct": 2
-    },
-    {
-      "id": 63,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "63. Milk is a poor source of:",
-      "options": ["A. Proteins", "B. Iron", "C. Butyric acid", "D. Calcium"],
-      "correct": 1
-    },
-    {
-      "id": 64,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "64. Which acid is produced when milk gets sour?",
-      "options": ["A. Tartaric acid", "B. Lactic acid", "C. Butyric acid", "D. Acetic acid"],
-      "correct": 1
-    },
-    {
-      "id": 65,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "65. Diamond is an allotropic form of:",
-      "options": ["A. Silicon", "B. Carbon", "C. Sulphur", "D. Germanium"],
-      "correct": 1
-    },
-    {
-      "id": 66,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "66. Sound can't travel through:",
-      "options": ["A. Solids", "B. Liquid", "C. Vacuum", "D. Gases"],
-      "correct": 2
-    },
-    {
-      "id": 67,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "67. The ear is part of:",
-      "options": ["A. Skeletal system", "B. Cardiovascular System", "C. Nervious Sytem", "D. None"],
-      "correct": 2
-    },
-    {
-      "id": 68,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "68. The tea best for digestion is:",
-      "options": ["A. Purple tea", "B. Pink tea", "C. Black tea", "D. Green tea"],
-      "correct": 3
-    },
-    {
-      "id": 69,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "69. Keyboard of computer science is:",
-      "options": ["A. Software", "B. Hardware", "C. Firmware", "D. All of these"],
-      "correct": 1
-    },
-    {
-      "id": 70,
-      "subject": "General Science",
-      "topic": "Science Principles",
-      "question": "70. One centimeter is equal to",
-      "options": ["A. $\\frac{1}{100}$ meter", "B. $\\frac{1}{100}$ meter", "C. $\\frac{1}{5}$ meter", "D. $\\frac{1}{100}$ meter"],
-      "correct": 0
-    }
-  ],
-  "Mathematics": [
-    {
-      "id": 71,
-      "subject": "Mathematics",
-      "topic": "Problem Solving",
-      "question": "71. \\(\\sqrt{248+\\sqrt{52+\\sqrt{144}}}\\)",
-      "options": ["A. 18.8", "B. 16.6", "C. 16", "D. 14"],
-      "correct": 2
-    },
-    {
-      "id": 72,
-      "subject": "Mathematics",
-      "topic": "Algebra",
-      "question": "72. If \\(36xy=18xyz,\\) then z is equal to:",
-      "options": ["A. 5", "B. 3", "C. 4", "D. 2"],
-      "correct": 3
-    },
-    {
-      "id": 73,
-      "subject": "Mathematics",
-      "topic": "Sequences",
-      "question": "73. What is the next in the following series, 1, 3, 8, 19,",
-      "options": ["A. 40", "B. 41", "C. 42", "D. 38"],
-      "correct": 1
-    },
-    {
-      "id": 74,
-      "subject": "Mathematics",
-      "topic": "Arithmetic",
-      "question": "74. Which among the following is the greatest number?",
-      "options": ["A. \\(\\frac{1}{4}\\) of 236", "B. \\(\\frac{1}{3}\\) of 741", "C. \\(\\frac{1}{16}\\) of 1028", "D. \\(\\frac{1}{9}\\) of 504"],
-      "correct": 1
-    },
-    {
-      "id": 75,
-      "subject": "Mathematics",
-      "topic": "Problem Solving",
-      "question": "75. A person washes eight cars in eighteen minutes, at the same rate how many cars wash in three hours?",
-      "options": ["A. 13", "B. 40", "C. 125", "D. 80"],
-      "correct": 3
-    },
-    {
-      "id": 76,
-      "subject": "Mathematics",
-      "topic": "Algebra",
-      "question": "76. If \\(\\frac{x}{4}=\\frac{y}{2}\\), then",
-      "options": ["A. \\(x=2y\\)", "B. \\(y=2x\\)", "C. \\(x=y\\)", "D. \\(y=x^{2}\\)"],
-      "correct": 0
-    },
-    {
-      "id": 77,
-      "subject": "Mathematics",
-      "topic": "Problem Solving",
-      "question": "77. Two apples and three mangoes cost Rs. 86, four apples and one mango cost Rs.112, What is the cost of an apple?",
-      "options": ["A. 35", "B. 30", "C. 25", "D. 20"],
-      "correct": 2
-    },
-    {
-      "id": 78,
-      "subject": "Mathematics",
-      "topic": "Percentages",
-      "question": "78. Ayaz lost 20% by selling a radio set for Rs.680. Which of the following was the original cost of the ratio?",
-      "options": ["A. 800", "B. 900", "C. 850", "D. None of these"],
-      "correct": 2
-    },
-    {
-      "id": 79,
-      "subject": "Mathematics",
-      "topic": "Arithmetic",
-      "question": "79. \\(\\sqrt{\\frac{1}{4}}+\\sqrt[3]{\\frac{1}{8}}\\) is equal to:",
-      "options": ["A. 0", "B. 1", "C. \\(\\frac{1}{2}\\)", "D. \\(\\sqrt[3]{\\frac{1}{2}}\\)"],
-      "correct": 1
-    },
-    {
-      "id": 80,
-      "subject": "Mathematics",
-      "topic": "Number Systems",
-      "question": "80. MMDCLXXX =",
-      "options": ["A. 2570", "B. 2670", "C. 2680", "D. 2770"],
-      "correct": 2
-    },
-    {
-      "id": 81,
-      "subject": "Mathematics",
-      "topic": "Exponents",
-      "question": "81. If \\(\\sqrt{2^{n}}=64\\) then find the value of \"n\".",
-      "options": ["A. 8", "B. 10", "C. 12", "D. 16"],
-      "correct": 2
-    },
-    {
-      "id": 82,
-      "subject": "Mathematics",
-      "topic": "Ratio and Proportion",
-      "question": "82. Find a third proportional to the number 4, 42.",
-      "options": ["A. 441", "B. 541", "C. 641", "D. None of these"],
-      "correct": 0
-    },
-    {
-      "id": 83,
-      "subject": "Mathematics",
-      "topic": "Ratio and Proportion",
-      "question": "83. The ratio of boys and girls in a school is 9:5. If the total number of students in the school is 1050, then the number of boys is:",
-      "options": ["A. 785", "B. 890", "C. 675", "D. None of these"],
-      "correct": 2
-    },
-    {
-      "id": 84,
-      "subject": "Mathematics",
-      "topic": "Percentages",
-      "question": "84. What percentage is equivalent to \\(5\\frac{1}{4}\\) ?",
-      "options": ["A. 525%", "B. 425%", "C. 625%", "D. None of these"],
-      "correct": 0
-    },
-    {
-      "id": 85,
-      "subject": "Mathematics",
-      "topic": "Algebra",
-      "question": "85. The solution set the system of equation \\(xy - 8 = 7\\) and \\(2x+6=8x\\) is",
-      "options": ["A. \\((1,15)\\)", "B. \\((2,15)\\)", "C. \\((3,1)\\)", "D. \\((1,3)\\)"],
-      "correct": 0
-    },
-    {
-      "id": 86,
-      "subject": "Mathematics",
-      "topic": "Arithmetic",
-      "question": "86. \\(90^{2}-70^{2}=?\\)",
-      "options": ["A. 3000", "B. 3100", "C. 3200", "D. 3500"],
-      "correct": 2
-    },
-    {
-      "id": 87,
-      "subject": "Mathematics",
-      "topic": "Algebra",
-      "question": "87. What is the value of \\(a^{2}+b^{2}\\), if \\(a+b=5\\) and \\(ab=2\\).",
-      "options": ["A. 21", "B. 24", "C. 25", "D. 30"],
-      "correct": 0
-    },
-    {
-      "id": 88,
-      "subject": "Mathematics",
-      "topic": "Problem Solving",
-      "question": "88. If 5 meters of cloth cost Rs.50, How many meters of the cloth can be purchase for Rs.750?",
-      "options": ["A. 15", "B. 25", "C. 45", "D. 75"],
-      "correct": 3
-    },
-    {
-      "id": 89,
-      "subject": "Mathematics",
-      "topic": "Trigonometry",
-      "question": "89. The value of tan45 is",
-      "options": ["A. \\(\\frac{1}{\\sqrt{3}}\\)", "B. \\(\\frac{1}{\\sqrt{2}}\\)", "C. 1", "D. \\(\\sqrt{3}\\)"],
-      "correct": 2
-    },
-    {
-      "id": 90,
-      "subject": "Mathematics",
-      "topic": "Number Systems",
-      "question": "90. 1 (one) is a ____ number?",
-      "options": ["A. Prime", "B. Composite", "C. Even", "D. None"],
-      "correct": 3
-    }
-  ],
-  "I.Q": [
-    {
-      "id": 91,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "91. What is a Burgee a type of?",
-      "options": ["A. Elastic", "B. Flag", "C. Row", "D. Food"],
-      "correct": 1
-    },
-    {
-      "id": 92,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "92. What number should replace the question mark? (Based on the pattern in the given circles, for the circle with 9, 6, 7, 7, and 42 in the center; and 7, 3, 6, 4, and 40 in the center; find the missing number for 8, 2, 3, 2, and ?? in the center)",
-      "options": ["A. 38", "B. 34", "C. 32", "D. 30"],
-      "correct": 3
-    },
-    {
-      "id": 93,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "93. What is the next in following series? 64, 32, 16, 8,",
-      "options": ["A. 2", "B. 4", "C. 6", "D. 1"],
-      "correct": 1
-    },
-    {
-      "id": 94,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "94. If $9\\times7=3545$ and $4\\times3=1520$ then 6x8=?",
-      "options": ["A. 5040", "B. 6050", "C. 4030", "D. 3040"],
-      "correct": 3
-    },
-    {
-      "id": 95,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "95. \"Talent\" is most opposite to",
-      "options": ["A. Ungrateful", "B. Silent", "C. Untalented", "D. Inability"],
-      "correct": 3
-    },
-    {
-      "id": 96,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "96. If \"BEST\" is equivalent to \"DGUV\" then \"ENTER\" is equivalent to?",
-      "options": ["A. GPVXC", "B. GPVGT", "C. GPVTA", "D. HIUTV"],
-      "correct": 1
-    },
-    {
-      "id": 97,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "97. Next number is the series 3, 8, 13, 18, 23,",
-      "options": ["A. 27", "B. 28", "C. 27", "D. 26"],
-      "correct": 1
-    },
-    {
-      "id": 98,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "98. What number should replace to question mark? (The numbers are presented in a 4x4 grid: Row 1: 1, 3, 7, 13; Row 2: 4, 6, 10, 16; Row 3: 9, 11, 15, 21; Row 4: 16, 18, 22, ?)",
-      "options": ["A. 28", "B. 23", "C. 19", "D. 30"],
-      "correct": 0
-    },
-    {
-      "id": 99,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "99. How many even prime numbers are there?",
-      "options": ["A. 1", "B. 4", "C. 5", "D. None of these"],
-      "correct": 0
-    },
-    {
-      "id": 100,
-      "subject": "I.Q",
-      "topic": "Logical Reasoning",
-      "question": "100. Find the odd man out.",
-      "options": ["A. Sea", "B. Lake", "C. Stream", "D. Bridge"],
-      "correct": 3
-    }
-  ]
-};
+        const questionsData = {
+          "English": [
+            { "id": 1, "subject": "English", "topic": "Vocabulary", "question": "1. Choose the correct SYNONYMS of the words from the given options: OMIT", "options": ["A. Recluse", "B. Mistake", "C. Destroy", "D. Neglect"], "correct": 3 },
+            { "id": 2, "subject": "English", "topic": "Vocabulary", "question": "2. Choose the correct SYNONYMS of the words from the given options: IMMACULATE", "options": ["A. Dirty", "B. Pure", "C. Filthy", "D. Neutral"], "correct": 1 },
+            { "id": 3, "subject": "English", "topic": "Vocabulary", "question": "3. Choose the correct SYNONYMS of the words from the given options: PERFECT", "options": ["A. Bad", "B. Inactive", "C. Faultless", "D. Workless"], "correct": 2 },
+            { "id": 4, "subject": "English", "topic": "Vocabulary", "question": "4. Choose the correct SYNONYMS of the words from the given options: ORAL", "options": ["A. Unnatural", "B. Spoken", "C. Formal", "D. Written"], "correct": 1 },
+            { "id": 5, "subject": "English", "topic": "Vocabulary", "question": "5. Choose the correct SYNONYMS of the words from the given options: SYNTAX", "options": ["A. A point", "B. Grammar", "C. Hope", "D. Noise"], "correct": 1 },
+            { "id": 6, "subject": "English", "topic": "Vocabulary", "question": "6. Choose the correct ANTONYMS of the words from the given options: CLARITY", "options": ["A. Exaggeration", "B. Candour", "C. Confusion", "D. Reserve"], "correct": 2 },
+            { "id": 7, "subject": "English", "topic": "Vocabulary", "question": "7. Choose the correct ANTONYMS of the words from the given options: CONFESS", "options": ["A. Deny", "B. Refuse", "C. Contest", "D. Contend"], "correct": 0 },
+            { "id": 8, "subject": "English", "topic": "Vocabulary", "question": "8. Choose the correct ANTONYMS of the words from the given options: ABHOR", "options": ["A. Love", "B. Likeness", "C. Attractiveness", "D. Loathe"], "correct": 0 },
+            { "id": 9, "subject": "English", "topic": "Vocabulary", "question": "9. Choose the correct ANTONYMS of the words from the given options: FIXED", "options": ["A. Hesitant", "B. Corrected", "C. Loose", "D. Delay"], "correct": 2 },
+            { "id": 10, "subject": "English", "topic": "Vocabulary", "question": "10. Choose the correct ANTONYMS of the words from the given options: VIOLENT", "options": ["A. Tame", "B. Humble", "C. Gentle", "D. Harmless"], "correct": 2 },
+            { "id": 11, "subject": "English", "topic": "Prepositions", "question": "11. Choose the correct PREPOSITION to complete the sentence: I am going to join my duties ____ a week.", "options": ["A. For", "B. In", "C. At", "D. To"], "correct": 1 },
+            { "id": 12, "subject": "English", "topic": "Prepositions", "question": "12. Choose the correct PREPOSITION to complete the sentence: Sattar is ____ vacation.", "options": ["A. With", "B. On", "C. For", "D. In"], "correct": 1 },
+            { "id": 13, "subject": "English", "topic": "Prepositions", "question": "13. Choose the correct PREPOSITION to complete the sentence: Look ____ the Sky.", "options": ["A. On", "B. By", "C. In", "D. At"], "correct": 3 },
+            { "id": 14, "subject": "English", "topic": "Prepositions", "question": "14. Choose the correct PREPOSITION to complete the sentence: She is old ____ her age.", "options": ["A. To", "B. For", "C. Of", "D. At"], "correct": 1 },
+            { "id": 15, "subject": "English", "topic": "Prepositions", "question": "15. Choose the correct PREPOSITION to complete the sentence: A plane is ____ to fly.", "options": ["A. With", "B. About", "C. At", "D. By"], "correct": 1 },
+            { "id": 16, "subject": "English", "topic": "Spelling", "question": "16. Choose the correctly spelled word from the given options.", "options": ["A. Affedevit", "B. Afidevit", "C. Affidevit", "D. Affidavit"], "correct": 3 },
+            { "id": 17, "subject": "English", "topic": "Spelling", "question": "17. Choose the correctly spelled word from the given options.", "options": ["A. Centrefuge", "B. Centrefuge", "C. Centifuse", "D. Centrifuge"], "correct": 3 },
+            { "id": 18, "subject": "English", "topic": "Spelling", "question": "18. Choose the correctly spelled word from the given options.", "options": ["A. Deference", "B. Defferance", "C. Defference", "D. Defference"], "correct": 0 },
+            { "id": 19, "subject": "English", "topic": "Spelling", "question": "19. Choose the correctly spelled word from the given options.", "options": ["A. Enterpreneur", "B. Entreorenure", "C. Entrepreneur", "D. Enterprenure"], "correct": 2 },
+            { "id": 20, "subject": "English", "topic": "Spelling", "question": "20. Choose the correctly spelled word from the given options.", "options": ["A. Bureacracy", "B. Bereaucracy", "C. Buereacracy", "D. Bureaucracy"], "correct": 3 },
+            { "id": 21, "subject": "English", "topic": "Narration", "question": "21. Choose the correct narration of following sentences: He said to me, \"I am ready\".", "options": ["A. He told to me that he is ready.", "B. He told me that he was ready.", "C. He told me that I am ready.", "D. He told me that I will ready."], "correct": 1 },
+            { "id": 22, "subject": "English", "topic": "Narration", "question": "22. Choose the correct narration of following sentences: Karim says, \"I shall go there\".", "options": ["A. Karim said that he went there.", "B. Karim says that he will go there.", "C. Karim says that he went there.", "D. Karim said that I will go there."], "correct": 1 },
+            { "id": 23, "subject": "English", "topic": "Narration", "question": "23. Choose the correct narration of following sentences: Sultan will say to me, \"I am your classmate\".", "options": ["A. Sultan will tell me that he is my classmate.", "B. Sultan will tell me that he was my classmate.", "C. Sultan will tell me that he will be my classmate.", "D. Sultan said me that he is my classmate."], "correct": 0 },
+            { "id": 24, "subject": "English", "topic": "Narration", "question": "24. Choose the correct narration of following sentences: He said to you, \"You may go out\".", "options": ["A. He told you that you might be go out.", "B. He said you that you might be go out.", "C. He told you that you may go out.", "D. He told you that you might go out."], "correct": 3 },
+            { "id": 25, "subject": "English", "topic": "Narration", "question": "25. Choose the correct narration of following sentences: He said to me, \"I had to finish this first.\"", "options": ["A. He told me that he has to finish this first.", "B. He told me that he have to finish this first.", "C. He told me that he had had to finish that first.", "D. He told me that he had to finish that first."], "correct": 2 },
+            { "id": 26, "subject": "English", "topic": "Voice", "question": "26. Choose the correct Active & Passive voice of following sentences: My father loves me.", "options": ["A. I loved my father.", "B. I was loved by my father.", "C. I were loved by my father.", "D. I am loved by my father."], "correct": 3 },
+            { "id": 27, "subject": "English", "topic": "Voice", "question": "27. Choose the correct Active & Passive voice of following sentences: My friends are watching the match.", "options": ["A. The match is watched by my friends.", "B. The match had being watched by my friends.", "C. The match is being watched by my friends.", "D. The match has being watched by my friends."], "correct": 2 },
+            { "id": 28, "subject": "English", "topic": "Voice", "question": "28. Choose the correct Active & Passive voice of following sentences: Sahil spoke the lie.", "options": ["A. The lie was spoke by Sahil.", "B. The lie spoken by Sahil.", "C. The lie is spoke by Sahil.", "D. The lie was spoken by Sahil."], "correct": 3 },
+            { "id": 29, "subject": "English", "topic": "Voice", "question": "29. Choose the correct Active & Passive voice of following sentences: Somebody had already adopted him.", "options": ["A. He have been already adopted.", "B. He had already been adopted.", "C. He had already adopted.", "D. He has been already adopted."], "correct": 1 },
+            { "id": 30, "subject": "English", "topic": "Voice", "question": "30. Choose the correct Active & Passive voice of following sentences: I must help him.", "options": ["A. He must helped by me.", "B. I must held him.", "C. He must get help from me.", "D. He must be helped by me."], "correct": 3 }
+          ],
+          "General Knowledge": [
+            { "id": 31, "subject": "General Knowledge", "topic": "World & History", "question": "31. The largest river in the world is:", "options": ["A. Indus River", "B. Nile River", "C. Amazon River", "D. Jhelum River"], "correct": 2 },
+            { "id": 32, "subject": "General Knowledge", "topic": "World & History", "question": "32. The last Mughal emperor was:", "options": ["A. Aurang Zeb Alamgir", "B. Jalal-ul-din Akbar", "C. Bahadur Shah Zafar", "D. Zaheer-din Babur"], "correct": 2 },
+            { "id": 33, "subject": "General Knowledge", "topic": "World & History", "question": "33. Shalimar Gardens are located in:", "options": ["A. Delhi", "B. Thatta", "C. Lahore", "D. Agra"], "correct": 2 },
+            { "id": 34, "subject": "General Knowledge", "topic": "World & History", "question": "34. The Karakoram Connect Pakistan with:", "options": ["A. Afghanistan", "B. China", "C. Iran", "D. Turkey"], "correct": 1 },
+            { "id": 35, "subject": "General Knowledge", "topic": "World & History", "question": "35. Who was the champion of the 2023 Cricket Asia Cup?", "options": ["A. India", "B. Sri Lanka", "C. Pakistan", "D. Bangladesh"], "correct": 0 },
+            { "id": 36, "subject": "General Knowledge", "topic": "World & History", "question": "36. Muhammad Bin Qasim entered in Sindh from which region of Sindh?", "options": ["A. Mansura", "B. Debal", "C. Manora", "D. Bhambhore"], "correct": 1 },
+            { "id": 37, "subject": "General Knowledge", "topic": "World & History", "question": "37. Karoonjhar Mountains located in:", "options": ["A. Sehwan", "B. Thatta", "C. Tharparkar", "D. Rohri"], "correct": 2 },
+            { "id": 38, "subject": "General Knowledge", "topic": "World & History", "question": "38. Hamal lake located in:", "options": ["A. Qambar", "B. Dadu", "C. Sehwan", "D. Hyderabad"], "correct": 0 },
+            { "id": 39, "subject": "General Knowledge", "topic": "World & History", "question": "39. Lowest point of Asia:", "options": ["A. Caspian Sea", "B. Dead Sea", "C. Lake Assal", "D. Lake Eyre"], "correct": 1 },
+            { "id": 40, "subject": "General Knowledge", "topic": "World & History", "question": "40. Largest producer of Tea is:", "options": ["A. Brazil", "B. China", "C. Pakistan", "D. India"], "correct": 1 },
+            { "id": 41, "subject": "General Knowledge", "topic": "World & History", "question": "41. South Pole is located in:", "options": ["A. Africa", "B. Australia", "C. Greenland", "D. Antarctica"], "correct": 3 },
+            { "id": 42, "subject": "General Knowledge", "topic": "World & History", "question": "42. \"Kwacha\" is currency of:", "options": ["A. Togo", "B. Zambia", "C. Maldives", "D. Taiwan"], "correct": 1 },
+            { "id": 43, "subject": "General Knowledge", "topic": "World & History", "question": "43. Capital city of South Korea is:", "options": ["A. Pyongyang", "B. Bishkek", "C. Male", "D. Seoul"], "correct": 3 },
+            { "id": 44, "subject": "General Knowledge", "topic": "World & History", "question": "44. Land of Golden Fleece is known as:", "options": ["A. Australia", "B. Bangladesh", "C. Scotland", "D. Thailand"], "correct": 0 },
+            { "id": 45, "subject": "General Knowledge", "topic": "World & History", "question": "45. Who wrote \"The Struggle for Pakistan\"?", "options": ["A. Aitzaz Ahsan", "B. Akbar S. Ahmed", "C. Main Ata Rabani", "D. Ayesha Jalal"], "correct": 3 },
+            { "id": 46, "subject": "General Knowledge", "topic": "World & History", "question": "46. Border between Pakistan and Afghanistan is known as:", "options": ["A. Silk line", "B. Safak line", "C. Durand Line", "D. Gojal Line"], "correct": 2 },
+            { "id": 47, "subject": "General Knowledge", "topic": "World & History", "question": "47. The constitution of 1973 consists of ____ Articles.", "options": ["A. 234", "B. 250", "C. 270", "D. 280"], "correct": 3 },
+            { "id": 48, "subject": "General Knowledge", "topic": "World & History", "question": "48. In 1911, who was the Viceroy of India?", "options": ["A. Lord Rippon", "B. Lord Hardinge", "C. Lord Curzon", "D. Lord Canning"], "correct": 1 },
+            { "id": 49, "subject": "General Knowledge", "topic": "World & History", "question": "49. The main occupation of the people of Indus valley was:", "options": ["A. Trade", "B. Fishing", "C. Hunting", "D. None of these"], "correct": 0 },
+            { "id": 50, "subject": "General Knowledge", "topic": "World & History", "question": "50. LNG stands for", "options": ["A. Liquid Natural Gas", "B. Liquefied Natural Gas", "C. Lithogram Natural Gas", "D. None"], "correct": 1 }
+          ],
+          "General Science": [
+            { "id": 51, "subject": "General Science", "topic": "Science Principles", "question": "51. Chemical Symbol of Potassium:", "options": ["A. Mg", "B. Pa", "C. Au", "D. K"], "correct": 3 },
+            { "id": 52, "subject": "General Science", "topic": "Science Principles", "question": "52. Shortest day on", "options": ["A. Neptune", "B. Venus", "C. Saturn", "D. Jupiter"], "correct": 3 },
+            { "id": 53, "subject": "General Science", "topic": "Science Principles", "question": "53. What is the maximum length of a day on the poles?", "options": ["A. 6 months", "B. one year", "C. 8 months", "D. 2 year"], "correct": 0 },
+            { "id": 54, "subject": "General Science", "topic": "Science Principles", "question": "54. Earthquakes rarely occur in:", "options": ["A. Brazil", "B. Alaska", "C. Mexico", "D. Russia"], "correct": 0 },
+            { "id": 55, "subject": "General Science", "topic": "Science Principles", "question": "55. Oxygen in the upper atmosphere is converted in", "options": ["A. Hydrogen", "B. Ozone", "C. Nitrogen", "D. CO2"], "correct": 1 },
+            { "id": 56, "subject": "General Science", "topic": "Science Principles", "question": "56. The instruments used for measuring humidity in air is:", "options": ["A. Pantograph", "B. Hygrograph", "C. Hydrograph", "D. Barograph"], "correct": 1 },
+            { "id": 57, "subject": "General Science", "topic": "Science Principles", "question": "57. The nearest relatives of man are:", "options": ["A. New world monkey", "B. Apes", "C. Old world monkey", "D. Lemurs."], "correct": 1 },
+            { "id": 58, "subject": "General Science", "topic": "Science Principles", "question": "58. Wisdom teeth normally grow during the of:", "options": ["A. 17-30 years", "B. 12-15 years", "C. 30-40 years", "D. 40-45 years"], "correct": 0 },
+            { "id": 59, "subject": "General Science", "topic": "Science Principles", "question": "59. Saliva in man is:", "options": ["A. Acidic", "B. Alkaline", "C. Neutral", "D. None of these"], "correct": 1 },
+            { "id": 60, "subject": "General Science", "topic": "Science Principles", "question": "60. The largest part of the human brain is:", "options": ["A. Cerebellum", "B. Cerebrum", "C. Mid-brain", "D. Medulla"], "correct": 1 },
+            { "id": 61, "subject": "General Science", "topic": "Science Principles", "question": "61. The mammal which lay eggs is:", "options": ["A. Bat", "B. Duck-billed platypus", "C. Squirrel", "D. Kangaroo"], "correct": 1 },
+            { "id": 62, "subject": "General Science", "topic": "Science Principles", "question": "62. Snake bite first affects the:", "options": ["A. Lungs", "B. Brain", "C. Nervous system", "D. Blood Circulation"], "correct": 2 },
+            { "id": 63, "subject": "General Science", "topic": "Science Principles", "question": "63. Milk is a poor source of:", "options": ["A. Proteins", "B. Iron", "C. Butyric acid", "D. Calcium"], "correct": 1 },
+            { "id": 64, "subject": "General Science", "topic": "Science Principles", "question": "64. Which acid is produced when milk gets sour?", "options": ["A. Tartaric acid", "B. Lactic acid", "C. Butyric acid", "D. Acetic acid"], "correct": 1 },
+            { "id": 65, "subject": "General Science", "topic": "Science Principles", "question": "65. Diamond is an allotropic form of:", "options": ["A. Silicon", "B. Carbon", "C. Sulphur", "D. Germanium"], "correct": 1 },
+            { "id": 66, "subject": "General Science", "topic": "Science Principles", "question": "66. Sound can't travel through:", "options": ["A. Solids", "B. Liquid", "C. Vacuum", "D. Gases"], "correct": 2 },
+            { "id": 67, "subject": "General Science", "topic": "Science Principles", "question": "67. The ear is part of:", "options": ["A. Skeletal system", "B. Cardiovascular System", "C. Nervous System", "D. None"], "correct": 2 },
+            { "id": 68, "subject": "General Science", "topic": "Science Principles", "question": "68. The tea best for digestion is:", "options": ["A. Purple tea", "B. Pink tea", "C. Black tea", "D. Green tea"], "correct": 3 },
+            { "id": 69, "subject": "General Science", "topic": "Science Principles", "question": "69. Keyboard of computer science is:", "options": ["A. Software", "B. Hardware", "C. Firmware", "D. All of these"], "correct": 1 },
+            { "id": 70, "subject": "General Science", "topic": "Science Principles", "question": "70. One centimeter is equal to", "options": ["A. $\\frac{1}{100}$ meter", "B. $\\frac{1}{10}$ meter", "C. 1 meter", "D. $\\frac{1}{1000}$ meter"], "correct": 0 }
+          ],
+          "Mathematics": [
+            { "id": 71, "subject": "Mathematics", "topic": "Problem Solving", "question": "71. \\(\\sqrt{248+\\sqrt{52+\\sqrt{144}}}\\)", "options": ["A. 18.8", "B. 16.6", "C. 16", "D. 14"], "correct": 2 },
+            { "id": 72, "subject": "Mathematics", "topic": "Algebra", "question": "72. If \\(36xy=18xyz,\\) then z is equal to:", "options": ["A. 5", "B. 3", "C. 4", "D. 2"], "correct": 3 },
+            { "id": 73, "subject": "Mathematics", "topic": "Sequences", "question": "73. What is the next in the following series, 1, 3, 8, 19,...", "options": ["A. 40", "B. 41", "C. 42", "D. 38"], "correct": 2 },
+            { "id": 74, "subject": "Mathematics", "topic": "Arithmetic", "question": "74. Which among the following is the greatest number?", "options": ["A. \\(\\frac{1}{4}\\) of 236", "B. \\(\\frac{1}{3}\\) of 741", "C. \\(\\frac{1}{16}\\) of 1028", "D. \\(\\frac{1}{9}\\) of 504"], "correct": 1 },
+            { "id": 75, "subject": "Mathematics", "topic": "Problem Solving", "question": "75. A person washes eight cars in eighteen minutes, at the same rate how many cars wash in three hours?", "options": ["A. 13", "B. 40", "C. 125", "D. 80"], "correct": 3 },
+            { "id": 76, "subject": "Mathematics", "topic": "Algebra", "question": "76. If \\(\\frac{x}{4}=\\frac{y}{2}\\), then", "options": ["A. \\(x=2y\\)", "B. \\(y=2x\\)", "C. \\(x=y\\)", "D. \\(y=x^{2}\\)"], "correct": 0 },
+            { "id": 77, "subject": "Mathematics", "topic": "Problem Solving", "question": "77. Two apples and three mangoes cost Rs. 86, four apples and one mango cost Rs.112, What is the cost of an apple?", "options": ["A. 35", "B. 30", "C. 25", "D. 20"], "correct": 2 },
+            { "id": 78, "subject": "Mathematics", "topic": "Percentages", "question": "78. Ayaz lost 20% by selling a radio set for Rs.680. Which of the following was the original cost of the ratio?", "options": ["A. 800", "B. 900", "C. 850", "D. None of these"], "correct": 2 },
+            { "id": 79, "subject": "Mathematics", "topic": "Arithmetic", "question": "79. \\(\\sqrt{\\frac{1}{4}}+\\sqrt[3]{\\frac{1}{8}}\\) is equal to:", "options": ["A. 0", "B. 1", "C. \\(\\frac{1}{2}\\)", "D. \\(\\sqrt[3]{\\frac{1}{2}}\\)"], "correct": 1 },
+            { "id": 80, "subject": "Mathematics", "topic": "Number Systems", "question": "80. MMDCLXXX =", "options": ["A. 2570", "B. 2670", "C. 2680", "D. 2770"], "correct": 2 },
+            { "id": 81, "subject": "Mathematics", "topic": "Exponents", "question": "81. If \\(\\sqrt{2^{n}}=64\\) then find the value of \"n\".", "options": ["A. 8", "B. 10", "C. 12", "D. 16"], "correct": 2 },
+            { "id": 82, "subject": "Mathematics", "topic": "Ratio and Proportion", "question": "82. Find a third proportional to the number 4, 42.", "options": ["A. 441", "B. 541", "C. 641", "D. None of these"], "correct": 0 },
+            { "id": 83, "subject": "Mathematics", "topic": "Ratio and Proportion", "question": "83. The ratio of boys and girls in a school is 9:5. If the total number of students in the school is 1050, then the number of boys is:", "options": ["A. 785", "B. 890", "C. 675", "D. None of these"], "correct": 2 },
+            { "id": 84, "subject": "Mathematics", "topic": "Percentages", "question": "84. What percentage is equivalent to \\(5\\frac{1}{4}\\) ?", "options": ["A. 525%", "B. 425%", "C. 625%", "D. None of these"], "correct": 0 },
+            { "id": 85, "subject": "Mathematics", "topic": "Algebra", "question": "85. The solution set the system of equation \\(xy - 8 = 7\\) and \\(2x+6=8x\\) is", "options": ["A. \\((1,15)\\)", "B. \\((2,15)\\)", "C. \\((3,1)\\)", "D. \\((1,3)\\)"], "correct": 0 },
+            { "id": 86, "subject": "Mathematics", "topic": "Arithmetic", "question": "86. \\(90^{2}-70^{2}=?\\)", "options": ["A. 3000", "B. 3100", "C. 3200", "D. 3500"], "correct": 2 },
+            { "id": 87, "subject": "Mathematics", "topic": "Algebra", "question": "87. What is the value of \\(a^{2}+b^{2}\\), if \\(a+b=5\\) and \\(ab=2\\).", "options": ["A. 21", "B. 24", "C. 25", "D. 30"], "correct": 0 },
+            { "id": 88, "subject": "Mathematics", "topic": "Problem Solving", "question": "88. If 5 meters of cloth cost Rs.50, How many meters of the cloth can be purchase for Rs.750?", "options": ["A. 15", "B. 25", "C. 45", "D. 75"], "correct": 3 },
+            { "id": 89, "subject": "Mathematics", "topic": "Trigonometry", "question": "89. The value of tan45 is", "options": ["A. \\(\\frac{1}{\\sqrt{3}}\\)", "B. \\(\\frac{1}{\\sqrt{2}}\\)", "C. 1", "D. \\(\\sqrt{3}\\)"], "correct": 2 },
+            { "id": 90, "subject": "Mathematics", "topic": "Number Systems", "question": "90. 1 (one) is a ____ number?", "options": ["A. Prime", "B. Composite", "C. Even", "D. None"], "correct": 3 }
+          ],
+          "I.Q": [
+            { "id": 91, "subject": "I.Q", "topic": "Logical Reasoning", "question": "91. What is a Burgee a type of?", "options": ["A. Elastic", "B. Flag", "C. Row", "D. Food"], "correct": 1 },
+            { "id": 92, "subject": "I.Q", "topic": "Logical Reasoning", "question": "92. What number should replace the question mark? (Pattern 1: 9,6,7,7 -> 16. Pattern 2: 7,3,6,4 -> 33. Question: 8,2,3,2 -> ??)", "options": ["A. 30", "B. 10", "C. 24", "D. 16"], "correct": 1 },
+            { "id": 93, "subject": "I.Q", "topic": "Logical Reasoning", "question": "93. What is the next in following series? 64, 32, 16, 8,...", "options": ["A. 2", "B. 4", "C. 6", "D. 1"], "correct": 1 },
+            { "id": 94, "subject": "I.Q", "topic": "Logical Reasoning", "question": "94. If $5+3=538$ and $9+1=9110$, then $8+4=?", "options": ["A. 8412", "B. 4812", "C. 8432", "D. 1284"], "correct": 0 },
+            { "id": 95, "subject": "I.Q", "topic": "Logical Reasoning", "question": "95. \"Talent\" is most opposite to", "options": ["A. Ungrateful", "B. Silent", "C. Untalented", "D. Inability"], "correct": 3 },
+            { "id": 96, "subject": "I.Q", "topic": "Logical Reasoning", "question": "96. If \"BEST\" is equivalent to \"DGUV\" then \"ENTER\" is equivalent to?", "options": ["A. GPVXC", "B. GPVGT", "C. GPVTA", "D. HIUTV"], "correct": 1 },
+            { "id": 97, "subject": "I.Q", "topic": "Logical Reasoning", "question": "97. Next number is the series 3, 8, 13, 18, 23,...", "options": ["A. 27", "B. 28", "C. 29", "D. 26"], "correct": 1 },
+            { "id": 98, "subject": "I.Q", "topic": "Logical Reasoning", "question": "98. What number should replace the question mark? (Grid: R1: 1,3,7,13; R2: 4,6,10,16; R3: 9,11,15,21; R4: 16,18,22,?)", "options": ["A. 28", "B. 23", "C. 19", "D. 30"], "correct": 0 },
+            { "id": 99, "subject": "I.Q", "topic": "Logical Reasoning", "question": "99. How many even prime numbers are there?", "options": ["A. 1", "B. 4", "C. 5", "D. None of these"], "correct": 0 },
+            { "id": 100, "subject": "I.Q", "topic": "Logical Reasoning", "question": "100. Find the odd man out.", "options": ["A. Sea", "B. Lake", "C. Stream", "D. Bridge"], "correct": 3 }
+          ]
+        };
+
         const allQuestions = [];
         Object.values(questionsData).forEach(sectionQuestions => {
             allQuestions.push(...sectionQuestions);
         });
-        
-        // Make questionsData globally accessible
-        window.questionsData = questionsData;
-        window.allQuestions = allQuestions;
 
-        // Initialize Test
-        $(document).ready(function() {
-            $('#passwordModal').modal('show');
-            generateQuestionPalette();
+        // Event Listener for DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            passwordModalInstance = new bootstrap.Modal(document.getElementById('passwordModal'));
+            passwordModalInstance.show();
             initializeTheme();
-            adjustForMobile(); // Add mobile adjustments on load
-            
-            // Check if required libraries are loaded
-            setTimeout(() => {
-                if (!checkLibraries()) {
-                    console.warn('Some required libraries failed to load. PDF generation may not work properly.');
-                }
-            }, 3000);
         });
 
-        // Password Verification
         function verifyPassword() {
             const password = document.getElementById('passwordInput').value;
-            const correctPassword = 'uostestbymk';
-            
-            if (password === correctPassword) {
-                $('#passwordModal').modal('hide');
-                $('#mainContent').show();
+            if (password === 'uostestbymk') {
+                passwordModalInstance.hide();
+                document.getElementById('mainContent').style.display = 'block';
                 startTest();
             } else {
-                document.getElementById('passwordError').textContent = 'Incorrect password. Please try again.';
+                document.getElementById('passwordError').textContent = 'Incorrect password.';
                 document.getElementById('passwordInput').classList.add('is-invalid');
-                document.getElementById('passwordInput').value = '';
             }
         }
 
-        // Enter key for password
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                verifyPassword();
-            }
+        document.getElementById('passwordInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') verifyPassword();
         });
 
-        // Start Test
         function startTest() {
             testStartTime = new Date();
+            generateQuestionPalette();
             startTimer();
             loadQuestion(1);
         }
 
-        // Timer Functions
         function startTimer() {
-            timerInterval = setInterval(function() {
+            timerInterval = setInterval(() => {
                 timeRemaining--;
                 updateTimerDisplay();
-                
                 if (timeRemaining <= 0) {
                     clearInterval(timerInterval);
                     autoSubmitTest();
@@ -1589,58 +604,44 @@
             const minutes = Math.floor(timeRemaining / 60);
             const seconds = timeRemaining % 60;
             document.getElementById('timer').textContent = 
-                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-            
-            // Change timer color when time is running out
-            if (timeRemaining <= 300) { // 5 minutes
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            if (timeRemaining <= 300) { // 5 minutes warning
                 document.getElementById('timer').style.background = 'linear-gradient(45deg, #dc3545, #c82333)';
             }
         }
 
-        // Generate Question Palette
         function generateQuestionPalette() {
             const palette = document.getElementById('questionPalette');
             palette.innerHTML = '';
-            
             for (let i = 1; i <= totalQuestions; i++) {
                 const button = document.createElement('button');
-                button.className = 'question-number btn d-inline-flex align-items-center justify-content-center me-2 mb-2';
+                button.className = 'question-number btn d-inline-flex align-items-center justify-content-center';
                 button.textContent = i;
                 button.onclick = () => loadQuestion(i);
                 palette.appendChild(button);
             }
         }
 
-        // Load Question
         function loadQuestion(questionNum) {
             currentQuestion = questionNum;
             const question = allQuestions[questionNum - 1];
             
             document.getElementById('currentQuestionNum').textContent = questionNum;
-            
-            // Update question content
             document.getElementById('questionContent').innerHTML = 
                 `<h6><span class="badge bg-info me-2">${question.subject}</span>${question.topic}</h6>
                  <p class="lead">${question.question}</p>`;
             
-            // Update options
             let optionsHTML = '';
             question.options.forEach((option, index) => {
                 const isSelected = answers[questionNum] === (index + 1) ? 'selected' : '';
-                optionsHTML += `
-                    <div class="option-card ${isSelected}" onclick="selectOption(${index + 1})">
-                        ${option}
-                    </div>
-                `;
+                optionsHTML += `<div class="option-card ${isSelected}" onclick="selectOption(${index + 1})">${option}</div>`;
             });
             document.getElementById('optionsContent').innerHTML = optionsHTML;
             
-            // Update navigation buttons
             document.getElementById('prevBtn').style.display = questionNum === 1 ? 'none' : 'inline-block';
             document.getElementById('nextBtn').style.display = questionNum === totalQuestions ? 'none' : 'inline-block';
             document.getElementById('submitBtn').style.display = questionNum === totalQuestions ? 'inline-block' : 'none';
             
-            // Update flag button
             const flagBtn = document.getElementById('flagBtn');
             if (flaggedQuestions.has(questionNum)) {
                 flagBtn.innerHTML = '<i class="fas fa-flag me-1"></i>Unflag';
@@ -1652,68 +653,34 @@
             
             updateQuestionPalette();
             
-            // Render MathJax
             if (window.MathJax) {
-                MathJax.typesetPromise().catch(function (err) {
-                    console.log('MathJax typeset error: ' + err.message);
-                });
+                MathJax.typesetPromise().catch(err => console.log('MathJax Error:', err));
             }
             
-            // Add fade-in animation
-            document.getElementById('questionCard').classList.add('fade-in');
-            setTimeout(() => {
-                document.getElementById('questionCard').classList.remove('fade-in');
-            }, 500);
+            const card = document.getElementById('questionCard');
+            card.classList.remove('fade-in');
+            void card.offsetWidth; // Trigger reflow
+            card.classList.add('fade-in');
         }
 
-        // Select Option
         function selectOption(optionNum) {
             answers[currentQuestion] = optionNum;
-            
-            // Update option display
-            document.querySelectorAll('.option-card').forEach((card, index) => {
-                card.classList.remove('selected');
-                if (index + 1 === optionNum) {
-                    card.classList.add('selected');
-                }
-            });
-            
-            updateQuestionPalette();
+            loadQuestion(currentQuestion); // Reload to show selection
         }
 
-        // Update Question Palette
         function updateQuestionPalette() {
-            const buttons = document.querySelectorAll('.question-number');
-            buttons.forEach((button, index) => {
-                const questionNum = index + 1;
-                button.classList.remove('current', 'answered', 'flagged');
-                
-                if (questionNum === currentQuestion) {
-                    button.classList.add('current');
-                } else if (answers[questionNum]) {
-                    button.classList.add('answered');
-                }
-                
-                if (flaggedQuestions.has(questionNum)) {
-                    button.classList.add('flagged');
-                }
+            document.querySelectorAll('.question-number').forEach((button, index) => {
+                const qNum = index + 1;
+                button.className = 'question-number btn d-inline-flex align-items-center justify-content-center'; // Reset classes
+                if (answers[qNum]) button.classList.add('answered');
+                if (flaggedQuestions.has(qNum)) button.classList.add('flagged');
+                if (qNum === currentQuestion) button.classList.add('current');
             });
         }
 
-        // Navigation Functions
-        function previousQuestion() {
-            if (currentQuestion > 1) {
-                loadQuestion(currentQuestion - 1);
-            }
-        }
+        function previousQuestion() { if (currentQuestion > 1) loadQuestion(currentQuestion - 1); }
+        function nextQuestion() { if (currentQuestion < totalQuestions) loadQuestion(currentQuestion + 1); }
 
-        function nextQuestion() {
-            if (currentQuestion < totalQuestions) {
-                loadQuestion(currentQuestion + 1);
-            }
-        }
-
-        // Flag Question
         function toggleFlag() {
             if (flaggedQuestions.has(currentQuestion)) {
                 flaggedQuestions.delete(currentQuestion);
@@ -1723,784 +690,240 @@
             loadQuestion(currentQuestion);
         }
 
-        // Submit Test
         function submitTest() {
-            console.log("Submit test function called");
-            if (confirm('Are you sure you want to submit the test? You cannot change your answers after submission.')) {
-                console.log("User confirmed submission");
-                testEndTime = new Date();
-                clearInterval(timerInterval);
-                calculateResults();
-            } else {
-                console.log("User cancelled submission");
+            if (confirm('Are you sure you want to submit the test?')) {
+                finalizeTest();
             }
         }
 
         function autoSubmitTest() {
+            alert("Time's up! The test will now be submitted automatically.");
+            finalizeTest();
+        }
+        
+        function finalizeTest() {
             testEndTime = new Date();
-            alert('Time\'s up! Test will be submitted automatically.');
+            clearInterval(timerInterval);
             calculateResults();
         }
 
-        // Calculate Score
-        function calculateScore(answers) {
-            let score = 0;
-            // We'll implement this properly when we have the questions data structure
-            return score;
-        }
-
-        // Calculate Results
         function calculateResults() {
-            console.log("Calculate results function called");
-            let correctAnswers = 0;
-            let totalAttempted = Object.keys(answers).length;
-            
-            allQuestions.forEach(question => {
-                if (answers[question.id] === question.correct) {
-                    correctAnswers++;
+            let correct = 0;
+            allQuestions.forEach(q => {
+                if ((answers[q.id] - 1) === q.correct) {
+                    correct++;
                 }
             });
             
-            const obtainedMarks = correctAnswers;
-            const totalMarks = 100;
-            const passingMarks = 50;
-            const isPassed = obtainedMarks >= passingMarks;
+            const totalAttempted = Object.keys(answers).length;
+            const isPassed = correct >= 50;
             const timeTaken = Math.floor((testEndTime - testStartTime) / 1000);
             
-            // Store results globally
             window.testResults = {
-                obtainedMarks,
-                totalMarks,
-                passingMarks,
+                obtainedMarks: correct,
+                totalMarks: totalQuestions,
                 isPassed,
-                correctAnswers,
+                correctAnswers: correct,
                 totalAttempted,
                 timeTaken,
-                answers,
-                flaggedQuestions: Array.from(flaggedQuestions)
+                answers
             };
-            
-            console.log("Results calculated:", window.testResults);
             displayResults();
         }
 
         function displayResults() {
-            const results = window.testResults;
-            const minutes = Math.floor(results.timeTaken / 60);
-            const seconds = results.timeTaken % 60;
+            const r = window.testResults;
+            const minutes = Math.floor(r.timeTaken / 60);
+            const seconds = r.timeTaken % 60;
             
-            const resultHTML = `
+            document.getElementById('resultContent').innerHTML = `
                 <div class="row text-center">
                     <div class="col-md-4 mb-3">
-                        <h2 class="display-4">${results.obtainedMarks}</h2>
-                        <p class="mb-0">Marks Obtained</p>
+                        <h2 class="display-4">${r.obtainedMarks}</h2><p>Marks Obtained</p>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <h2 class="display-4">${results.totalMarks}</h2>
-                        <p class="mb-0">Total Marks</p>
+                        <h2 class="display-4">${r.totalMarks}</h2><p>Total Marks</p>
                     </div>
                     <div class="col-md-4 mb-3">
-                        <h2 class="display-4 ${results.isPassed ? 'text-success' : 'text-danger'}">
-                            ${results.isPassed ? 'PASS' : 'FAIL'}
-                        </h2>
-                        <p class="mb-0">Result Status</p>
+                        <h2 class="display-4 ${r.isPassed ? 'text-success' : 'text-danger'}">${r.isPassed ? 'PASS' : 'FAIL'}</h2>
+                        <p>Result</p>
                     </div>
                 </div>
                 <hr class="my-4">
                 <div class="row text-center">
-                    <div class="col-md-6">
-                        <h5><i class="fas fa-clock me-2"></i>Time Taken</h5>
-                        <p class="lead">${minutes}:${seconds.toString().padStart(2, '0')} minutes</p>
-                    </div>
-                    <div class="col-md-6">
-                        <h5><i class="fas fa-percentage me-2"></i>Percentage</h5>
-                        <p class="lead">${results.obtainedMarks}%</p>
-                    </div>
-                </div>
-            `;
+                    <div class="col-md-6"><h5><i class="fas fa-clock me-2"></i>Time Taken</h5><p class="lead">${minutes}:${String(seconds).padStart(2, '0')} min</p></div>
+                    <div class="col-md-6"><h5><i class="fas fa-percentage me-2"></i>Percentage</h5><p class="lead">${r.obtainedMarks}%</p></div>
+                </div>`;
             
-            document.getElementById('resultContent').innerHTML = resultHTML;
-            
-            // Ensure Bootstrap modal is properly initialized and shown
-            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
-            resultModal.show();
-            
-            console.log("Result modal should be shown now");
+            new bootstrap.Modal(document.getElementById('resultModal')).show();
         }
 
-        // Retake Test Function
         function retakeTest() {
-            if (confirm('Are you sure you want to retake the test? This will reset all your current answers.')) {
-                // Reset all test variables
-                currentQuestion = 1;
-                answers = {};
-                flaggedQuestions = new Set();
-                timeRemaining = 90 * 60; // Reset to 90 minutes
-                
-                // Clear timer
-                if (timerInterval) {
-                    clearInterval(timerInterval);
-                }
-                
-                // Hide result modal
-                const resultModal = bootstrap.Modal.getInstance(document.getElementById('resultModal'));
-                if (resultModal) {
-                    resultModal.hide();
-                }
-                
-                // Reset UI
-                generateQuestionPalette();
-                
-                // Start fresh test
-                setTimeout(() => {
-                    startTest();
-                }, 500);
+            if (confirm('Are you sure you want to retake the test?')) {
+                location.reload(); // Simple and effective way to reset everything
             }
         }
 
-        // Show Review
         function showReview() {
-            const results = window.testResults;
+            const { answers } = window.testResults;
             let reviewHTML = '';
             
-            // Generate review content section-wise
             const sectionOrder = ['English', 'General Knowledge', 'General Science', 'Mathematics', 'I.Q'];
-            
-            for (const sectionName of sectionOrder) {
-                // Skip if section doesn't exist in questionsData
-                if (!questionsData[sectionName]) {
-                    console.warn(`Section "${sectionName}" not found in questionsData`);
-                    continue;
-                }
-                
-                const sectionQuestions = questionsData[sectionName];
-                
-                // Section Header
-                reviewHTML += `
-                    <div class="mb-4">
-                        <h4 class="text-primary border-bottom pb-2">
-                            <i class="fas fa-book-open me-2"></i>${sectionName}
-                        </h4>
-                `;
-                
-                sectionQuestions.forEach(question => {
-                    const userAnswer = results.answers[question.id];
-                    const isCorrect = userAnswer === question.correct;
-                    const isAttempted = userAnswer !== undefined;
-                    
-                    let statusClass, statusIcon, statusText;
-                    if (!isAttempted) {
-                        statusClass = 'review-unattempted';
-                        statusIcon = 'fas fa-minus-circle text-secondary';
-                        statusText = 'Not Attempted';
+            sectionOrder.forEach(sectionName => {
+                reviewHTML += `<h4 class="text-primary border-bottom pb-2 mt-4"><i class="fas fa-book-open me-2"></i>${sectionName}</h4>`;
+                questionsData[sectionName].forEach(q => {
+                    const userAnswer = answers[q.id];
+                    const isCorrect = (userAnswer - 1) === q.correct;
+                    let statusClass, statusIcon, statusText, userAnswerText;
+
+                    if (userAnswer === undefined) {
+                        [statusClass, statusIcon, statusText, userAnswerText] = 
+                            ['review-unattempted', 'fa-minus-circle text-secondary', 'Not Attempted', 'Not Attempted'];
                     } else if (isCorrect) {
-                        statusClass = 'review-correct';
-                        statusIcon = 'fas fa-check-circle text-success';
-                        statusText = 'Correct';
+                        [statusClass, statusIcon, statusText, userAnswerText] = 
+                            ['review-correct', 'fa-check-circle text-success', 'Correct', q.options[userAnswer - 1]];
                     } else {
-                        statusClass = 'review-incorrect';
-                        statusIcon = 'fas fa-times-circle text-danger';
-                        statusText = 'Incorrect';
+                        [statusClass, statusIcon, statusText, userAnswerText] = 
+                            ['review-incorrect', 'fa-times-circle text-danger', 'Incorrect', q.options[userAnswer - 1]];
                     }
                     
+                    const correctAnswerText = q.options[q.correct];
                     reviewHTML += `
                         <div class="card mb-3 ${statusClass}">
-                            <div class="card-header">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <h6 class="mb-0">Question ${question.id}</h6>
-                                        <small class="text-muted">${question.topic}</small>
-                                    </div>
-                                    <div class="col-md-6 text-md-end">
-                                        <span class="badge bg-secondary">
-                                            <i class="${statusIcon} me-1"></i>${statusText}
-                                        </span>
-                                    </div>
-                                </div>
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <h6 class="mb-0">Q ${q.id}: ${q.topic}</h6>
+                                <span class="badge bg-light text-dark"><i class="fas ${statusIcon} me-1"></i>${statusText}</span>
                             </div>
                             <div class="card-body">
-                                <p><strong>Question:</strong> ${question.question}</p>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <p><strong>Your Answer:</strong> 
-                                            ${userAnswer ? question.options[userAnswer - 1] : 'Not Attempted'}
-                                        </p>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <p><strong>Correct Answer:</strong> 
-                                            ${question.options[question.correct - 1]}
-                                        </p>
-                                    </div>
-                                </div>
+                                <p><strong>Question:</strong> ${q.question}</p>
+                                <p><strong>Your Answer:</strong> ${userAnswerText}</p>
+                                <p><strong>Correct Answer:</strong> ${correctAnswerText}</p>
                             </div>
-                        </div>
-                    `;
+                        </div>`;
                 });
-                
-                reviewHTML += '</div>'; // Close section
-            }
+            });
             
             document.getElementById('reviewContent').innerHTML = reviewHTML;
-            
-            // Show review modal using Bootstrap JS
-            const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
-            reviewModal.show();
-            
-            // Render MathJax for review
-            if (window.MathJax) {
-                MathJax.typesetPromise().catch(function (err) {
-                    console.log('MathJax typeset error in review: ' + err.message);
-                });
-            }
+            new bootstrap.Modal(document.getElementById('reviewModal')).show();
+            if (window.MathJax) MathJax.typesetPromise();
         }
-
-                // Complete PDF Generation - WITHOUT Question Palette
+        
         async function generateCompletePDF() {
-            // Show progress modal
             document.getElementById('pdfProgress').style.display = 'flex';
-            updateProgress(0, 'Initializing PDF generation...');
+            updateProgress(0, 'Initializing...');
             
             try {
-                console.log('Starting PDF generation...');
-                
-                // Check if required libraries are loaded
-                if (!checkLibraries()) {
-                    throw new Error('Required libraries (jsPDF, html2canvas) are not loaded properly. Please refresh the page and try again.');
+                if (typeof window.jspdf === 'undefined' || typeof window.html2canvas === 'undefined') {
+                    throw new Error('PDF generation libraries not loaded.');
                 }
-                
-                // Check if jsPDF is properly loaded
-                if (!window.jspdf || !window.jspdf.jsPDF) {
-                    throw new Error('jsPDF library not loaded properly. Please refresh the page and try again.');
-                }
-                
                 const { jsPDF } = window.jspdf;
-                
-                // Test if we can create a jsPDF instance
-                let doc;
-                try {
-                    doc = new jsPDF('p', 'mm', 'a4');
-                    console.log('jsPDF instance created successfully');
-                } catch (pdfError) {
-                    throw new Error('Failed to create PDF document: ' + pdfError.message);
-                }
-                
-                // Check if test results are available
-                if (!window.testResults) {
-                    throw new Error('Test results not available. Please complete the test first.');
-                }
-                
-                // Check if questions data is available
-                if (!window.questionsData) {
-                    throw new Error('Questions data not available. Please refresh the page and try again.');
-                }
-                
+                const doc = new jsPDF('p', 'mm', 'a4');
                 const results = window.testResults;
-                console.log('Test results available:', results);
-                
-                const obtainedMarks = results.obtainedMarks;
-                const totalMarks = results.totalMarks;
-                const percentage = obtainedMarks;
-                const grade = obtainedMarks >= 50 ? 'Pass' : 'Fail';
-                const remarks = obtainedMarks >= 80 ? 'Excellent!' : 
-                               obtainedMarks >= 70 ? 'Very Good' : 
-                               obtainedMarks >= 60 ? 'Good' : 
-                               obtainedMarks >= 50 ? 'Satisfactory' : 'Needs Improvement';
-                
-                // REMOVED the sections object that contained empty data that was showing in the PDF
-                // const sections = {
-                //     'English': { totalMarks: 30, obtainedMarks: 0, percentage: 0, grade: '', remarks: '' },
-                //     'General Knowledge': { totalMarks: 20, obtainedMarks: 0, percentage: 0, grade: '', remarks: '' },
-                //     'General Science': { totalMarks: 20, obtainedMarks: 0, percentage: 0, grade: '', remarks: '' },
-                //     'Mathematics': { totalMarks: 20, obtainedMarks: 0, percentage: 0, grade: '', remarks: '' },
-                //     'I.Q': { totalMarks: 10, obtainedMarks: 0, percentage: 0, grade: '', remarks: '' }
-                // };
-                
-                // REMOVED the sectionNames variable that was not being used
-                // const sectionNames = ['English', 'General Knowledge', 'General Science', 'Mathematics', 'I.Q'];
-                
-                const questionsData = window.questionsData;
-                console.log('Questions data available:', questionsData);
-                
                 const pageWidth = doc.internal.pageSize.width;
-                const pageHeight = doc.internal.pageSize.height;
                 const margin = 15;
-                const lineHeight = 6;
-                let yPos = margin;
-                
-                // Helper function to add new page
-                function addNewPage() {
-                    doc.addPage();
-                    yPos = margin + 10;
-                }
-                
-                // Helper function to check page overflow
-                function checkPageOverflow(requiredSpace = 25) {
-                    if (yPos + requiredSpace > pageHeight - margin) {
-                        addNewPage();
-                        return true;
+                let yPos = 0;
+
+                const addHeader = () => {
+                    doc.setFillColor(102, 126, 234);
+                    doc.rect(0, 0, pageWidth, 40, 'F');
+                    doc.setTextColor(255).setFontSize(18).setFont('helvetica', 'bold').text('UOS Mock Test Results', margin, 20);
+                    doc.setFontSize(10).setFont('helvetica', 'normal').text(`Generated: ${new Date().toLocaleDateString()}`, margin, 28);
+                    yPos = 50;
+                };
+
+                const checkPageOverflow = (requiredSpace) => {
+                    if (yPos + requiredSpace > doc.internal.pageSize.height - margin) {
+                        doc.addPage();
+                        addHeader();
                     }
-                    return false;
-                }
+                };
                 
-                // Helper function to clean LaTeX for plain text
-                function cleanLatexText(text) {
-                    if (!text) return '';
-                    return text
-                        .replace(/\\\(/g, '')
-                        .replace(/\\\)/g, '')
-                        .replace(/\\\[/g, '')
-                        .replace(/\\\]/g, '')
-                        .replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1)/($2)')
-                        .replace(/\\sqrt\{([^}]+)\}/g, 'sqrt($1)')
-                        .replace(/\\pi/g, 'π')
-                        .replace(/\\theta/g, 'θ')
-                        .replace(/\\alpha/g, 'α')
-                        .replace(/\\beta/g, 'β')
-                        .replace(/\\gamma/g, 'γ')
-                        .replace(/\\delta/g, 'δ')
-                        .replace(/\\epsilon/g, 'ε')
-                        .replace(/\\phi/g, 'φ')
-                        .replace(/\\lambda/g, 'λ')
-                        .replace(/\\mu/g, 'μ')
-                        .replace(/\\sigma/g, 'σ')
-                        .replace(/\\omega/g, 'ω')
-                        .replace(/\\Omega/g, 'Ω')
-                        .replace(/\\times/g, '×')
-                        .replace(/\\cdot/g, '·')
-                        .replace(/\\rightarrow/g, '→')
-                        .replace(/\\leftarrow/g, '←')
-                        .replace(/\\rightleftharpoons/g, '⇌')
-                        .replace(/\\infty/g, '∞')
-                        .replace(/\\pm/g, '±')
-                        .replace(/\\leq/g, '≤')
-                        .replace(/\\geq/g, '≥')
-                        .replace(/\\neq/g, '≠')
-                        .replace(/\\approx/g, '≈')
-                        .replace(/\\int/g, '∫')
-                        .replace(/\\sum/g, 'Σ')
-                        .replace(/\\prod/g, 'Π')
-                        .replace(/\\lim/g, 'lim')
-                        .replace(/\\log/g, 'log')
-                        .replace(/\\ln/g, 'ln')
-                        .replace(/\\sin/g, 'sin')
-                        .replace(/\\cos/g, 'cos')
-                        .replace(/\\tan/g, 'tan')
-                        .replace(/\\mathbb\{([^}]+)\}/g, '$1')
-                        .replace(/\\setminus/g, '\\')
-                        .replace(/\\\\/g, ' ')
-                        .replace(/\\text\{([^}]+)\}/g, '$1')
-                        .replace(/\\[a-zA-Z]+/g, '')
-                        .replace(/[{}]/g, '')
-                        .replace(/\s+/g, ' ')
-                        .trim();
-                }
-                
-                updateProgress(5, 'Creating header...');
-                
-                // Header Section
-                doc.setFillColor(102, 126, 234);
-                doc.rect(0, 0, pageWidth, 50, 'F');
-                
-                doc.setTextColor(255, 255, 255);
-                doc.setFontSize(20);
-                doc.setFont('helvetica', 'bold');
-                doc.text('UOS Mock Test Batch 2k26 - Test 1', margin, 20);
-                
-                doc.setFontSize(14);
-                doc.setFont('helvetica', 'normal');
-                doc.text('Academic Test Results Report', margin, 32);
-                
-                doc.setFontSize(10);
-                doc.text(`Generated on: ${new Date().toLocaleString()}`, margin, 42);
-                
-                yPos = 60;
-                doc.setTextColor(0, 0, 0);
+                const cleanLatex = (text) => text.replace(/\\\(|\\\)|\\\[|\\\]|\$|\$\$/g, '').replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1)/($2)');
+
+                addHeader();
                 
                 updateProgress(10, 'Adding result summary...');
-                
-                // Results Summary Section - REMOVED the section data that was showing empty values
-                doc.setFontSize(16);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor(102, 126, 234);
-                doc.text('TEST RESULTS SUMMARY', margin, yPos);
-                
-                yPos += 20;
-                doc.setFontSize(12);
-                doc.setFont('helvetica', 'normal');
-                doc.setTextColor(0, 0, 0);
-                doc.text(`Total Marks: ${totalMarks}`, margin, yPos);
+                doc.setTextColor(0).setFontSize(14).setFont('helvetica', 'bold').text('Test Summary', margin, yPos);
                 yPos += 10;
-                doc.text(`Obtained Marks: ${obtainedMarks}`, margin, yPos);
-                yPos += 10;
-                doc.text(`Percentage: ${percentage.toFixed(2)}%`, margin, yPos);
-                yPos += 10;
-                doc.text(`Grade: ${grade}`, margin, yPos);
-                yPos += 10;
-                doc.text(`Remarks: ${remarks}`, margin, yPos);
-                yPos += 20;
-                
-                updateProgress(40, 'Adding question details...');
-                
+                doc.setFontSize(11).setFont('helvetica', 'normal');
+                doc.text(`Marks: ${results.obtainedMarks}/${results.totalMarks}  |  Percentage: ${results.obtainedMarks}%  |  Result: ${results.isPassed ? 'PASS' : 'FAIL'}`, margin, yPos);
+                yPos += 8;
+                doc.text(`Attempted: ${results.totalAttempted}  |  Correct: ${results.correctAnswers}  |  Incorrect: ${results.totalAttempted - results.correctAnswers}`, margin, yPos);
                 yPos += 15;
-                
-                // Summary box
-                doc.setDrawColor(102, 126, 234);
-                doc.setLineWidth(0.5);
-                doc.rect(margin, yPos, pageWidth - 2 * margin, 55);
-                
-                doc.setFontSize(12);
-                doc.setFont('helvetica', 'normal');
-                doc.setTextColor(0, 0, 0);
-                
-                const minutes = Math.floor(results.timeTaken / 60);
-                const seconds = results.timeTaken % 60;
-                
-                const summaryInfo = [
-                    `Marks Obtained: ${results.obtainedMarks}/${results.totalMarks}`,
-                    `Percentage: ${results.obtainedMarks}%`,
-                    `Result Status: ${results.isPassed ? 'PASS' : 'FAIL'}`,
-                    `Time Taken: ${minutes}:${seconds.toString().padStart(2, '0')} minutes`,
-                    `Questions Attempted: ${results.totalAttempted}/100`,
-                    `Correct Answers: ${results.correctAnswers}`,
-                    `Incorrect Answers: ${results.totalAttempted - results.correctAnswers}`,
-                    `Unattempted: ${100 - results.totalAttempted}`
-                ];
-                
-                // Better alignment for summary information
-                summaryInfo.forEach((info, index) => {
-                    const x = (index % 2 === 0) ? margin + 10 : (pageWidth / 2) + 5;
-                    const y = yPos + 15 + Math.floor(index / 2) * 12;
-                    doc.text(info, x, y);
-                });
-                
-                yPos += 65;
-                checkPageOverflow();
-                
-                updateProgress(15, 'Creating section-wise question analysis...');
-                
-                // Section-wise Question Analysis
-                doc.setFontSize(16);
-                doc.setFont('helvetica', 'bold');
-                doc.setTextColor(102, 126, 234);
-                doc.text('DETAILED SECTION-WISE ANALYSIS', margin, yPos);
-                yPos += 20; // Increased spacing after section title
-                
-                // Process sections in order
-                const sectionOrder = ['English', 'General Knowledge', 'General Science', 'Mathematics', 'I.Q'];
-                let questionCounter = 0;
-                
-                // Log available sections for debugging
-                console.log('Available sections:', Object.keys(questionsData));
-                
-                for (const sectionName of sectionOrder) {
-                    // Skip if section doesn't exist in questionsData
-                    if (!questionsData[sectionName]) {
-                        console.warn(`Section "${sectionName}" not found in questionsData. Available sections:`, Object.keys(questionsData));
-                        continue;
-                    }
-                    
-                    const sectionQuestions = questionsData[sectionName];
-                    
-                    // Update progress
-                    const sectionProgress = 15 + Math.floor((questionCounter / 100) * 70);
-                    updateProgress(sectionProgress, `Processing ${sectionName} section...`);
-                    
-                    // Check if we need a new page for section header
-                    checkPageOverflow(20);
-                    
-                    // Section Header
-                    doc.setFillColor(52, 58, 64);
-                    // Improved sizing and positioning for section headers
-                    doc.rect(margin, yPos - 3, pageWidth - 2 * margin, 15, 'F');
-                    
-                    doc.setTextColor(255, 255, 255);
-                    doc.setFontSize(14);
-                    doc.setFont('helvetica', 'bold');
-                    // Better vertical alignment for section headers
-                    doc.text(`${sectionName.toUpperCase()}`, margin + 5, yPos + 4);
-                    
-                    doc.setTextColor(0, 0, 0);
-                    yPos += 20; // Increased spacing after section header
-                    
-                    // Process questions in this section
-                    for (const question of sectionQuestions) {
-                        const userAnswer = results.answers[question.id];
-                        const isCorrect = userAnswer === question.correct;
-                        const isAttempted = userAnswer !== undefined;
-                        
-                        questionCounter++;
-                        
-                        // Check if we need a new page
-                        checkPageOverflow(40);
-                        
-                        // Question header
-                        doc.setFillColor(248, 249, 250);
-                        doc.rect(margin, yPos - 3, pageWidth - 2 * margin, 15, 'F');
-                        
-                        doc.setFontSize(11);
-                        doc.setFont('helvetica', 'bold');
-                        doc.setTextColor(0, 0, 0);
-                        doc.text(`Q${question.id}. ${question.topic}`, margin + 5, yPos + 2);
-                        
-                        // Status badge
-                        let statusColor, statusText;
-                        if (!isAttempted) {
-                            statusColor = [108, 117, 125];
-                            statusText = 'NOT ATTEMPTED';
-                        } else if (isCorrect) {
-                            statusColor = [25, 135, 84];
-                            statusText = 'CORRECT';
-                        } else {
-                            statusColor = [220, 53, 69];
-                            statusText = 'INCORRECT';
-                        }
-                        
-                        doc.setFillColor(statusColor[0], statusColor[1], statusColor[2]);
-                        const statusWidth = doc.getTextWidth(statusText) + 10;
-                        doc.rect(pageWidth - margin - statusWidth, yPos - 3, statusWidth, 15, 'F');
-                        doc.setTextColor(255, 255, 255);
-                        doc.setFontSize(8);
-                        doc.text(statusText, pageWidth - margin - statusWidth + 5, yPos + 3);
-                        
-                        yPos += 18; // Increased spacing after question header
-                        
-                        // Question text
-                        doc.setTextColor(0, 0, 0);
-                        doc.setFontSize(10);
-                        doc.setFont('helvetica', 'normal');
-                        
-                        const questionText = cleanLatexText(question.question);
-                        const questionLines = doc.splitTextToSize(questionText, pageWidth - 2 * margin - 15);
-                        
-                        questionLines.forEach((line, index) => {
-                            checkPageOverflow(8);
-                            doc.text(line, margin + 8, yPos + 1);
-                            yPos += lineHeight + 1;
-                        });
-                        
-                        yPos += 8; // Increased spacing after question text to prevent overlapping
-                        
-                        // Options
-                        question.options.forEach((option, optIndex) => {
-                            checkPageOverflow(15); // Increased overflow check spacing
-                            
-                            const isSelected = userAnswer === (optIndex + 1);
-                            const isCorrectOption = optIndex === question.correct;
-                            
-                            // Calculate option text height first to properly size containers
-                            const optionText = cleanLatexText(option);
-                            const optionLines = doc.splitTextToSize(optionText, pageWidth - 2 * margin - 20);
-                            const optionHeight = (optionLines.length * lineHeight) + 4;
-                            
-                            // Highlight correct options with green background (always visible)
-                            // Also highlight user's selections
-                            if (isCorrectOption) {
-                                // Always highlight correct answers with green background
-                                // Using a lighter green to simulate transparency since we can't use setFillAlpha
-                                doc.setFillColor(192, 224, 207); // Light green color
-                                doc.rect(margin + 5, yPos - 2, pageWidth - 2 * margin - 10, optionHeight, 'F');
-                            } else if (isSelected) {
-                                // Highlight incorrect user selections with red background
-                                // Using a lighter red to simulate transparency since we can't use setFillAlpha
-                                doc.setFillColor(240, 200, 205); // Light red color
-                                doc.rect(margin + 5, yPos - 2, pageWidth - 2 * margin - 10, optionHeight, 'F');
-                            }
-                            
-                            // Reset to default after drawing
-                            doc.setFillColor(0);
-                            
-                            // Make correct answers bold for better visibility
-                            doc.setFont('helvetica', isCorrectOption ? 'bold' : (isSelected ? 'bold' : 'normal'));
-                            
-                            // No symbols as requested
-                            optionLines.forEach((line, lineIndex) => {
-                                if (lineIndex > 0) checkPageOverflow(8);
-                                // Proper vertical alignment with calculated positioning
-                                doc.text(line, margin + 10, yPos + 2);
-                                yPos += lineHeight;
-                            });
-                            
-                            // Add spacing after each option to prevent overlapping
-                            yPos += 3;
-                        });
-                        
-                        yPos += 10; // Consistent spacing after options section
-                    }
-                    
-                    yPos += 10; // Increased spacing between sections
-                }
-                
-                updateProgress(95, 'Finalizing PDF...');
-                
-                // Footer on last page
-                yPos = pageHeight - 20;
-                doc.setFontSize(8);
-                doc.setTextColor(128, 128, 128);
-                doc.setFont('helvetica', 'normal');
-                doc.text('© 2025 Copyright UOS Mock Test Series Powered By Mock Test Hub', margin, yPos);
-                doc.text(`Generated on ${new Date().toLocaleDateString()} at ${new Date().toLocaleTimeString()}`, margin, yPos + 5);
-                
-                updateProgress(100, 'Download starting...');
-                
-                // Save the PDF
-                const fileName = `UOS_Academic_Mock_Test_Complete_Report_${new Date().getTime()}.pdf`;
-                doc.save(fileName);
-                
-                // Hide progress modal after a short delay
-                setTimeout(() => {
-                    document.getElementById('pdfProgress').style.display = 'none';
 
-                }, 1000);
-                
-            } catch (error) {
-                console.error('Error generating PDF:', error);
-                document.getElementById('pdfProgress').style.display = 'none';
-                let errorMessage = 'An error occurred while generating the PDF. ';
-                
-                // Provide more specific error messages based on the error type
-                if (error.message.includes('library')) {
-                    errorMessage += 'Please refresh the page and try again. If the problem persists, check your internet connection.';
-                } else if (error.message.includes('results')) {
-                    errorMessage += 'Please complete the test first before generating a report.';
-                } else if (error.message.includes('sectionName')) {
-                    errorMessage += 'There was an issue with the section data. Please try again.';
-                } else {
-                    errorMessage += 'Please try again. Error details: ' + error.message;
+                updateProgress(20, 'Processing questions...');
+                let questionCounter = 0;
+                for (const sectionName of ['English', 'General Knowledge', 'General Science', 'Mathematics', 'I.Q']) {
+                    checkPageOverflow(15);
+                    doc.setFillColor(230, 230, 230).rect(margin, yPos-5, pageWidth - 2*margin, 10, 'F');
+                    doc.setTextColor(0).setFontSize(12).setFont('helvetica', 'bold').text(sectionName, margin + 2, yPos + 2);
+                    yPos += 15;
+
+                    for (const q of questionsData[sectionName]) {
+                        questionCounter++;
+                        updateProgress(20 + Math.floor((questionCounter / totalQuestions) * 75), `Processing Q#${q.id}`);
+                        
+                        const userAnswer = results.answers[q.id];
+                        const isCorrect = (userAnswer - 1) === q.correct;
+                        checkPageOverflow(30);
+
+                        doc.setFontSize(10).setFont('helvetica', 'bold').text(`Q${q.id}: ${cleanLatex(q.question)}`, margin, yPos);
+                        yPos += 7;
+                        
+                        q.options.forEach((opt, idx) => {
+                            const isUserAns = userAnswer === (idx + 1);
+                            const isCorrectAns = q.correct === idx;
+                            let prefix = '';
+                            if (isCorrectAns) { prefix = '✓ '; doc.setTextColor(34, 139, 34); }
+                            if (isUserAns && !isCorrect) { prefix = '✗ '; doc.setTextColor(220, 20, 60); }
+                            
+                            doc.setFont('helvetica', (isUserAns || isCorrectAns) ? 'bold' : 'normal').text(prefix + cleanLatex(opt), margin + 5, yPos);
+                            doc.setTextColor(0); // Reset color
+                            yPos += 6;
+                        });
+                        yPos += 5;
+                    }
                 }
                 
-                // Only show alert in development, remove for production
-                console.log('PDF Error: ' + errorMessage);
+                updateProgress(100, 'Finalizing...');
+                doc.save(`UOS_Mock_Test_Report_${Date.now()}.pdf`);
+                document.getElementById('pdfProgress').style.display = 'none';
+
+            } catch (error) {
+                console.error('PDF generation failed:', error);
+                alert('Failed to generate PDF. See console for details.');
+                document.getElementById('pdfProgress').style.display = 'none';
             }
         }
         
-        // Update progress function
         function updateProgress(percentage, text) {
             document.getElementById('progressFill').style.width = percentage + '%';
             document.getElementById('progressText').textContent = text;
         }
 
         // Theme Toggle
+        let currentTheme = 'light';
         function toggleTheme() {
             currentTheme = currentTheme === 'light' ? 'dark' : 'light';
             document.documentElement.setAttribute('data-theme', currentTheme);
-            
-            const themeIcon = document.querySelector('#themeToggle i');
-            if (currentTheme === 'dark') {
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                themeIcon.className = 'fas fa-moon';
-            }
-            
+            document.querySelector('#themeToggle i').className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             localStorage.setItem('theme', currentTheme);
         }
 
         function initializeTheme() {
             const savedTheme = localStorage.getItem('theme') || 'light';
-            currentTheme = savedTheme;
-            document.documentElement.setAttribute('data-theme', currentTheme);
-            
-            const themeIcon = document.querySelector('#themeToggle i');
-            if (currentTheme === 'dark') {
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                themeIcon.className = 'fas fa-moon';
+            if (savedTheme === 'dark') {
+                toggleTheme(); // Apply dark theme if saved
             }
         }
 
-        // Initialize Test
-        $(document).ready(function() {
-            $('#passwordModal').modal('show');
-            generateQuestionPalette();
-            initializeTheme();
-            
-            // Check if required libraries are loaded
-            setTimeout(() => {
-                if (!checkLibraries()) {
-                    console.warn('Some required libraries failed to load. PDF generation may not work properly.');
-                }
-            }, 3000);
-        });
-
-        // Mobile responsive adjustments
-        function adjustForMobile() {
-            const isMobile = window.innerWidth <= 768;
-            
-            // Adjust question palette for mobile
-            const questionPalette = document.getElementById('questionPalette');
-            if (questionPalette) {
-                if (isMobile) {
-                    questionPalette.style.padding = '6px';
-                } else {
-                    questionPalette.style.padding = '10px';
-                }
-            }
-            
-            // Adjust option cards for mobile
-            const optionCards = document.querySelectorAll('.option-card');
-            optionCards.forEach(card => {
-                if (isMobile) {
-                    card.style.padding = '12px 15px';
-                    card.style.margin = '6px 0';
-                } else {
-                    card.style.padding = '15px 20px';
-                    card.style.margin = '10px 0';
-                }
-            });
-        }
-
-        // Initialize mobile adjustments
-        window.addEventListener('resize', adjustForMobile);
-        window.addEventListener('load', adjustForMobile);
-
-        // Keyboard Navigation
-        document.addEventListener('keydown', function(e) {
-            if ($('#passwordModal').hasClass('show')) return;
-            
-            switch(e.key) {
-                case 'ArrowLeft':
-                    if (currentQuestion > 1) previousQuestion();
-                    break;
-                case 'ArrowRight':
-                    if (currentQuestion < totalQuestions) nextQuestion();
-                    break;
-                case '1':
-                case '2':
-                case '3':
-                case '4':
-                    if (!e.ctrlKey && !e.altKey) {
-                        selectOption(parseInt(e.key));
-                    }
-                    break;
-                case 'f':
-                case 'F':
-                    if (!e.ctrlKey && !e.altKey) {
-                        toggleFlag();
-                    }
-                    break;
-            }
-        });
-
-        // Prevent right-click and keyboard shortcuts
+        // Prevent Cheating
         document.addEventListener('contextmenu', e => e.preventDefault());
-        document.addEventListener('keydown', function(e) {
-            if (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'a' || e.key === 'p')) {
-                e.preventDefault();
-            }
-            if (e.key === 'F12') {
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c'))) {
                 e.preventDefault();
             }
         });
-
-        // Prevent text selection
-        document.addEventListener('selectstart', e => e.preventDefault());
-
-        // Auto-save functionality
-        setInterval(function() {
-            if (Object.keys(answers).length > 0) {
-                localStorage.setItem('mockTestAnswers', JSON.stringify(answers));
-                localStorage.setItem('mockTestFlagged', JSON.stringify(Array.from(flaggedQuestions)));
-            }
-        }, 30000); // Auto-save every 30 seconds
     </script>
 </body>
 </html>

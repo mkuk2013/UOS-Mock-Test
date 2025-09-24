@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        #mainContent {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Password Modal -->
+    <div class="modal fade show" id="passwordModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false" style="display: block; background: rgba(0,0,0,0.5);">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-lock me-2"></i>Secure Access Required</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                        <h6>Enter Password to Access Test</h6>
+                    </div>
+                    <input type="password" class="form-control text-center" id="passwordInput" 
+                           placeholder="Enter Password" maxlength="20">
+                    <div class="invalid-feedback" id="passwordError"></div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary btn-custom" onclick="verifyPassword()">
+                        <i class="fas fa-key me-2"></i>Access Test
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div id="mainContent">
+        <div class="container mt-5">
+            <div class="alert alert-success">
+                <h4 class="alert-heading">Access Granted!</h4>
+                <p>You have successfully entered the correct password. The test content is now visible.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function verifyPassword() {
+            const password = document.getElementById('passwordInput').value;
+            const correctPassword = 'uostestbymk';
+            
+            if (password === correctPassword) {
+                // Hide modal and show main content
+                document.getElementById('passwordModal').style.display = 'none';
+                document.getElementById('mainContent').style.display = 'block';
+            } else {
+                document.getElementById('passwordError').textContent = 'Incorrect password. Please try again.';
+                document.getElementById('passwordInput').classList.add('is-invalid');
+                document.getElementById('passwordInput').value = '';
+            }
+        }
+        
+        // Enter key for password
+        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                verifyPassword();
+            }
+        });
+    </script>
+</body>
+</html>

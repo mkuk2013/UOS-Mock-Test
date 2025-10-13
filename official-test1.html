@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="ur">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UOS Official Pre-Entry Test 12 October 2025</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <script src="https://tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    
+    <style>
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+            --light-color: #f8f9fa;
+            --dark-color: #212529;
+        }
+
+        [data-theme="dark"] {
+            --primary-color: #0d6efd;
+            --secondary-color: #6c757d;
+            --success-color: #198754;
+            --danger-color: #dc3545;
+            --warning-color: #ffc107;
+            --info-color: #0dcaf0;
+            --light-color: #212529;
+            --dark-color: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--light-color);
+            color: var(--dark-color);
+            transition: all 0.3s ease;
+        }
+
+        [data-theme="dark"] body {
+            background: var(--dark-color);
+            color: var(--light-color);
+        }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        [data-theme="dark"] .header-gradient {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+        }
+
+        .question-palette {
+            max-height: 80px;
+            overflow-x: auto;
+            overflow-y: hidden;
+            white-space: nowrap;
+            margin-top: 15px;
+            padding: 10px;
+            background: rgba(0,0,0,0.03);
+            border-radius: 8px;
+        }
+
+        [data-theme="dark"] .question-palette {
+            background: rgba(255,255,255,0.1);
+        }
+
+        .question-number {
+            min-width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            border: 2px solid #dee2e6;
+            background: white;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 3px;
+            font-weight: 500;
+        }
+
+        [data-theme="dark"] .question-number {
+            background: #495057;
+            color: white;
+            border-color: #6c757d;
+        }
+
+        .question-number:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .question-number.current {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            font-weight: bold;
+            transform: scale(1.1);
+        }
+
+        .question-number.answered {
+            background: var(--success-color);
+            color: white;
+            border-color: var(--success-color);
+        }
+
+        .question-number.flagged {
+            background: var(--warning-color);
+            color: black;
+            border-color: var(--warning-color);
+        }
+
+        .question-number.flagged.answered {
+            background: var(--info-color);
+            color: white;
+            border-color: var(--info-color);
+        }
+
+        .timer {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .option-card {
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 15px 20px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: white;
+            position: relative;
+        }
+        
+        .option-card img {
+            max-height: 60px;
+            max-width: 100%;
+        }
+
+        [data-theme="dark"] .option-card {
+            background: #495057;
+            border-color: #6c757d;
+            color: white;
+        }
+
+        .option-card:hover {
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+        }
+
+        .option-card.selected {
+            border-color: var(--primary-color);
+            background: rgba(13, 110, 253, 0.1);
+            font-weight: 500;
+        }
+
+        .btn-custom {
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            margin: 5px;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .review-correct {
+            background: rgba(25, 135, 84, 0.1);
+            border-left: 4px solid var(--success-color);
+        }
+
+        .review-incorrect {
+            background: rgba(220, 53, 69, 0.1);
+            border-left: 4px solid var(--danger-color);
+        }
+
+        .review-unattempted {
+            background: rgba(108, 117, 125, 0.1);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 4px solid var(--primary-color);
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .MathJax { font-size: 1.1em !important; }
+        .question-content .MathJax { font-size: 1.2em !important; }
+        .question-content img, .review-content img { max-width: 100%; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+
+        .pdf-progress {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); display: none; justify-content: center;
+            align-items: center; z-index: 9999;
+        }
+
+        .pdf-progress-content {
+            background: white; padding: 30px; border-radius: 15px; text-align: center;
+            max-width: 400px; width: 90%;
+        }
+
+        .progress-bar-custom {
+            width: 100%; height: 20px; background: #e9ecef; border-radius: 10px;
+            overflow: hidden; margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%; background: linear-gradient(45deg, #667eea, #764ba2);
+            width: 0%; transition: width 0.3s ease;
+        }
+
+        .retake-btn {
+            background: linear-gradient(45deg, #28a745, #20c997); color: white; border: none;
+            padding: 15px 35px; border-radius: 30px; font-size: 16px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .retake-btn:hover {
+            transform: translateY(-3px); box-shadow: 0 10px 30px rgba(40, 167, 69, 0.6);
+            background: linear-gradient(45deg, #218838, #1e7e34);
+        }
+
+        @media (max-width: 768px) {
+            .question-palette { max-height: 60px; }
+            .question-number { min-width: 35px; height: 35px; font-size: 12px; }
+            .timer { font-size: 14px; padding: 8px 16px; }
+            .MathJax { font-size: 1em !important; }
+            .card-footer .btn-custom, .modal-footer .btn-custom, .modal-footer .retake-btn { width: 100%; margin: 5px 0; }
+            .text-md-end { text-align: center !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="pdf-progress" id="pdfProgress">
+        <div class="pdf-progress-content">
+            <h4><i class="fas fa-file-pdf text-danger me-2"></i>Generating PDF Report</h4>
+            <div class="progress-bar-custom">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <p id="progressText">Preparing document...</p>
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="passwordModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title"><i class="fas fa-lock me-2"></i>Secure Access Required</h5>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
+                        <h6>Enter Password to Access Test</h6>
+                    </div>
+                    <input type="password" class="form-control text-center" id="passwordInput" placeholder="Enter Password" maxlength="20">
+                    <div class="invalid-feedback" id="passwordError"></div>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary btn-custom" onclick="verifyPassword()">
+                        <i class="fas fa-key me-2"></i>Access Test
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="mainContent" style="display: none;">
+        <header class="header-gradient text-white py-4 shadow-lg">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="h3 mb-0"><i class="fas fa-graduation-cap me-2"></i>UOS Official Pre-Entry Test 12 October 2025</h1>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <div class="d-flex align-items-center justify-content-md-end justify-content-center gap-3">
+                            <div class="timer" id="timer">90:00</div>
+                            <button class="btn btn-outline-light btn-sm" onclick="toggleTheme()" id="themeToggle">
+                                <i class="fas fa-moon"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container my-4">
+            <div class="card shadow-lg border-0" id="questionCard">
+                <div class="card-header bg-primary text-white">
+                    <div class="row align-items-center">
+                        <div class="col-md-6">
+                            <h5 class="mb-0">Question <span id="currentQuestionNum">1</span> of <span id="totalQuestionCount">100</span></h5>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <button class="btn btn-warning btn-sm" onclick="toggleFlag()" id="flagBtn">
+                                <i class="fas fa-flag me-1"></i>Flag
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body p-4">
+                    <div id="questionContent" class="question-content"></div>
+                    <div id="optionsContent" class="mt-4"></div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-secondary btn-custom" onclick="previousQuestion()" id="prevBtn">
+                                <i class="fas fa-chevron-left me-2"></i>Previous
+                            </button>
+                        </div>
+                        <div class="col-md-6 text-md-end">
+                            <button class="btn btn-primary btn-custom" onclick="nextQuestion()" id="nextBtn">
+                                Next<i class="fas fa-chevron-right ms-2"></i>
+                            </button>
+                            <button class="btn btn-success btn-custom" onclick="submitTest()" id="submitBtn" style="display: none;">
+                                <i class="fas fa-paper-plane me-2"></i>Submit
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="container-fluid bg-light py-3 mt-4" data-theme-bg="secondary">
+            <div class="container">
+                <h6 class="mb-2"><i class="fas fa-list-ol me-2"></i>Question Palette</h6>
+                <div class="question-palette" id="questionPalette"></div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="resultModal" tabindex="-1" data-bs-backdrop="static">
+            <div class="modal-dialog modal-lg modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header bg-success text-white">
+                        <h5 class="modal-title"><i class="fas fa-trophy me-2"></i>Test Results</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="result-card text-center">
+                            <div id="resultContent"></div>
+                        </div>
+                    </div>
+                    <div class="modal-footer justify-content-center">
+                        <button class="btn btn-info btn-custom" onclick="showReview()"><i class="fas fa-eye me-2"></i>Review</button>
+                        <button class="btn btn-success btn-custom" onclick="generateCompletePDF()"><i class="fas fa-download me-2"></i>Save PDF</button>
+                        <button class="retake-btn" onclick="retakeTest()"><i class="fas fa-redo me-2"></i>Retake Test</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="reviewModal" tabindex="-1">
+            <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title"><i class="fas fa-clipboard-list me-2"></i>Answer Review</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    </div>
+                    <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
+                        <div id="reviewContent"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="bg-dark text-white text-center py-3 mt-5">
+            <p class="mb-0">© 2025 Copyright UOS Mock Test Series | Powered By Mock Test Hub</p>
+        </footer>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Global Variables
+        let currentQuestionIndex = 0;
+        let answers = {};
+        let flaggedQuestions = new Set();
+        let timeRemaining = 90 * 60; // 90 minutes
+        let timerInterval;
+        let testStartTime;
+        let testEndTime;
+        let passwordModalInstance;
+
+        // MathJax Configuration
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)'], ['$', '$']],
+                displayMath: [['\\[', '\\]'], ['$$', '$$']]
+            },
+            svg: { fontCache: 'global' }
+        };
+
+     const questionsData = {
+        "English": [
+            { "id": 1, "subject": "English", "topic": "Synonyms", "question": "Choose the correct SYNONYM for: ABSCOND", "options": ["Rob", "Obscure", "Flee", "Absolve"], "correct": 2 },
+            { "id": 2, "subject": "English", "topic": "Synonyms", "question": "Choose the correct SYNONYM for: DEFLECT", "options": ["Divert", "Frustrate", "Revert", "Depress"], "correct": 0 },
+            { "id": 3, "subject": "English", "topic": "Synonyms", "question": "Choose the correct SYNONYM for: ADEQUATE", "options": ["Poor", "Sufficient", "Extra", "Mislaid"], "correct": 1 },
+            { "id": 4, "subject": "English", "topic": "Synonyms", "question": "Choose the correct SYNONYM for: RAPID", "options": ["Heavy", "Slow", "Quick", "Right"], "correct": 2 },
+            { "id": 5, "subject": "English", "topic": "Synonyms", "question": "Choose the correct SYNONYM for: RELUCTANT", "options": ["Excited", "Certain", "Cheerful", "Unwilling"], "correct": 3 },
+            { "id": 6, "subject": "English", "topic": "Antonyms", "question": "Choose the correct ANTONYM for: ARBITRARY", "options": ["Consistent", "Appropriate", "Smicker", "Prescribed"], "correct": 3 },
+            { "id": 7, "subject": "English", "topic": "Antonyms", "question": "Choose the correct ANTONYM for: GENEROUS", "options": ["Giving", "Stingy", "Kind", "Thoughtful"], "correct": 1 },
+            { "id": 8, "subject": "English", "topic": "Antonyms", "question": "Choose the correct ANTONYM for: ARROGANT", "options": ["Haughty", "Pompous", "Proud", "Humble"], "correct": 3 },
+            { "id": 9, "subject": "English", "topic": "Antonyms", "question": "Choose the correct ANTONYM for: STINGY", "options": ["Generous", "Kind", "Helpful", "Loud"], "correct": 0 },
+            { "id": 10, "subject": "English", "topic": "Antonyms", "question": "Choose the correct ANTONYM for: TEDIOUS", "options": ["Boring", "Dull", "Engaging", "Monotonous"], "correct": 2 },
+            { "id": 11, "subject": "English", "topic": "Spelling", "question": "Choose the correctly spelled word.", "options": ["signficance", "signeficance", "signoficance", "significance"], "correct": 3 },
+            { "id": 12, "subject": "English", "topic": "Spelling", "question": "Choose the correctly spelled word.", "options": ["definately", "defenately", "definitly", "definitely"], "correct": 3 },
+            { "id": 13, "subject": "English", "topic": "Spelling", "question": "Choose the correctly spelled word.", "options": ["pnemonia", "pneumonia", "namunia", "pnemunia"], "correct": 1 },
+            { "id": 14, "subject": "English", "topic": "Spelling", "question": "Choose the correctly spelled word.", "options": ["maintenance", "maintenence", "maintanance", "maintainence"], "correct": 0 },
+            { "id": 15, "subject": "English", "topic": "Spelling", "question": "Choose the correctly spelled word.", "options": ["persue", "pursu", "pursue", "pursiew"], "correct": 2 },
+            { "id": 16, "subject": "English", "topic": "Grammar", "question": "His application for a visa was turned ______ by the consulate.", "options": ["in", "out", "beyond", "down"], "correct": 3 },
+            { "id": 17, "subject": "English", "topic": "Grammar", "question": "He lives ______ an apartment ______ the third floor.", "options": ["in/on", "at/in", "over/in", "on/at"], "correct": 0 },
+            { "id": 18, "subject": "English", "topic": "Grammar", "question": "He is solely responsible ______ the project.", "options": ["of", "for", "with", "in"], "correct": 1 },
+            { "id": 19, "subject": "English", "topic": "Grammar", "question": "Don't be jealous ______ your friend.", "options": ["from", "with", "for", "of"], "correct": 3 },
+            { "id": 20, "subject": "English", "topic": "Grammar", "question": "The letter ______ by the manager yesterday.", "options": ["wrote", "was written", "is writing", "had wrote"], "correct": 1 },
+            { "id": 21, "subject": "English", "topic": "Narration", "question": "Change the narration: He said, 'Gandhi ji faced many awkward situations when he was living in South Africa.'", "options": ["He says that Gandhi ji faced many awkward situations...", "He told that Gandhi ji had faced many awkward situations...", "He said that Gandhi ji had been facing awkward situations...", "He said that Gandhi ji had faced many awkward situations..."], "correct": 3 },
+            { "id": 22, "subject": "English", "topic": "Narration", "question": "Change the narration: 'I am going to the market,' she said.", "options": ["She said that she was going to the market.", "She said that I was going to the market.", "She said that she will go to the market.", "She said that she is going to the market."], "correct": 0 },
+            { "id": 23, "subject": "English", "topic": "Narration", "question": "Change the narration: He said, 'I am happy to be here today.'", "options": ["He said that he was happy to be there today.", "He said that he is happy to be there today.", "He said that he was happy to be there that day.", "He said that I was happy to be there that day."], "correct": 2 },
+            { "id": 24, "subject": "English", "topic": "Narration", "question": "Change the narration: She said, 'I can speak English.'", "options": ["She said that she can speak English.", "She said that she could speak English.", "She said she speaks English.", "She said she speaking English."], "correct": 1 },
+            { "id": 25, "subject": "English", "topic": "Narration", "question": "Change the narration: He said, 'I am tired.'", "options": ["He said that I was tired.", "He says he is tired.", "He said that he was tired.", "He told that he is tired."], "correct": 2 },
+            { "id": 26, "subject": "English", "topic": "Voice", "question": "Change the voice: They are repairing the road now.", "options": ["The road repairs now.", "The road was repairing now.", "The road is being repaired now.", "The road repaired now."], "correct": 2 },
+            { "id": 27, "subject": "English", "topic": "Voice", "question": "Change the voice: Did you clean the room?", "options": ["Is the room cleaned by you?", "Was the room cleaned by you?", "Is the room being cleaned by you?", "Is the room being cleaned by you?"], "correct": 1 },
+            { "id": 28, "subject": "English", "topic": "Voice", "question": "Change the voice: The teacher will punish the students.", "options": ["The students will be punished by the teacher.", "The students are punished by the teacher.", "The students were punished by the teacher.", "The students will be punishing the teacher."], "correct": 0 },
+            { "id": 29, "subject": "English", "topic": "Voice", "question": "Change the voice: The chef prepared the delicious meal.", "options": ["The delicious meal was prepared by the chef.", "The delicious meal is prepared by the chef.", "The chef was preparing the delicious meal.", "The delicious meal has been prepared by the chef."], "correct": 0 },
+            { "id": 30, "subject": "English", "topic": "Voice", "question": "Change the voice: The renowned Picasso painted this picture.", "options": ["This picture has been painted by the renowned Picasso.", "The renowned Picasso was painted this picture by.", "The renowned Picasso has painted this picture.", "The picture was painted by the renowned Picasso."], "correct": 0 }
+        ],
+        "General Knowledge": [
+            { "id": 31, "subject": "General Knowledge", "topic": "World Affairs", "question": "The current Secretary-General of United Nations António Guterres belongs to which country?", "options": ["South Korea", "Portugal", "Thailand", "Bulgaria"], "correct": 1 },
+            { "id": 32, "subject": "General Knowledge", "topic": "Current Affairs", "question": "Who is the current Chief Adviser of Interim Government of Bangladesh?", "options": ["Fakhruddin Ahmed", "Sheikh Hasina", "Shafiqur Rahman", "Muhammad Yunus"], "correct": 3 },
+            { "id": 33, "subject": "General Knowledge", "topic": "World Organizations", "question": "The location of the headquarters of the Arab League is:", "options": ["Riyadh, Saudi Arabia", "Baghdad, Iraq", "Cairo, Egypt", "Doha, Qatar"], "correct": 2 },
+            { "id": 34, "subject": "General Knowledge", "topic": "History", "question": "The Kargil war happened in:", "options": ["1997", "1998", "1999", "2000"], "correct": 2 },
+            { "id": 35, "subject": "General Knowledge", "topic": "Geography", "question": "Chittagong city is located in:", "options": ["India", "Sri Lanka", "Bangladesh", "Nepal"], "correct": 2 },
+            { "id": 36, "subject": "General Knowledge", "topic": "World Heritage", "question": "Taj Mahal is situated on the bank of the river:", "options": ["Yamuna", "Ganga", "Sutlaj", "Ravi"], "correct": 0 },
+            { "id": 37, "subject": "General Knowledge", "topic": "Sports", "question": "The Oval cricket ground is located in:", "options": ["Australia", "England", "South Africa", "New Zealand"], "correct": 1 },
+            { "id": 38, "subject": "General Knowledge", "topic": "History", "question": "Which was the first country to recognize Pakistan as an independent state?", "options": ["Afghanistan", "Saudi Arabia", "Iran", "China"], "correct": 2 },
+            { "id": 39, "subject": "General Knowledge", "topic": "Pakistani Politics", "question": "Who is the current Deputy Speaker of the National Assembly of Pakistan?", "options": ["Sardar Ayaz Sadiq", "Faisal Karim Kundi", "Asad Qaiser", "Ghulam Mustafa Shah"], "correct": 1 },
+            { "id": 40, "subject": "General Knowledge", "topic": "Pakistani Politics", "question": "The Parliament of Pakistan is officially named:", "options": ["Majles-e Shurá-ye Eslámi", "Majlis Ash-Shura", "Majlis-e-Shoora", "Shura-e-Milli"], "correct": 2 },
+            { "id": 41, "subject": "General Knowledge", "topic": "Geography", "question": "Which of the following countries is connected with Pakistan via Taftan Border?", "options": ["Afghanistan", "China", "Iran", "India"], "correct": 2 },
+            { "id": 42, "subject": "General Knowledge", "topic": "Defense", "question": "Which of the following is the name given to a Pakistani missile?", "options": ["Shamshiri", "Hydri", "Akbari", "Ghouri"], "correct": 3 },
+            { "id": 43, "subject": "General Knowledge", "topic": "History", "question": "The Operation Bunyan-un-Marsoos against India was launched in:", "options": ["April-2025", "May-2025", "June-2025", "July-2025"], "correct": -1 },
+            { "id": 44, "subject": "General Knowledge", "topic": "History", "question": "Akbar the Great Mughal Emperor was born in:", "options": ["Umer Kot", "Agra", "Lucknow", "Delhi"], "correct": 0 },
+            { "id": 45, "subject": "General Knowledge", "topic": "History", "question": "Elsa Kazi, commonly known as 'Mother Elsa', wife of Allama I.I. Kazi was born in:", "options": ["France", "England", "Germany", "Pakistan"], "correct": 2 },
+            { "id": 46, "subject": "General Knowledge", "topic": "History", "question": "'Shams-ul-Ulama' title was awarded to:", "options": ["Dr. Umer Bin Mohammad Daud Pota", "Mirza Qaleech Baig", "Allama I.I. Kazi", "Both (a) and (b)"], "correct": 3 },
+            { "id": 47, "subject": "General Knowledge", "topic": "Geography", "question": "Which of the following Barrage is on River Indus?", "options": ["Sukkur Barrage", "Tonsa Barrage", "Chashma Barrage", "All of these"], "correct": 3 },
+            { "id": 48, "subject": "General Knowledge", "topic": "Islamic History", "question": "Shah Rafi-ud-Din was the scholar who translated the Holy Quran into:", "options": ["Sindhi", "Hindi", "Urdu", "Persians"], "correct": 2 },
+            { "id": 49, "subject": "General Knowledge", "topic": "Islamic Studies", "question": "Nimaz-e-Istisqa is offered:", "options": ["at the occasion of Storm", "for requesting rain", "at the occasion of earthquake", "at the occasion of Sun eclipse"], "correct": 1 },
+            { "id": 50, "subject": "General Knowledge", "topic": "Islamic Studies", "question": "Which is the longest Surah in the Holy Qur'an?", "options": ["Surah Aal-e-Imran", "Surah An-Nisa", "Surah Al-Maidah", "Surah Al-Baqarah"], "correct": 3 }
+        ],
+        "General Science": [
+            { "id": 51, "subject": "General Science", "topic": "Physics", "question": "Freezing point of water is:", "options": ["32 °F", "273 °K", "0 °C", "All of these"], "correct": 3 },
+            { "id": 52, "subject": "General Science", "topic": "Geography", "question": "High up around the earth in its atmosphere, in between twelve to fifty kilometers above the ground, there is a layer called:", "options": ["Ozone layer", "Mesosphere layer", "Stratosphere layer", "Troposphere layer"], "correct": 2 },
+            { "id": 53, "subject": "General Science", "topic": "Biology", "question": "Vitamin C deficiency causes:", "options": ["Rickets", "Night blindness", "Scurvy", "Goiter"], "correct": 2 },
+            { "id": 54, "subject": "General Science", "topic": "Physics", "question": "Cusecs is a unit used to measure the flow of water. One Cusec is equal to:", "options": ["18.317 liters flow per second", "28.317 liters flow per second", "3 gallon flow per second", "9 gallon flow per second"], "correct": 1 },
+            { "id": 55, "subject": "General Science", "topic": "Physics", "question": "_______ is heat from within the Earth that can be converted into electricity.", "options": ["Solar energy", "Geothermal energy", "Hydropower energy", "Biomass energy"], "correct": 1 },
+            { "id": 56, "subject": "General Science", "topic": "Biology", "question": "In humans, fertilization usually takes place in:", "options": ["Uterus", "Ovary", "Cervix", "Fallopian tube"], "correct": 3 },
+            { "id": 57, "subject": "General Science", "topic": "Biology", "question": "What is the major function of the human lungs?", "options": ["Digestion", "Exhaling CO₂ & Inhaling O₂", "Filtering blood", "Pumping blood"], "correct": 1 },
+            { "id": 58, "subject": "General Science", "topic": "History of Science", "question": "Polio vaccine was invented in:", "options": ["UK", "Germany", "USA", "France"], "correct": 2 },
+            { "id": 59, "subject": "General Science", "topic": "Physics", "question": "Which color has the longest wavelength?", "options": ["Red", "Blue", "Green", "Violet"], "correct": 0 },
+            { "id": 60, "subject": "General Science", "topic": "Biology", "question": "Blood is produced by:", "options": ["Heart arteries", "Lungs", "Kidneys", "Bone Marrow"], "correct": 3 },
+            { "id": 61, "subject": "General Science", "topic": "Physics", "question": "The Celsius is the scale used to measure:", "options": ["Distance", "Area", "Temperature", "Speed"], "correct": 2 },
+            { "id": 62, "subject": "General Science", "topic": "Physics", "question": "What is the SI unit of electric charge?", "options": ["Volt", "Coulomb", "Ampere", "Joule"], "correct": 1 },
+            { "id": 63, "subject": "General Science", "topic": "Biology", "question": "In human body, which of the following fight against disease?", "options": ["Hemoglobin", "Red blood cells (RBC)", "White blood cells (WBC)", "Platelets"], "correct": 2 },
+            { "id": 64, "subject": "General Science", "topic": "Chemistry", "question": "Which gas is used in balloons to make them float?", "options": ["Oxygen", "Helium", "Carbon dioxide", "Nitrogen"], "correct": 1 },
+            { "id": 65, "subject": "General Science", "topic": "Physics", "question": "-40 degree Celsius is equal to:", "options": ["18 degree Fahrenheit", "-18 degree Fahrenheit", "40 degree Fahrenheit", "-40 degree Fahrenheit"], "correct": 3 },
+            { "id": 66, "subject": "General Science", "topic": "Technology", "question": "RADAR stands for:", "options": ["Radio Diagnosing and Ranging", "Radio Detection and Ranging", "Rais Detection and Ranging", "Radio Adapter Detection and Ranging"], "correct": 1 },
+            { "id": 67, "subject": "General Science", "topic": "Astronomy", "question": "Rotation is the Earth's journey around ______ taking approximately 24 hours.", "options": ["Moon", "Sun", "Stars", "its own axis"], "correct": 3 },
+            { "id": 68, "subject": "General Science", "topic": "Biology", "question": "The instrument to measure blood pressure is called:", "options": ["Sphygmomanometer", "Thermometer", "Barometer", "Stethoscope"], "correct": 0 },
+            { "id": 69, "subject": "General Science", "topic": "Computer Science", "question": "The unit to measure the speed of a microprocessor of a computer is:", "options": ["Meter", "Bit", "Byte", "Hertz"], "correct": 3 },
+            { "id": 70, "subject": "General Science", "topic": "Computer Science", "question": "Mouse of a computer system is:", "options": ["groupware", "hardware", "software", "firmware"], "correct": 1 }
+        ],
+        "Simple Arithmetic": [
+            { "id": 71, "subject": "Simple Arithmetic", "topic": "Algebra", "question": "If '+' means 'x' and '-' means '+', then what will be the value of 56 + 20 - 19?", "options": ["930", "491", "1139", "528"], "correct": 2 },
+            { "id": 72, "subject": "Simple Arithmetic", "topic": "Ratio", "question": "Find the ratio of 18 inches to 2 yards.", "options": ["3 : 4", "1 : 4", "1 : 5", "2 : 5"], "correct": 1 },
+            { "id": 73, "subject": "Simple Arithmetic", "topic": "Decimals", "question": "0.003 x 0.02 = ?", "options": ["0.06", "0.006", "0.0006", "0.00006"], "correct": 3 },
+            { "id": 74, "subject": "Simple Arithmetic", "topic": "Number Series", "question": "Find the next number in the series: 4, 9, 16, 25, ...", "options": ["32", "55", "60", "36"], "correct": 3 },
+            { "id": 75, "subject": "Simple Arithmetic", "topic": "Geometry", "question": "If base of right-angled triangle is 8 cm, height is 4 cm, what would be the area of triangle?", "options": ["32 cm²", "16 cm²", "8 cm²", "64 cm²"], "correct": 1 },
+            { "id": 76, "subject": "Simple Arithmetic", "topic": "Word Problems", "question": "If Arif can read 39 pages of a book in half an hour. How long will it take him to finish a book that is 1287 pages?", "options": ["15.5 Hours", "16 Hours", "16.5 Hours", "17 Hours"], "correct": 2 },
+            { "id": 77, "subject": "Simple Arithmetic", "topic": "Number Series", "question": "Find the next two numbers in the series: 18, 21, 25, 18, 29, 33, 18, ...", "options": ["41, 18", "41, 44", "37, 18", "37, 41"], "correct": 2 },
+            { "id": 78, "subject": "Simple Arithmetic", "topic": "Percentage", "question": "What percentage of 120 is 90?", "options": ["25%", "33%", "50%", "75%"], "correct": 3 },
+            { "id": 79, "subject": "Simple Arithmetic", "topic": "Percentage", "question": "How much is 60% of 50 greater than 40% of 30?", "options": ["11", "15", "18", "20"], "correct": 2 },
+            { "id": 80, "subject": "Simple Arithmetic", "topic": "Units", "question": "One Gross is equal to:", "options": ["5 dozen", "10 dozen", "12 dozen", "20 dozen"], "correct": 2 },
+            { "id": 81, "subject": "Simple Arithmetic", "topic": "Word Problems", "question": "Twelve children take sixteen days to complete work which can be completed by 8 adults in 12 days. After working for 3 days, sixteen adults left, and six adults and four children joined them. How many days will they take to complete the remaining work?", "options": ["3 days", "4 days", "6 days", "8 days"], "correct": 2 },
+            { "id": 82, "subject": "Simple Arithmetic", "topic": "Word Problems", "question": "18 men can eat 20 kg of rice in 3 days. How long will 6 men take to eat 40 kg of rice?", "options": ["18", "20", "32", "33"], "correct": 0 },
+            { "id": 83, "subject": "Simple Arithmetic", "topic": "Interest", "question": "A sum of money at simple interest amounts to Rs. 815 in 3 years and to Rs. 854 in 4 years. The sum is:", "options": ["Rs. 650", "Rs. 690", "Rs. 700", "Rs. 698"], "correct": 3 },
+            { "id": 84, "subject": "Simple Arithmetic", "topic": "Interest", "question": "An amount of 5,000 is invested at a fixed rate of 8 per cent per annum. What amount will be the value of the investment in five years' time, if the interest is compounded every six months?", "options": ["Rs. 7401.22", "Rs. 7500", "Rs. 8507.22", "Rs. 7890.45"], "correct": 0 },
+            { "id": 85, "subject": "Simple Arithmetic", "topic": "Trigonometry", "question": "The top of a 15-metre-high tower makes an angle of elevation of 60° with the bottom of an electric pole and angle of elevation of 30° with the top of the pole. What is the height of the electric pole?", "options": ["5 meters", "8 meters", "10 meters", "12 meters"], "correct": 2 },
+            { "id": 86, "subject": "Simple Arithmetic", "topic": "Number Series", "question": "Find out the wrong number in the series: 1, 1, 2, 6, 24, 96, 720.", "options": ["6", "24", "96", "720"], "correct": 2 },
+            { "id": 87, "subject": "Simple Arithmetic", "topic": "Percentage", "question": "The cost price of an article is 64% of the marked price. Calculate the gain percentage after allowing a discount of 12%.", "options": ["27.50%", "37.50%", "18.50%", "42%"], "correct": 1 },
+            { "id": 88, "subject": "Simple Arithmetic", "topic": "Percentage", "question": "The price of petrol is increased by 25%. By how much percent a car owner should reduce his consumption of petrol so that expenditure on petrol would not be increased?", "options": ["20", "25", "35", "50"], "correct": 0 },
+            { "id": 89, "subject": "Simple Arithmetic", "topic": "Percentage", "question": "3.5 can be expressed in terms of percentage as:", "options": ["0.35%", "3.50%", "35%", "350%"], "correct": 3 }
+        ],
+        "Simple I.Q.": [
+            { "id": 90, "subject": "Simple I.Q.", "topic": "Ratio and Proportion", "question": "Find the fourth proportion to 3, 7 and 9.", "options": ["21", "27", "31", "63"], "correct": 0 },
+            { "id": 91, "subject": "Simple I.Q.", "topic": "Logical Reasoning", "question": "A is the brother of B. B is the brother of C. D is the father of A. Based on these three statements, which of the following statements cannot be definitely true?", "options": ["B is the brother of A", "B is the son of D", "A is the brother of C", "C is the brother of A"], "correct": 3 },
+            { "id": 92, "subject": "Simple I.Q.", "topic": "Visual Reasoning", "question": "Which figure comes next in the sequence?<br><svg width='300' height='100' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='10' width='30' height='30' fill='blue' /><rect x='50' y='10' width='40' height='30' fill='blue' /><rect x='100' y='10' width='50' height='30' fill='blue' /><rect x='160' y='10' width='60' height='30' fill='blue' /><text x='250' y='30' font-size='20'>?</text></svg>", "options": ["<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='10' width='40' height='40' fill='blue' /></svg>", "<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='10' width='40' height='40' fill='red' /></svg>", "<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><circle cx='30' cy='30' r='20' fill='blue' /></svg>", "<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='10' width='70' height='30' fill='blue' /></svg>"], "correct": 3 },
+            { "id": 93, "subject": "Simple I.Q.", "topic": "Visual Reasoning", "question": "What numbers should replace the question marks?<br><svg width='300' height='200' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='10' width='80' height='80' fill='white' stroke='black' /><text x='50' y='60' font-size='24' text-anchor='middle'>3</text><rect x='110' y='10' width='80' height='80' fill='white' stroke='black' /><text x='150' y='60' font-size='24' text-anchor='middle'>5</text><rect x='210' y='10' width='80' height='80' fill='white' stroke='black' /><text x='250' y='60' font-size='24' text-anchor='middle'>?</text><rect x='10' y='110' width='80' height='80' fill='white' stroke='black' /><text x='50' y='160' font-size='24' text-anchor='middle'>7</text><rect x='110' y='110' width='80' height='80' fill='white' stroke='black' /><text x='150' y='160' font-size='24' text-anchor='middle'>9</text><rect x='210' y='110' width='80' height='80' fill='white' stroke='black' /><text x='250' y='160' font-size='24' text-anchor='middle'>?</text></svg>", "options": ["6,4,3,7", "4,6,3,7", "3,4,6,7", "7,4,3,6"], "correct": 0 },
+            { "id": 94, "subject": "Simple I.Q.", "topic": "Coding", "question": "If REASON is coded as 5 and BELIEVED as 7, then what is the code for GOVERNMENT?", "options": ["6", "8", "9", "10"], "correct": 2 },
+            { "id": 95, "subject": "Simple I.Q.", "topic": "Alphabet Series", "question": "Write the middle letter? B C D E F G H", "options": ["D", "E", "C", "F"], "correct": 1 },
+            { "id": 96, "subject": "Simple I.Q.", "topic": "Age Problems", "question": "Adnan was 21-year-old in 1945, how old will he be in 1965?", "options": ["41", "43", "45", "65"], "correct": 0 },
+            { "id": 97, "subject": "Simple I.Q.", "topic": "Odd One Out", "question": "Which one is different from the rest?", "options": ["Similar", "Like", "Same", "Distinguish"], "correct": 3 },
+            { "id": 98, "subject": "Simple I.Q.", "topic": "Alphabet Series", "question": "Which pair comes next in the following series? A, Z, B, Y, ...", "options": ["C, X", "D, T", "V, Z", "Y, S"], "correct": 0 },
+            { "id": 99, "subject": "Simple I.Q.", "topic": "Letter Series", "question": "Which option comes next in the following series? AB, DEF, HIJK, MNOPQ, ...", "options": ["STUVXW", "STUVWX", "STUVXZ", "SUTVXW"], "correct": 1 },
+            { "id": 100, "subject": "Simple I.Q.", "topic": "Visual Reasoning", "question": "Which option correctly completes the empty cell in the matrix below?<br><svg width='200' height='200' xmlns='http://www.w3.org/2000/svg'><rect x='10' y='10' width='80' height='80' fill='white' stroke='black' /><circle cx='50' cy='50' r='20' fill='blue' /><rect x='110' y='10' width='80' height='80' fill='white' stroke='black' /><rect x='130' y='30' width='40' height='40' fill='blue' /><rect x='10' y='110' width='80' height='80' fill='white' stroke='black' /><polygon points='50,130 70,170 30,170' fill='blue' /><rect x='110' y='110' width='80' height='80' fill='white' stroke='black' stroke-dasharray='5,5' /></svg>", "options": ["<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><circle cx='30' cy='30' r='20' fill='blue' /></svg>", "<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><rect x='20' y='20' width='20' height='20' fill='blue' /></svg>", "<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><polygon points='30,15 45,45 15,45' fill='blue' /></svg>", "<svg width='60' height='60' xmlns='http://www.w3.org/2000/svg'><line x1='10' y1='10' x2='50' y2='50' stroke='blue' stroke-width='3' /><line x1='50' y1='10' x2='10' y2='50' stroke='blue' stroke-width='3' /></svg>"], "correct": 1 }
+        ]
+    };
+
+
+        const allQuestions = [];
+        Object.values(questionsData).forEach(sectionQuestions => {
+            allQuestions.push(...sectionQuestions);
+        });
+        allQuestions.sort((a, b) => a.id - b.id);
+
+        const totalActualQuestions = allQuestions.length;
+
+        // Event Listener for DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', function() {
+            passwordModalInstance = new bootstrap.Modal(document.getElementById('passwordModal'));
+            passwordModalInstance.show();
+            initializeTheme();
+        });
+
+        function verifyPassword() {
+            const password = document.getElementById('passwordInput').value;
+            if (password === 'uostestbymk') {
+                passwordModalInstance.hide();
+                document.getElementById('mainContent').style.display = 'block';
+                startTest();
+            } else {
+                document.getElementById('passwordError').textContent = 'Incorrect password.';
+                document.getElementById('passwordInput').classList.add('is-invalid');
+            }
+        }
+
+        document.getElementById('passwordInput').addEventListener('keypress', e => {
+            if (e.key === 'Enter') verifyPassword();
+        });
+
+        function startTest() {
+            testStartTime = new Date();
+            document.getElementById('totalQuestionCount').textContent = totalActualQuestions;
+            generateQuestionPalette();
+            startTimer();
+            loadQuestion(0);
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitTest();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+            document.getElementById('timer').textContent = 
+                `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            if (timeRemaining <= 300) { // 5 minutes warning
+                document.getElementById('timer').style.background = 'linear-gradient(45deg, #dc3545, #c82333)';
+            }
+        }
+
+        function generateQuestionPalette() {
+            const palette = document.getElementById('questionPalette');
+            palette.innerHTML = '';
+            allQuestions.forEach((q, index) => {
+                const button = document.createElement('button');
+                button.className = 'question-number btn d-inline-flex align-items-center justify-content-center';
+                button.textContent = q.id;
+                button.onclick = () => loadQuestion(index);
+                palette.appendChild(button);
+            });
+        }
+
+        function loadQuestion(questionIndex) {
+            currentQuestionIndex = questionIndex;
+            const question = allQuestions[questionIndex];
+            
+            document.getElementById('currentQuestionNum').textContent = question.id;
+            document.getElementById('questionContent').innerHTML = 
+                `<h6><span class="badge bg-info me-2">${question.subject}</span>${question.topic}</h6>
+                 <p class="lead">${question.question}</p>`;
+            
+            let optionsHTML = '';
+            question.options.forEach((option, index) => {
+                const isSelected = answers[question.id] === index ? 'selected' : '';
+                optionsHTML += `<div class="option-card ${isSelected}" onclick="selectOption(${index})">${option}</div>`;
+            });
+            document.getElementById('optionsContent').innerHTML = optionsHTML;
+            
+            // Fixed button visibility logic
+            document.getElementById('prevBtn').style.display = questionIndex === 0 ? 'none' : 'inline-block';
+            document.getElementById('nextBtn').style.display = questionIndex === totalActualQuestions - 1 ? 'none' : 'inline-block';
+            document.getElementById('submitBtn').style.display = questionIndex === totalActualQuestions - 1 ? 'inline-block' : 'none';
+            
+            const flagBtn = document.getElementById('flagBtn');
+            if (flaggedQuestions.has(question.id)) {
+                flagBtn.innerHTML = '<i class="fas fa-flag me-1"></i>Unflag';
+                flagBtn.className = 'btn btn-danger btn-sm';
+            } else {
+                flagBtn.innerHTML = '<i class="fas fa-flag me-1"></i>Flag';
+                flagBtn.className = 'btn btn-warning btn-sm';
+            }
+            
+            updateQuestionPalette();
+            
+            if (window.MathJax && typeof window.MathJax.typeset === 'function') {
+                window.MathJax.typeset();
+            }
+            
+            const card = document.getElementById('questionCard');
+            card.classList.remove('fade-in');
+            void card.offsetWidth; // Trigger reflow
+            card.classList.add('fade-in');
+        }
+
+        function selectOption(optionIndex) {
+            const questionId = allQuestions[currentQuestionIndex].id;
+            answers[questionId] = optionIndex;
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function updateQuestionPalette() {
+            document.querySelectorAll('.question-number').forEach((button) => {
+                const qNum = parseInt(button.textContent);
+                button.classList.remove('answered', 'flagged', 'current');
+                
+                if (answers[qNum] !== undefined) button.classList.add('answered');
+                if (flaggedQuestions.has(qNum)) button.classList.add('flagged');
+                if (qNum === allQuestions[currentQuestionIndex].id) button.classList.add('current');
+            });
+        }
+
+
+        function previousQuestion() { if (currentQuestionIndex > 0) loadQuestion(currentQuestionIndex - 1); }
+        function nextQuestion() { if (currentQuestionIndex < totalActualQuestions - 1) loadQuestion(currentQuestionIndex + 1); }
+
+        function toggleFlag() {
+            const questionId = allQuestions[currentQuestionIndex].id;
+            if (flaggedQuestions.has(questionId)) {
+                flaggedQuestions.delete(questionId);
+            } else {
+                flaggedQuestions.add(questionId);
+            }
+            loadQuestion(currentQuestionIndex);
+        }
+
+        function submitTest() {
+            if (confirm('Are you sure you want to submit the test?')) {
+                finalizeTest();
+            }
+        }
+
+        function autoSubmitTest() {
+            alert("Time's up! The test will now be submitted automatically.");
+            finalizeTest();
+        }
+        
+        function finalizeTest() {
+            testEndTime = new Date();
+            clearInterval(timerInterval);
+            calculateResults();
+        }
+
+        function calculateResults() {
+            let correct = 0;
+            allQuestions.forEach(q => {
+                if (answers[q.id] === q.correct) {
+                    correct++;
+                }
+            });
+            
+            const totalAttempted = Object.keys(answers).length;
+            const isPassed = correct >= 50;
+            const timeTaken = Math.floor((testEndTime - testStartTime) / 1000);
+            
+            // Ensure testResults is properly set
+            window.testResults = {
+                obtainedMarks: correct,
+                totalMarks: totalActualQuestions,
+                isPassed,
+                correctAnswers: correct,
+                totalAttempted,
+                timeTaken,
+                answers: answers // Make sure answers are included
+            };
+            
+            displayResults();
+        }
+
+        function displayResults() {
+            const r = window.testResults;
+            const minutes = Math.floor(r.timeTaken / 60);
+            const seconds = r.timeTaken % 60;
+            
+            document.getElementById('resultContent').innerHTML = `
+                <div class="row text-center">
+                    <div class="col-md-4 mb-3">
+                        <h2 class="display-4">${r.obtainedMarks}</h2><p>Marks Obtained</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h2 class="display-4">${r.totalMarks}</h2><p>Total Marks</p>
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <h2 class="display-4 ${r.isPassed ? 'text-success' : 'text-danger'}">${r.isPassed ? 'PASS' : 'FAIL'}</h2>
+                        <p>Result</p>
+                    </div>
+                </div>
+                <hr class="my-4">
+                <div class="row text-center">
+                    <div class="col-md-6"><h5><i class="fas fa-clock me-2"></i>Time Taken</h5><p class="lead">${minutes}:${String(seconds).padStart(2, '0')} min</p></div>
+                    <div class="col-md-6"><h5><i class="fas fa-percentage me-2"></i>Percentage</h5><p class="lead">${(r.obtainedMarks / r.totalMarks * 100).toFixed(2)}%</p></div>
+                </div>`;
+            
+            new bootstrap.Modal(document.getElementById('resultModal')).show();
+        }
+
+        function retakeTest() {
+            if (confirm('Are you sure you want to retake the test?')) {
+                location.reload();
+            }
+        }
+
+        function showReview() {
+            try {
+                // Check if testResults is available
+                if (!window.testResults) {
+                    alert('Test results not found. Please try again.');
+                    return;
+                }
+                const { answers } = window.testResults;
+                let reviewHTML = '';
+                
+                const sectionOrder = ['English', 'General Knowledge', 'General Science', 'Simple Arithmetic', 'Simple I.Q.'];
+                sectionOrder.forEach(sectionName => {
+                    if(!questionsData[sectionName]) return;
+                    reviewHTML += `<h4 class="text-primary border-bottom pb-2 mt-4"><i class="fas fa-book-open me-2"></i>${sectionName}</h4>`;
+                    questionsData[sectionName].forEach(q => {
+                        const userAnswer = answers[q.id];
+                        const isCorrect = userAnswer === q.correct;
+                        let statusClass, statusIcon, statusText, userAnswerText;
+
+                        if (userAnswer === undefined) {
+                            [statusClass, statusIcon, statusText, userAnswerText] = 
+                                ['review-unattempted', 'fa-minus-circle text-secondary', 'Not Attempted', 'Not Attempted'];
+                        } else if (isCorrect) {
+                            [statusClass, statusIcon, statusText, userAnswerText] = 
+                                ['review-correct', 'fa-check-circle text-success', 'Correct', q.options[userAnswer] || 'Answer not available'];
+                        } else {
+                            [statusClass, statusIcon, statusText, userAnswerText] = 
+                                ['review-incorrect', 'fa-times-circle text-danger', 'Incorrect', q.options[userAnswer] || 'Answer not available'];
+                        }
+                        
+                        // Ensure correctAnswerText is not undefined
+                        const correctAnswerText = q.options[q.correct] || 'Answer not available';
+                        
+                        // Check if userAnswerText and correctAnswerText are strings before calling includes
+                        const userAnswerDisplay = (typeof userAnswerText === 'string' && userAnswerText.includes('<img')) 
+                            ? userAnswerText.replace(/class="[^"]*"/, 'class="img-fluid"') 
+                            : userAnswerText;
+                            
+                        const correctAnswerDisplay = (typeof correctAnswerText === 'string' && correctAnswerText.includes('<img')) 
+                            ? correctAnswerText.replace(/class="[^"]*"/, 'class="img-fluid"') 
+                            : correctAnswerText;
+                        
+                        reviewHTML += `
+                            <div class="card mb-3 ${statusClass}">
+                                <div class="card-header d-flex justify-content-between align-items-center">
+                                    <h6 class="mb-0">Q ${q.id}: ${q.topic}</h6>
+                                    <span class="badge bg-light text-dark"><i class="fas ${statusIcon} me-1"></i>${statusText}</span>
+                                </div>
+                                <div class="card-body">
+                                    <p><strong>Question:</strong> ${q.question}</p>
+                                    <p><strong>Your Answer:</strong> ${userAnswerDisplay}</p>
+                                    <p><strong>Correct Answer:</strong> ${correctAnswerDisplay}</p>
+                                </div>
+                            </div>`;
+                    });
+                });
+                
+                document.getElementById('reviewContent').innerHTML = reviewHTML;
+                
+                // Initialize the modal
+                const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+                reviewModal.show();
+                
+                if (window.MathJax && typeof window.MathJax.typeset === 'function') {
+                    window.MathJax.typeset();
+                }
+            } catch (error) {
+                console.error('Error in showReview:', error);
+                alert('An error occurred while displaying the review. Please check the console for details.');
+            }
+        }
+        
+        async function generateCompletePDF() {
+            document.getElementById('pdfProgress').style.display = 'flex';
+            updateProgress(0, 'Initializing...');
+            
+            try {
+                if (typeof window.jspdf === 'undefined' || typeof window.html2canvas === 'undefined') {
+                    throw new Error('PDF generation libraries not loaded.');
+                }
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF('p', 'mm', 'a4');
+                const results = window.testResults;
+                const pageWidth = doc.internal.pageSize.width;
+                const margin = 15;
+                let yPos = 0;
+
+                const addHeader = () => {
+                    doc.setFillColor(102, 126, 234);
+                    doc.rect(0, 0, pageWidth, 40, 'F');
+                    doc.setTextColor(255).setFontSize(18).setFont('helvetica', 'bold').text('UOS Official Pre-Entry Test 12 October 2025 Results', margin, 20);
+                    doc.setFontSize(10).setFont('helvetica', 'normal').text(`Generated: ${new Date().toLocaleDateString()}`, margin, 28);
+                    yPos = 50;
+                };
+
+                const checkPageOverflow = (requiredSpace) => {
+                    if (yPos + requiredSpace > doc.internal.pageSize.height - margin) {
+                        doc.addPage();
+                        addHeader();
+                    }
+                };
+                
+                const cleanLatex = (text) => text.replace(/\\\(|\\\)|\\\[|\\\]|\$|\$\$/g, '').replace(/\\frac\{([^}]+)\}\{([^}]+)\}/g, '($1)/($2)');
+
+                addHeader();
+                
+                updateProgress(10, 'Adding result summary...');
+                doc.setTextColor(0).setFontSize(14).setFont('helvetica', 'bold').text('Test Summary', margin, yPos);
+                yPos += 10;
+                doc.setFontSize(11).setFont('helvetica', 'normal');
+                doc.text(`Marks: ${results.obtainedMarks}/${results.totalMarks}  |  Percentage: ${(results.obtainedMarks / results.totalMarks * 100).toFixed(2)}%  |  Result: ${results.isPassed ? 'PASS' : 'FAIL'}`, margin, yPos);
+                yPos += 8;
+                doc.text(`Attempted: ${results.totalAttempted}  |  Correct: ${results.correctAnswers}  |  Incorrect: ${results.totalAttempted - results.correctAnswers}`, margin, yPos);
+                yPos += 15;
+
+                updateProgress(20, 'Processing questions...');
+                let questionCounter = 0;
+                for (const sectionName of ['English', 'General Knowledge', 'General Science', 'Simple Arithmetic', 'Simple I.Q.']) {
+                    if(!questionsData[sectionName]) continue;
+                    checkPageOverflow(15);
+                    doc.setFillColor(230, 230, 230).rect(margin, yPos-5, pageWidth - 2*margin, 10, 'F');
+                    doc.setTextColor(0).setFontSize(12).setFont('helvetica', 'bold').text(sectionName, margin + 2, yPos + 2);
+                    yPos += 15;
+
+                    for (const q of questionsData[sectionName]) {
+                        questionCounter++;
+                        updateProgress(20 + Math.floor((questionCounter / totalActualQuestions) * 75), `Processing Q#${q.id}`);
+                        
+                        const userAnswer = results.answers[q.id];
+                        const isCorrect = userAnswer === q.correct;
+                        checkPageOverflow(30);
+
+                        doc.setFontSize(10).setFont('helvetica', 'bold').text(`Q${q.id}: ${cleanLatex(q.question.replace(/<br><img[^>]*>/, ' [Image]'))}`, margin, yPos);
+                        yPos += 7;
+                        
+                        q.options.forEach((opt, idx) => {
+                            const isUserAns = userAnswer === idx;
+                            const isCorrectAns = q.correct === idx;
+                            let prefix = '';
+                            if (isCorrectAns) { prefix = '✓ '; doc.setTextColor(34, 139, 34); }
+                            if (isUserAns && !isCorrect) { prefix = '✗ '; doc.setTextColor(220, 20, 60); }
+                            
+                            doc.setFont('helvetica', (isUserAns || isCorrectAns) ? 'bold' : 'normal').text(prefix + cleanLatex(opt.replace(/<img[^>]*>/, `Option ${idx+1} [Image]`)), margin + 5, yPos);
+                            doc.setTextColor(0);
+                            yPos += 6;
+                        });
+                        yPos += 5;
+                    }
+                }
+                
+                updateProgress(100, 'Finalizing...');
+                doc.save(`UOS_Official_Test_Report_${Date.now()}.pdf`);
+                document.getElementById('pdfProgress').style.display = 'none';
+
+            } catch (error) {
+                console.error('PDF generation failed:', error);
+                alert('Failed to generate PDF. See console for details.');
+                document.getElementById('pdfProgress').style.display = 'none';
+            }
+        }
+        
+        function updateProgress(percentage, text) {
+            document.getElementById('progressFill').style.width = percentage + '%';
+            document.getElementById('progressText').textContent = text;
+        }
+
+        // Theme Toggle
+        let currentTheme = 'light';
+        function toggleTheme() {
+            currentTheme = currentTheme === 'light' ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            document.querySelector('#themeToggle i').className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+            localStorage.setItem('theme', currentTheme);
+        }
+
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                toggleTheme();
+            }
+        }
+
+        // Prevent Cheating
+        document.addEventListener('contextmenu', e => e.preventDefault());
+        document.addEventListener('keydown', e => {
+            if (e.key === 'F12' || (e.ctrlKey && (e.key === 'u' || e.key === 's' || e.key === 'c'))) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>

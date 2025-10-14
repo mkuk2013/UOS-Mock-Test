@@ -395,13 +395,62 @@
             </div>
         </section>
 
-
-
-
-
-
-
-
+<!-- NEW Second Phase Test Section -->
+        <section id="secondPhaseTest" class="mb-16">
+            <h3 class="text-2xl md:text-3xl font-bold text-white mb-8 text-center animate-fadeInUp" style="animation-delay: 2.6s;">
+                Second Phase Test Practice Mock Test 
+                <!-- NEW Badge for Section Heading -->
+                <span class="ml-3 px-3 py-1 text-sm font-extrabold rounded-full bg-red-600 text-white shadow-lg inline-block">NEW!</span>
+            </h3>
+            
+            <div class="tests-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Card for Second Phase Test 1 -->
+                <div class="card-professional p-6 animate-scaleIn" style="animation-delay: 2.7s;">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-gradient-primary rounded-full flex items-center justify-center">
+                            <i data-lucide="rocket" class="w-6 h-6 text-white"></i>
+                        </div>
+                        
+                        <!-- Tags for Second Phase Test 1, including NEW badge -->
+                        <div class="flex items-center space-x-2">
+                            <span class="px-3 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">
+                                Second Phase
+                            </span>
+                            <span class="px-3 py-1 text-xs font-extrabold rounded-full bg-red-600 text-white shadow-md">
+                                NEW
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Second Phase Test Mock 1</h4>
+                    <p class="text-gray-600 mb-4 leading-relaxed font-medium">
+                        Comprehensive practice test for candidates appearing in the second phase.
+                    </p>
+                    
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-center text-gray-700">
+                            <i data-lucide="file-text" class="w-4 h-4 mr-3 text-blue-600"></i>
+                            <span class="text-sm font-medium">100 Questions</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i data-lucide="timer" class="w-4 h-4 mr-3 text-green-600"></i>
+                            <span class="text-sm font-medium">90 Minutes</span>
+                        </div>
+                        <div class="flex items-center text-gray-700">
+                            <i data-lucide="trending-up" class="w-4 h-4 mr-3 text-purple-600"></i>
+                            <span class="text-sm font-medium">Advanced Preparation</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Link set to practice-test1.html as requested -->
+                    <a href="practice-test1.html" class="w-full inline-block text-center btn-primary">
+                        <i data-lucide="play" class="w-4 h-4 mr-2 inline"></i>
+                        Start Test
+                    </a>
+                </div>
+            </div>
+        </section>
+<!-- END NEW Second Phase Test Section -->
 
 
         <!-- Mock Test Introduction Section -->
@@ -652,8 +701,9 @@
                 startTest(testId);
             });
             
-            // Event handler for Official Paper (uses direct link in HTML, no JS function needed)
-            $(document).on('click', 'a[href^="official-test"]', function(e) {
+            // Event handler for static test papers (Official and Second Phase)
+            // Now includes practice-test links
+            $(document).on('click', 'a[href^="official-test"], a[href^="practice-test"]', function(e) {
                 e.preventDefault(); // Prevent default redirection initially
                 
                 // Show loading modal

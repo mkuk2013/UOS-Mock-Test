@@ -1795,15 +1795,14 @@
             }
 
             // Event handlers
-            $(document).on("click", ".option-item", function() {
+            $(document).on("click", ".option-item", function(e) {
                 if (isReviewMode) return;
+                // Prevent event bubbling issues
+                e.preventDefault(); 
                 const optionIndex = parseInt($(this).data("option"));
                 userAnswers[currentQuestion] = optionIndex;
-                $(".option-item").removeClass("selected");
-                $(this).addClass("selected");
-                $(this).find("input").prop("checked", true);
+                loadQuestion(currentQuestion);
                 updateProgress();
-                updateQuestionNavigation();
             });
 
             $(document).on("click", ".question-nav-item", function() {

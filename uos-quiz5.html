@@ -840,8 +840,8 @@
     </div>
     
     <footer class="glass text-white/70 text-center py-4 px-6 mt-8">
-        <p class="text-sm">&copy; 2025 Copyright UOS Mock Test Series</p>
-        <p class="text-xs mt-1">Powered By <strong><a href="https://mock-test-hub.netlify.app">Mock Test Hub</a></strong></p>
+        <p class="text-sm font-bold">&copy; 2026 UOS Mock Test Series</p>
+        <p class="text-xs mt-1 opacity-75">Powered By <strong><a href="https://mock-test-hub.netlify.app" target="_blank" class="hover:underline">Mock Test Hub</a></strong></p>
     </footer>
 
     <script>
@@ -871,15 +871,15 @@
             function showConfirmationModal(title, message, onConfirm) {
                 $('#confirmationTitle').text(title);
                 $('#confirmationMessage').text(message);
-                $('#confirmationModal').removeClass('hidden').addClass('show');
+                $('#confirmationModal').removeClass('hidden').addClass('flex show');
                 
                 $('#confirmYes').off('click').on('click', function() {
-                    $('#confirmationModal').removeClass('show').addClass('hidden');
+                    $('#confirmationModal').removeClass('show flex').addClass('hidden');
                     onConfirm(true);
                 });
                 
                 $('#confirmNo').off('click').on('click', function() {
-                    $('#confirmationModal').removeClass('show').addClass('hidden');
+                    $('#confirmationModal').removeClass('show flex').addClass('hidden');
                     onConfirm(false);
                 });
             }

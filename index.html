@@ -19,11 +19,22 @@
     
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
     
     <style>
         * {
             font-family: 'Inter', sans-serif;
+        }
+        
+        .font-urdu-nastaliq {
+            font-family: 'Noto Nastaliq Urdu', 'Noto Sans Arabic', 'Inter', serif;
+            line-height: 2.2;
+            direction: rtl;
+        }
+
+        .font-urdu-sans {
+            font-family: 'Noto Sans Arabic', 'Inter', sans-serif;
+            direction: rtl;
         }
         
         /* Professional Color Palette */
@@ -501,67 +512,173 @@
     </div>
     
     <!-- ************************************ -->
-    <!-- NEW ARRIVAL MODAL - Added by the AI -->
+    <!-- AI & DIGITAL TOOLS PROMOTION MODAL -->
     <!-- ************************************ -->
-    <div id="newArrivalModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden animate-scaleIn">
-        <div class="bg-white rounded-2xl p-8 text-center max-w-sm mx-4 shadow-2xl relative">
+    <div id="promoAiModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md flex items-center justify-center z-50 hidden animate-fadeInUp p-3 sm:p-4">
+        <div class="bg-white rounded-3xl max-w-lg w-full max-h-[90vh] overflow-y-auto shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5)] relative border border-slate-200 transform transition-all flex flex-col" id="promoAiModalCard">
             
-            <!-- Close Button -->
-            <button id="closeNewArrivalModal" class="absolute top-3 right-3 text-gray-400 hover:text-gray-700 transition-colors">
-                <i data-lucide="x" class="w-6 h-6"></i>
-            </button>
-            
-            <div class="w-16 h-16 bg-gradient-accent rounded-full flex items-center justify-center mx-auto mb-4 animate-scaleIn">
-                <!-- 'Gift' icon signifies a new item/feature -->
-                <i data-lucide="gift" class="w-8 h-8 text-white"></i>
+            <!-- Sleek Top Header Gradient Banner -->
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 px-6 py-4 text-white flex items-center justify-between border-b border-indigo-900/50">
+                <div class="flex items-center space-x-2">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-amber-500"></span>
+                    </span>
+                    <span class="text-xs sm:text-sm font-extrabold uppercase tracking-wider text-amber-400">🔥 Official AI Offer | خاص پیشکش</span>
+                </div>
+
+                <!-- Close Button -->
+                <button id="closePromoAiModal" class="w-8 h-8 bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white rounded-full flex items-center justify-center transition-colors focus:outline-none" title="Close">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
             </div>
-            
-            <h3 class="text-2xl font-bold text-gradient mb-3">
-                🎉 New Arrival!
-            </h3>
-            
-            <p class="text-gray-700 mb-6 text-lg font-medium leading-relaxed">
-                <span class="font-extrabold text-blue-700">Official Pre-Entry Tests</span> have been added to the platform!
-            </p>
-            
-            <p class="text-gray-600 mb-6 text-sm">
-                Practice with real exam papers for the most accurate preparation. Check out the section below!
-            </p>
-            
-            <button class="w-full inline-block text-center btn-primary" id="goToOfficialTests">
-                <i data-lucide="check-square" class="w-4 h-4 mr-2 inline"></i>
-                View Official Tests
-            </button>
+
+            <div class="p-5 sm:p-7">
+                <!-- Original AI Tools Brand Icons Grid (Matching User Requested Logos) -->
+                <div class="text-center mb-6">
+                    <div class="flex items-center justify-center space-x-1.5 mb-3">
+                        <span class="h-px w-8 bg-slate-200"></span>
+                        <p class="text-[11px] font-extrabold uppercase tracking-widest text-slate-500">100% Original AI & Digital Tools</p>
+                        <span class="h-px w-8 bg-slate-200"></span>
+                    </div>
+                    
+                    <div class="grid grid-cols-5 gap-2 sm:gap-2.5">
+                        
+                        <!-- 1. ChatGPT (Exact User Uploaded Image) -->
+                        <div class="relative flex flex-col items-center p-2 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                            <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-emerald-500 text-white rounded-full text-[9px] font-bold flex items-center justify-center shadow-sm">✓</span>
+                            <div class="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-white flex items-center justify-center group-hover:scale-110 transition-transform p-1">
+                                <img src="logo-chatgpt.png" alt="ChatGPT" class="w-9 h-9 sm:w-10 sm:h-10 object-contain">
+                            </div>
+                            <span class="text-[11px] font-extrabold text-slate-800 mt-1.5 leading-tight">ChatGPT</span>
+                            <span class="text-[9px] text-emerald-600 font-bold">Plus 4o</span>
+                        </div>
+
+                        <!-- 2. Canva (Exact User Uploaded Image) -->
+                        <div class="relative flex flex-col items-center p-2 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                            <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-cyan-500 text-white rounded-full text-[9px] font-bold flex items-center justify-center shadow-sm">✓</span>
+                            <div class="w-11 h-11 sm:w-13 sm:h-13 flex items-center justify-center group-hover:scale-110 transition-transform">
+                                <img src="logo-canva.png" alt="Canva" class="w-11 h-11 sm:w-13 sm:h-13 object-contain">
+                            </div>
+                            <span class="text-[11px] font-extrabold text-slate-800 mt-1.5 leading-tight">Canva</span>
+                            <span class="text-[9px] text-cyan-600 font-bold">Pro / Edu</span>
+                        </div>
+
+                        <!-- 3. Gemini (Exact User Uploaded Image) -->
+                        <div class="relative flex flex-col items-center p-2 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                            <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-indigo-500 text-white rounded-full text-[9px] font-bold flex items-center justify-center shadow-sm">✓</span>
+                            <div class="w-11 h-11 sm:w-13 sm:h-13 flex items-center justify-center group-hover:scale-110 transition-transform p-1">
+                                <img src="logo-gemini.png" alt="Gemini" class="w-9 h-9 sm:w-11 sm:h-11 object-contain">
+                            </div>
+                            <span class="text-[11px] font-extrabold text-slate-800 mt-1.5 leading-tight">Gemini</span>
+                            <span class="text-[9px] text-indigo-600 font-bold">Advanced</span>
+                        </div>
+
+                        <!-- 4. Midjourney (Exact User Uploaded Image) -->
+                        <div class="relative flex flex-col items-center p-2 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                            <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-purple-600 text-white rounded-full text-[9px] font-bold flex items-center justify-center shadow-sm">✓</span>
+                            <div class="w-11 h-11 sm:w-13 sm:h-13 rounded-2xl bg-white flex items-center justify-center group-hover:scale-110 transition-transform p-1">
+                                <img src="logo-midjourney.png" alt="Midjourney" class="w-9 h-9 sm:w-10 sm:h-10 object-contain">
+                            </div>
+                            <span class="text-[11px] font-extrabold text-slate-800 mt-1.5 leading-tight">Midjourney</span>
+                            <span class="text-[9px] text-purple-700 font-bold">v6 Pro</span>
+                        </div>
+
+                        <!-- 5. Claude (Exact User Uploaded Image) -->
+                        <div class="relative flex flex-col items-center p-2 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 group cursor-pointer">
+                            <span class="absolute -top-1.5 -right-1.5 w-4 h-4 bg-orange-500 text-white rounded-full text-[9px] font-bold flex items-center justify-center shadow-sm">✓</span>
+                            <div class="w-11 h-11 sm:w-13 sm:h-13 flex items-center justify-center group-hover:scale-110 transition-transform p-1">
+                                <img src="logo-claude.png" alt="Claude" class="w-9 h-9 sm:w-10 sm:h-10 object-contain">
+                            </div>
+                            <span class="text-[11px] font-extrabold text-slate-800 mt-1.5 leading-tight">Claude</span>
+                            <span class="text-[9px] text-orange-600 font-bold">3.5 Sonnet</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Professional Urdu Message Card (Clean & Perfect RTL Typography) -->
+                <div dir="rtl" class="bg-gradient-to-br from-slate-50 to-blue-50/70 border border-blue-200/80 rounded-2xl p-4 sm:p-5 text-right mb-4 shadow-sm relative overflow-hidden font-urdu-sans">
+                    <div class="absolute top-0 right-0 w-2 h-full bg-gradient-to-b from-blue-600 to-indigo-600"></div>
+                    
+                    <h4 class="text-xl sm:text-2xl font-extrabold text-blue-950 mb-3 flex items-center justify-start space-x-2 space-x-reverse">
+                        <span>🌟</span>
+                        <span>معزز سبسکرائبر!</span>
+                    </h4>
+                    
+                    <p class="text-slate-800 text-base sm:text-lg font-bold leading-relaxed mb-3">
+                        ہم تمام <span class="text-blue-700 font-extrabold">AI اور ڈیجیٹل ٹولز</span> مارکیٹ سے انتہائی <span class="text-emerald-700 font-extrabold bg-emerald-100/90 px-2 py-0.5 rounded-md border border-emerald-300">مناسب قیمت</span> میں بھی فروخت کرتے ہیں۔
+                    </p>
+
+                    <!-- Highlights Tags -->
+                    <div class="flex flex-wrap gap-2 pt-2.5 border-t border-slate-200/70 text-xs">
+                        <span class="bg-emerald-600 text-white px-3 py-1 rounded-full font-bold shadow-xs">
+                            ✓ 100% اوریجنل اکاؤنٹس
+                        </span>
+                        <span class="bg-blue-600 text-white px-3 py-1 rounded-full font-bold shadow-xs">
+                            ✓ کم ترین قیمت
+                        </span>
+                        <span class="bg-indigo-600 text-white px-3 py-1 rounded-full font-bold shadow-xs">
+                            ✓ فوری ڈیلیوری
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Roman Urdu Translation Banner -->
+                <div class="bg-blue-50/70 border border-blue-200/60 rounded-xl p-3 text-center mb-5 text-xs sm:text-sm text-blue-950 font-semibold leading-relaxed">
+                    💬 <strong>Moziz Subscriber!</strong> Hum All AI & Digital Tools market se munasib qeemat mein sell karte hain.
+                </div>
+
+                <!-- WhatsApp Direct CTA Button (Pure Urdu Text with Pre-filled Message) -->
+                <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20want%20information%20about%20AI%20and%20Digital%20Tools." target="_blank" rel="noopener noreferrer" id="whatsappPromoBtn" class="w-full flex items-center justify-center space-x-3 space-x-reverse bg-gradient-to-r from-emerald-600 via-green-600 to-emerald-500 hover:from-emerald-500 hover:to-green-500 text-white font-bold text-base sm:text-lg py-3.5 px-6 rounded-2xl shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 transform hover:-translate-y-0.5 transition-all duration-200 group">
+                    <svg class="w-7 h-7 fill-current text-white group-hover:scale-110 transition-transform shrink-0 ml-2" viewBox="0 0 24 24">
+                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                    </svg>
+                    <span dir="rtl" class="font-urdu-sans font-bold">مزید معلومات کے لیے واٹس ایپ پر رابطہ کیجیے</span>
+                </a>
+            </div>
+
         </div>
     </div>
     <!-- ************************************ -->
-    <!-- END NEW ARRIVAL MODAL -->
+    <!-- END AI & DIGITAL TOOLS PROMOTION MODAL -->
     <!-- ************************************ -->
 
+    <!-- FLOATING ACTION BUTTON TO RE-OPEN PROMO MODAL -->
+    <button id="openPromoAiModalFAB" class="fixed bottom-6 right-6 z-40 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold px-4 py-3 rounded-full shadow-2xl flex items-center space-x-2 border-2 border-white/40 cursor-pointer transform hover:scale-105 transition-all duration-300">
+        <span class="relative flex h-3 w-3">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-300 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-400"></span>
+        </span>
+        <span class="text-sm font-semibold">🤖 AI Tools | مناسب قیمت</span>
+    </button>
+
     <script>
-        // Fix for ReferenceError: $ is not defined by ensuring code runs only when jQuery is ready.
-        // The script is already correctly wrapped in $(document).ready()
         $(document).ready(function() {
             // Initialize Lucide icons
             lucide.createIcons();
             
-            // Show the New Arrival Modal on page load
-            $('#newArrivalModal').removeClass('hidden').addClass('flex');
+            // Show the AI Tools Promotion Modal ONCE per browser session only
+            if (!sessionStorage.getItem('promoAiModalShown')) {
+                $('#promoAiModal').removeClass('hidden').addClass('flex');
+                sessionStorage.setItem('promoAiModalShown', 'true');
+            }
             
-            // Close button functionality for the New Arrival Modal
-            $('#closeNewArrivalModal').on('click', function() {
-                $('#newArrivalModal').addClass('hidden').removeClass('flex');
+            // Close button functionality for Promo Modal
+            $('#closePromoAiModal').on('click', function() {
+                $('#promoAiModal').addClass('hidden').removeClass('flex');
             });
 
-            // Smooth scroll to Official Tests section and close modal
-            $('#goToOfficialTests').on('click', function(e) {
-                e.preventDefault();
-                $('#newArrivalModal').addClass('hidden').removeClass('flex');
-                
-                // Smooth scroll to the section
-                $('html, body').animate({
-                    scrollTop: $('#officialTestPapers').offset().top - 100 // -100 for some padding
-                }, 800);
+            // Close on backdrop click
+            $('#promoAiModal').on('click', function(e) {
+                if (e.target === this) {
+                    $('#promoAiModal').addClass('hidden').removeClass('flex');
+                }
+            });
+
+            // Open from Floating Action Button (Manual re-open anytime)
+            $('#openPromoAiModalFAB').on('click', function() {
+                $('#promoAiModal').removeClass('hidden').addClass('flex');
             });
             
             // Mock test data with 100 questions each.

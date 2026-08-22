@@ -1026,12 +1026,20 @@
             });
 
             // Student Login Form Submit
-            $('#studentLoginForm').on('submit', function(e) {
+            $('#studentLoginForm').on('submit', async function(e) {
                 e.preventDefault();
                 const username = $('#stdUsername').val();
                 const password = $('#stdPassword').val();
+                const $btn = $(this).find('button[type="submit"]');
+                const origHtml = $btn.html();
 
-                const res = UOSAuth.loginStudent(username, password);
+                $btn.html('<i data-lucide="loader" class="w-4 h-4 animate-spin"></i><span>Verifying...</span>').prop('disabled', true);
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+
+                const res = await UOSAuth.loginStudentAsync(username, password);
+                $btn.html(origHtml).prop('disabled', false);
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+
                 if (res.success) {
                     $('#studentLoginError').addClass('hidden');
                     $('#studentLoginModal').addClass('hidden');

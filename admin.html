@@ -255,6 +255,58 @@
                         </div>
                     </div>
 
+                    <!-- Supabase Cloud Database (User Sync) Card -->
+                    <div class="admin-card p-6 border-t-4 border-t-emerald-600">
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-8 h-8 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center font-black">
+                                    <i data-lucide="database" class="w-4 h-4"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-sm font-black text-slate-900">Supabase Cloud Database</h4>
+                                    <p class="text-[11px] text-slate-500">Live multi-device candidate sync</p>
+                                </div>
+                            </div>
+                            <span id="cloudStatusBadge" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200">
+                                🟡 Local Mode
+                            </span>
+                        </div>
+
+                        <div class="space-y-2.5">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Supabase Project URL</label>
+                                <input type="url" id="supabaseUrlInput" placeholder="https://your-project.supabase.co" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-emerald-500">
+                            </div>
+
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-700 mb-1">Supabase Anon Key</label>
+                                <input type="password" id="supabaseAnonKeyInput" placeholder="eyJhbGciOiJIUzI1NiIsIn..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs font-mono focus:ring-2 focus:ring-emerald-500">
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2 pt-1">
+                                <button id="btnSaveCloudConfig" class="btn-glow-success font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center space-x-1.5">
+                                    <i data-lucide="plug" class="w-3.5 h-3.5"></i>
+                                    <span>Connect Cloud</span>
+                                </button>
+                                <button id="btnSyncToCloud" class="bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center space-x-1.5 border border-emerald-200 transition-colors">
+                                    <i data-lucide="upload-cloud" class="w-3.5 h-3.5"></i>
+                                    <span>Push Users</span>
+                                </button>
+                            </div>
+
+                            <div class="flex items-center justify-between pt-1">
+                                <button id="btnOpenSupabaseGuide" type="button" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center space-x-1">
+                                    <i data-lucide="help-circle" class="w-3.5 h-3.5"></i>
+                                    <span>Supabase SQL & Setup (1 Min)</span>
+                                </button>
+                                <button id="btnPullFromCloud" type="button" class="text-[11px] font-bold text-slate-600 hover:text-slate-900 flex items-center space-x-1">
+                                    <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
+                                    <span>Refresh</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Data Backup & Master Settings -->
                     <div class="admin-card p-6">
                         <h4 class="text-sm font-black text-slate-900 mb-3 flex items-center">
@@ -288,7 +340,7 @@
                         <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
                             <div>
                                 <h3 class="text-lg font-black text-slate-900">Registered Accounts Directory</h3>
-                                <p class="text-xs text-slate-500">Single-device locked candidate logins for mock tests</p>
+                                <p class="text-xs text-slate-500">Single-device locked candidate logins (Admin is unrestricted & can login from anywhere)</p>
                             </div>
 
                             <div class="relative w-full sm:w-64">
@@ -329,6 +381,74 @@
         </main>
     </div>
 
+    <!-- Supabase Quick Setup Guide Modal -->
+    <div id="supabaseGuideModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden animate-fadeInUp">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-4 pb-3 border-b border-slate-100">
+                <div class="flex items-center space-x-2.5">
+                    <div class="w-10 h-10 rounded-2xl bg-emerald-50 text-emerald-600 flex items-center justify-center font-black">
+                        <i data-lucide="database" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-base font-black text-slate-900">Supabase Free Database Setup</h3>
+                        <p class="text-xs text-slate-500">1 Minute mein Cloud Database banayein</p>
+                    </div>
+                </div>
+                <button id="closeSupabaseGuideModal" class="p-1.5 text-slate-400 hover:text-slate-700 rounded-lg">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-4 text-xs text-slate-700 leading-relaxed">
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 space-y-3">
+                    <div class="flex items-start space-x-2.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-black text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
+                        <div>
+                            <p class="font-bold text-slate-900">Supabase Account & Project Kholein:</p>
+                            <p class="text-slate-600 mt-0.5"><a href="https://supabase.com" target="_blank" class="text-emerald-700 font-bold underline">supabase.com</a> par jayein (Free Account) aur <strong>"New project"</strong> banayein.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-2.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-black text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
+                        <div>
+                            <p class="font-bold text-slate-900">SQL Editor Mein Table Banayein:</p>
+                            <p class="text-slate-600 mt-0.5">Left menu se <strong>"SQL Editor"</strong> par jayein, <strong>"New query"</strong> dabayein aur yeh script paste karke <strong>Run</strong> karein:</p>
+                            <div class="relative mt-2">
+                                <pre id="sqlScriptBox" class="bg-slate-900 text-emerald-400 p-3 rounded-xl font-mono text-[11px] overflow-x-auto select-all">create table if not exists uos_mock_users (
+  id text primary key,
+  username text unique not null,
+  password text not null,
+  boundDeviceId text,
+  status text default 'active',
+  createdAt text,
+  lastLogin text
+);
+
+alter table uos_mock_users disable row level security;</pre>
+                                <button id="btnCopySql" class="absolute top-2 right-2 px-2.5 py-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-[10px] rounded-lg shadow-sm">Copy SQL</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start space-x-2.5">
+                        <span class="w-5 h-5 rounded-full bg-emerald-600 text-white font-black text-[10px] flex items-center justify-center flex-shrink-0 mt-0.5">3</span>
+                        <div>
+                            <p class="font-bold text-slate-900">API Keys Copy Karein:</p>
+                            <p class="text-slate-600 mt-0.5">Project Settings ➔ <strong>"API"</strong> tab par jayein. <strong>Project URL</strong> aur <strong>anon public key</strong> copy karke yahan input boxes mein paste karein aur <strong>"Connect Cloud"</strong> dabayein!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 text-right">
+                <button id="btnCloseSupabaseGuideFooter" class="px-5 py-2.5 bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs rounded-xl transition-all">
+                    Samajh Gaya (Done)
+                </button>
+            </div>
+        </div>
+    </div>
+
     <!-- Password Change Modal -->
     <div id="changePassModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
         <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200">
@@ -352,10 +472,15 @@
             let lastGenerated = null;
 
             // Check if admin is currently logged in this session
-            function checkAdminAuth() {
+            async function checkAdminAuth() {
                 if (UOSAuth.isAdminLoggedIn()) {
                     $('#adminAuthScreen').addClass('hidden');
                     $('#adminMainContent').removeClass('hidden');
+                    updateCloudStatusUI();
+                    
+                    if (UOSAuth.isCloudEnabled()) {
+                        await UOSAuth.fetchUsersFromCloud();
+                    }
                     renderUsers();
                 } else {
                     $('#adminAuthScreen').removeClass('hidden');
@@ -363,6 +488,103 @@
                 }
                 lucide.createIcons();
             }
+
+            // Update Cloud Status UI
+            function updateCloudStatusUI() {
+                const config = UOSAuth.getSupabaseConfig();
+                if (config.url) {
+                    $('#supabaseUrlInput').val(config.url);
+                }
+                if (config.key) {
+                    $('#supabaseAnonKeyInput').val(config.key);
+                }
+                if (config.enabled && config.url && config.key) {
+                    $('#cloudStatusBadge').html('🟢 Live Supabase Connected').removeClass('bg-slate-100 text-slate-600').addClass('bg-emerald-100 text-emerald-800 border-emerald-300');
+                } else {
+                    $('#cloudStatusBadge').html('🟡 Local Mode').removeClass('bg-emerald-100 text-emerald-800 border-emerald-300').addClass('bg-slate-100 text-slate-600');
+                }
+            }
+
+            // Save & Connect Supabase Cloud Config
+            $('#btnSaveCloudConfig').on('click', async function() {
+                const url = $('#supabaseUrlInput').val().trim();
+                const key = $('#supabaseAnonKeyInput').val().trim();
+
+                if (!url || !key) {
+                    UOSAuth.saveSupabaseConfig('', '', false);
+                    updateCloudStatusUI();
+                    alert('Cloud sync disabled. Reverted to local storage mode.');
+                    return;
+                }
+
+                $('#btnSaveCloudConfig').html('<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>Connecting...</span>').prop('disabled', true);
+
+                const testRes = await UOSAuth.testCloudConnection(url, key);
+                $('#btnSaveCloudConfig').html('<i data-lucide="plug" class="w-3.5 h-3.5"></i><span>Connect Cloud</span>').prop('disabled', false);
+                lucide.createIcons();
+
+                if (testRes.success) {
+                    UOSAuth.saveSupabaseConfig(url, key, true);
+                    updateCloudStatusUI();
+                    // Auto-sync current users to Supabase
+                    await UOSAuth.pushAllUsersToCloud(UOSAuth.getUsers());
+                    alert('✓ Success: Connected to Supabase Cloud! Candidate logins are now syncing live across all devices.');
+                } else {
+                    alert(`Connection Notice: ${testRes.message}`);
+                }
+            });
+
+            // Push Users to Supabase
+            $('#btnSyncToCloud').on('click', async function() {
+                if (!UOSAuth.isCloudEnabled()) {
+                    alert('Pehle Supabase URL aur Anon Key set karein aur "Connect Cloud" karein.');
+                    return;
+                }
+                const users = UOSAuth.getUsers();
+                $('#btnSyncToCloud').html('<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>Pushing...</span>');
+                const ok = await UOSAuth.pushAllUsersToCloud(users);
+                $('#btnSyncToCloud').html('<i data-lucide="upload-cloud" class="w-3.5 h-3.5"></i><span>Push Users</span>');
+                lucide.createIcons();
+                if (ok) {
+                    alert(`✓ Success: ${users.length} candidate accounts pushed to Supabase Cloud successfully!`);
+                } else {
+                    alert('Cloud push failed. Check your Supabase URL, key, or table creation.');
+                }
+            });
+
+            // Pull Users from Supabase
+            $('#btnPullFromCloud').on('click', async function() {
+                if (!UOSAuth.isCloudEnabled()) {
+                    alert('Supabase cloud sync is not enabled.');
+                    return;
+                }
+                $('#btnPullFromCloud').html('<i data-lucide="loader" class="w-3.5 h-3.5 animate-spin"></i><span>Fetching...</span>');
+                await UOSAuth.fetchUsersFromCloud();
+                $('#btnPullFromCloud').html('<i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i><span>Refresh</span>');
+                lucide.createIcons();
+                renderUsers();
+                alert('✓ Candidate accounts refreshed from Supabase Cloud!');
+            });
+
+            // Supabase Guide Modal Handlers
+            $('#btnOpenSupabaseGuide').on('click', function() {
+                $('#supabaseGuideModal').removeClass('hidden').addClass('flex');
+            });
+            $('#closeSupabaseGuideModal, #btnCloseSupabaseGuideFooter').on('click', function() {
+                $('#supabaseGuideModal').addClass('hidden').removeClass('flex');
+            });
+            $('#supabaseGuideModal').on('click', function(e) {
+                if (e.target === this) {
+                    $(this).addClass('hidden').removeClass('flex');
+                }
+            });
+            $('#btnCopySql').on('click', function() {
+                const sql = $('#sqlScriptBox').text();
+                navigator.clipboard.writeText(sql).then(() => {
+                    $('#btnCopySql').text('Copied! ✓');
+                    setTimeout(() => $('#btnCopySql').text('Copy SQL'), 2000);
+                });
+            });
 
             // Admin Login Submit (Multi-device access enabled)
             $('#adminLoginForm').on('submit', function(e) {

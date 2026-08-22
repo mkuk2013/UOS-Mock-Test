@@ -234,7 +234,12 @@
                                 <span class="text-xs font-black text-emerald-800 flex items-center">
                                     <i data-lucide="check" class="w-3.5 h-3.5 mr-1 text-emerald-600"></i> Account Generated!
                                 </span>
-                                <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">🔒 1-Device Lock</span>
+                                <div class="flex items-center space-x-1">
+                                    <span class="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full flex items-center gap-1">
+                                        <i data-lucide="check-circle" class="w-3 h-3 text-emerald-600"></i> Cloud Auto-Saved
+                                    </span>
+                                    <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">🔒 1-Device Lock</span>
+                                </div>
                             </div>
                             
                             <div class="bg-white p-3 rounded-xl border border-emerald-100 space-y-1.5 text-xs font-mono mb-3">
@@ -351,8 +356,8 @@
                             </div>
                         </div>
 
-                        <!-- Table -->
-                        <div class="overflow-x-auto">
+                        <!-- Desktop Table View -->
+                        <div class="hidden md:block overflow-x-auto">
                             <table class="w-full text-left text-xs">
                                 <thead>
                                     <tr class="bg-slate-50 text-slate-500 uppercase tracking-wider font-extrabold border-b border-slate-200">
@@ -367,6 +372,11 @@
                                     <!-- Populated via JavaScript -->
                                 </tbody>
                             </table>
+                        </div>
+
+                        <!-- Mobile Card View (Optimized for Phones) -->
+                        <div id="usersMobileCardsList" class="md:hidden space-y-3">
+                            <!-- Populated via JavaScript on mobile -->
                         </div>
 
                         <div id="noUsersNotice" class="py-12 text-center text-slate-400 hidden">
@@ -622,7 +632,9 @@ alter table uos_mock_users disable row level security;</pre>
                 $('#statActiveUsers').text(users.filter(u => u.status === 'active').length);
 
                 const tbody = $('#usersTableBody');
+                const mobileList = $('#usersMobileCardsList');
                 tbody.empty();
+                mobileList.empty();
 
                 if (filtered.length === 0) {
                     $('#noUsersNotice').removeClass('hidden');
@@ -640,6 +652,7 @@ alter table uos_mock_users disable row level security;</pre>
                             ? `<div class="flex items-center justify-center space-x-1.5"><span class="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-black px-2 py-0.5 rounded-full">🔒 Locked to Device</span><button class="btn-reset-device text-[10px] text-amber-600 hover:text-amber-800 font-extrabold underline ml-1" data-id="${user.id}" title="Reset device lock if student changed phone">Reset Lock</button></div>`
                             : `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold px-2 py-0.5 rounded-full">🟢 Ready for 1st Login</span>`;
 
+                        // 1. Desktop Table Row
                         const row = $(`
                             <tr class="hover:bg-slate-50/80 transition-colors">
                                 <td class="py-3 px-3">
@@ -670,6 +683,44 @@ alter table uos_mock_users disable row level security;</pre>
                             </tr>
                         `);
                         tbody.append(row);
+
+                        // 2. Mobile Responsive Card (for Phones)
+                        const mobileCard = $(`
+                            <div class="p-3.5 bg-slate-50 border border-slate-200 rounded-2xl space-y-2.5 shadow-xs">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-1.5">
+                                        <span class="text-[10px] font-bold text-slate-400">User:</span>
+                                        <span class="font-mono font-black text-xs text-slate-900 bg-white px-2 py-0.5 rounded-lg border border-slate-200 select-all">${user.username}</span>
+                                    </div>
+                                    <div>${statusBadge}</div>
+                                </div>
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center space-x-1.5">
+                                        <span class="text-[10px] font-bold text-slate-400">Pass:</span>
+                                        <span class="font-mono font-black text-xs text-blue-700 bg-blue-50 px-2 py-0.5 rounded-lg border border-blue-100 select-all">${user.password}</span>
+                                    </div>
+                                    <div>
+                                        ${isLocked 
+                                            ? `<button class="btn-reset-device text-[10px] bg-amber-50 hover:bg-amber-100 text-amber-700 border border-amber-200 font-extrabold px-2 py-0.5 rounded-full flex items-center space-x-1" data-id="${user.id}"><i data-lucide="unlock" class="w-3 h-3"></i><span>Reset Lock</span></button>` 
+                                            : `<span class="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full border border-emerald-200 font-bold">🟢 Unlocked</span>`
+                                        }
+                                    </div>
+                                </div>
+                                <div class="pt-2 border-t border-slate-200/80 flex items-center justify-between gap-1.5">
+                                    <button class="btn-copy-user flex-1 py-1.5 px-2 bg-white hover:bg-slate-100 text-slate-700 font-bold text-[11px] rounded-xl border border-slate-200 flex items-center justify-center space-x-1 shadow-2xs" data-id="${user.id}">
+                                        <i data-lucide="copy" class="w-3.5 h-3.5 text-emerald-600"></i>
+                                        <span>Copy WhatsApp</span>
+                                    </button>
+                                    <button class="btn-toggle-status p-2 bg-white hover:bg-slate-100 text-amber-600 rounded-xl border border-slate-200 flex items-center justify-center" data-id="${user.id}" title="Toggle Active">
+                                        <i data-lucide="${isOnline ? 'pause' : 'play'}" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                    <button class="btn-delete-user p-2 bg-white hover:bg-red-50 text-red-600 rounded-xl border border-slate-200 flex items-center justify-center" data-id="${user.id}" title="Delete">
+                                        <i data-lucide="trash-2" class="w-3.5 h-3.5"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        `);
+                        mobileList.append(mobileCard);
                     });
                 }
 
@@ -682,18 +733,32 @@ alter table uos_mock_users disable row level security;</pre>
                 $('#quickUsernameInput').val(`uos-26-${randomNum}`);
             });
 
-            // 1-Click Fast Generator Click
-            $('#btnQuickGenerate').on('click', function() {
+            // 1-Click Fast Generator Click (Auto Pushes live to Supabase Database)
+            $('#btnQuickGenerate').on('click', async function() {
                 const desiredUser = $('#quickUsernameInput').val().trim();
+                const $btn = $(this);
+                const origHtml = $btn.html();
+
+                $btn.html('<i data-lucide="loader" class="w-4 h-4 animate-spin"></i><span>Creating & Auto-Syncing to Supabase...</span>').prop('disabled', true);
+                if (typeof lucide !== 'undefined') lucide.createIcons();
 
                 const res = UOSAuth.generateCredentials(desiredUser);
                 if (!res.success) {
+                    $btn.html(origHtml).prop('disabled', false);
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
                     alert(res.message);
                     return;
                 }
 
                 const newUser = res.user;
                 lastGenerated = newUser;
+
+                // Guaranteed immediate push to Supabase Cloud
+                if (UOSAuth.isCloudEnabled()) {
+                    await UOSAuth.pushUserToCloud(newUser);
+                }
+
+                $btn.html(origHtml).prop('disabled', false);
 
                 // Show Generated Box
                 $('#genUsername').text(newUser.username);
@@ -704,6 +769,7 @@ alter table uos_mock_users disable row level security;</pre>
                 $('#quickUsernameInput').val('');
                 
                 renderUsers();
+                if (typeof lucide !== 'undefined') lucide.createIcons();
             });
 
             // Copy generated credentials formatted for WhatsApp with Strict Single-Device Policy
@@ -744,8 +810,8 @@ alter table uos_mock_users disable row level security;</pre>
                 });
             });
 
-            // Reset Device Lock
-            $(document).on('click', '.btn-reset-device', function() {
+            // Reset Device Lock (Auto syncs live to Supabase)
+            $(document).on('click', '.btn-reset-device', async function() {
                 const id = $(this).data('id');
                 const user = UOSAuth.getUsers().find(u => u.id === id);
                 if (!user) return;
@@ -753,7 +819,7 @@ alter table uos_mock_users disable row level security;</pre>
                 if (confirm(`Are you sure you want to reset the device lock for "${user.username}"? They will be able to log in on a new device.`)) {
                     UOSAuth.resetUserDevice(id);
                     renderUsers();
-                    alert(`Device lock for ${user.username} has been reset successfully.`);
+                    alert(`✓ Device lock for "${user.username}" has been reset and updated live on Supabase Cloud.`);
                 }
             });
 

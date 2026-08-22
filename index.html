@@ -102,38 +102,38 @@
     
     <!-- Top Navigation Header -->
     <header class="sticky top-0 z-40 bg-white/90 backdrop-blur-md border-b border-slate-200/80 shadow-xs">
-        <div class="container mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
-            <div class="flex items-center space-x-3.5">
-                <div class="relative flex items-center justify-center">
+        <div class="container mx-auto px-3 sm:px-8 py-2.5 sm:py-3.5 flex items-center justify-between">
+            <div class="flex items-center space-x-2 sm:space-x-3.5">
+                <div class="relative flex items-center justify-center shrink-0">
                     <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-full blur-xs opacity-75"></div>
-                    <img src="uos-logo.png" alt="UOS Seal" onerror="this.onerror=null;this.src='uos-logo.png';" class="relative h-12 w-12 object-contain drop-shadow">
+                    <img src="uos-logo.png" alt="UOS Seal" onerror="this.onerror=null;this.src='uos-logo.png';" class="relative h-9 w-9 sm:h-12 sm:w-12 object-contain drop-shadow">
                 </div>
                 <div>
-                    <div class="flex items-center space-x-2">
-                        <h1 class="text-base sm:text-lg font-black text-slate-900 tracking-tight leading-none">University of Sindh</h1>
-                        <span class="bg-emerald-100 text-emerald-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-emerald-200 hidden sm:inline-block">● 2k26 Portal</span>
+                    <div class="flex items-center space-x-1.5 sm:space-x-2">
+                        <h1 class="text-xs sm:text-lg font-black text-slate-900 tracking-tight leading-tight">University of Sindh</h1>
+                        <span class="bg-emerald-100 text-emerald-700 text-[9px] sm:text-[10px] font-extrabold px-1.5 sm:px-2 py-0.5 rounded-full border border-emerald-200 hidden xs:inline-block">● 2k26</span>
                     </div>
-                    <p class="text-xs text-slate-500 font-medium">Pre-Entry Online Mock Test Platform</p>
+                    <p class="text-[10px] sm:text-xs text-slate-500 font-medium truncate max-w-[130px] sm:max-w-none">Mock Test Portal</p>
                 </div>
             </div>
 
-            <div class="flex items-center space-x-2 sm:space-x-3">
+            <div class="flex items-center space-x-1.5 sm:space-x-3">
                 <!-- PWA Install App Button -->
-                <button id="btnInstallApp" class="px-3 sm:px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-all shadow-md shadow-emerald-500/20" title="Install Web App on your Device">
-                    <i data-lucide="download" class="w-4 h-4"></i>
+                <button id="btnInstallApp" class="px-2.5 sm:px-4 py-2 sm:py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1 sm:space-x-1.5 transition-all shadow-md shadow-emerald-500/20" title="Install Web App on your Device">
+                    <i data-lucide="download" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
                     <span class="hidden sm:inline">Install App</span>
                 </button>
 
-                <a href="admin.html" class="px-3 sm:px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-colors border border-slate-200" title="Admin Dashboard">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-blue-600"></i>
+                <a href="admin.html" class="px-2.5 sm:px-4 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1 sm:space-x-1.5 transition-colors border border-slate-200" title="Admin Dashboard">
+                    <i data-lucide="shield-check" class="w-3.5 h-3.5 sm:w-4 sm:h-4 text-blue-600"></i>
                     <span class="hidden md:inline">Admin Portal</span>
                 </a>
 
                 <!-- Candidate Auth Container -->
                 <div id="headerAuthContainer">
-                    <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center space-x-2">
-                        <i data-lucide="log-in" class="w-4 h-4"></i>
-                        <span>Candidate Login</span>
+                    <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2 sm:py-2.5 px-2.5 sm:px-4 rounded-xl flex items-center space-x-1.5 sm:space-x-2">
+                        <i data-lucide="log-in" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                        <span>Login</span>
                     </button>
                 </div>
             </div>
@@ -973,19 +973,19 @@
 
                 if (currentStudent) {
                     container.append(`
-                        <div class="flex items-center space-x-2 bg-blue-50 border border-blue-200 py-1.5 px-3 rounded-xl">
-                            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
-                            <span class="text-xs font-bold text-blue-900">${currentStudent.name || currentStudent.username}</span>
-                            <button id="headerLogoutBtn" class="text-[11px] font-extrabold text-red-600 hover:text-red-700 ml-1.5 bg-red-50 hover:bg-red-100 px-2 py-0.5 rounded-lg border border-red-200 transition-colors">
+                        <div class="flex items-center space-x-1.5 sm:space-x-2 bg-blue-50 border border-blue-200 py-1 sm:py-1.5 px-2 sm:px-3 rounded-xl">
+                            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></div>
+                            <span class="text-[11px] sm:text-xs font-bold text-blue-900 truncate max-w-[80px] sm:max-w-[140px]">${currentStudent.name || currentStudent.username}</span>
+                            <button id="headerLogoutBtn" class="text-[10px] sm:text-[11px] font-extrabold text-red-600 hover:text-red-700 ml-1 bg-red-50 hover:bg-red-100 px-1.5 sm:px-2 py-0.5 rounded-lg border border-red-200 transition-colors">
                                 Logout
                             </button>
                         </div>
                     `);
                 } else {
                     container.append(`
-                        <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center space-x-2">
-                            <i data-lucide="log-in" class="w-4 h-4"></i>
-                            <span>Candidate Login</span>
+                        <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2 sm:py-2.5 px-2.5 sm:px-4 rounded-xl flex items-center space-x-1.5 sm:space-x-2">
+                            <i data-lucide="log-in" class="w-3.5 h-3.5 sm:w-4 sm:h-4"></i>
+                            <span>Login</span>
                         </button>
                     `);
                 }

@@ -263,7 +263,8 @@ const UOSAuth = {
         return { success: true, session: session };
     },
 
-    loginAdmin: function(username, password) {
+    // Admin login has ZERO device restrictions (Unlimited multi-device access)
+    loginAdmin: function(username, password, rememberMe = true) {
         const cleanUser = (username || '').trim();
         const cleanPass = (password || '').trim();
         const config = this.getAdminConfig();
@@ -275,6 +276,9 @@ const UOSAuth = {
                 loginTime: new Date().toISOString()
             };
             sessionStorage.setItem('uos_admin_active_session', JSON.stringify(adminSession));
+            if (rememberMe) {
+                localStorage.setItem('uos_admin_active_session', JSON.stringify(adminSession));
+            }
             return { success: true };
         }
         return { success: false, message: 'Invalid Admin Credentials.' };
@@ -282,7 +286,7 @@ const UOSAuth = {
 
     isAdminLoggedIn: function() {
         try {
-            const sess = sessionStorage.getItem('uos_admin_active_session');
+            const sess = sessionStorage.getItem('uos_admin_active_session') || localStorage.getItem('uos_admin_active_session');
             return sess ? JSON.parse(sess).role === 'admin' : false;
         } catch (e) {
             return false;
@@ -291,6 +295,7 @@ const UOSAuth = {
 
     logoutAdmin: function() {
         sessionStorage.removeItem('uos_admin_active_session');
+        localStorage.removeItem('uos_admin_active_session');
     },
 
     getCurrentStudent: function() {

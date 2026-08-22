@@ -10,6 +10,7 @@
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="auth.js"></script>
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -249,17 +250,6 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
         }
 
-        .floating-btn {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            z-index: 1000;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-        }
-
         .result-card {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -408,13 +398,6 @@
                 padding: 8px 16px;
             }
             
-            .floating-btn {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-            }
-
             .MathJax {
                 font-size: 1em !important;
             }
@@ -476,39 +459,19 @@
         </div>
     </div>
 
-    <!-- Password Modal -->
-    <div class="modal fade" id="passwordModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title"><i class="fas fa-lock me-2"></i>Secure Access Required</h5>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="mb-4">
-                        <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
-                        <h6>Enter Password to Access Test</h6>
-                    </div>
-                    <input type="password" class="form-control text-center" id="passwordInput" 
-                           placeholder="Enter Password" maxlength="20">
-                    <div class="invalid-feedback" id="passwordError"></div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-primary btn-custom" onclick="verifyPassword()">
-                        <i class="fas fa-key me-2"></i>Access Test
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- Main Content -->
-    <div id="mainContent" style="display: none;">
+    <div id="mainContent">
         <!-- Header -->
         <header class="header-gradient text-white py-4 shadow-lg">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="h3 mb-0"><i class="fas fa-graduation-cap me-2"></i>UOS Mock Test Batch 2k26 - Test 3</h1>
+                        <div class="d-flex align-items-center flex-wrap gap-2">
+                            <a href="index.html" class="btn btn-outline-light btn-sm rounded-pill px-3 py-1.5 fw-bold d-inline-flex align-items-center shadow-sm" style="background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.35); backdrop-filter: blur(4px);" title="Back to Home">
+                                <i class="fas fa-arrow-left me-1.5"></i> Back to Home
+                            </a>
+                            <h1 class="h3 mb-0"><i class="fas fa-graduation-cap me-2"></i>UOS Mock Test Batch 2k26 - Test 3</h1>
+                        </div>
                     </div>
                     <div class="col-md-4 text-md-end">
                         <div class="d-flex align-items-center justify-content-md-end justify-content-center gap-3">
@@ -607,6 +570,8 @@
                         <button class="retake-btn" onclick="retakeTest()">
                             <i class="fas fa-redo me-2"></i>Retake Test
                         </button>
+                    
+                        <a href="index.html" class="btn btn-dark btn-custom text-white d-inline-flex align-items-center"><i class="fas fa-home me-2"></i>Back to Home</a>
                     </div>
                 </div>
             </div>
@@ -634,11 +599,6 @@
             <p class="mb-0">© 2025 Copyright UOS Mock Test Series Powered By Mock Test Hub</p>
         </footer>
     </div>
-
-    <!-- Theme Toggle Floating Button -->
-    <button class="btn btn-primary floating-btn d-none d-md-block" onclick="toggleTheme()" title="Toggle Theme">
-        <i class="fas fa-adjust"></i>
-    </button>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -1570,13 +1530,15 @@
         // Make questionsData globally accessible
         window.questionsData = questionsData;
         window.allQuestions = allQuestions;
+        // Centralized Student Auth Guard
+        const currentStudent = UOSAuth.requireStudentAuth();
 
         // Initialize Test
         $(document).ready(function() {
-            $('#passwordModal').modal('show');
+            if (!currentStudent) return;
             generateQuestionPalette();
             initializeTheme();
-            adjustForMobile(); // Add mobile adjustments on load
+            startTest();
             
             // Check if required libraries are loaded
             setTimeout(() => {
@@ -1584,46 +1546,6 @@
                     console.warn('Some required libraries failed to load. PDF generation may not work properly.');
                 }
             }, 3000);
-        });
-
-        // Password Verification
-        function verifyPassword() {
-            const password = document.getElementById('passwordInput').value;
-            const correctPassword = 'uostestbymk';
-            
-            if (password === correctPassword) {
-                // Hide modal and show main content
-                const passwordModal = bootstrap.Modal.getInstance(document.getElementById('passwordModal'));
-                if (passwordModal) {
-                    passwordModal.hide();
-                }
-                // Ensure main content is visible
-                document.getElementById('mainContent').style.display = 'block';
-                startTest();
-            } else {
-                document.getElementById('passwordError').textContent = 'Incorrect password. Please try again.';
-                document.getElementById('passwordInput').classList.add('is-invalid');
-                document.getElementById('passwordInput').value = '';
-                
-                // Add shake animation to indicate error
-                const modalContent = document.querySelector('#passwordModal .modal-content');
-                if (modalContent) {
-                    modalContent.classList.add('animate__shakeX');
-                    
-                    // Remove animation class after it completes
-                    setTimeout(() => {
-                        modalContent.classList.remove('animate__shakeX');
-                    }, 1000);
-                }
-            }
-        }
-
-        // Enter key for password
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                verifyPassword();
-            }
         });
 
         // Start Test
@@ -2492,21 +2414,7 @@
             }
         }
 
-        // Initialize Test
-        $(document).ready(function() {
-            // Initially hide main content and show password modal
-            $('#mainContent').hide();
-            $('#passwordModal').modal('show');
-            generateQuestionPalette();
-            initializeTheme();
-            
-            // Check if required libraries are loaded
-            setTimeout(() => {
-                if (!checkLibraries()) {
-                    console.warn('Some required libraries failed to load. PDF generation may not work properly.');
-                }
-            }, 3000);
-        });
+
 
         // Mobile responsive adjustments
         function adjustForMobile() {

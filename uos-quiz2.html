@@ -18,6 +18,7 @@
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="auth.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -231,13 +232,6 @@
                 padding: 8px 16px;
             }
             
-            .floating-btn {
-                width: 50px;
-                height: 50px;
-                bottom: 20px;
-                right: 20px;
-            }
-
             .MathJax {
                 font-size: 1em !important;
             }
@@ -298,36 +292,17 @@
         </div>
     </div>
 
-    <div class="modal fade" id="passwordModal" tabindex="-1" data-bs-backdrop="static" data-bs-keyboard="false">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title"><i class="fas fa-lock me-2"></i>Secure Access Required</h5>
-                </div>
-                <div class="modal-body text-center">
-                    <div class="mb-4">
-                        <i class="fas fa-shield-alt fa-3x text-primary mb-3"></i>
-                        <h6>Enter Password to Access Test</h6>
-                    </div>
-                    <input type="password" class="form-control text-center" id="passwordInput" 
-                           placeholder="Enter Password" maxlength="20">
-                    <div class="invalid-feedback" id="passwordError"></div>
-                </div>
-                <div class="modal-footer justify-content-center">
-                    <button type="button" class="btn btn-primary btn-custom" onclick="verifyPassword()">
-                        <i class="fas fa-key me-2"></i>Access Test
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="mainContent" style="display: none;">
+    <div id="mainContent">
         <header class="header-gradient text-white py-4 shadow-lg">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-md-8">
-                        <h1 class="h3 mb-0"><i class="fas fa-graduation-cap me-2"></i>UOS Mock Test Batch 2k26 - Test 2</h1>
+                        <div class="d-flex align-items-center flex-wrap gap-2">
+                            <a href="index.html" class="btn btn-outline-light btn-sm rounded-pill px-3 py-1.5 fw-bold d-inline-flex align-items-center shadow-sm" style="background: rgba(255,255,255,0.18); border-color: rgba(255,255,255,0.35); backdrop-filter: blur(4px);" title="Back to Home">
+                                <i class="fas fa-arrow-left me-1.5"></i> Back to Home
+                            </a>
+                            <h1 class="h3 mb-0"><i class="fas fa-graduation-cap me-2"></i>UOS Mock Test Batch 2k26 - Test 2</h1>
+                        </div>
                     </div>
                     <div class="col-md-4 text-md-end">
                         <div class="d-flex align-items-center justify-content-md-end justify-content-center gap-3">
@@ -419,6 +394,8 @@
                         <button class="retake-btn" onclick="retakeTest()">
                             <i class="fas fa-redo me-2"></i>Retake Test
                         </button>
+                    
+                        <a href="index.html" class="btn btn-dark btn-custom text-white d-inline-flex align-items-center"><i class="fas fa-home me-2"></i>Back to Home</a>
                     </div>
                 </div>
             </div>
@@ -460,10 +437,6 @@
             <p class="mb-0 text-white-50 small">Powered By <a href="https://mock-test-hub.netlify.app" target="_blank" class="text-info fw-bold text-decoration-none">Mock Test Hub</a></p>
         </footer>
     </div>
-
-    <button class="btn btn-primary floating-btn d-none d-md-block" onclick="toggleTheme()" title="Toggle Theme">
-        <i class="fas fa-adjust"></i>
-    </button>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -1360,12 +1333,16 @@
         window.questionsData = questionsData;
         window.allQuestions = allQuestions;
 
+        // Centralized Student Auth Guard
+        const currentStudent = UOSAuth.requireStudentAuth();
+
         // Initialize Test
         $(document).ready(function() {
-            $('#passwordModal').modal('show');
+            if (!currentStudent) return;
             generateQuestionPalette();
             initializeTheme();
-            adjustForMobile(); // Add mobile adjustments on load
+            adjustForMobile();
+            startTest();
             
             // Check if required libraries are loaded
             setTimeout(() => {
@@ -1373,46 +1350,6 @@
                     console.warn('Some required libraries failed to load. PDF generation may not work properly.');
                 }
             }, 3000);
-        });
-
-        // Password Verification
-        function verifyPassword() {
-            const password = document.getElementById('passwordInput').value;
-            const correctPassword = 'uostestbymk';
-            
-            if (password === correctPassword) {
-                // Hide modal and show main content
-                const passwordModal = bootstrap.Modal.getInstance(document.getElementById('passwordModal'));
-                if (passwordModal) {
-                    passwordModal.hide();
-                }
-                // Ensure main content is visible
-                document.getElementById('mainContent').style.display = 'block';
-                startTest();
-            } else {
-                document.getElementById('passwordError').textContent = 'Incorrect password. Please try again.';
-                document.getElementById('passwordInput').classList.add('is-invalid');
-                document.getElementById('passwordInput').value = '';
-                
-                // Add shake animation to indicate error
-                const modalContent = document.querySelector('#passwordModal .modal-content');
-                if (modalContent) {
-                    modalContent.classList.add('animate__shakeX');
-                    
-                    // Remove animation class after it completes
-                    setTimeout(() => {
-                        modalContent.classList.remove('animate__shakeX');
-                    }, 1000);
-                }
-            }
-        }
-
-        // Enter key for password
-        document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                e.preventDefault();
-                verifyPassword();
-            }
         });
 
         // Start Test
@@ -2270,22 +2207,6 @@
                 themeIcon.className = 'fas fa-moon';
             }
         }
-
-        // Initialize Test
-        $(document).ready(function() {
-            // Initially hide main content and show password modal
-            $('#mainContent').hide();
-            $('#passwordModal').modal('show');
-            generateQuestionPalette();
-            initializeTheme();
-            
-            // Check if required libraries are loaded
-            setTimeout(() => {
-                if (!checkLibraries()) {
-                    console.warn('Some required libraries failed to load. PDF generation may not work properly.');
-                }
-            }, 3000);
-        });
 
         // Mobile responsive adjustments
         function adjustForMobile() {

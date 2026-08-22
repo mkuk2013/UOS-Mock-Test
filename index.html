@@ -8,7 +8,14 @@
 <link rel="icon" type="image/svg+xml" href="favicon.svg" />
 <link rel="shortcut icon" href="favicon.ico" />
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
-<link rel="manifest" href="site.webmanifest" />
+<link rel="manifest" href="manifest.json" />
+
+<!-- PWA Meta Tags -->
+<meta name="theme-color" content="#1e40af">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="UOS Mock Test">
 
 
     <title>University of Sindh (UOS) Online Mock Test For 2k26 Batch</title>
@@ -18,6 +25,9 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Central Authentication Library -->
+    <script src="auth.js"></script>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;600;700&family=Noto+Sans+Arabic:wght@400;600;700;800&display=swap" rel="stylesheet">
     
@@ -45,16 +55,16 @@
         /* Sleek EdTech Dashboard Elements */
         .test-card {
             background: #ffffff;
-            border: 1px solid #e2e8f0;
             border-radius: 20px;
-            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04);
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .test-card:hover {
-            transform: translateY(-5px);
-            border-color: #3b82f6;
-            box-shadow: 0 20px 35px -5px rgba(37, 99, 235, 0.12), 0 10px 15px -5px rgba(37, 99, 235, 0.04);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -10px rgba(37, 99, 235, 0.12);
+            border-color: rgba(59, 130, 246, 0.4);
         }
 
         .btn-glow {
@@ -107,12 +117,25 @@
                 </div>
             </div>
 
-            <div class="flex items-center space-x-3">
-                <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20need%20the%20mock%20test%20password." target="_blank" class="btn-glow font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center space-x-2">
-                    <i data-lucide="key" class="w-4 h-4"></i>
-                    <span class="hidden sm:inline">Get Password</span>
-                    <span class="sm:hidden">Password</span>
+            <div class="flex items-center space-x-2 sm:space-x-3">
+                <!-- PWA Install App Button -->
+                <button id="btnInstallApp" class="px-3 sm:px-4 py-2.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-all shadow-md shadow-emerald-500/20" title="Install Web App on your Device">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Install App</span>
+                </button>
+
+                <a href="admin.html" class="px-3 sm:px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-colors border border-slate-200" title="Admin Dashboard">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-blue-600"></i>
+                    <span class="hidden md:inline">Admin Portal</span>
                 </a>
+
+                <!-- Candidate Auth Container -->
+                <div id="headerAuthContainer">
+                    <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center space-x-2">
+                        <i data-lucide="log-in" class="w-4 h-4"></i>
+                        <span>Candidate Login</span>
+                    </button>
+                </div>
             </div>
         </div>
     </header>
@@ -144,20 +167,20 @@
             </div>
         </div>
 
-        <!-- Password Notice Banner -->
-        <div class="bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-300/80 rounded-2xl p-4 sm:p-5 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <!-- Authorized Access Notice Banner -->
+        <div class="bg-gradient-to-r from-blue-500/10 via-indigo-500/5 to-transparent border border-blue-200 rounded-2xl p-4 sm:p-5 mb-10 flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center space-x-3.5">
-                <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 flex items-center justify-center font-bold shrink-0">
+                <div class="w-10 h-10 rounded-xl bg-blue-600 text-white flex items-center justify-center font-bold shrink-0 shadow-md shadow-blue-500/20">
                     <i data-lucide="lock" class="w-5 h-5"></i>
                 </div>
                 <div>
-                    <h4 class="text-slate-900 font-extrabold text-sm sm:text-base">Password Protected Tests</h4>
-                    <p class="text-slate-600 text-xs sm:text-sm">Contact us on WhatsApp to get the free password key for accessing mock tests.</p>
+                    <h4 class="text-slate-900 font-extrabold text-sm sm:text-base">Login-Protected Mock Exams</h4>
+                    <p class="text-slate-600 text-xs sm:text-sm">Click on any test to begin. You will be prompted to enter your Admin-Generated candidate credentials.</p>
                 </div>
             </div>
-            <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20need%20the%20mock%20test%20password." target="_blank" class="shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl shadow-sm transition-all flex items-center space-x-2">
+            <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20need%20the%20mock%20test%20login%20credentials." target="_blank" class="shrink-0 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl shadow-sm transition-all flex items-center space-x-2">
                 <i data-lucide="message-circle" class="w-4 h-4"></i>
-                <span>Get Access Password</span>
+                <span>Get Login Credentials</span>
             </a>
         </div>
 
@@ -350,6 +373,132 @@
                     </a>
                 </div>
             </div>
+            
+           <!-- Dedicated PWA App Download & Install Instructions Section (Roman Urdu) -->
+        <section id="appDownloadSection" class="mb-14 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 text-white rounded-3xl p-6 sm:p-10 shadow-2xl border border-indigo-800/40 relative overflow-hidden">
+            <!-- Background glow -->
+            <div class="absolute -right-16 -top-16 w-64 h-64 bg-blue-600/20 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute -left-16 -bottom-16 w-64 h-64 bg-emerald-600/20 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10">
+                <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-8 pb-8 border-b border-white/10">
+                    <div class="flex items-start sm:items-center space-x-4">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-tr from-blue-600 to-indigo-600 rounded-3xl flex items-center justify-center p-3 shadow-xl shadow-blue-500/30 shrink-0 border border-white/20">
+                            <img src="uos-logo.png" alt="UOS App" class="w-full h-full object-contain">
+                        </div>
+                        <div>
+                            <div class="flex items-center space-x-2.5 mb-1.5">
+                                <span class="bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-[10px] sm:text-xs font-black px-2.5 py-0.5 rounded-full uppercase tracking-wider">
+                                    ⚡ 1-Click Fast Web App
+                                </span>
+                                <span class="bg-blue-500/20 text-blue-300 border border-blue-400/30 text-[10px] font-bold px-2 py-0.5 rounded-full hidden sm:inline-block">
+                                    Android • iPhone • PC
+                                </span>
+                            </div>
+                            <h3 class="text-xl sm:text-2xl font-black text-white tracking-tight">UOS Mock Test App Install Karein</h3>
+                            <p class="text-xs sm:text-sm text-slate-300 font-medium mt-1">Bar bar browser kholne ki zaroorat nahi — Apne mobile screen par 1-tap me mock exams dein!</p>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-wrap items-center gap-3 w-full lg:w-auto">
+                        <button id="btnDirectInstallHero" class="flex-1 sm:flex-none px-6 py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-white font-extrabold text-sm rounded-2xl flex items-center justify-center space-x-2 transition-all shadow-xl shadow-emerald-600/30 hover:shadow-emerald-600/50 transform hover:-translate-y-0.5">
+                            <i data-lucide="download" class="w-5 h-5"></i>
+                            <span>Abhi Install Karein</span>
+                        </button>
+                        <button id="btnOpenInstallGuideModal" class="flex-1 sm:flex-none px-5 py-3.5 bg-white/10 hover:bg-white/20 text-white font-bold text-sm rounded-2xl flex items-center justify-center space-x-2 transition-all border border-white/20">
+                            <i data-lucide="help-circle" class="w-4 h-4 text-amber-400"></i>
+                            <span>Install Ka Tariqa (Guide)</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 3 Quick Step Cards for Devices (Roman Urdu) -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mt-8">
+                    
+                    <!-- 1. Android Guide -->
+                    <div class="bg-white/5 border border-white/10 hover:border-emerald-500/50 rounded-2xl p-5 transition-all group">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-white text-sm">Android (Chrome)</h4>
+                                <p class="text-[11px] text-emerald-400 font-bold">Automatic / 1-Click</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-300">
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-emerald-400">1.</span>
+                                <span>Upar <strong>"Abhi Install Karein"</strong> button dabayein.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-emerald-400">2.</span>
+                                <span>Ya Chrome ke <strong>3 Dots (⋮)</strong> me <strong>"Install app"</strong> select karein.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-emerald-400">3.</span>
+                                <span>Home Screen par UOS ka icon ban jayega!</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 2. iPhone Guide -->
+                    <div class="bg-white/5 border border-white/10 hover:border-blue-500/50 rounded-2xl p-5 transition-all group">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+                                <i data-lucide="apple" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-white text-sm">iPhone / iPad (Safari)</h4>
+                                <p class="text-[11px] text-blue-400 font-bold">Safari Share Menu</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-300">
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-blue-400">1.</span>
+                                <span>Safari browser me niche <strong>Share Button (⬆️)</strong> dabayein.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-blue-400">2.</span>
+                                <span>Menu me niche scroll karke <strong>"Add to Home Screen"</strong> chunein.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-blue-400">3.</span>
+                                <span>Top par <strong>"Add"</strong> dabayein — App install ho jayegi!</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- 3. Computer / Laptop Guide -->
+                    <div class="bg-white/5 border border-white/10 hover:border-purple-500/50 rounded-2xl p-5 transition-all group">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
+                                <i data-lucide="monitor" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-extrabold text-white text-sm">Computer / Laptop</h4>
+                                <p class="text-[11px] text-purple-400 font-bold">Chrome & Edge</p>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-300">
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-purple-400">1.</span>
+                                <span>Browser ki address bar me search ke sath <strong>(+) Install icon</strong> dekhein.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-purple-400">2.</span>
+                                <span><strong>"Install"</strong> par click karein.</span>
+                            </li>
+                            <li class="flex items-start space-x-2">
+                                <span class="font-bold text-purple-400">3.</span>
+                                <span>Desktop shortcut ban kar full window open hogi!</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </section>
         </section>
 
         <!-- Full Mock Test Series (1 to 10) -->
@@ -373,11 +522,189 @@
         </div>
     </footer>
 
+    <!-- ************************************ -->
+    <!-- INTERACTIVE APP INSTALLATION GUIDE MODAL -->
+    <!-- ************************************ -->
+    <div id="pwaGuideModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden animate-fadeInUp">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative max-h-[90vh] overflow-y-auto">
+            
+            <button id="closePwaGuideModal" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-gradient-to-tr from-blue-600 to-indigo-600 text-white rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-blue-500/25">
+                    <i data-lucide="smartphone" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-900">App Install Karne Ka Tariqa</h3>
+                <p class="text-xs text-slate-500 mt-1">Apne device ke mutabiq asan steps follow karein</p>
+            </div>
+
+            <!-- Device Select Tabs -->
+            <div class="flex items-center justify-center space-x-1.5 p-1 bg-slate-100 rounded-xl mb-6">
+                <button class="pwa-tab-btn flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all bg-white text-blue-600 shadow-sm" data-tab="android">
+                    🤖 Android
+                </button>
+                <button class="pwa-tab-btn flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900" data-tab="ios">
+                    🍎 iPhone (iOS)
+                </button>
+                <button class="pwa-tab-btn flex-1 py-2 px-3 rounded-lg text-xs font-bold transition-all text-slate-600 hover:text-slate-900" data-tab="pc">
+                    💻 Laptop / PC
+                </button>
+            </div>
+
+            <!-- Tab Content: Android -->
+            <div id="pwaTabAndroid" class="pwa-tab-content space-y-3.5">
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-emerald-50/70 border border-emerald-100">
+                    <div class="w-7 h-7 rounded-full bg-emerald-600 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Install Button Par Click Karein</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">Top bar me <strong>"Install App"</strong> button dabayein ya screen ke bottom par aane wale banner par <strong>"Install"</strong> dabayein.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-7 h-7 rounded-full bg-slate-800 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Alternative: Chrome Menu</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">Agar button na dikhe to Chrome ke upar <strong>3 Dots (⋮)</strong> par tap karein aur <strong>"Install app"</strong> ya <strong>"Add to Home screen"</strong> par click karein.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-7 h-7 rounded-full bg-slate-800 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Install Confirm Karein</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">Pop-up aane par <strong>"Install"</strong> dabayein. Chand seconds me app aapke mobile ki home screen par add ho jayegi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: iPhone / iOS -->
+            <div id="pwaTabIos" class="pwa-tab-content space-y-3.5 hidden">
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-blue-50/70 border border-blue-100">
+                    <div class="w-7 h-7 rounded-full bg-blue-600 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Safari Browser Use Karein</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">iPhone me yeh link sirf <strong>Safari Browser</strong> me open karein.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-7 h-7 rounded-full bg-slate-800 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Share Icon Par Tap Karein</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">Safari ke niche darmiyan me diye gaye <strong>Share Button (Square with Arrow ⬆️)</strong> par tap karein.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-7 h-7 rounded-full bg-slate-800 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">"Add to Home Screen" Select Karein</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">Menu me niche scroll karke <strong>"Add to Home Screen"</strong> par click karein aur top right par <strong>"Add"</strong> dabayein.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab Content: PC / Laptop -->
+            <div id="pwaTabPc" class="pwa-tab-content space-y-3.5 hidden">
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-purple-50/70 border border-purple-100">
+                    <div class="w-7 h-7 rounded-full bg-purple-600 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">1</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Chrome ya Edge Browser Me Kholein</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">Yeh feature Google Chrome aur Microsoft Edge browsers par best chalta hai.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-7 h-7 rounded-full bg-slate-800 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">2</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Address Bar Me (+) Icon</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5">Browser ki address bar (URL ke bilkul right side) me diye gaye <strong>Install Icon (+)</strong> par click karein.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-start space-x-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
+                    <div class="w-7 h-7 rounded-full bg-slate-800 text-white font-black text-xs flex items-center justify-center shrink-0 mt-0.5">3</div>
+                    <div>
+                        <h4 class="text-xs font-bold text-slate-900">Desktop App Ready</h4>
+                        <p class="text-[11px] text-slate-600 mt-0.5"><strong>"Install"</strong> dabate hi app separate full-screen window me open ho jayegi aur Desktop par icon ban jayega.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-slate-100">
+                <button id="btnModalActionInstall" class="w-full btn-glow font-bold text-xs py-3 rounded-xl flex items-center justify-center space-x-2">
+                    <i data-lucide="download" class="w-4 h-4"></i>
+                    <span>Abhi App Install Karein</span>
+                </button>
+            </div>
+
+        </div>
+    </div>
+
     <div id="loadingModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
         <div class="bg-white rounded-2xl p-8 text-center max-w-sm mx-4 shadow-2xl">
             <div class="loading-spinner mx-auto mb-4"></div>
             <h3 class="text-xl font-bold text-gray-800 mb-2">Starting Mock Test</h3>
             <p class="text-gray-600">Please wait while we prepare your test...</p>
+        </div>
+    </div>
+    
+    <!-- ************************************ -->
+    <!-- CANDIDATE / STUDENT LOGIN MODAL -->
+    <!-- ************************************ -->
+    <div id="studentLoginModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative">
+            <button id="closeStudentLoginModal" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+            
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-blue-100 shadow-inner">
+                    <i data-lucide="lock" class="w-7 h-7"></i>
+                </div>
+                <h3 class="text-xl font-black text-slate-900">Candidate Login Required</h3>
+                <p class="text-xs text-slate-500 mt-1">Enter your Admin-Generated username & password to access this mock test.</p>
+            </div>
+
+            <form id="studentLoginForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Candidate Username</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i data-lucide="user" class="w-4 h-4"></i>
+                        </div>
+                        <input type="text" id="stdUsername" placeholder="e.g. uos-26-1049" required class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Candidate Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i data-lucide="key-round" class="w-4 h-4"></i>
+                        </div>
+                        <input type="password" id="stdPassword" placeholder="Enter password" required class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                    </div>
+                </div>
+
+                <div id="studentLoginError" class="text-xs font-bold text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl hidden"></div>
+
+                <button type="submit" class="w-full btn-glow font-bold text-sm py-3.5 rounded-xl flex items-center justify-center space-x-2">
+                    <i data-lucide="check-circle" class="w-4 h-4"></i>
+                    <span>Login & Access Mock Test</span>
+                </button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 text-center space-y-2">
+                <p class="text-xs text-slate-500">Don't have your login credentials yet?</p>
+                <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20need%20the%20mock%20test%20login%20credentials." target="_blank" class="inline-flex items-center space-x-2 text-xs font-bold text-emerald-600 hover:text-emerald-700 bg-emerald-50 hover:bg-emerald-100 py-2 px-4 rounded-xl border border-emerald-200 transition-colors">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Get Credentials on WhatsApp</span>
+                </a>
+            </div>
         </div>
     </div>
     
@@ -574,11 +901,6 @@
                 mockTests.forEach((test, index) => {
                     const difficultyColor = getDifficultyColor(test.difficulty);
                     
-                    // All tests are now active
-                    const buttonText = 'Start Test'; 
-                    const buttonClass = 'btn-primary';
-                    const buttonIcon = 'play';
-
                     // Polished test card template
                     const card = $(`
                         <div class="test-card p-6 border-t-4 border-t-blue-600 relative overflow-hidden group cursor-pointer mock-test-card flex flex-col justify-between" data-test-id="${test.id}">
@@ -643,24 +965,100 @@
                 }
             }
 
-            // Start test function (for mock tests only)
-            function startTest(testId) {
-                const test = mockTests.find(t => t.id === testId);
-                
-                // Show loading modal
-                $('#loadingModal').removeClass('hidden').addClass('flex');
-                
-                // Simulate loading time
-                setTimeout(() => {
-                    $('#loadingModal').addClass('hidden').removeClass('flex');
-                    
-                    // Redirect to the correct HTML file based on testId
-                    // Note: This logic is only for the auto-generated Mock Tests (uos-quiz1.html to uos-quiz10.html)
-                    window.location.href = `uos-quiz${testId}.html`; 
-                }, 1500);
+            // Header Auth State Manager
+            function updateHeaderAuthState() {
+                const currentStudent = UOSAuth.getCurrentStudent();
+                const container = $('#headerAuthContainer');
+                container.empty();
+
+                if (currentStudent) {
+                    container.append(`
+                        <div class="flex items-center space-x-2 bg-blue-50 border border-blue-200 py-1.5 px-3 rounded-xl">
+                            <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></div>
+                            <span class="text-xs font-bold text-blue-900">${currentStudent.name || currentStudent.username}</span>
+                            <button id="headerLogoutBtn" class="text-[11px] font-extrabold text-red-600 hover:text-red-700 ml-1.5 bg-red-50 hover:bg-red-100 px-2 py-0.5 rounded-lg border border-red-200 transition-colors">
+                                Logout
+                            </button>
+                        </div>
+                    `);
+                } else {
+                    container.append(`
+                        <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2.5 px-4 rounded-xl flex items-center space-x-2">
+                            <i data-lucide="log-in" class="w-4 h-4"></i>
+                            <span>Candidate Login</span>
+                        </button>
+                    `);
+                }
+                lucide.createIcons();
             }
 
-            // Notification system (kept for potential future use)
+            // Pending Target Test URL if login requested
+            let pendingTestUrl = null;
+
+            // Auth protected start test function
+            function tryStartTest(url) {
+                const currentStudent = UOSAuth.getCurrentStudent();
+                if (currentStudent) {
+                    // Authorized -> start test
+                    $('#loadingModal').removeClass('hidden').addClass('flex');
+                    setTimeout(() => {
+                        $('#loadingModal').addClass('hidden').removeClass('flex');
+                        window.location.href = url;
+                    }, 1200);
+                } else {
+                    // Not logged in -> show login modal
+                    pendingTestUrl = url;
+                    $('#studentLoginModal').removeClass('hidden');
+                    $('#stdUsername').focus();
+                }
+            }
+
+            // Modal Open & Close events
+            $(document).on('click', '#openCandidateLoginBtn', function() {
+                pendingTestUrl = null;
+                $('#studentLoginModal').removeClass('hidden');
+                $('#stdUsername').focus();
+            });
+
+            $('#closeStudentLoginModal').on('click', function() {
+                $('#studentLoginModal').addClass('hidden');
+                $('#studentLoginError').addClass('hidden');
+            });
+
+            // Student Login Form Submit
+            $('#studentLoginForm').on('submit', function(e) {
+                e.preventDefault();
+                const username = $('#stdUsername').val();
+                const password = $('#stdPassword').val();
+
+                const res = UOSAuth.loginStudent(username, password);
+                if (res.success) {
+                    $('#studentLoginError').addClass('hidden');
+                    $('#studentLoginModal').addClass('hidden');
+                    $('#stdUsername').val('');
+                    $('#stdPassword').val('');
+                    updateHeaderAuthState();
+
+                    if (pendingTestUrl) {
+                        const target = pendingTestUrl;
+                        pendingTestUrl = null;
+                        tryStartTest(target);
+                    } else {
+                        showNotification(`Welcome, ${res.session.name}! Login successful.`, 'success');
+                    }
+                } else {
+                    $('#studentLoginError').text(res.message).removeClass('hidden');
+                }
+            });
+
+            // Logout Action
+            $(document).on('click', '#headerLogoutBtn', function() {
+                UOSAuth.logoutStudent();
+                updateHeaderAuthState();
+                showNotification('You have logged out.', 'info');
+            });
+
+            // Notification system
             function showNotification(message, type = 'info') {
                 const bgColor = type === 'success' ? 'bg-green-500' : 
                                type === 'error' ? 'bg-red-500' : 'bg-blue-500';
@@ -718,52 +1116,162 @@
                 });
             });
 
-            // Event handlers for Mock Tests (using startTest function)
+            // Event handlers for Mock Tests (1 - 10)
             $(document).on('click', '.start-test-btn', function(e) {
                 e.stopPropagation();
                 const testId = parseInt($(this).data('test-id'));
-                startTest(testId);
+                tryStartTest(`uos-quiz${testId}.html`);
             });
 
             $(document).on('click', '.mock-test-card', function() {
                 const testId = parseInt($(this).data('test-id'));
-                startTest(testId);
+                tryStartTest(`uos-quiz${testId}.html`);
             });
             
             // Event handler for static test papers (Official and Second Phase)
-            // Now includes practice-test links
             $(document).on('click', 'a[href^="official-test"], a[href^="practice-test"]', function(e) {
-                e.preventDefault(); // Prevent default redirection initially
-                
-                // Show loading modal
-                $('#loadingModal').removeClass('hidden').addClass('flex');
-
+                e.preventDefault();
                 const targetUrl = $(this).attr('href');
-                
-                // Simulate loading time then redirect
-                setTimeout(() => {
-                    $('#loadingModal').addClass('hidden').removeClass('flex');
-                    window.location.href = targetUrl;
-                }, 1500);
+                tryStartTest(targetUrl);
             });
 
+            // Check if redirected from a protected test without login
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('loginRequired') === '1') {
+                const redirect = urlParams.get('redirect') || sessionStorage.getItem('uos_intended_test');
+                if (redirect) {
+                    pendingTestUrl = redirect;
+                }
+                $('#studentLoginModal').removeClass('hidden');
+                $('#studentLoginError').text('Please login with your authorized candidate account to access the exam.').removeClass('hidden');
+            }
 
-            // Initialize the page
+            // Initialize Header State and Cards
+            updateHeaderAuthState();
             generateMockTestCards();
 
-            // Performance monitoring
-            console.log('%c🎓 University of Sindh Mock Test Portal', 'color: #1e40af; font-size: 20px; font-weight: bold;');
-            console.log('%cProfessional Edition - 2k26 Batch', 'color: #64748b; font-size: 14px;');
-        });
+            // ==========================================
+            // PWA INSTALLATION & SERVICE WORKER
+            // ==========================================
+            let deferredPrompt = null;
 
-        // Page load performance
-        window.addEventListener('load', function() {
-            // Check if jQuery is loaded to avoid error on performance logging
-            if (typeof $ !== 'undefined') {
-                const loadTime = performance.now();
-                console.log(`%cPage loaded in ${Math.round(loadTime)}ms`, 'color: #059669; font-weight: bold;');
+            // Register Service Worker
+            if ('serviceWorker' in navigator) {
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register('./sw.js')
+                        .then((reg) => {
+                            console.log('[PWA] Service Worker registered successfully with scope:', reg.scope);
+                        })
+                        .catch((err) => {
+                            console.warn('[PWA] Service Worker registration failed:', err);
+                        });
+                });
             }
+
+            // Check if already in standalone/installed mode
+            const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+            if (isStandalone) {
+                $('#btnInstallApp, #btnDirectInstallHero').html('<i data-lucide="check-circle" class="w-4 h-4"></i><span>App Installed</span>').addClass('opacity-75 cursor-default').attr('disabled', true);
+            }
+
+            // Capture PWA beforeinstallprompt event
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+
+                // Show install banner if not dismissed before
+                if (!sessionStorage.getItem('uos_pwa_banner_dismissed') && !isStandalone) {
+                    $('#pwaInstallBanner').removeClass('hidden').addClass('flex');
+                }
+            });
+
+            // Trigger Install from any Install Button
+            $(document).on('click', '#btnInstallApp, #btnBannerInstall, #btnDirectInstallHero, #btnModalActionInstall', function() {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    deferredPrompt.userChoice.then((choiceResult) => {
+                        if (choiceResult.outcome === 'accepted') {
+                            console.log('[PWA] User accepted the install prompt');
+                            $('#pwaInstallBanner, #pwaGuideModal').addClass('hidden');
+                            $('#btnInstallApp, #btnDirectInstallHero').html('<i data-lucide="check-circle" class="w-4 h-4"></i><span>App Installed</span>').addClass('opacity-75 cursor-default').attr('disabled', true);
+                        }
+                        deferredPrompt = null;
+                    });
+                } else if (!isStandalone) {
+                    // Open Guide Modal if direct prompt not available
+                    $('#pwaGuideModal').removeClass('hidden').addClass('flex');
+                }
+            });
+
+            // Open/Close PWA Guide Modal
+            $(document).on('click', '#btnOpenInstallGuideModal, #btnBannerGuide', function() {
+                $('#pwaGuideModal').removeClass('hidden').addClass('flex');
+            });
+
+            $('#closePwaGuideModal').on('click', function() {
+                $('#pwaGuideModal').addClass('hidden').removeClass('flex');
+            });
+
+            $('#pwaGuideModal').on('click', function(e) {
+                if (e.target === this) {
+                    $('#pwaGuideModal').addClass('hidden').removeClass('flex');
+                }
+            });
+
+            // PWA Guide Tab Switching
+            $('.pwa-tab-btn').on('click', function() {
+                const targetTab = $(this).data('tab');
+                
+                $('.pwa-tab-btn').removeClass('bg-white text-blue-600 shadow-sm').addClass('text-slate-600 hover:text-slate-900');
+                $(this).addClass('bg-white text-blue-600 shadow-sm').removeClass('text-slate-600 hover:text-slate-900');
+
+                $('.pwa-tab-content').addClass('hidden');
+                if (targetTab === 'android') $('#pwaTabAndroid').removeClass('hidden');
+                else if (targetTab === 'ios') $('#pwaTabIos').removeClass('hidden');
+                else if (targetTab === 'pc') $('#pwaTabPc').removeClass('hidden');
+            });
+
+            $('#btnBannerDismiss').on('click', function() {
+                $('#pwaInstallBanner').addClass('hidden');
+                sessionStorage.setItem('uos_pwa_banner_dismissed', '1');
+            });
+
+            window.addEventListener('appinstalled', () => {
+                console.log('[PWA] App successfully installed!');
+                $('#pwaInstallBanner, #pwaGuideModal').addClass('hidden');
+                $('#btnInstallApp, #btnDirectInstallHero').html('<i data-lucide="check-circle" class="w-4 h-4"></i><span>App Installed</span>').addClass('opacity-75 cursor-default').attr('disabled', true);
+            });
+
+            // Page load performance
+            window.addEventListener('load', function() {
+                if (typeof $ !== 'undefined') {
+                    const loadTime = performance.now();
+                    console.log(`%cPage loaded in ${Math.round(loadTime)}ms`, 'color: #059669; font-weight: bold;');
+                }
+            });
         });
     </script>
+
+    <!-- Floating PWA Install Prompt Banner for Mobile & Desktop -->
+    <div id="pwaInstallBanner" class="fixed bottom-4 left-4 right-4 sm:left-auto sm:right-6 z-50 max-w-md bg-slate-900/95 backdrop-blur-md text-white p-4 rounded-2xl shadow-2xl border border-slate-700 hidden animate-fadeInUp">
+        <div class="flex items-center space-x-3.5">
+            <img src="web-app-manifest-192x192.png" alt="UOS App" class="w-11 h-11 rounded-xl shadow-md flex-shrink-0">
+            <div class="flex-1 min-w-0">
+                <h4 class="text-sm font-black text-white">Install UOS Mock App</h4>
+                <p class="text-[11px] text-slate-300">Fast offline access & home screen icon</p>
+            </div>
+            <div class="flex items-center space-x-2">
+                <button id="btnBannerInstall" class="px-3 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-xs rounded-xl transition-all shadow-md whitespace-nowrap">
+                    Install
+                </button>
+                <button id="btnBannerGuide" class="px-2.5 py-2 bg-white/10 hover:bg-white/20 text-white font-bold text-xs rounded-xl transition-all whitespace-nowrap" title="Install Guide">
+                    Tariqa
+                </button>
+                <button id="btnBannerDismiss" class="p-1.5 text-slate-400 hover:text-white rounded-lg">
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

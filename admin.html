@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - UOS Mock Test Portal</title>
+    
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1e40af">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * { font-family: 'Inter', sans-serif; }
+        .font-mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .admin-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+            transition: all 0.2s ease;
+        }
+        
+        .btn-glow-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-glow-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+        }
+
+        .btn-glow-success {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+            transition: all 0.2s ease;
+        }
+        .btn-glow-success:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.45);
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-slate-50 text-slate-900 antialiased">
+
+    <!-- ========================================== -->
+    <!-- 1. ADMIN LOGIN OVERLAY (If not logged in) -->
+    <!-- ========================================== -->
+    <div id="adminAuthScreen" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-slate-200 relative">
+            <div class="text-center mb-6">
+                <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-100 shadow-inner">
+                    <i data-lucide="shield-check" class="w-8 h-8"></i>
+                </div>
+                <h2 class="text-2xl font-black text-slate-900 tracking-tight">Admin Portal Access</h2>
+                <p class="text-xs text-slate-500 font-medium mt-1">University of Sindh Mock Test Management</p>
+            </div>
+
+            <form id="adminLoginForm" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Admin Username</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i data-lucide="user" class="w-4 h-4"></i>
+                        </div>
+                        <input type="text" id="adminUser" placeholder="Enter admin username" required class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-700 uppercase tracking-wider mb-1.5">Admin Password</label>
+                    <div class="relative">
+                        <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
+                            <i data-lucide="lock" class="w-4 h-4"></i>
+                        </div>
+                        <input type="password" id="adminPass" placeholder="Enter admin password" required class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                    </div>
+                </div>
+
+                <div id="adminLoginError" class="text-xs font-bold text-red-600 bg-red-50 border border-red-200 p-3 rounded-xl hidden"></div>
+
+                <button type="submit" class="w-full btn-glow-primary font-bold text-sm py-3.5 rounded-xl flex items-center justify-center space-x-2">
+                    <i data-lucide="log-in" class="w-4 h-4"></i>
+                    <span>Unlock Admin Dashboard</span>
+                </button>
+            </form>
+
+            <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+                <a href="index.html" class="text-xs font-bold text-blue-600 hover:text-blue-700 inline-flex items-center space-x-1">
+                    <i data-lucide="arrow-left" class="w-3.5 h-3.5"></i>
+                    <span>Back to Public Portal</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- 2. MAIN ADMIN DASHBOARD CONTENT -->
+    <!-- ========================================== -->
+    <div id="adminMainContent" class="hidden min-h-screen flex flex-col">
+        
+        <!-- Top Navigation -->
+        <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
+            <div class="container mx-auto px-4 sm:px-8 py-3.5 flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-slate-900 text-white rounded-xl flex items-center justify-center font-black">
+                        UOS
+                    </div>
+                    <div>
+                        <div class="flex items-center space-x-2">
+                            <h1 class="text-base sm:text-lg font-black text-slate-900">Admin Control Center</h1>
+                            <span class="bg-indigo-100 text-indigo-700 text-[10px] font-black px-2 py-0.5 rounded-full border border-indigo-200">Local Auth Engine</span>
+                        </div>
+                        <p class="text-xs text-slate-500 font-medium">Candidate Credential Generator & Manager</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-2 sm:space-x-3">
+                    <a href="index.html" class="px-3 sm:px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs rounded-xl flex items-center space-x-1.5 transition-colors">
+                        <i data-lucide="globe" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">View Portal</span>
+                    </a>
+                    
+                    <button id="adminLogoutBtn" class="px-3 sm:px-4 py-2 bg-red-50 hover:bg-red-100 text-red-600 font-bold text-xs rounded-xl flex items-center space-x-1.5 transition-colors border border-red-200">
+                        <i data-lucide="log-out" class="w-4 h-4"></i>
+                        <span>Logout</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="container mx-auto px-4 sm:px-8 py-8 flex-1">
+            
+            <!-- Quick Stats Bar -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-8">
+                <div class="admin-card p-5 border-l-4 border-l-blue-600 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Total Generated Users</p>
+                        <h3 class="text-3xl font-black text-slate-900 mt-1" id="statTotalUsers">0</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                </div>
+
+                <div class="admin-card p-5 border-l-4 border-l-emerald-600 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Active Authorized Users</p>
+                        <h3 class="text-3xl font-black text-emerald-600 mt-1" id="statActiveUsers">0</h3>
+                    </div>
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="check-circle" class="w-6 h-6"></i>
+                    </div>
+                </div>
+
+                <div class="admin-card p-5 border-l-4 border-l-purple-600 flex items-center justify-between">
+                    <div>
+                        <p class="text-xs font-bold text-slate-500 uppercase tracking-wider">Storage Engine</p>
+                        <h3 class="text-lg font-black text-purple-700 mt-1">Browser LocalStorage</h3>
+                        <p class="text-[11px] text-slate-400 font-medium">100% Offline & Private</p>
+                    </div>
+                    <div class="w-12 h-12 bg-purple-50 text-purple-600 rounded-2xl flex items-center justify-center">
+                        <i data-lucide="database" class="w-6 h-6"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                
+                <!-- LEFT COLUMN: Generator & Fast Actions -->
+                <div class="space-y-6">
+                    
+                    <!-- Username & Random Password Generator Box -->
+                    <div class="admin-card p-6 border-t-4 border-t-blue-600">
+                        <div class="flex items-center space-x-2.5 mb-3">
+                            <div class="w-8 h-8 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center">
+                                <i data-lucide="zap" class="w-4 h-4"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-base font-black text-slate-900">1-Click Credential Generator</h3>
+                                <p class="text-xs text-slate-500 font-medium">Username set karein, password auto random banega</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3.5 my-4">
+                            <div>
+                                <div class="flex items-center justify-between mb-1.5">
+                                    <label class="block text-xs font-bold text-slate-700">Set Username</label>
+                                    <button type="button" id="btnSuggestUser" class="text-[11px] font-bold text-blue-600 hover:text-blue-800 flex items-center space-x-1">
+                                        <i data-lucide="shuffle" class="w-3 h-3"></i>
+                                        <span>Random Suggest</span>
+                                    </button>
+                                </div>
+                                <input type="text" id="quickUsernameInput" placeholder="e.g. ali_khan or uos-26-1049" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                                <p class="text-[11px] text-slate-400 mt-1">Khali chhodenge to auto unique username ban jayega.</p>
+                            </div>
+                        </div>
+
+                        <button id="btnQuickGenerate" class="w-full btn-glow-primary font-bold text-sm py-3 px-4 rounded-xl flex items-center justify-center space-x-2">
+                            <i data-lucide="sparkles" class="w-4 h-4"></i>
+                            <span>Generate Password & Create</span>
+                        </button>
+
+                        <!-- Generated Success Card Output -->
+                        <div id="newlyGeneratedBox" class="mt-5 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 hidden">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-xs font-black text-emerald-800 flex items-center">
+                                    <i data-lucide="check" class="w-3.5 h-3.5 mr-1 text-emerald-600"></i> Account Generated!
+                                </span>
+                                <span class="text-[10px] bg-indigo-100 text-indigo-800 font-bold px-2 py-0.5 rounded-full">🔒 1-Device Lock</span>
+                            </div>
+                            
+                            <div class="bg-white p-3 rounded-xl border border-emerald-100 space-y-1.5 text-xs font-mono mb-3">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500">Username:</span>
+                                    <span class="font-bold text-slate-900 bg-slate-100 px-2 py-0.5 rounded select-all" id="genUsername">-</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-slate-500">Password:</span>
+                                    <span class="font-bold text-blue-700 bg-blue-50 px-2 py-0.5 rounded border border-blue-100 select-all" id="genPassword">-</span>
+                                </div>
+                            </div>
+
+                            <button id="btnCopyGenerated" class="w-full btn-glow-success font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center space-x-2">
+                                <i data-lucide="copy" class="w-3.5 h-3.5"></i>
+                                <span id="copyBtnText">Copy for WhatsApp</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Data Backup & Master Settings -->
+                    <div class="admin-card p-6">
+                        <h4 class="text-sm font-black text-slate-900 mb-3 flex items-center">
+                            <i data-lucide="hard-drive" class="w-4 h-4 mr-2 text-slate-600"></i> Backup & Admin Settings
+                        </h4>
+                        
+                        <div class="space-y-3">
+                            <button id="btnExportBackup" class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center space-x-2 transition-colors border border-slate-200">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                                <span>Export Users Backup (JSON)</span>
+                            </button>
+
+                            <label class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs py-2.5 px-3 rounded-xl flex items-center justify-center space-x-2 transition-colors border border-slate-200 cursor-pointer">
+                                <i data-lucide="upload" class="w-4 h-4"></i>
+                                <span>Import Users Backup</span>
+                                <input type="file" id="importFileInput" accept=".json" class="hidden">
+                            </label>
+
+                            <button id="btnChangeAdminPass" class="w-full text-slate-500 hover:text-slate-800 font-semibold text-xs py-2 flex items-center justify-center space-x-1.5">
+                                <i data-lucide="key" class="w-3.5 h-3.5"></i>
+                                <span>Change Admin Password</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- RIGHT COLUMN: Users Table & Search -->
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="admin-card p-6">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-slate-100">
+                            <div>
+                                <h3 class="text-lg font-black text-slate-900">Registered Accounts Directory</h3>
+                                <p class="text-xs text-slate-500">Single-device locked candidate logins for mock tests</p>
+                            </div>
+
+                            <div class="relative w-full sm:w-64">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-slate-400">
+                                    <i data-lucide="search" class="w-4 h-4"></i>
+                                </div>
+                                <input type="text" id="userSearchInput" placeholder="Search by username..." class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            </div>
+                        </div>
+
+                        <!-- Table -->
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="bg-slate-50 text-slate-500 uppercase tracking-wider font-extrabold border-b border-slate-200">
+                                        <th class="py-3 px-3">Username</th>
+                                        <th class="py-3 px-3">Password</th>
+                                        <th class="py-3 px-3 text-center">Device Lock</th>
+                                        <th class="py-3 px-3 text-center">Status</th>
+                                        <th class="py-3 px-3 text-right">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersTableBody" class="divide-y divide-slate-100">
+                                    <!-- Populated via JavaScript -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div id="noUsersNotice" class="py-12 text-center text-slate-400 hidden">
+                            <i data-lucide="user-x" class="w-10 h-10 mx-auto mb-2 opacity-50"></i>
+                            <p class="font-bold text-sm">No accounts found</p>
+                            <p class="text-xs">Use the generator on the left to create an account.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- Password Change Modal -->
+    <div id="changePassModal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 hidden">
+        <div class="bg-white rounded-2xl max-w-sm w-full p-6 shadow-2xl border border-slate-200">
+            <h3 class="text-base font-black text-slate-900 mb-2">Change Admin Password</h3>
+            <p class="text-xs text-slate-500 mb-4">Set a new master password for accessing this dashboard.</p>
+            <input type="password" id="newAdminPasswordInput" placeholder="Enter new password" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm mb-4 focus:ring-2 focus:ring-blue-500">
+            <div class="flex space-x-2">
+                <button id="cancelChangePass" class="w-1/2 py-2.5 bg-slate-100 text-slate-700 font-bold text-xs rounded-xl">Cancel</button>
+                <button id="saveNewAdminPass" class="w-1/2 py-2.5 btn-glow-primary font-bold text-xs rounded-xl">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Central Authentication Library -->
+    <script src="auth.js"></script>
+
+    <script>
+        $(document).ready(function() {
+            lucide.createIcons();
+
+            let lastGenerated = null;
+
+            // Check if admin is currently logged in this session
+            function checkAdminAuth() {
+                if (UOSAuth.isAdminLoggedIn()) {
+                    $('#adminAuthScreen').addClass('hidden');
+                    $('#adminMainContent').removeClass('hidden');
+                    renderUsers();
+                } else {
+                    $('#adminAuthScreen').removeClass('hidden');
+                    $('#adminMainContent').addClass('hidden');
+                }
+                lucide.createIcons();
+            }
+
+            // Admin Login Submit
+            $('#adminLoginForm').on('submit', function(e) {
+                e.preventDefault();
+                const username = $('#adminUser').val();
+                const password = $('#adminPass').val();
+
+                const res = UOSAuth.loginAdmin(username, password);
+                if (res.success) {
+                    $('#adminLoginError').addClass('hidden');
+                    checkAdminAuth();
+                } else {
+                    $('#adminLoginError').text(res.message).removeClass('hidden');
+                }
+            });
+
+            // Admin Logout
+            $('#adminLogoutBtn').on('click', function() {
+                UOSAuth.logoutAdmin();
+                checkAdminAuth();
+            });
+
+            // Render Users Table & Stats
+            function renderUsers() {
+                const users = UOSAuth.getUsers();
+                const searchQuery = $('#userSearchInput').val().toLowerCase().trim();
+
+                const filtered = users.filter(u => 
+                    u.username.toLowerCase().includes(searchQuery)
+                );
+
+                // Update Stats
+                $('#statTotalUsers').text(users.length);
+                $('#statActiveUsers').text(users.filter(u => u.status === 'active').length);
+
+                const tbody = $('#usersTableBody');
+                tbody.empty();
+
+                if (filtered.length === 0) {
+                    $('#noUsersNotice').removeClass('hidden');
+                } else {
+                    $('#noUsersNotice').addClass('hidden');
+                    
+                    filtered.forEach(user => {
+                        const isOnline = user.status === 'active';
+                        const statusBadge = isOnline 
+                            ? `<span class="bg-emerald-100 text-emerald-700 text-[10px] font-extrabold px-2.5 py-1 rounded-full">Active</span>`
+                            : `<span class="bg-slate-100 text-slate-500 text-[10px] font-extrabold px-2.5 py-1 rounded-full">Disabled</span>`;
+
+                        const isLocked = !!user.boundDeviceId;
+                        const deviceBadge = isLocked
+                            ? `<div class="flex items-center justify-center space-x-1.5"><span class="bg-indigo-50 text-indigo-700 border border-indigo-200 text-[10px] font-black px-2 py-0.5 rounded-full">🔒 Locked to Device</span><button class="btn-reset-device text-[10px] text-amber-600 hover:text-amber-800 font-extrabold underline ml-1" data-id="${user.id}" title="Reset device lock if student changed phone">Reset Lock</button></div>`
+                            : `<span class="bg-emerald-50 text-emerald-700 border border-emerald-200 text-[10px] font-extrabold px-2 py-0.5 rounded-full">🟢 Ready for 1st Login</span>`;
+
+                        const row = $(`
+                            <tr class="hover:bg-slate-50/80 transition-colors">
+                                <td class="py-3 px-3">
+                                    <span class="font-mono font-bold text-slate-900 bg-slate-100 px-2.5 py-1 rounded-lg border border-slate-200 select-all">${user.username}</span>
+                                </td>
+                                <td class="py-3 px-3">
+                                    <span class="font-mono font-bold text-blue-700 bg-blue-50 px-2.5 py-1 rounded-lg border border-blue-200 select-all">${user.password}</span>
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    ${deviceBadge}
+                                </td>
+                                <td class="py-3 px-3 text-center">
+                                    ${statusBadge}
+                                </td>
+                                <td class="py-3 px-3 text-right">
+                                    <div class="flex items-center justify-end space-x-1.5">
+                                        <button class="btn-copy-user p-1.5 hover:bg-slate-200 text-slate-600 rounded-lg transition-colors" data-id="${user.id}" title="Copy for WhatsApp">
+                                            <i data-lucide="copy" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="btn-toggle-status p-1.5 hover:bg-amber-100 text-amber-600 rounded-lg transition-colors" data-id="${user.id}" title="Toggle Active/Disable">
+                                            <i data-lucide="${isOnline ? 'pause' : 'play'}" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="btn-delete-user p-1.5 hover:bg-red-100 text-red-600 rounded-lg transition-colors" data-id="${user.id}" title="Delete User">
+                                            <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `);
+                        tbody.append(row);
+                    });
+                }
+
+                lucide.createIcons();
+            }
+
+            // Suggest Random Username Button
+            $('#btnSuggestUser').on('click', function() {
+                const randomNum = Math.floor(1000 + Math.random() * 9000);
+                $('#quickUsernameInput').val(`uos-26-${randomNum}`);
+            });
+
+            // 1-Click Fast Generator Click
+            $('#btnQuickGenerate').on('click', function() {
+                const desiredUser = $('#quickUsernameInput').val().trim();
+
+                const res = UOSAuth.generateCredentials(desiredUser);
+                if (!res.success) {
+                    alert(res.message);
+                    return;
+                }
+
+                const newUser = res.user;
+                lastGenerated = newUser;
+
+                // Show Generated Box
+                $('#genUsername').text(newUser.username);
+                $('#genPassword').text(newUser.password);
+                $('#newlyGeneratedBox').removeClass('hidden');
+
+                // Reset inputs
+                $('#quickUsernameInput').val('');
+                
+                renderUsers();
+            });
+
+            // Copy generated credentials formatted for WhatsApp with Strict Single-Device Policy
+            $('#btnCopyGenerated').on('click', function() {
+                if (!lastGenerated) return;
+                const portalUrl = window.location.origin + window.location.pathname.replace('admin.html', 'index.html');
+                const text = `🎓 *Sindh University Entry Test Mock Exam Login*\n\n` +
+                             `👤 *Username:* ${lastGenerated.username}\n` +
+                             `🔑 *Password:* ${lastGenerated.password}\n` +
+                             `🌐 *Portal Link:* ${portalUrl}\n\n` +
+                             `⚠️ *STRICT POLICY:* Yeh login sirf *EK (1) mobile/device* par chalega. Kisi doosre device par chalane ki koshish block ho jayegi.\n\n` +
+                             `_Login karein aur apne Mock Tests attempt karein. Best of luck!_`;
+
+                navigator.clipboard.writeText(text).then(() => {
+                    $('#copyBtnText').text('Copied to Clipboard! ✓');
+                    setTimeout(() => {
+                        $('#copyBtnText').text('Copy for WhatsApp');
+                    }, 2500);
+                });
+            });
+
+            // Copy single user from table
+            $(document).on('click', '.btn-copy-user', function() {
+                const id = $(this).data('id');
+                const user = UOSAuth.getUsers().find(u => u.id === id);
+                if (!user) return;
+
+                const portalUrl = window.location.origin + window.location.pathname.replace('admin.html', 'index.html');
+                const text = `🎓 *Sindh University Entry Test Mock Exam Login*\n\n` +
+                             `👤 *Username:* ${user.username}\n` +
+                             `🔑 *Password:* ${user.password}\n` +
+                             `🌐 *Portal Link:* ${portalUrl}\n\n` +
+                             `⚠️ *STRICT POLICY:* Yeh login sirf *EK (1) mobile/device* par chalega. Kisi doosre device par chalane ki koshish block ho jayegi.\n\n` +
+                             `_Login karein aur apne Mock Tests attempt karein. Best of luck!_`;
+
+                navigator.clipboard.writeText(text).then(() => {
+                    alert(`Credentials for ${user.username} copied to clipboard!`);
+                });
+            });
+
+            // Reset Device Lock
+            $(document).on('click', '.btn-reset-device', function() {
+                const id = $(this).data('id');
+                const user = UOSAuth.getUsers().find(u => u.id === id);
+                if (!user) return;
+
+                if (confirm(`Are you sure you want to reset the device lock for "${user.username}"? They will be able to log in on a new device.`)) {
+                    UOSAuth.resetUserDevice(id);
+                    renderUsers();
+                    alert(`Device lock for ${user.username} has been reset successfully.`);
+                }
+            });
+
+            // Toggle user active / disabled status
+            $(document).on('click', '.btn-toggle-status', function() {
+                const id = $(this).data('id');
+                UOSAuth.toggleUserStatus(id);
+                renderUsers();
+            });
+
+            // Delete user
+            $(document).on('click', '.btn-delete-user', function() {
+                const id = $(this).data('id');
+                if (confirm('Are you sure you want to delete this user? They will no longer be able to log in.')) {
+                    UOSAuth.deleteUser(id);
+                    renderUsers();
+                }
+            });
+
+            // Search Table
+            $('#userSearchInput').on('keyup', function() {
+                renderUsers();
+            });
+
+            // Export Backup
+            $('#btnExportBackup').on('click', function() {
+                UOSAuth.exportUsersBackup();
+            });
+
+            // Import Backup
+            $('#importFileInput').on('change', function(e) {
+                const file = e.target.files[0];
+                if (!file) return;
+
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    const content = evt.target.result;
+                    const res = UOSAuth.importUsersBackup(content);
+                    if (res.success) {
+                        alert(`Successfully restored ${res.count} user accounts!`);
+                        renderUsers();
+                    } else {
+                        alert(`Import failed: ${res.message}`);
+                    }
+                };
+                reader.readAsText(file);
+            });
+
+            // Change Admin Password Modal
+            $('#btnChangeAdminPass').on('click', function() {
+                $('#changePassModal').removeClass('hidden');
+            });
+            $('#cancelChangePass').on('click', function() {
+                $('#changePassModal').addClass('hidden');
+            });
+            $('#saveNewAdminPass').on('click', function() {
+                const newPass = $('#newAdminPasswordInput').val().trim();
+                if (!newPass) return alert('Password cannot be empty');
+                UOSAuth.updateAdminPassword(newPass);
+                $('#changePassModal').addClass('hidden');
+                $('#newAdminPasswordInput').val('');
+                alert('Admin Master Password successfully updated!');
+            });
+
+            // Initial check
+            checkAdminAuth();
+        });
+    </script>
+</body>
+</html>

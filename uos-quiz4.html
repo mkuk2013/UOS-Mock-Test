@@ -16,6 +16,7 @@
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
     
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <script src="auth.js"></script>
     
     <!-- jsPDF Library for PDF generation -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -570,35 +571,15 @@
     </style>
 </head>
 <body class="min-h-screen">
-    
-    <div id="passwordScreen" class="fixed inset-0 gradient-hero flex items-center justify-center z-50">
-        <div class="modern-card p-8 max-w-md w-full mx-4 text-center animate-fade-in">
-            <div class="w-20 h-20 gradient-primary rounded-full flex items-center justify-center mx-auto mb-6">
-                <i data-lucide="lock" class="w-10 h-10 text-white"></i>
-            </div>
-            <h2 class="text-2xl font-bold text-white mb-2">Secure Test Access</h2>
-            <p class="text-white/80 mb-6">Enter your test password to begin the mock examination</p>
-            <div class="space-y-4">
-                <input type="password" id="passwordInput" 
-                       class="w-full p-4 border-2 bg-transparent text-white border-gray-500 rounded-xl focus:outline-none focus:border-indigo-400 transition-colors placeholder-gray-400" 
-                       placeholder="Enter test password">
-                <button id="startButton" class="btn-modern btn-primary w-full">
-                    <i data-lucide="play-circle" class="w-5 h-5 mr-2"></i>
-                    Start Mock Test
-                </button>
-            </div>
-            <p id="passwordError" class="text-red-400 mt-4 hidden">
-                <i data-lucide="alert-circle" class="w-4 h-4 inline mr-1"></i>
-                Incorrect password. Please try again.
-            </p>
-        </div>
-    </div>
-
-    <div id="testInterface" class="hidden">
+    <div id="testInterface">
         <header class="glass fixed w-full top-0 z-40 py-4">
             <div class="container mx-auto px-6">
                 <div class="flex items-center justify-between">
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-3 sm:space-x-4">
+                        <a href="index.html" class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs font-bold transition-all border border-white/20 shadow-sm" title="Back to Home">
+                            <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            <span class="hidden sm:inline">Back to Home</span>
+                        </a>
                         <!-- Logo updated to uos-logo.png -->
                         <img src="uos-logo.png" alt="UOS Logo" class="w-10 h-10 rounded-full"> 
                         <div>
@@ -782,6 +763,11 @@
                     <i data-lucide="printer" class="w-4 h-4 mr-2"></i>
                     Print Result
                 </button>
+            
+                <a href="index.html" class="btn-modern bg-slate-800 hover:bg-slate-900 text-white flex items-center justify-center text-decoration-none">
+                    <i data-lucide="home" class="w-4 h-4 mr-2"></i>
+                    Back to Home
+                </a>
             </div>
         </div>
     </div>
@@ -851,7 +837,6 @@
 
             // Test configuration
             const TEST_CONFIG = {
-                password: "uostestbymk",
                 totalQuestions: 100,
                 timeLimit: 90 * 60, // 90 minutes in seconds
                 subjects: ["English", "General Science", "General Knowledge", "Mathematics", "Intelligence"],
@@ -1638,30 +1623,14 @@
     "correct": 0
   }
 ];
-
             }
 
-            // Password validation
-            $("#startButton").on("click", function() {
-                const password = $("#passwordInput").val();
-                if (password === TEST_CONFIG.password) {
-                    $("#passwordScreen").hide();
-                    $("#testInterface").removeClass("hidden");
-                    initializeTest();
-                } else {
-                    $("#passwordError").removeClass("hidden");
-                    $("#passwordInput").addClass("border-red-500").focus();
-                }
-            });
+            // Centralized Student Auth Guard
+            const currentStudent = UOSAuth.requireStudentAuth();
+            if (!currentStudent) return;
 
-            $("#passwordInput").on("keypress", function(e) {
-                if (e.which === 13) {
-                    $("#startButton").click();
-                }
-            }).on("input", function() {
-                $("#passwordError").addClass("hidden");
-                $(this).removeClass("border-red-500");
-            });
+            // Auto-start test
+            initializeTest();
 
             // Initialize test
             function initializeTest() {

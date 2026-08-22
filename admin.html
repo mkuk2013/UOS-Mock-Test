@@ -772,10 +772,22 @@ alter table uos_mock_users disable row level security;</pre>
                 if (typeof lucide !== 'undefined') lucide.createIcons();
             });
 
+            // Helper to get main student portal URL regardless of pretty URLs (/admin or /admin.html)
+            function getStudentPortalUrl() {
+                if (window.location.protocol === 'file:') {
+                    return window.location.href.replace(/admin(\.html)?([?#].*)?$/i, 'index.html');
+                }
+                let path = window.location.pathname.replace(/\/admin(\.html)?\/?$/i, '');
+                if (!path.endsWith('/')) {
+                    path += '/';
+                }
+                return `${window.location.origin}${path}`;
+            }
+
             // Copy generated credentials formatted for WhatsApp with Strict Single-Device Policy
             $('#btnCopyGenerated').on('click', function() {
                 if (!lastGenerated) return;
-                const portalUrl = window.location.origin + window.location.pathname.replace('admin.html', 'index.html');
+                const portalUrl = getStudentPortalUrl();
                 const text = `🎓 *Sindh University Entry Test Mock Exam Login*\n\n` +
                              `👤 *Username:* ${lastGenerated.username}\n` +
                              `🔑 *Password:* ${lastGenerated.password}\n` +
@@ -797,7 +809,7 @@ alter table uos_mock_users disable row level security;</pre>
                 const user = UOSAuth.getUsers().find(u => u.id === id);
                 if (!user) return;
 
-                const portalUrl = window.location.origin + window.location.pathname.replace('admin.html', 'index.html');
+                const portalUrl = getStudentPortalUrl();
                 const text = `🎓 *Sindh University Entry Test Mock Exam Login*\n\n` +
                              `👤 *Username:* ${user.username}\n` +
                              `🔑 *Password:* ${user.password}\n` +

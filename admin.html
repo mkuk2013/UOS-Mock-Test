@@ -772,28 +772,30 @@ alter table uos_mock_users disable row level security;</pre>
                 if (typeof lucide !== 'undefined') lucide.createIcons();
             });
 
-            // Helper to get main student portal URL regardless of pretty URLs (/admin or /admin.html)
-            function getStudentPortalUrl() {
-                if (window.location.protocol === 'file:') {
-                    return window.location.href.replace(/admin(\.html)?([?#].*)?$/i, 'index.html');
+            // Helper to get formatted WhatsApp credentials template
+            function formatWhatsAppMessage(username, password) {
+                let portalUrl = 'https://uos-mock-test.netlify.app/admin';
+                if (window.location.protocol !== 'file:' && window.location.origin && !window.location.origin.includes('localhost') && !window.location.origin.includes('127.0.0.1')) {
+                    portalUrl = window.location.href.split('#')[0].split('?')[0];
                 }
-                let path = window.location.pathname.replace(/\/admin(\.html)?\/?$/i, '');
-                if (!path.endsWith('/')) {
-                    path += '/';
-                }
-                return `${window.location.origin}${path}`;
+
+                return `🎓 UoS Official Mock Test – Login Credentials\n\n` +
+                       `Thank you for subscribing to UoS Mock Test! 🎉\n\n` +
+                       `✅ Payment successfully received and verified.\n\n` +
+                       `👤 Username: ${username}\n` +
+                       `🔑 Password: ${password}\n` +
+                       `🌐 Portal Link: ${portalUrl}\n\n` +
+                       `⚠️ IMPORTANT: Yeh login sirf EK (1) mobile/device par use kiya ja sakta hai. Kisi doosre device par login karne ki koshish karne par access block ho sakta hai.\n\n` +
+                       `🔐 Please apne login credentials kisi ke saath share na karein.\n\n` +
+                       `Ab portal par login karein aur apne UoS Mock Tests attempt karein.\n\n` +
+                       `📚 Best of luck with your preparation!\n` +
+                       `— Mock Test Hub Team`;
             }
 
             // Copy generated credentials formatted for WhatsApp with Strict Single-Device Policy
             $('#btnCopyGenerated').on('click', function() {
                 if (!lastGenerated) return;
-                const portalUrl = getStudentPortalUrl();
-                const text = `🎓 *Sindh University Entry Test Mock Exam Login*\n\n` +
-                             `👤 *Username:* ${lastGenerated.username}\n` +
-                             `🔑 *Password:* ${lastGenerated.password}\n` +
-                             `🌐 *Portal Link:* ${portalUrl}\n\n` +
-                             `⚠️ *STRICT POLICY:* Yeh login sirf *EK (1) mobile/device* par chalega. Kisi doosre device par chalane ki koshish block ho jayegi.\n\n` +
-                             `_Login karein aur apne Mock Tests attempt karein. Best of luck!_`;
+                const text = formatWhatsAppMessage(lastGenerated.username, lastGenerated.password);
 
                 navigator.clipboard.writeText(text).then(() => {
                     $('#copyBtnText').text('Copied to Clipboard! ✓');
@@ -809,13 +811,7 @@ alter table uos_mock_users disable row level security;</pre>
                 const user = UOSAuth.getUsers().find(u => u.id === id);
                 if (!user) return;
 
-                const portalUrl = getStudentPortalUrl();
-                const text = `🎓 *Sindh University Entry Test Mock Exam Login*\n\n` +
-                             `👤 *Username:* ${user.username}\n` +
-                             `🔑 *Password:* ${user.password}\n` +
-                             `🌐 *Portal Link:* ${portalUrl}\n\n` +
-                             `⚠️ *STRICT POLICY:* Yeh login sirf *EK (1) mobile/device* par chalega. Kisi doosre device par chalane ki koshish block ho jayegi.\n\n` +
-                             `_Login karein aur apne Mock Tests attempt karein. Best of luck!_`;
+                const text = formatWhatsAppMessage(user.username, user.password);
 
                 navigator.clipboard.writeText(text).then(() => {
                     alert(`Credentials for ${user.username} copied to clipboard!`);

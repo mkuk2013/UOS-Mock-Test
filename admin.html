@@ -774,9 +774,9 @@ alter table uos_mock_users disable row level security;</pre>
 
             // Helper to get formatted WhatsApp credentials template
             function formatWhatsAppMessage(username, password) {
-                let portalUrl = 'https://uos-mock-test.netlify.app/admin';
+                let portalUrl = 'https://uos-mock-test.netlify.app/';
                 if (window.location.protocol !== 'file:' && window.location.origin && !window.location.origin.includes('localhost') && !window.location.origin.includes('127.0.0.1')) {
-                    portalUrl = window.location.href.split('#')[0].split('?')[0];
+                    portalUrl = window.location.origin + '/';
                 }
 
                 return `🎓 UoS Official Mock Test – Login Credentials\n\n` +

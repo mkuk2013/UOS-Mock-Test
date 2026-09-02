@@ -19,6 +19,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="auth.js"></script>
+    <script src="uos-question-engine.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -1322,15 +1323,22 @@
       "correct": 2
     }
   ]
-
 };
+        let activeQuestionsData = questionsData;
+        if (typeof UOSQuestionEngine !== 'undefined') {
+            const dynamicData = UOSQuestionEngine.getQuestionsDataForBootstrapQuiz(2);
+            if (dynamicData && dynamicData["English"] && dynamicData["English"].length > 0) {
+                activeQuestionsData = dynamicData;
+            }
+        }
+
         const allQuestions = [];
-        Object.values(questionsData).forEach(sectionQuestions => {
+        Object.values(activeQuestionsData).forEach(sectionQuestions => {
             allQuestions.push(...sectionQuestions);
         });
         
         // Make questionsData globally accessible
-        window.questionsData = questionsData;
+        window.questionsData = activeQuestionsData;
         window.allQuestions = allQuestions;
 
         // Centralized Student Auth Guard

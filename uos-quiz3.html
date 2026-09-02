@@ -569,6 +569,7 @@
             gap: 1rem;
         }
     </style>
+    <script src="uos-question-engine.js"></script>
 </head>
 <body class="min-h-screen">
     <div id="testInterface">
@@ -871,7 +872,14 @@
 
             // Generate 100 dummy questions without a loop for initial generation
             function generateQuestions() {
-                     questions = [
+            if (typeof UOSQuestionEngine !== 'undefined') {
+                const dynamicQ = UOSQuestionEngine.getQuestionsForTailwindQuiz(3);
+                if (dynamicQ && dynamicQ.length > 0) {
+                    questions = dynamicQ;
+                    return;
+                }
+            }
+            questions = [
   {
     "id": 1,
     "subject": "English",

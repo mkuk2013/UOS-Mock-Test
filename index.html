@@ -480,6 +480,18 @@
             color: #ffffff !important;
         }
 
+        /* Mobile Navigation Drawer Smooth Animation */
+        #mobileSideDrawer {
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        #mobileDrawerBackdrop {
+            transition: opacity 0.25s ease;
+        }
+        html.dark #mobileSideDrawer {
+            background-color: #0b132b !important;
+            border-color: #1e293b !important;
+        }
+
         html.dark ::-webkit-scrollbar-track { background: #0b132b; }
         html.dark ::-webkit-scrollbar-thumb { background: #334155; }
     </style>
@@ -516,68 +528,251 @@
 
     <!-- TOP NAVIGATION HEADER -->
     <header class="sticky top-0 z-40 glass-header shadow-xs">
-        <div class="container mx-auto px-3 sm:px-8 py-3 flex items-center justify-between">
+        <div class="container mx-auto px-3 sm:px-6 py-2.5 sm:py-3 flex items-center justify-between">
             
             <!-- Brand Seal & Name -->
-            <a href="index.html" class="flex items-center space-x-3 group">
+            <a href="index.html" class="flex items-center space-x-2.5 sm:space-x-3 group min-w-0">
                 <div class="relative flex items-center justify-center shrink-0">
                     <div class="absolute -inset-1 bg-gradient-to-r from-blue-600 via-indigo-600 to-amber-500 rounded-2xl blur-xs opacity-60 group-hover:opacity-100 transition-opacity"></div>
                     <div class="relative bg-white p-1 rounded-xl shadow-xs border border-slate-100">
-                        <img src="uos-logo.png" alt="University of Sindh Seal" onerror="this.onerror=null;this.src='uos-logo.png';" class="h-9 w-9 sm:h-11 sm:w-11 object-contain drop-shadow-xs">
+                        <img src="uos-logo.png" alt="University of Sindh Seal" onerror="this.onerror=null;this.src='uos-logo.png';" class="h-8 w-8 sm:h-11 sm:w-11 object-contain drop-shadow-xs">
                     </div>
                 </div>
-                <div>
-                    <div class="flex items-center space-x-2">
-                        <span class="font-heading text-base sm:text-xl font-black text-slate-950 tracking-tight leading-none group-hover:text-blue-700 transition-colors">University of Sindh</span>
-                        <span class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[9px] sm:text-[10px] font-black px-2 py-0.5 rounded-full shadow-xs tracking-wide uppercase hidden xs:inline-block">2k26</span>
+                <div class="min-w-0">
+                    <div class="flex items-center space-x-1.5 sm:space-x-2">
+                        <span class="font-heading text-sm sm:text-lg md:text-xl font-black text-slate-950 dark:text-white tracking-tight leading-none group-hover:text-blue-700 dark:group-hover:text-blue-400 transition-colors truncate">University of Sindh</span>
+                        <span class="bg-gradient-to-r from-emerald-600 to-teal-600 text-white text-[9px] sm:text-[10px] font-black px-1.5 sm:px-2 py-0.5 rounded-full shadow-xs tracking-wide uppercase shrink-0 hidden xs:inline-block">2k26</span>
                     </div>
-                    <p class="text-[11px] sm:text-xs text-slate-500 font-semibold tracking-wide">Online Mock Test & Past Papers Archive</p>
+                    <p class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-semibold tracking-wide truncate max-w-[160px] xs:max-w-[240px] sm:max-w-none">Online Mock Test & Past Papers</p>
                 </div>
             </a>
 
             <!-- Action Controls & Candidate Session -->
-            <div class="flex items-center space-x-1.5 sm:space-x-2.5">
+            <div class="flex items-center space-x-1 sm:space-x-2 shrink-0">
                 
-                <!-- Dark / Light Theme Toggle -->
-                <button id="btnThemeToggle" class="px-2.5 sm:px-3 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-all border border-slate-200 shadow-xs cursor-pointer" title="Toggle Dark / Light Theme">
-                    <i data-lucide="moon" class="w-4 h-4 text-indigo-600"></i>
-                    <span class="hidden md:inline">Theme</span>
+                <!-- Desktop-only Quick Controls -->
+                <!-- Dark / Light Theme Toggle (Desktop) -->
+                <button id="btnThemeToggle" class="hidden md:flex px-2.5 sm:px-3 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm rounded-xl items-center space-x-1.5 transition-all border border-slate-200 dark:border-slate-700 shadow-xs cursor-pointer" title="Toggle Dark / Light Theme">
+                    <i data-lucide="moon" class="w-4 h-4 text-indigo-600 dark:text-indigo-400"></i>
+                    <span class="hidden lg:inline">Theme</span>
                 </button>
 
-                <!-- Sound FX Toggle -->
-                <button id="btnSoundToggle" class="px-2.5 sm:px-3 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-all border border-slate-200 shadow-xs cursor-pointer" title="Toggle Audio Sound FX">
-                    <i data-lucide="volume-2" class="w-4 h-4 text-emerald-600"></i>
-                    <span class="hidden md:inline">Sound</span>
+                <!-- Sound FX Toggle (Desktop) -->
+                <button id="btnSoundToggle" class="hidden md:flex px-2.5 sm:px-3 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm rounded-xl items-center space-x-1.5 transition-all border border-slate-200 dark:border-slate-700 shadow-xs cursor-pointer" title="Toggle Audio Sound FX">
+                    <i data-lucide="volume-2" class="w-4 h-4 text-emerald-600 dark:text-emerald-400"></i>
+                    <span class="hidden lg:inline">Sound</span>
                 </button>
 
-                <!-- Candidate Performance Studio -->
-                <button id="btnOpenStudio" class="px-2.5 sm:px-3.5 py-2 sm:py-2.5 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-all shadow-md shadow-purple-600/20 cursor-pointer group" title="Open My Performance Studio & Stats">
+                <!-- Candidate Performance Studio (Desktop) -->
+                <button id="btnOpenStudio" class="hidden sm:flex px-2.5 sm:px-3.5 py-2 sm:py-2.5 bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 hover:from-purple-500 hover:to-indigo-500 text-white font-bold text-xs sm:text-sm rounded-xl items-center space-x-1.5 transition-all shadow-md shadow-purple-600/20 cursor-pointer group" title="Open My Performance Studio & Stats">
                     <i data-lucide="bar-chart-2" class="w-4 h-4 text-amber-300 group-hover:scale-110 transition-transform"></i>
-                    <span class="hidden sm:inline">My Studio</span>
+                    <span class="hidden md:inline">My Studio</span>
                 </button>
 
-                <!-- Quick App Install Button -->
-                <button id="btnInstallApp" class="px-2.5 sm:px-3.5 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-all border border-slate-200 shadow-xs group" title="Install Web App on your Device">
+                <!-- Quick App Install Button (Desktop) -->
+                <button id="btnInstallApp" class="hidden xl:flex px-2.5 sm:px-3.5 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm rounded-xl items-center space-x-1.5 transition-all border border-slate-200 dark:border-slate-700 shadow-xs group cursor-pointer" title="Install Web App on your Device">
                     <i data-lucide="download" class="w-4 h-4 text-emerald-600 group-hover:translate-y-0.5 transition-transform"></i>
-                    <span class="hidden lg:inline">Install</span>
+                    <span>Install</span>
                 </button>
 
-                <!-- Admin Portal Link -->
-                <a href="admin.html" class="px-2.5 sm:px-3.5 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 transition-colors border border-slate-200 shadow-xs" title="Admin Dashboard">
-                    <i data-lucide="shield-check" class="w-4 h-4 text-blue-600"></i>
-                    <span class="hidden lg:inline">Admin</span>
+                <!-- Admin Portal Link (Desktop) -->
+                <a href="admin.html" class="hidden xl:flex px-2.5 sm:px-3.5 py-2 sm:py-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm rounded-xl items-center space-x-1.5 transition-colors border border-slate-200 dark:border-slate-700 shadow-xs" title="Admin Dashboard">
+                    <i data-lucide="shield-check" class="w-4 h-4 text-blue-600 dark:text-blue-400"></i>
+                    <span>Admin</span>
                 </a>
 
-                <!-- Candidate Auth Container -->
+                <!-- Candidate Auth Container (Always Accessible) -->
                 <div id="headerAuthContainer">
-                    <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2 sm:py-2.5 px-3.5 sm:px-5 rounded-xl flex items-center space-x-1.5 shadow-md">
+                    <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2 sm:py-2.5 px-3 sm:px-5 rounded-xl flex items-center space-x-1.5 shadow-md">
                         <i data-lucide="log-in" class="w-4 h-4"></i>
-                        <span>Candidate Login</span>
+                        <span class="hidden xs:inline">Candidate Login</span>
+                        <span class="xs:hidden">Login</span>
                     </button>
                 </div>
+
+                <!-- Mobile Hamburger Menu Button -->
+                <button id="mobileMenuToggleBtn" class="p-2 sm:p-2.5 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-800 dark:text-slate-100 rounded-xl border border-slate-200 dark:border-slate-700 shadow-xs flex items-center justify-center transition-colors cursor-pointer md:hidden focus:outline-none focus:ring-2 focus:ring-blue-500" aria-label="Open Navigation Menu" title="Open Navigation Menu">
+                    <i data-lucide="menu" class="w-5 h-5"></i>
+                </button>
             </div>
         </div>
     </header>
+
+    <!-- ========================================================================= -->
+    <!-- MOBILE NAVIGATION SLIDING DRAWER & BACKDROP -->
+    <!-- ========================================================================= -->
+    <div id="mobileDrawerBackdrop" class="fixed inset-0 bg-slate-950/75 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
+
+    <aside id="mobileSideDrawer" class="fixed top-0 right-0 h-full w-[85%] sm:w-80 max-w-sm bg-white dark:bg-[#0b132b] text-slate-900 dark:text-slate-100 z-50 shadow-2xl border-l border-slate-200 dark:border-slate-800/80 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col overflow-hidden" aria-label="Mobile Navigation Menu">
+        
+        <!-- Drawer Top Bar with Logo & Close Button -->
+        <div class="p-4 sm:p-5 border-b border-slate-200/80 dark:border-slate-800/80 flex items-center justify-between bg-slate-50/70 dark:bg-[#070d1e]/70 backdrop-blur-xs">
+            <div class="flex items-center space-x-2.5">
+                <div class="w-9 h-9 rounded-xl bg-white p-1 border border-slate-200 dark:border-slate-700 shadow-xs flex items-center justify-center shrink-0">
+                    <img src="uos-logo.png" alt="University of Sindh" class="w-7 h-7 object-contain">
+                </div>
+                <div>
+                    <h3 class="font-heading font-black text-sm text-slate-950 dark:text-white leading-tight">University of Sindh</h3>
+                    <p class="text-[10px] font-bold text-slate-500 dark:text-slate-400">Mock Portal 2k26</p>
+                </div>
+            </div>
+            
+            <!-- Close Button On Top -->
+            <button id="closeMobileDrawerBtn" class="w-9 h-9 rounded-full bg-slate-200/70 hover:bg-slate-300 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 flex items-center justify-center transition-all cursor-pointer shadow-xs active:scale-95" title="Close Menu" aria-label="Close Navigation Menu">
+                <i data-lucide="x" class="w-5 h-5"></i>
+            </button>
+        </div>
+
+        <!-- Drawer Body Scrollable Content -->
+        <div class="flex-1 overflow-y-auto p-4 space-y-4">
+            
+            <!-- Candidate Account Section -->
+            <div id="mobileDrawerAuthContainer">
+                <!-- Dynamically injected: Logged-in profile or Login Card -->
+            </div>
+
+            <!-- Quick Access Links & Tools -->
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-1">
+                    Exam Preparation Tools
+                </div>
+                <div class="space-y-1.5">
+                    <a href="javascript:void(0)" id="mobileNavRapidFire" class="flex items-center justify-between p-3 rounded-2xl bg-rose-500/10 hover:bg-rose-500/15 text-rose-700 dark:text-rose-300 font-bold text-xs sm:text-sm border border-rose-500/20 transition-all group">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-rose-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="zap" class="w-4 h-4"></i>
+                            </span>
+                            <span>15-Min Rapid Drill</span>
+                        </div>
+                        <span class="text-[10px] bg-rose-500/20 text-rose-700 dark:text-rose-300 font-extrabold px-2 py-0.5 rounded-full flex items-center">
+                            <i data-lucide="lock" class="w-2.5 h-2.5 mr-1"></i> Login Req.
+                        </span>
+                    </a>
+
+                    <a href="javascript:void(0)" id="mobileNavStudio" class="flex items-center justify-between p-3 rounded-2xl bg-indigo-500/10 hover:bg-indigo-500/15 text-indigo-700 dark:text-indigo-300 font-bold text-xs sm:text-sm border border-indigo-500/20 transition-all group">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-indigo-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="bar-chart-2" class="w-4 h-4"></i>
+                            </span>
+                            <span>Candidate Studio</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-indigo-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+
+                    <a href="#cpnCalculatorSection" id="mobileNavCpn" class="flex items-center justify-between p-3 rounded-2xl bg-amber-500/10 hover:bg-amber-500/15 text-amber-800 dark:text-amber-300 font-bold text-xs sm:text-sm border border-amber-500/20 transition-all group">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-amber-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="calculator" class="w-4 h-4"></i>
+                            </span>
+                            <span>CPN Merit Predictor</span>
+                        </div>
+                        <span class="text-[10px] bg-amber-500/20 text-amber-800 dark:text-amber-300 font-extrabold px-2 py-0.5 rounded-full">2k26</span>
+                    </a>
+
+                    <a href="#flashcardsSection" id="mobileNavFlashcards" class="flex items-center justify-between p-3 rounded-2xl bg-cyan-500/10 hover:bg-cyan-500/15 text-cyan-800 dark:text-cyan-300 font-bold text-xs sm:text-sm border border-cyan-500/20 transition-all group">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-cyan-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="lightbulb" class="w-4 h-4"></i>
+                            </span>
+                            <span>Smart 3D Flashcards</span>
+                        </div>
+                        <i data-lucide="chevron-right" class="w-4 h-4 text-cyan-400 group-hover:translate-x-0.5 transition-transform"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Examination Archives Navigation -->
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-1">
+                    Papers & Mock Series
+                </div>
+                <div class="space-y-1.5">
+                    <a href="#officialTestPapers" id="mobileNavPastPapers" class="flex items-center justify-between p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm border border-slate-200 dark:border-slate-700/60 transition-all group">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="archive" class="w-4 h-4"></i>
+                            </span>
+                            <span>Past Papers (2013-2025)</span>
+                        </div>
+                        <span class="text-[10px] font-extrabold text-slate-500">13 Years</span>
+                    </a>
+
+                    <a href="#mockSeriesSection" id="mobileNavMockTests" class="flex items-center justify-between p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm border border-slate-200 dark:border-slate-700/60 transition-all group">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-blue-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="award" class="w-4 h-4"></i>
+                            </span>
+                            <span>10 Mock Tests Series</span>
+                        </div>
+                        <span class="text-[10px] font-extrabold text-slate-500">1000 MCQs</span>
+                    </a>
+
+                    <a href="javascript:void(0)" id="mobileNavShuffle" class="flex items-center justify-between p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm border border-slate-200 dark:border-slate-700/60 transition-all group">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-purple-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="shuffle" class="w-4 h-4"></i>
+                            </span>
+                            <span>Shuffle / Update MCQs</span>
+                        </div>
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5 text-purple-500"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Utilities & Admin Link -->
+            <div>
+                <div class="text-[10px] font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-2 px-1">
+                    Preferences & Admin
+                </div>
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <button id="mobileDrawerThemeToggle" class="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs border border-slate-200 dark:border-slate-700/60 flex items-center space-x-2 transition-all cursor-pointer">
+                        <i data-lucide="moon" class="w-4 h-4 text-indigo-500 shrink-0"></i>
+                        <span id="mobileThemeLabel">Dark Mode</span>
+                    </button>
+
+                    <button id="mobileDrawerSoundToggle" class="p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs border border-slate-200 dark:border-slate-700/60 flex items-center space-x-2 transition-all cursor-pointer">
+                        <i data-lucide="volume-2" class="w-4 h-4 text-emerald-500 shrink-0"></i>
+                        <span id="mobileSoundLabel">Sound On</span>
+                    </button>
+                </div>
+
+                <div class="space-y-1.5">
+                    <button id="mobileNavInstall" class="w-full flex items-center justify-between p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm border border-slate-200 dark:border-slate-700/60 transition-all cursor-pointer">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-teal-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                            </span>
+                            <span>Install Web App</span>
+                        </div>
+                        <i data-lucide="arrow-down-to-line" class="w-4 h-4 text-teal-500"></i>
+                    </button>
+
+                    <a href="admin.html" class="flex items-center justify-between p-3 rounded-2xl bg-slate-100 hover:bg-slate-200 dark:bg-slate-800/60 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-xs sm:text-sm border border-slate-200 dark:border-slate-700/60 transition-all">
+                        <div class="flex items-center space-x-2.5">
+                            <span class="w-7 h-7 rounded-xl bg-slate-700 dark:bg-slate-600 text-white flex items-center justify-center shrink-0 shadow-xs">
+                                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                            </span>
+                            <span>Admin Dashboard</span>
+                        </div>
+                        <i data-lucide="external-link" class="w-4 h-4 text-slate-400"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- WhatsApp Credentials & Help Box -->
+            <div class="pt-2">
+                <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20need%20the%20mock%20test%20login%20credentials." target="_blank" class="w-full flex items-center justify-center space-x-2 p-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs shadow-lg shadow-emerald-600/25 transition-all">
+                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+                    <span>Get Login Credentials on WhatsApp</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Drawer Footer -->
+        <div class="p-3 border-t border-slate-200/80 dark:border-slate-800/80 bg-slate-50/50 dark:bg-[#070d1e]/50 text-center text-[10px] text-slate-500 dark:text-slate-400 font-semibold">
+            © University of Sindh • Testing Center Portal
+        </div>
+    </aside>
 
     <main class="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         
@@ -910,10 +1105,10 @@
                 </div>
 
                 <!-- Formula Weighting Selector -->
-                <div class="flex items-center space-x-2 bg-slate-100 p-1 rounded-2xl border border-slate-200 shrink-0">
-                    <button class="cpn-formula-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-white text-blue-700 shadow-xs" data-ratio="10-30-60">10% SSC • 30% HSC • 60% Test (Official)</button>
-                    <button class="cpn-formula-btn px-3 py-1.5 rounded-xl font-bold text-xs text-slate-600 hover:text-slate-900" data-ratio="20-40-40">20-40-40</button>
-                    <button class="cpn-formula-btn px-3 py-1.5 rounded-xl font-bold text-xs text-slate-600 hover:text-slate-900" data-ratio="10-40-50">10-40-50</button>
+                <div class="flex items-center space-x-1.5 sm:space-x-2 bg-slate-100 dark:bg-slate-800 p-1 rounded-2xl border border-slate-200 dark:border-slate-700 shrink-0 overflow-x-auto max-w-full">
+                    <button class="cpn-formula-btn active px-3 py-1.5 rounded-xl font-bold text-xs bg-white dark:bg-[#16203c] text-blue-700 dark:text-blue-300 shadow-xs whitespace-nowrap" data-ratio="10-30-60">10% SSC • 30% HSC • 60% Test (Official)</button>
+                    <button class="cpn-formula-btn px-3 py-1.5 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 whitespace-nowrap" data-ratio="20-40-40">20-40-40</button>
+                    <button class="cpn-formula-btn px-3 py-1.5 rounded-xl font-bold text-xs text-slate-600 dark:text-slate-400 hover:text-slate-900 whitespace-nowrap" data-ratio="10-40-50">10-40-50</button>
                 </div>
             </div>
 
@@ -2138,24 +2333,55 @@
             function updateHeaderAuthState() {
                 const currentStudent = (typeof UOSAuth !== 'undefined') ? UOSAuth.getCurrentStudent() : null;
                 const container = $('#headerAuthContainer');
+                const drawerContainer = $('#mobileDrawerAuthContainer');
                 container.empty();
+                drawerContainer.empty();
 
                 if (currentStudent) {
                     container.append(`
-                        <div class="flex items-center space-x-2 bg-blue-50 border border-blue-200 py-1.5 px-3 rounded-xl shadow-xs">
+                        <div class="flex items-center space-x-1.5 sm:space-x-2 bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800/80 py-1.5 px-2.5 sm:px-3 rounded-xl shadow-xs">
                             <div class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0"></div>
-                            <span class="text-xs font-bold text-blue-950 truncate max-w-[100px] sm:max-w-[150px]">${currentStudent.name || currentStudent.username}</span>
-                            <button id="headerLogoutBtn" class="text-[11px] font-black text-red-600 hover:text-red-700 ml-1 bg-red-50 hover:bg-red-100 px-2 py-0.5 rounded-lg border border-red-200 transition-colors">
+                            <span class="text-xs font-bold text-blue-950 dark:text-blue-100 truncate max-w-[80px] sm:max-w-[140px]">${currentStudent.name || currentStudent.username}</span>
+                            <button id="headerLogoutBtn" class="text-[10px] sm:text-[11px] font-black text-red-600 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300 ml-1 bg-red-50 hover:bg-red-100 dark:bg-red-950/50 dark:hover:bg-red-900/50 px-2 py-0.5 rounded-lg border border-red-200 dark:border-red-800/60 transition-colors cursor-pointer">
                                 Logout
                             </button>
                         </div>
                     `);
+
+                    drawerContainer.append(`
+                        <div class="bg-gradient-to-r from-blue-900/40 via-indigo-900/40 to-slate-900/40 p-4 rounded-2xl border border-blue-500/30">
+                            <div class="flex items-center justify-between mb-2">
+                                <div class="flex items-center space-x-2">
+                                    <div class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></div>
+                                    <span class="text-[10px] font-black uppercase tracking-wider text-emerald-400">Candidate Online</span>
+                                </div>
+                                <button id="mobileDrawerLogoutBtn" class="text-xs font-bold text-red-400 hover:text-red-300 bg-red-950/60 px-2.5 py-1 rounded-lg border border-red-800/60 cursor-pointer transition-colors">Logout</button>
+                            </div>
+                            <div class="font-extrabold text-sm text-white truncate">${currentStudent.name || currentStudent.username}</div>
+                            <div class="text-[11px] text-blue-200 font-mono mt-0.5">${currentStudent.username || 'Active Session'}</div>
+                        </div>
+                    `);
                 } else {
                     container.append(`
-                        <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2 sm:py-2.5 px-3.5 sm:px-5 rounded-xl flex items-center space-x-1.5 shadow-md">
+                        <button id="openCandidateLoginBtn" class="btn-glow font-bold text-xs sm:text-sm py-2 sm:py-2.5 px-2.5 sm:px-5 rounded-xl flex items-center space-x-1.5 shadow-md">
                             <i data-lucide="log-in" class="w-4 h-4"></i>
-                            <span>Candidate Login</span>
+                            <span class="hidden xs:inline">Candidate Login</span>
+                            <span class="xs:hidden">Login</span>
                         </button>
+                    `);
+
+                    drawerContainer.append(`
+                        <div class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-[#111c38] dark:to-[#0f172a] p-4 rounded-2xl border border-blue-200/80 dark:border-slate-800">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <i data-lucide="lock" class="w-4 h-4 text-amber-500"></i>
+                                <span class="text-xs font-extrabold text-slate-800 dark:text-slate-200">Candidate Access</span>
+                            </div>
+                            <p class="text-[11px] text-slate-600 dark:text-slate-400 mb-3">Login with your assigned credentials to access tests & 15-min drill.</p>
+                            <button id="mobileDrawerLoginBtn" class="w-full btn-glow font-bold text-xs py-2.5 px-4 rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer">
+                                <i data-lucide="log-in" class="w-4 h-4"></i>
+                                <span>Candidate Login</span>
+                            </button>
+                        </div>
                     `);
                 }
                 if (typeof lucide !== 'undefined') {
@@ -2261,6 +2487,104 @@
                 }
                 updateHeaderAuthState();
                 showNotification('You have logged out.', 'info');
+            });
+
+            // =========================================================================
+            // MOBILE SLIDING DRAWER LOGIC & CONTROLS
+            // =========================================================================
+            function openMobileDrawer() {
+                $('#mobileDrawerBackdrop').removeClass('opacity-0 pointer-events-none').addClass('opacity-100 pointer-events-auto');
+                $('#mobileSideDrawer').removeClass('translate-x-full').addClass('translate-x-0');
+                $('body').addClass('overflow-hidden');
+                updateDrawerToggleLabels();
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+
+            function closeMobileDrawer() {
+                $('#mobileDrawerBackdrop').removeClass('opacity-100 pointer-events-auto').addClass('opacity-0 pointer-events-none');
+                $('#mobileSideDrawer').removeClass('translate-x-0').addClass('translate-x-full');
+                $('body').removeClass('overflow-hidden');
+            }
+
+            function updateDrawerToggleLabels() {
+                const isDark = $('html').hasClass('dark');
+                $('#mobileThemeLabel').text(isDark ? 'Light Theme' : 'Dark Theme');
+                const themeIcon = isDark ? 'sun' : 'moon';
+                $('#mobileDrawerThemeToggle i').attr('data-lucide', themeIcon);
+
+                const soundEnabled = (typeof UOSAdvanced !== 'undefined' && UOSAdvanced.sound && typeof UOSAdvanced.sound.isEnabled === 'function') 
+                    ? UOSAdvanced.sound.isEnabled() : true;
+                $('#mobileSoundLabel').text(soundEnabled ? 'Sound On' : 'Muted');
+                const soundIcon = soundEnabled ? 'volume-2' : 'volume-x';
+                $('#mobileDrawerSoundToggle i').attr('data-lucide', soundIcon);
+
+                if (typeof lucide !== 'undefined') lucide.createIcons();
+            }
+
+            $(document).on('click', '#mobileMenuToggleBtn', function(e) {
+                if (e) e.preventDefault();
+                openMobileDrawer();
+            });
+
+            $(document).on('click', '#closeMobileDrawerBtn, #mobileDrawerBackdrop', function(e) {
+                if (e) e.preventDefault();
+                closeMobileDrawer();
+            });
+
+            $(document).on('click', '#mobileDrawerLoginBtn', function() {
+                closeMobileDrawer();
+                pendingTestUrl = null;
+                $('#studentLoginModal').removeClass('hidden');
+                $('#studentLoginError').addClass('hidden').removeClass('auth-notice-amber auth-notice-red');
+                $('#stdUsername').focus();
+            });
+
+            $(document).on('click', '#mobileDrawerLogoutBtn', function() {
+                closeMobileDrawer();
+                if (typeof UOSAuth !== 'undefined') {
+                    UOSAuth.logoutStudent();
+                }
+                updateHeaderAuthState();
+                showNotification('You have logged out.', 'info');
+            });
+
+            $(document).on('click', '#mobileNavRapidFire', function(e) {
+                if (e) e.preventDefault();
+                closeMobileDrawer();
+                tryStartRapidFireDrill();
+            });
+
+            $(document).on('click', '#mobileNavStudio', function(e) {
+                if (e) e.preventDefault();
+                closeMobileDrawer();
+                openCandidateStudio();
+            });
+
+            $(document).on('click', '#mobileNavShuffle', function(e) {
+                if (e) e.preventDefault();
+                closeMobileDrawer();
+                $('#btnHeroUpdateQuestions').trigger('click');
+            });
+
+            $(document).on('click', '#mobileNavInstall', function(e) {
+                if (e) e.preventDefault();
+                closeMobileDrawer();
+                $('#btnInstallApp').trigger('click');
+            });
+
+            $(document).on('click', '#mobileDrawerThemeToggle', function() {
+                $('#btnThemeToggle').trigger('click');
+                updateDrawerToggleLabels();
+            });
+
+            $(document).on('click', '#mobileDrawerSoundToggle', function() {
+                $('#btnSoundToggle').trigger('click');
+                updateDrawerToggleLabels();
+            });
+
+            // Close mobile drawer when clicking anchor links inside drawer
+            $(document).on('click', '#mobileSideDrawer a', function() {
+                closeMobileDrawer();
             });
 
             function showNotification(message, type = 'info') {

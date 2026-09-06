@@ -1689,53 +1689,53 @@
     </div>
     
     <!-- CANDIDATE / STUDENT LOGIN MODAL -->
-    <div id="studentLoginModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-4 hidden animate-fadeInUp">
-        <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-slate-200 relative">
-            <button id="closeStudentLoginModal" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center transition-colors">
+    <div id="studentLoginModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md flex items-center justify-center p-3 sm:p-4 hidden animate-fadeInUp">
+        <div class="bg-white dark:bg-[#0b132b] rounded-3xl max-w-md w-full max-h-[96vh] p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 relative flex flex-col overflow-y-auto custom-scrollbar">
+            <button id="closeStudentLoginModal" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-300 flex items-center justify-center transition-colors cursor-pointer" title="Close Login">
                 <i data-lucide="x" class="w-4 h-4"></i>
             </button>
             
-            <div class="text-center mb-6">
-                <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-3 border border-blue-100 shadow-inner">
-                    <i data-lucide="lock" class="w-7 h-7"></i>
+            <div class="text-center mb-3 sm:mb-4">
+                <div class="w-11 h-11 bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 rounded-2xl flex items-center justify-center mx-auto mb-2 border border-blue-100 dark:border-blue-800/60 shadow-inner">
+                    <i data-lucide="lock" class="w-5 h-5"></i>
                 </div>
-                <h3 class="font-heading text-2xl font-black text-slate-900">Candidate Login</h3>
-                <p class="text-xs text-slate-500 mt-1">Enter your Admin-Generated username & password to access this mock test or past paper.</p>
+                <h3 class="font-heading text-lg sm:text-xl font-black text-slate-900 dark:text-white leading-snug">Candidate Login</h3>
+                <p class="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 max-w-xs mx-auto">Enter your Admin-assigned credentials to unlock mock exams & 15-min drill.</p>
             </div>
 
-            <form id="studentLoginForm" class="space-y-4">
+            <form id="studentLoginForm" class="space-y-2.5 sm:space-y-3">
                 <div>
-                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">Candidate Username</label>
+                    <label class="block text-[10px] sm:text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">Candidate Username</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                             <i data-lucide="user" class="w-4 h-4"></i>
                         </div>
-                        <input type="text" id="stdUsername" placeholder="e.g. uos-26-1049" required class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                        <input type="text" id="stdUsername" placeholder="e.g. uos-26-1049" required class="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 dark:bg-[#16203c] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                     </div>
                 </div>
 
                 <div>
-                    <label class="block text-xs font-extrabold text-slate-700 uppercase tracking-wider mb-1.5">Candidate Password</label>
+                    <label class="block text-[10px] sm:text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-1">Candidate Password</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-slate-400">
                             <i data-lucide="key-round" class="w-4 h-4"></i>
                         </div>
-                        <input type="password" id="stdPassword" placeholder="Enter password" required class="w-full pl-10 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 focus:bg-white transition-all">
+                        <input type="password" id="stdPassword" placeholder="Enter password" required class="w-full pl-9 pr-3.5 py-2.5 bg-slate-50 dark:bg-[#16203c] border border-slate-200 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-xs sm:text-sm font-semibold focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all">
                     </div>
                 </div>
 
-                <div id="studentLoginError" class="text-xs font-bold p-3.5 rounded-2xl hidden"></div>
+                <div id="studentLoginError" class="text-xs font-bold p-2.5 sm:p-3 rounded-xl hidden"></div>
 
-                <button type="submit" class="w-full btn-glow font-bold text-sm py-3.5 rounded-xl flex items-center justify-center space-x-2">
+                <button type="submit" class="w-full btn-glow font-bold text-xs sm:text-sm py-2.5 sm:py-3 rounded-xl flex items-center justify-center space-x-2 shadow-md cursor-pointer">
                     <i data-lucide="check-circle" class="w-4 h-4"></i>
                     <span>Login & Access Paper</span>
                 </button>
             </form>
 
-            <div class="mt-6 pt-4 border-t border-slate-100 text-center space-y-2">
-                <p class="text-xs text-slate-500">Don't have your login credentials yet?</p>
-                <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20need%20the%20mock%20test%20login%20credentials." target="_blank" class="inline-flex items-center space-x-2 text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 py-2.5 px-4 rounded-xl border border-emerald-200 transition-colors">
-                    <i data-lucide="message-circle" class="w-4 h-4"></i>
+            <div class="mt-3 pt-2.5 border-t border-slate-100 dark:border-slate-800 text-center space-y-1.5">
+                <p class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">Don't have your login credentials yet?</p>
+                <a href="https://wa.me/923480358640?text=Assalam-o-Alaikum!%20I%20need%20the%20mock%20test%20login%20credentials." target="_blank" class="inline-flex items-center space-x-2 text-[11px] sm:text-xs font-bold text-emerald-700 dark:text-emerald-300 hover:text-emerald-800 bg-emerald-50 dark:bg-emerald-950/50 hover:bg-emerald-100 py-2 px-3.5 rounded-xl border border-emerald-200 dark:border-emerald-800 transition-colors">
+                    <i data-lucide="message-circle" class="w-3.5 h-3.5"></i>
                     <span>Get Credentials on WhatsApp</span>
                 </a>
             </div>
@@ -1876,74 +1876,74 @@
     <!-- ========================================================================= -->
     <!-- RAPID-FIRE SPEED CHALLENGE MODAL (15 QUESTIONS) -->
     <!-- ========================================================================= -->
-    <div id="rapidFireModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden animate-fadeInUp p-3 sm:p-4">
-        <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative border border-slate-200 flex flex-col">
+    <div id="rapidFireModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden animate-fadeInUp p-2 sm:p-4">
+        <div class="bg-white dark:bg-[#0b132b] rounded-3xl max-w-xl sm:max-w-2xl w-full max-h-[96vh] sm:max-h-[92vh] overflow-y-auto custom-scrollbar shadow-2xl relative border border-slate-200 dark:border-slate-800 flex flex-col">
             
             <!-- Modal Header -->
-            <div class="bg-gradient-to-r from-slate-900 via-rose-950 to-slate-900 px-6 py-4 text-white flex items-center justify-between border-b border-rose-900/40">
+            <div class="bg-gradient-to-r from-slate-900 via-rose-950 to-slate-900 px-4 sm:px-6 py-2.5 sm:py-3 text-white flex items-center justify-between border-b border-rose-900/40 shrink-0">
                 <div class="flex items-center space-x-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center font-black shadow-md shadow-rose-600/30">
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-rose-600 text-white flex items-center justify-center font-black shadow-md shadow-rose-600/30 shrink-0">
                         <i data-lucide="zap" class="w-4 h-4"></i>
                     </div>
                     <div>
-                        <span class="text-xs font-black uppercase tracking-wider text-rose-400">⚡ 15-Minute Rapid Speed Drill</span>
+                        <span class="text-[11px] sm:text-xs font-black uppercase tracking-wider text-rose-400">⚡ 15-Minute Rapid Drill</span>
                         <div class="flex items-center space-x-2">
-                            <span id="rfQuestionIndexBadge" class="text-xs text-slate-300 font-bold">Question 1 of 15</span>
-                            <span id="rfStreakBadge" class="bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[10px] font-black px-2 py-0.5 rounded-full hidden">
+                            <span id="rfQuestionIndexBadge" class="text-[11px] sm:text-xs text-slate-300 font-bold">Question 1 of 15</span>
+                            <span id="rfStreakBadge" class="bg-amber-500/20 text-amber-300 border border-amber-400/30 text-[9px] sm:text-[10px] font-black px-1.5 py-0.5 rounded-full hidden">
                                 🔥 <span id="rfStreakCount">0</span>x Streak
                             </span>
                         </div>
                     </div>
                 </div>
 
-                <div class="flex items-center space-x-3">
+                <div class="flex items-center space-x-2 sm:space-x-3">
                     <!-- 45s Countdown Timer Badge -->
-                    <div class="flex items-center space-x-1.5 bg-white/10 px-3 py-1.5 rounded-xl border border-white/15">
-                        <i data-lucide="timer" class="w-4 h-4 text-rose-400"></i>
-                        <span id="rfTimerText" class="font-mono font-black text-sm text-white">45s</span>
+                    <div class="flex items-center space-x-1 sm:space-x-1.5 bg-white/10 px-2.5 py-1 rounded-xl border border-white/15">
+                        <i data-lucide="timer" class="w-3.5 h-3.5 text-rose-400"></i>
+                        <span id="rfTimerText" class="font-mono font-black text-xs sm:text-sm text-white">45s</span>
                     </div>
 
-                    <button id="closeRapidFireModal" class="w-8 h-8 bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white rounded-full flex items-center justify-center transition-colors cursor-pointer" title="Exit Challenge">
-                        <i data-lucide="x" class="w-5 h-5"></i>
+                    <button id="closeRapidFireModal" class="w-7 h-7 sm:w-8 sm:h-8 bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white rounded-full flex items-center justify-center transition-colors cursor-pointer" title="Exit Challenge">
+                        <i data-lucide="x" class="w-4 h-4"></i>
                     </button>
                 </div>
             </div>
 
             <!-- Modal Body: Active Question View -->
-            <div id="rfActiveView" class="p-6 sm:p-8 space-y-6">
+            <div id="rfActiveView" class="p-3.5 sm:p-5 space-y-2.5 sm:space-y-3.5">
                 <!-- Subject Badge & Timer Progress Bar -->
                 <div>
-                    <div class="flex items-center justify-between mb-2">
-                        <span id="rfSubjectTag" class="bg-rose-50 text-rose-700 font-black text-[11px] px-3 py-1 rounded-full uppercase tracking-wider border border-rose-200">
+                    <div class="flex items-center justify-between mb-1.5">
+                        <span id="rfSubjectTag" class="bg-rose-50 dark:bg-rose-950/60 text-rose-700 dark:text-rose-300 font-black text-[10px] sm:text-[11px] px-2.5 py-0.5 rounded-full uppercase tracking-wider border border-rose-200 dark:border-rose-800">
                             General Science
                         </span>
-                        <span class="text-xs text-slate-400 font-semibold">45 Seconds per Question</span>
+                        <span class="text-[11px] text-slate-400 font-semibold">45s per MCQ</span>
                     </div>
-                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                    <div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 sm:h-2 rounded-full overflow-hidden">
                         <div id="rfTimerProgressBar" class="bg-gradient-to-r from-rose-600 to-amber-500 h-full w-full transition-all duration-1000 ease-linear"></div>
                     </div>
                 </div>
 
                 <!-- Question Text -->
-                <div class="bg-slate-50/70 p-5 rounded-2xl border border-slate-200/80">
-                    <h3 id="rfQuestionText" class="font-heading text-lg sm:text-xl font-black text-slate-900 leading-snug">
+                <div class="bg-slate-50/80 dark:bg-[#111c38] p-3 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+                    <h3 id="rfQuestionText" class="font-heading text-sm sm:text-base font-black text-slate-900 dark:text-white leading-snug">
                         Loading question...
                     </h3>
                 </div>
 
-                <!-- Options List (A, B, C, D) -->
-                <div class="space-y-3" id="rfOptionsList">
+                <!-- Options List (A, B, C, D) in 2x2 Grid for compact height -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-2" id="rfOptionsList">
                     <!-- Populated dynamically -->
                 </div>
 
                 <!-- Explanation Box (Appears after choice) -->
-                <div id="rfExplanationBox" class="hidden p-4 rounded-2xl border transition-all text-xs sm:text-sm font-medium">
+                <div id="rfExplanationBox" class="hidden p-2.5 sm:p-3 rounded-xl border transition-all text-xs font-medium">
                     <!-- Populated dynamically -->
                 </div>
 
                 <!-- Next Question Button -->
-                <div class="flex justify-end pt-2">
-                    <button id="rfNextQuestionBtn" class="px-6 py-3 bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-2 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer" disabled>
+                <div class="flex justify-end pt-1">
+                    <button id="rfNextQuestionBtn" class="px-5 py-2 sm:py-2.5 bg-gradient-to-r from-blue-700 to-indigo-700 hover:from-blue-600 hover:to-indigo-600 text-white font-bold text-xs sm:text-sm rounded-xl flex items-center space-x-1.5 shadow-md transition-all disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer" disabled>
                         <span>Next Question</span>
                         <i data-lucide="arrow-right" class="w-4 h-4"></i>
                     </button>
@@ -1951,33 +1951,33 @@
             </div>
 
             <!-- Modal Completion View -->
-            <div id="rfCompletedView" class="p-8 text-center space-y-6 hidden">
-                <div class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-tr from-rose-600 via-pink-600 to-amber-500 text-white flex items-center justify-center shadow-xl shadow-rose-500/30">
-                    <i data-lucide="trophy" class="w-10 h-10 animate-bounce"></i>
+            <div id="rfCompletedView" class="p-4 sm:p-6 text-center space-y-3 sm:space-y-4 hidden">
+                <div class="w-14 h-14 sm:w-16 sm:h-16 mx-auto rounded-3xl bg-gradient-to-tr from-rose-600 via-pink-600 to-amber-500 text-white flex items-center justify-center shadow-xl shadow-rose-500/30">
+                    <i data-lucide="trophy" class="w-7 h-7 sm:w-8 sm:h-8 animate-bounce"></i>
                 </div>
 
                 <div>
-                    <h3 class="font-heading text-2xl sm:text-3xl font-black text-slate-900">Drill Completed!</h3>
-                    <p class="text-xs sm:text-sm text-slate-500 mt-1">Great job finishing the 15-Minute Rapid Speed Challenge.</p>
+                    <h3 class="font-heading text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Drill Completed!</h3>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">Great job finishing the 15-Minute Rapid Speed Challenge.</p>
                 </div>
 
                 <!-- Score Meter -->
-                <div class="bg-slate-50 p-6 rounded-3xl border border-slate-200/80 max-w-sm mx-auto space-y-3">
-                    <div class="text-[11px] font-bold text-slate-500 uppercase tracking-widest">Final Accuracy</div>
-                    <div class="font-heading text-4xl sm:text-5xl font-black text-slate-900">
-                        <span id="rfFinalScore" class="text-rose-600">12</span> <span class="text-slate-400 text-2xl">/ 15</span>
+                <div class="bg-slate-50 dark:bg-[#111c38] p-3.5 sm:p-4 rounded-2xl border border-slate-200/80 dark:border-slate-800 max-w-xs mx-auto space-y-1.5">
+                    <div class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Final Accuracy</div>
+                    <div class="font-heading text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">
+                        <span id="rfFinalScore" class="text-rose-600 dark:text-rose-400">12</span> <span class="text-slate-400 text-xl">/ 15</span>
                     </div>
-                    <div id="rfFinalPctBadge" class="text-xs font-black text-emerald-700 bg-emerald-100 px-3 py-1 rounded-full inline-block">
+                    <div id="rfFinalPctBadge" class="text-xs font-black text-emerald-700 dark:text-emerald-300 bg-emerald-100 dark:bg-emerald-950/60 px-3 py-0.5 rounded-full inline-block">
                         80.0% Accuracy
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-                    <button id="rfTryAgainBtn" class="w-full sm:w-auto px-6 py-3.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center justify-center space-x-2 cursor-pointer">
-                        <i data-lucide="refresh-cw" class="w-4 h-4"></i>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-2 pt-1">
+                    <button id="rfTryAgainBtn" class="w-full sm:w-auto px-5 py-2.5 bg-rose-600 hover:bg-rose-500 text-white font-bold text-xs sm:text-sm rounded-xl shadow-md transition-all flex items-center justify-center space-x-1.5 cursor-pointer">
+                        <i data-lucide="refresh-cw" class="w-3.5 h-3.5"></i>
                         <span>Try Another 15 Questions</span>
                     </button>
-                    <button id="rfCloseCompletedBtn" class="w-full sm:w-auto px-6 py-3.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-xs sm:text-sm rounded-xl transition-all cursor-pointer">
+                    <button id="rfCloseCompletedBtn" class="w-full sm:w-auto px-5 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-200 font-bold text-xs sm:text-sm rounded-xl transition-all cursor-pointer">
                         Close to Portal
                     </button>
                 </div>
@@ -1987,135 +1987,155 @@
     </div>
 
     <!-- ========================================================================= -->
+    <!-- ========================================================================= -->
     <!-- CANDIDATE PERFORMANCE STUDIO & ANALYTICS MODAL -->
     <!-- ========================================================================= -->
-    <div id="candidateStudioModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden animate-fadeInUp p-3 sm:p-4">
-        <div class="bg-white rounded-3xl max-w-3xl w-full max-h-[92vh] overflow-y-auto shadow-2xl relative border border-slate-200 flex flex-col">
+    <div id="candidateStudioModal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-md flex items-center justify-center z-50 hidden animate-fadeInUp p-2 sm:p-4">
+        <div class="bg-white dark:bg-[#0b132b] rounded-3xl max-w-4xl w-full max-h-[96vh] sm:max-h-[92vh] overflow-y-auto custom-scrollbar shadow-2xl relative border border-slate-200 dark:border-slate-800 flex flex-col">
             
             <!-- Modal Header -->
-            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 px-6 py-4 text-white flex items-center justify-between border-b border-indigo-900/40">
+            <div class="bg-gradient-to-r from-slate-900 via-indigo-950 to-purple-950 px-4 sm:px-6 py-2.5 sm:py-3 text-white flex items-center justify-between border-b border-indigo-900/40 shrink-0">
                 <div class="flex items-center space-x-2.5">
-                    <div class="w-8 h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center font-black shadow-md shadow-purple-600/30">
+                    <div class="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-gradient-to-tr from-purple-600 to-indigo-600 text-white flex items-center justify-center font-black shadow-md shadow-purple-600/30 shrink-0">
                         <i data-lucide="bar-chart-2" class="w-4 h-4 text-amber-300"></i>
                     </div>
                     <div>
-                        <h3 class="font-heading font-black text-sm sm:text-base text-white">Candidate Performance Studio</h3>
-                        <p class="text-[11px] text-indigo-300 font-medium" id="studioCandidateGreeting">Sindh University Exam Analytics & Readiness</p>
+                        <h3 class="font-heading font-black text-xs sm:text-sm md:text-base text-white">Candidate Performance Studio</h3>
+                        <p class="text-[10px] sm:text-[11px] text-indigo-300 font-medium" id="studioCandidateGreeting">Sindh University Exam Analytics & Readiness</p>
                     </div>
                 </div>
 
-                <button id="closeStudioModal" class="w-8 h-8 bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white rounded-full flex items-center justify-center transition-colors cursor-pointer" title="Close Studio">
-                    <i data-lucide="x" class="w-5 h-5"></i>
+                <button id="closeStudioModal" class="w-7 h-7 sm:w-8 sm:h-8 bg-white/10 hover:bg-white/20 text-slate-300 hover:text-white rounded-full flex items-center justify-center transition-colors cursor-pointer" title="Close Studio">
+                    <i data-lucide="x" class="w-4 h-4"></i>
                 </button>
             </div>
 
-            <div class="p-6 sm:p-8 space-y-6">
+            <div class="p-3.5 sm:p-5 space-y-3">
                 
-                <!-- 4 Quick Key Metrics -->
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 text-center">
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Tests Attempted</div>
-                        <div id="studioTotalTests" class="font-heading text-2xl font-black text-slate-900">0</div>
+                <!-- 4 Quick Key Metrics in 1 Compact Row -->
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-2.5">
+                    <div class="bg-slate-50 dark:bg-[#111c38] p-2 sm:p-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-center">
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider">Tests Attempted</div>
+                        <div id="studioTotalTests" class="font-heading text-lg sm:text-xl font-black text-slate-900 dark:text-white">0</div>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 text-center">
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Average Score</div>
-                        <div id="studioAvgScore" class="font-heading text-2xl font-black text-blue-600">0%</div>
+                    <div class="bg-slate-50 dark:bg-[#111c38] p-2 sm:p-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-center">
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider">Average Score</div>
+                        <div id="studioAvgScore" class="font-heading text-lg sm:text-xl font-black text-blue-600 dark:text-blue-400">0%</div>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 text-center">
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Highest Score</div>
-                        <div id="studioHighScore" class="font-heading text-2xl font-black text-emerald-600">0</div>
+                    <div class="bg-slate-50 dark:bg-[#111c38] p-2 sm:p-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-center">
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider">Highest Score</div>
+                        <div id="studioHighScore" class="font-heading text-lg sm:text-xl font-black text-emerald-600 dark:text-emerald-400">0</div>
                     </div>
-                    <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200/80 text-center">
-                        <div class="text-[10px] font-bold text-slate-500 uppercase tracking-wider mb-1">Estimated CPN</div>
-                        <div id="studioEstimatedCpn" class="font-heading text-2xl font-black text-amber-600">74.2%</div>
+                    <div class="bg-slate-50 dark:bg-[#111c38] p-2 sm:p-2.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 text-center">
+                        <div class="text-[9px] sm:text-[10px] font-bold text-slate-500 uppercase tracking-wider">Estimated CPN</div>
+                        <div id="studioEstimatedCpn" class="font-heading text-lg sm:text-xl font-black text-amber-600 dark:text-amber-400">74.2%</div>
                     </div>
                 </div>
 
-                <!-- Subject Mastery Breakdown Bars -->
-                <div class="bg-slate-50/70 p-5 sm:p-6 rounded-3xl border border-slate-200/80 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-200 pb-3">
+                <!-- 2-Column Dashboard Grid (Fits without vertical scrolling) -->
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-start">
+                    
+                    <!-- Left: Subject Mastery Radar & AI Recommendation (7 cols) -->
+                    <div class="md:col-span-7 space-y-2.5">
+                        
+                        <!-- Subject Mastery Radar -->
+                        <div class="bg-slate-50/80 dark:bg-[#111c38] p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 space-y-2">
+                            <div class="flex items-center justify-between border-b border-slate-200 dark:border-slate-700/60 pb-1.5">
+                                <h4 class="font-heading font-black text-slate-900 dark:text-white text-xs sm:text-sm">Subject Mastery Radar</h4>
+                                <span class="text-[10px] font-bold text-purple-700 dark:text-purple-300 bg-purple-100 dark:bg-purple-950/60 px-2 py-0.5 rounded-full">SUTC Syllabus</span>
+                            </div>
+
+                            <div class="space-y-1.5">
+                                <!-- English -->
+                                <div>
+                                    <div class="flex justify-between text-[11px] font-bold mb-0.5">
+                                        <span class="text-blue-700 dark:text-blue-300 flex items-center"><i data-lucide="book-open" class="w-3 h-3 mr-1"></i> English (30m)</span>
+                                        <span id="masteryPctEnglish" class="text-slate-900 dark:text-white font-extrabold">75%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div id="masteryBarEnglish" class="bg-blue-600 h-full w-[75%] rounded-full transition-all duration-700"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Gen Science -->
+                                <div>
+                                    <div class="flex justify-between text-[11px] font-bold mb-0.5">
+                                        <span class="text-emerald-700 dark:text-emerald-300 flex items-center"><i data-lucide="flask-conical" class="w-3 h-3 mr-1"></i> Gen Science (20m)</span>
+                                        <span id="masteryPctScience" class="text-slate-900 dark:text-white font-extrabold">80%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div id="masteryBarScience" class="bg-emerald-600 h-full w-[80%] rounded-full transition-all duration-700"></div>
+                                    </div>
+                                </div>
+
+                                <!-- General Knowledge -->
+                                <div>
+                                    <div class="flex justify-between text-[11px] font-bold mb-0.5">
+                                        <span class="text-purple-700 dark:text-purple-300 flex items-center"><i data-lucide="globe" class="w-3 h-3 mr-1"></i> General Knowledge (20m)</span>
+                                        <span id="masteryPctGk" class="text-slate-900 dark:text-white font-extrabold">70%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div id="masteryBarGk" class="bg-purple-600 h-full w-[70%] rounded-full transition-all duration-700"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Mathematics -->
+                                <div>
+                                    <div class="flex justify-between text-[11px] font-bold mb-0.5">
+                                        <span class="text-amber-700 dark:text-amber-300 flex items-center"><i data-lucide="calculator" class="w-3 h-3 mr-1"></i> Mathematics (20m)</span>
+                                        <span id="masteryPctMath" class="text-slate-900 dark:text-white font-extrabold">65%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div id="masteryBarMath" class="bg-amber-600 h-full w-[65%] rounded-full transition-all duration-700"></div>
+                                    </div>
+                                </div>
+
+                                <!-- Intelligence IQ -->
+                                <div>
+                                    <div class="flex justify-between text-[11px] font-bold mb-0.5">
+                                        <span class="text-pink-700 dark:text-pink-300 flex items-center"><i data-lucide="brain" class="w-3 h-3 mr-1"></i> Intelligence IQ (10m)</span>
+                                        <span id="masteryPctIq" class="text-slate-900 dark:text-white font-extrabold">90%</span>
+                                    </div>
+                                    <div class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full overflow-hidden">
+                                        <div id="masteryBarIq" class="bg-pink-600 h-full w-[90%] rounded-full transition-all duration-700"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI Smart Recommendation Box -->
+                        <div class="p-2.5 sm:p-3 rounded-xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-300/80 dark:border-amber-700/60 flex items-start space-x-2.5">
+                            <div class="w-6 h-6 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs mt-0.5">
+                                <i data-lucide="sparkles" class="w-3.5 h-3.5"></i>
+                            </div>
+                            <div>
+                                <h5 class="text-[10px] font-black text-amber-900 dark:text-amber-300 uppercase tracking-wide">Admission Tip</h5>
+                                <p class="text-[11px] text-slate-700 dark:text-slate-300 leading-snug mt-0.5" id="studioRecommendationText">
+                                    Focus on <strong>Math word problems & Ratios</strong> and review <strong>Prepositions</strong> in Flashcards to push CPN above 78% for BS CS!
+                                </p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Right: Recent Attempts & Quick Drill Launch (5 cols) -->
+                    <div class="md:col-span-5 bg-slate-50/80 dark:bg-[#111c38] p-3 sm:p-3.5 rounded-2xl border border-slate-200/80 dark:border-slate-800 flex flex-col justify-between">
                         <div>
-                            <h4 class="font-heading font-black text-slate-900 text-sm sm:text-base">Subject Mastery Radar</h4>
-                            <p class="text-[11px] text-slate-500">Your proficiency based on past paper and mock test performance.</p>
+                            <div class="flex items-center justify-between mb-2">
+                                <h4 class="font-heading font-black text-slate-900 dark:text-white text-xs sm:text-sm">Recent Attempts</h4>
+                                <span class="text-[9px] font-bold text-slate-400">Live Record</span>
+                            </div>
+                            <div id="studioHistoryContainer" class="space-y-1.5 max-h-40 overflow-y-auto custom-scrollbar">
+                                <!-- Populated dynamically -->
+                            </div>
                         </div>
-                        <span class="text-xs font-bold text-purple-700 bg-purple-100 px-3 py-1 rounded-full">SUTC Syllabus</span>
+
+                        <button id="studioDrillLaunchBtn" class="w-full mt-3 py-2 px-3 bg-gradient-to-r from-rose-600 via-pink-600 to-rose-500 hover:from-rose-500 hover:to-pink-500 text-white font-extrabold text-xs rounded-xl shadow-md shadow-rose-600/20 flex items-center justify-center space-x-1.5 cursor-pointer transition-all active:scale-95">
+                            <i data-lucide="zap" class="w-3.5 h-3.5"></i>
+                            <span>Start 15-Min Rapid Drill</span>
+                        </button>
                     </div>
 
-                    <!-- English -->
-                    <div>
-                        <div class="flex justify-between text-xs font-bold mb-1">
-                            <span class="text-blue-700 flex items-center"><i data-lucide="book-open" class="w-3.5 h-3.5 mr-1.5"></i> English (30 Marks)</span>
-                            <span id="masteryPctEnglish" class="text-slate-900 font-extrabold">75%</span>
-                        </div>
-                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                            <div id="masteryBarEnglish" class="bg-blue-600 h-full w-[75%] rounded-full transition-all duration-700"></div>
-                        </div>
-                    </div>
-
-                    <!-- Gen Science -->
-                    <div>
-                        <div class="flex justify-between text-xs font-bold mb-1">
-                            <span class="text-emerald-700 flex items-center"><i data-lucide="flask-conical" class="w-3.5 h-3.5 mr-1.5"></i> General Science (20 Marks)</span>
-                            <span id="masteryPctScience" class="text-slate-900 font-extrabold">80%</span>
-                        </div>
-                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                            <div id="masteryBarScience" class="bg-emerald-600 h-full w-[80%] rounded-full transition-all duration-700"></div>
-                        </div>
-                    </div>
-
-                    <!-- General Knowledge -->
-                    <div>
-                        <div class="flex justify-between text-xs font-bold mb-1">
-                            <span class="text-purple-700 flex items-center"><i data-lucide="globe" class="w-3.5 h-3.5 mr-1.5"></i> General Knowledge (20 Marks)</span>
-                            <span id="masteryPctGk" class="text-slate-900 font-extrabold">70%</span>
-                        </div>
-                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                            <div id="masteryBarGk" class="bg-purple-600 h-full w-[70%] rounded-full transition-all duration-700"></div>
-                        </div>
-                    </div>
-
-                    <!-- Mathematics -->
-                    <div>
-                        <div class="flex justify-between text-xs font-bold mb-1">
-                            <span class="text-amber-700 flex items-center"><i data-lucide="calculator" class="w-3.5 h-3.5 mr-1.5"></i> Mathematics (20 Marks)</span>
-                            <span id="masteryPctMath" class="text-slate-900 font-extrabold">65%</span>
-                        </div>
-                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                            <div id="masteryBarMath" class="bg-amber-600 h-full w-[65%] rounded-full transition-all duration-700"></div>
-                        </div>
-                    </div>
-
-                    <!-- Intelligence IQ -->
-                    <div>
-                        <div class="flex justify-between text-xs font-bold mb-1">
-                            <span class="text-pink-700 flex items-center"><i data-lucide="brain" class="w-3.5 h-3.5 mr-1.5"></i> Intelligence IQ (10 Marks)</span>
-                            <span id="masteryPctIq" class="text-slate-900 font-extrabold">90%</span>
-                        </div>
-                        <div class="w-full bg-slate-200 h-2.5 rounded-full overflow-hidden">
-                            <div id="masteryBarIq" class="bg-pink-600 h-full w-[90%] rounded-full transition-all duration-700"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- AI Smart Recommendation Box -->
-                <div class="p-4 rounded-2xl bg-gradient-to-r from-amber-500/10 via-amber-500/5 to-transparent border border-amber-300/80 flex items-start space-x-3">
-                    <div class="w-8 h-8 rounded-xl bg-amber-500 text-white flex items-center justify-center shrink-0 shadow-xs">
-                        <i data-lucide="sparkles" class="w-4 h-4"></i>
-                    </div>
-                    <div>
-                        <h5 class="text-xs font-black text-amber-900 dark:text-amber-300 uppercase tracking-wide">Smart Recommendation for SU Admission</h5>
-                        <p class="text-xs text-slate-700 dark:text-slate-300 mt-0.5" id="studioRecommendationText">
-                            Focus on <strong>Mathematics word problems & Ratios</strong> and review <strong>Prepositions</strong> in our Smart Flashcards to push your estimated CPN above 78% for BS Computer Science!
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Recent Test Attempts History -->
-                <div>
-                    <h4 class="font-heading font-black text-slate-900 text-sm mb-3">Recent Test Attempts</h4>
-                    <div id="studioHistoryContainer" class="space-y-2 max-h-48 overflow-y-auto">
-                        <!-- Populated dynamically -->
-                    </div>
                 </div>
 
             </div>
@@ -3066,11 +3086,11 @@
                 opts.forEach((optText, idx) => {
                     const letter = optLetters[idx] || (idx + 1);
                     const btn = $(`
-                        <button class="rf-opt-btn w-full p-3.5 rounded-2xl bg-white dark:bg-[#16203c] border border-slate-200/90 dark:border-slate-800 text-left font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 transition-all flex items-center space-x-3 cursor-pointer group" data-index="${idx}">
-                            <span class="w-8 h-8 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center text-xs font-black shrink-0 transition-colors">
+                        <button class="rf-opt-btn w-full p-2.5 sm:p-3 rounded-xl bg-white dark:bg-[#16203c] border border-slate-200/90 dark:border-slate-800 text-left font-bold text-xs sm:text-sm text-slate-800 dark:text-slate-100 hover:border-blue-500 transition-all flex items-center space-x-2.5 cursor-pointer group shadow-2xs" data-index="${idx}">
+                            <span class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 group-hover:bg-blue-600 group-hover:text-white flex items-center justify-center text-[11px] sm:text-xs font-black shrink-0 transition-colors">
                                 ${letter}
                             </span>
-                            <span class="flex-1">${optText}</span>
+                            <span class="flex-1 leading-snug">${optText}</span>
                         </button>
                     `);
                     $opts.append(btn);
@@ -3338,6 +3358,11 @@
 
             $('#closeStudioModal').on('click', function() {
                 $('#candidateStudioModal').addClass('hidden').removeClass('flex').css('display', 'none');
+            });
+
+            $(document).on('click', '#studioDrillLaunchBtn', function() {
+                $('#candidateStudioModal').addClass('hidden').removeClass('flex').css('display', 'none');
+                tryStartRapidFireDrill();
             });
 
             $('#candidateStudioModal').on('click', function(e) {

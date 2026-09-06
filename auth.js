@@ -579,6 +579,14 @@ const UOSAuth = {
         }
     },
 
+    getCurrentSession: function() {
+        return this.getCurrentStudent();
+    },
+
+    getSession: function() {
+        return this.getCurrentStudent();
+    },
+
     logoutStudent: function() {
         localStorage.removeItem(UOS_STORAGE_KEYS.CURRENT_USER);
     },

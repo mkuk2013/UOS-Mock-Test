@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="pageTitle">UOS Pre-Entry Test Past Paper • Sindh University</title>
+
+    <link rel="icon" type="image/png" href="favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="manifest" href="manifest.json" />
+
+    <!-- Meta Tags -->
+    <meta name="theme-color" content="#0f172a">
+    <meta name="mobile-web-app-capable" content="yes">
+
+    <!-- Bootstrap 5 & Tailwind CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- MathJax for formula rendering -->
+    <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <!-- jsPDF & html2canvas for PDF download -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Auth, Past Papers & Advanced Tools Suite -->
+    <script src="auth.js"></script>
+    <script src="uos-past-papers-data.js"></script>
+    <script src="uos-advanced-tools.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * { font-family: 'Inter', system-ui, sans-serif; }
+        h1, h2, h3, h4, h5, .font-heading { font-family: 'Outfit', 'Inter', sans-serif; }
+        body { background-color: #f8fafc; color: #0f172a; min-height: 100vh; }
+
+        .header-gradient {
+            background: linear-gradient(135deg, #090d16 0%, #172554 50%, #090d16 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .timer-badge {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+            color: #ffffff;
+            padding: 8px 18px;
+            border-radius: 9999px;
+            font-weight: 800;
+            font-size: 1.05rem;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 14px rgba(220, 38, 38, 0.35);
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .exam-card {
+            border-radius: 24px !important;
+            overflow: hidden;
+            border: 1px solid #e2e8f0 !important;
+            box-shadow: 0 10px 30px -5px rgba(15, 23, 42, 0.08) !important;
+            background: #ffffff;
+        }
+
+        .option-pill {
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+            background: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #334155;
+            display: flex;
+            align-items: center;
+        }
+
+        .option-pill:hover {
+            border-color: #3b82f6;
+            transform: translateX(4px);
+            background: #f8fafc;
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.1);
+        }
+
+        .option-pill.selected {
+            border-color: #2563eb;
+            background: #eff6ff;
+            color: #1e40af;
+            font-weight: 700;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.18);
+        }
+
+        .question-palette {
+            max-height: 90px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 12px 16px;
+            background: #ffffff;
+            border-radius: 18px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .palette-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            margin: 0 4px;
+            border-radius: 12px;
+            font-size: 13px;
+            font-weight: 700;
+            background: #f1f5f9;
+            color: #475569;
+            border: 1px solid #cbd5e1;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .palette-btn:hover { background: #e2e8f0; transform: translateY(-2px); }
+        .palette-btn.current { background: #2563eb; color: #ffffff; border-color: #1d4ed8; font-weight: 900; }
+        .palette-btn.answered { background: #10b981; color: #ffffff; border-color: #059669; }
+        .palette-btn.flagged { background: #f59e0b; color: #ffffff; border-color: #d97706; }
+
+        .btn-custom {
+            padding: 12px 24px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+        }
+
+        .btn-custom:hover { transform: translateY(-2px); }
+
+        .pdf-progress {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.85);
+            display: flex; align-items: center; justify-content: center;
+            z-index: 9999;
+        }
+        .pdf-progress-content {
+            background: white; border-radius: 24px; padding: 32px; text-align: center; max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- PDF Generation Progress Modal -->
+    <div class="pdf-progress" id="pdfProgress" style="display: none;">
+        <div class="pdf-progress-content shadow-2xl">
+            <h4 class="font-heading font-black text-slate-900 mb-2"><i class="fas fa-file-pdf text-red-500 me-2"></i>Generating PDF Report</h4>
+            <p class="text-xs text-slate-500 mb-3" id="progressText">Formatting questions & scores...</p>
+            <div class="w-full bg-slate-100 rounded-full h-2 mb-3 overflow-hidden">
+                <div id="progressFill" class="bg-blue-600 h-full rounded-full transition-all" style="width: 25%;"></div>
+            </div>
+            <div class="spinner-border text-primary" role="status"></div>
+        </div>
+    </div>
+
+    <!-- MAIN HEADER -->
+    <header class="header-gradient text-white py-3.5 shadow-lg sticky top-0 z-40 backdrop-blur-md">
+        <div class="container mx-auto px-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <div class="d-flex align-items-center flex-wrap gap-2.5">
+                        <a href="index.html" class="btn btn-outline-light btn-sm rounded-pill px-3 py-1.5 fw-bold d-inline-flex align-items-center shadow-xs" style="background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.25);">
+                            <i class="fas fa-arrow-left me-1.5"></i> Back to Portal
+                        </a>
+                        <div class="d-flex align-items-center space-x-2">
+                            <img src="uos-logo.png" alt="UOS Seal" class="w-8 h-8 object-contain">
+                            <div>
+                                <h1 class="font-heading text-sm sm:text-base font-black text-white mb-0" id="headerPaperTitle">UOS Pre-Entry Test Past Paper</h1>
+                                <p class="text-[11px] text-blue-200 mb-0 font-medium" id="headerPaperSubtitle">Official 100-Mark Solved Exam Archive</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-md-end mt-2 mt-md-0">
+                    <div class="d-flex align-items-center justify-content-md-end justify-content-between gap-3">
+                        <div class="timer-badge" id="timer">90:00</div>
+                        <div id="candidateSessionBadge" class="hidden sm:inline-flex items-center text-xs font-bold bg-white/10 px-3 py-1.5 rounded-full border border-white/20">
+                            <i class="fas fa-user-graduate text-emerald-400 me-1.5"></i>
+                            <span id="candidateNameText">Candidate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- EXAM CONTAINER -->
+    <main class="container mx-auto px-4 py-6 max-w-4xl">
+        <div class="card exam-card shadow-lg" id="questionCard">
+            <!-- Header bar with Question status & Flag -->
+            <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white px-6 py-3.5 flex items-center justify-between border-b border-white/10">
+                <div class="flex items-center space-x-3">
+                    <span class="bg-blue-600 text-white font-heading font-black text-xs px-3 py-1 rounded-full" id="subjectBadge">English</span>
+                    <span class="text-xs text-slate-300 font-bold" id="topicBadge">Synonyms</span>
+                </div>
+                <div class="flex items-center space-x-3">
+                    <span class="text-xs font-bold text-slate-300">Question <span id="currentQuestionNum" class="text-amber-400 font-black">1</span> of 100</span>
+                    <button class="btn btn-warning btn-sm font-bold text-xs px-3 py-1 rounded-pill" onclick="toggleFlag()" id="flagBtn">
+                        <i class="fas fa-flag me-1"></i> Flag
+                    </button>
+                </div>
+            </div>
+
+            <!-- Card Body: Question & 4 Options -->
+            <div class="card-body p-6 sm:p-8">
+                <div id="questionContent" class="text-lg font-bold text-slate-900 leading-relaxed mb-6"></div>
+                <div id="optionsContent" class="space-y-3"></div>
+            </div>
+
+            <!-- Card Footer: Nav controls -->
+            <div class="card-footer bg-slate-50 p-4 border-t border-slate-100 flex items-center justify-between">
+                <button class="btn btn-secondary btn-custom" onclick="previousQuestion()" id="prevBtn">
+                    <i class="fas fa-chevron-left me-2"></i> Previous
+                </button>
+                <div class="flex items-center space-x-2">
+                    <button class="btn btn-primary btn-custom" onclick="nextQuestion()" id="nextBtn">
+                        Next <i class="fas fa-chevron-right ms-2"></i>
+                    </button>
+                    <button class="btn btn-success btn-custom" onclick="submitTest()" id="submitBtn" style="display: none;">
+                        <i class="fas fa-paper-plane me-2"></i> Submit Test
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 100 QUESTION PALETTE DOCK -->
+        <div class="mt-6 bg-white p-4 rounded-3xl border border-slate-200 shadow-xs">
+            <div class="flex items-center justify-between mb-3 px-2">
+                <h6 class="font-heading font-black text-xs text-slate-700 uppercase tracking-wider mb-0">
+                    <i class="fas fa-th me-2 text-blue-600"></i> Question Palette (100 Questions)
+                </h6>
+                <div class="flex items-center space-x-3 text-[11px] font-bold text-slate-500">
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500 inline-block me-1"></span> Answered</span>
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-amber-500 inline-block me-1"></span> Flagged</span>
+                    <span class="flex items-center"><span class="w-2.5 h-2.5 rounded-full bg-slate-300 inline-block me-1"></span> Unvisited</span>
+                </div>
+            </div>
+            <div class="question-palette" id="questionPalette"></div>
+        </div>
+    </main>
+
+    <!-- RESULT MODAL -->
+    <div class="modal fade" id="resultModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-3xl overflow-hidden border-0 shadow-2xl">
+                <div class="modal-header bg-gradient-to-r from-slate-900 to-indigo-950 text-white p-4">
+                    <h5 class="modal-title font-heading font-black"><i class="fas fa-trophy text-amber-400 me-2"></i>Official Test Result</h5>
+                </div>
+                <div class="modal-body p-6">
+                    <div id="resultContent"></div>
+                </div>
+                <div class="modal-footer bg-slate-50 p-4 border-t border-slate-100 justify-content-center gap-2">
+                    <button class="btn btn-info btn-custom text-white font-bold" onclick="showReview()"><i class="fas fa-eye me-2"></i> Review Answers</button>
+                    <button class="btn btn-success btn-custom font-bold" onclick="generateCompletePDF()"><i class="fas fa-download me-2"></i> Download PDF Report</button>
+                    <button class="btn btn-warning btn-custom font-bold" onclick="retakeTest()"><i class="fas fa-redo me-2"></i> Retake Paper</button>
+                    <a href="index.html" class="btn btn-dark btn-custom text-white font-bold"><i class="fas fa-home me-2"></i> Back to Portal</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ANSWER REVIEW MODAL -->
+    <div class="modal fade" id="reviewModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content rounded-3xl overflow-hidden border-0 shadow-2xl">
+                <div class="modal-header bg-slate-900 text-white p-4">
+                    <h5 class="modal-title font-heading font-black"><i class="fas fa-clipboard-list text-blue-400 me-2"></i> Complete 100-Question Answer Review</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-6" style="max-height: 75vh; overflow-y: auto;">
+                    <div id="reviewContent"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SUBMIT CONFIRMATION MODAL -->
+    <div class="modal fade" id="confirmSubmitModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content rounded-3xl p-6 text-center shadow-2xl border-0">
+                <div class="modal-body">
+                    <div class="w-16 h-16 bg-blue-50 text-blue-600 rounded-3xl flex items-center justify-center mx-auto mb-4 text-2xl shadow-inner">
+                        <i class="fas fa-paper-plane"></i>
+                    </div>
+                    <h4 class="font-heading font-black text-slate-900 mb-2">Submit Examination Now?</h4>
+                    <p class="text-xs text-slate-500 mb-6">Are you sure you want to finalize and submit your test? Your result will be calculated immediately.</p>
+                    <div class="d-flex justify-content-center gap-3">
+                        <button type="button" class="btn btn-secondary px-4 py-2.5 rounded-xl font-bold text-xs" data-bs-dismiss="modal">Cancel & Continue</button>
+                        <button type="button" class="btn btn-success px-4 py-2.5 rounded-xl font-bold text-xs shadow-md" onclick="confirmFinalSubmit()">Yes, Submit Examination</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Check Authentication First
+        const currentStudent = (typeof UOSAuth !== 'undefined') ? UOSAuth.getCurrentStudent() : null;
+        if (!currentStudent) {
+            // Save intended target and redirect to login
+            const intendedUrl = window.location.href;
+            sessionStorage.setItem('uos_intended_test', intendedUrl);
+            window.location.href = 'index.html?loginRequired=1';
+        }
+
+        // Global Exam Variables
+        let currentYear = 2024;
+        let flatQuestions = [];
+        let currentIndex = 0;
+        let userAnswers = {};
+        let flaggedIndices = new Set();
+        let timeRemaining = 90 * 60; // 90 mins
+        let timerInterval = null;
+        let testStartTime = null;
+        let testEndTime = null;
+
+        // Extract Year from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const yearParam = urlParams.get('year');
+        if (yearParam && !isNaN(parseInt(yearParam, 10))) {
+            currentYear = parseInt(yearParam, 10);
+        }
+
+        // Initialize Exam Data
+        document.addEventListener('DOMContentLoaded', function() {
+            if (currentStudent) {
+                document.getElementById('candidateNameText').textContent = currentStudent.name || currentStudent.username;
+            }
+
+            // Load Past Paper Data
+            const paperData = UOSPastPapers.getPaper(currentYear);
+            document.getElementById('headerPaperTitle').textContent = `UOS Pre-Entry Test ${currentYear} Past Paper`;
+            document.getElementById('headerPaperSubtitle').textContent = `Official Solved Archive • 100 Questions • 90 Minutes`;
+            document.getElementById('pageTitle').textContent = `UOS Past Paper ${currentYear} • Sindh University Portal`;
+
+            // Flatten questions into sequential 1 to 100 array
+            flatQuestions = [];
+            const subjects = ["English", "General Knowledge", "General Science", "Simple Arithmetic", "Simple I.Q."];
+            subjects.forEach(sub => {
+                if (paperData.questions[sub]) {
+                    paperData.questions[sub].forEach(q => flatQuestions.push(q));
+                }
+            });
+
+            // If flatQuestions is not 100, ensure exactly 100 questions exist
+            console.log(`[Exam] Loaded ${flatQuestions.length} questions for year ${currentYear}`);
+
+            // Build Palette & Render first question
+            renderPalette();
+            renderQuestion(currentIndex);
+            startTimer();
+        });
+
+        // 90-Minute Countdown Timer
+        function startTimer() {
+            testStartTime = new Date();
+            const timerEl = document.getElementById('timer');
+
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    timerEl.textContent = "00:00";
+                    alert("Time's up! Your examination is being submitted automatically.");
+                    confirmFinalSubmit();
+                    return;
+                }
+
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                timerEl.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            }, 1000);
+        }
+
+        // Render Question
+        function renderQuestion(index) {
+            if (index < 0 || index >= flatQuestions.length) return;
+            currentIndex = index;
+            const q = flatQuestions[index];
+
+            document.getElementById('currentQuestionNum').textContent = index + 1;
+            document.getElementById('subjectBadge').textContent = q.subject;
+            document.getElementById('topicBadge').textContent = q.topic || "General";
+
+            // Flag state
+            const flagBtn = document.getElementById('flagBtn');
+            if (flaggedIndices.has(index)) {
+                flagBtn.classList.remove('btn-warning');
+                flagBtn.classList.add('btn-danger');
+                flagBtn.innerHTML = '<i class="fas fa-flag text-white me-1"></i> Flagged';
+            } else {
+                flagBtn.classList.remove('btn-danger');
+                flagBtn.classList.add('btn-warning');
+                flagBtn.innerHTML = '<i class="fas fa-flag me-1"></i> Flag';
+            }
+
+            // Question Statement
+            document.getElementById('questionContent').innerHTML = `${index + 1}. ${q.question}`;
+
+            // Options
+            const optionsContainer = document.getElementById('optionsContent');
+            optionsContainer.innerHTML = '';
+            const optionLabels = ["A", "B", "C", "D"];
+
+            q.options.forEach((opt, optIdx) => {
+                const isSelected = userAnswers[index] === optIdx;
+                const pill = document.createElement('div');
+                pill.className = `option-pill ${isSelected ? 'selected' : ''}`;
+                pill.innerHTML = `
+                    <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-bold flex items-center justify-center me-3 shrink-0 ${isSelected ? 'bg-blue-600 text-white' : ''}">
+                        ${optionLabels[optIdx]}
+                    </span>
+                    <span class="flex-1">${opt}</span>
+                `;
+                pill.onclick = () => selectOption(index, optIdx);
+                optionsContainer.appendChild(pill);
+            });
+
+            // Nav buttons
+            document.getElementById('prevBtn').disabled = (index === 0);
+            if (index === flatQuestions.length - 1) {
+                document.getElementById('nextBtn').style.display = 'none';
+                document.getElementById('submitBtn').style.display = 'inline-block';
+            } else {
+                document.getElementById('nextBtn').style.display = 'inline-block';
+                document.getElementById('submitBtn').style.display = 'none';
+            }
+
+            // Update Palette Active State
+            updatePalette();
+
+            // Re-render MathJax if present
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        // Option Selection
+        function selectOption(qIdx, optIdx) {
+            userAnswers[qIdx] = optIdx;
+            renderQuestion(qIdx);
+        }
+
+        // Toggle Flag
+        function toggleFlag() {
+            if (flaggedIndices.has(currentIndex)) {
+                flaggedIndices.delete(currentIndex);
+            } else {
+                flaggedIndices.add(currentIndex);
+            }
+            renderQuestion(currentIndex);
+        }
+
+        // Navigation
+        function nextQuestion() {
+            if (currentIndex < flatQuestions.length - 1) {
+                renderQuestion(currentIndex + 1);
+            }
+        }
+
+        function previousQuestion() {
+            if (currentIndex > 0) {
+                renderQuestion(currentIndex - 1);
+            }
+        }
+
+        // Question Palette
+        function renderPalette() {
+            const palette = document.getElementById('questionPalette');
+            palette.innerHTML = '';
+
+            flatQuestions.forEach((_, idx) => {
+                const btn = document.createElement('button');
+                btn.id = `paletteBtn_${idx}`;
+                btn.className = 'palette-btn';
+                btn.textContent = idx + 1;
+                btn.onclick = () => renderQuestion(idx);
+                palette.appendChild(btn);
+            });
+            updatePalette();
+        }
+
+        function updatePalette() {
+            flatQuestions.forEach((_, idx) => {
+                const btn = document.getElementById(`paletteBtn_${idx}`);
+                if (!btn) return;
+
+                btn.className = 'palette-btn';
+                if (idx === currentIndex) {
+                    btn.classList.add('current');
+                } else if (userAnswers.hasOwnProperty(idx)) {
+                    btn.classList.add('answered');
+                } else if (flaggedIndices.has(idx)) {
+                    btn.classList.add('flagged');
+                }
+            });
+        }
+
+        // Submit Dialog
+        function submitTest() {
+            const modal = new bootstrap.Modal(document.getElementById('confirmSubmitModal'));
+            modal.show();
+        }
+
+        // Confirm Final Submit & Score Calculation
+        function confirmFinalSubmit() {
+            clearInterval(timerInterval);
+            testEndTime = new Date();
+
+            // Hide confirmation modal
+            const confirmModalEl = document.getElementById('confirmSubmitModal');
+            const confirmModal = bootstrap.Modal.getInstance(confirmModalEl);
+            if (confirmModal) confirmModal.hide();
+
+            // Calculate Score & Subject breakdown
+            let totalCorrect = 0;
+            const subjectStats = {};
+
+            flatQuestions.forEach((q, idx) => {
+                if (!subjectStats[q.subject]) {
+                    subjectStats[q.subject] = { correct: 0, total: 0 };
+                }
+                subjectStats[q.subject].total++;
+
+                if (userAnswers[idx] === q.correct) {
+                    totalCorrect++;
+                    subjectStats[q.subject].correct++;
+                }
+            });
+
+            const percentage = Math.round((totalCorrect / flatQuestions.length) * 100);
+            const isPassed = percentage >= 40;
+
+            // Record to Candidate Studio Progress History
+            if (typeof UOSAdvanced !== 'undefined') {
+                UOSAdvanced.progress.recordTestResult(
+                    paperData.title,
+                    totalCorrect,
+                    flatQuestions.length,
+                    {
+                        english: (subjectStats['English'] ? subjectStats['English'].correct : 0),
+                        science: (subjectStats['General Science'] ? subjectStats['General Science'].correct : 0),
+                        gk: (subjectStats['General Knowledge'] ? subjectStats['General Knowledge'].correct : 0),
+                        math: (subjectStats['Simple Arithmetic'] ? subjectStats['Simple Arithmetic'].correct : 0),
+                        iq: (subjectStats['Intelligence'] ? subjectStats['Intelligence'].correct : 0)
+                    }
+                );
+
+                if (isPassed) {
+                    UOSAdvanced.sound.fanfare();
+                    if (typeof confetti === 'function') {
+                        confetti({
+                            particleCount: 120,
+                            spread: 80,
+                            origin: { y: 0.6 }
+                        });
+                    }
+                } else {
+                    UOSAdvanced.sound.wrong();
+                }
+            }
+
+            // Render Result Card HTML
+            const resultHtml = `
+                <div class="text-center mb-6">
+                    <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-3 ${isPassed ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
+                        ${isPassed ? '✓ Passed (Qualified)' : '✗ Below Passing Score (Needs Review)'}
+                    </div>
+                    <div class="font-heading font-black text-5xl text-slate-900 mb-1">${totalCorrect} <span class="text-2xl text-slate-400">/ ${flatQuestions.length}</span></div>
+                    <p class="text-xs text-slate-500 font-bold">Overall Score: ${percentage}% • Minimum Passing: 40%</p>
+                </div>
+
+                <div class="bg-slate-50 p-4 rounded-2xl border border-slate-200 mb-4 space-y-3">
+                    <h6 class="font-heading font-black text-xs text-slate-700 uppercase tracking-wider mb-2">Subject Performance Breakdown</h6>
+                    ${Object.keys(subjectStats).map(sub => {
+                        const s = subjectStats[sub];
+                        const subPct = Math.round((s.correct / s.total) * 100);
+                        return `
+                            <div>
+                                <div class="flex justify-between text-xs font-bold mb-1">
+                                    <span class="text-slate-800">${sub}</span>
+                                    <span class="text-blue-700">${s.correct} / ${s.total} (${subPct}%)</span>
+                                </div>
+                                <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+                                    <div class="bg-blue-600 h-full rounded-full" style="width: ${subPct}%;"></div>
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+
+            document.getElementById('resultContent').innerHTML = resultHtml;
+            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
+        }
+
+        // Answer Review Modal
+        function showReview() {
+            let reviewHtml = '';
+            const optionLetters = ["A", "B", "C", "D"];
+
+            flatQuestions.forEach((q, idx) => {
+                const userChoice = userAnswers[idx];
+                const isCorrect = userChoice === q.correct;
+                const isSkipped = userChoice === undefined;
+
+                reviewHtml += `
+                    <div class="p-4 mb-3 rounded-2xl border ${isCorrect ? 'bg-emerald-50/50 border-emerald-200' : isSkipped ? 'bg-slate-50 border-slate-200' : 'bg-red-50/50 border-red-200'}">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-heading font-black text-xs text-slate-500">Q${idx + 1} • ${q.subject} (${q.topic || 'General'})</span>
+                            <span class="text-[11px] font-black px-2.5 py-0.5 rounded-full ${isCorrect ? 'bg-emerald-600 text-white' : isSkipped ? 'bg-slate-400 text-white' : 'bg-red-600 text-white'}">
+                                ${isCorrect ? 'Correct (+1)' : isSkipped ? 'Skipped (0)' : 'Incorrect (0)'}
+                            </span>
+                        </div>
+                        <p class="font-bold text-slate-900 text-sm mb-3">${q.question}</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                            ${q.options.map((opt, oIdx) => {
+                                let optClass = 'bg-white border-slate-200 text-slate-700';
+                                if (oIdx === q.correct) optClass = 'bg-emerald-600 text-white font-bold border-emerald-600';
+                                else if (oIdx === userChoice) optClass = 'bg-red-600 text-white font-bold border-red-600';
+                                return `<div class="p-2.5 rounded-xl border ${optClass}"><strong>${optionLetters[oIdx]}.</strong> ${opt}</div>`;
+                            }).join('')}
+                        </div>
+                    </div>
+                `;
+            });
+
+            document.getElementById('reviewContent').innerHTML = reviewHtml;
+            const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
+            reviewModal.show();
+
+            if (window.MathJax && window.MathJax.typesetPromise) {
+                window.MathJax.typesetPromise();
+            }
+        }
+
+        // Retake Paper
+        function retakeTest() {
+            if (confirm("Do you want to retake this past paper? All your current answers will be reset.")) {
+                window.location.reload();
+            }
+        }
+
+        // PDF Generation
+        async function generateCompletePDF() {
+            const progress = document.getElementById('pdfProgress');
+            const progressFill = document.getElementById('progressFill');
+            const progressText = document.getElementById('progressText');
+            progress.style.display = 'flex';
+
+            try {
+                progressFill.style.width = '30%';
+                progressText.textContent = 'Building Examination PDF Layout...';
+
+                const { jsPDF } = window.jspdf;
+                const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+
+                doc.setFont('Helvetica', 'bold');
+                doc.setFontSize(16);
+                doc.text(`University of Sindh Jamshoro - Pre-Entry Test ${currentYear}`, 105, 18, { align: 'center' });
+
+                doc.setFontSize(11);
+                doc.setFont('Helvetica', 'normal');
+                doc.text(`Candidate: ${currentStudent ? (currentStudent.name || currentStudent.username) : 'Candidate'} • Date: ${new Date().toLocaleDateString()}`, 105, 25, { align: 'center' });
+
+                doc.line(14, 28, 196, 28);
+
+                let y = 35;
+                let pageNumber = 1;
+
+                flatQuestions.forEach((q, idx) => {
+                    if (y > 270) {
+                        doc.addPage();
+                        pageNumber++;
+                        y = 20;
+                    }
+
+                    const userChoice = userAnswers[idx];
+                    const optLetters = ["A", "B", "C", "D"];
+                    const correctLetter = optLetters[q.correct];
+                    const userLetter = userChoice !== undefined ? optLetters[userChoice] : "None";
+
+                    doc.setFont('Helvetica', 'bold');
+                    doc.setFontSize(9);
+                    const cleanQ = q.question.replace(/<[^>]*>?/gm, '');
+                    doc.text(`${idx + 1}. [${q.subject}] ${cleanQ}`, 14, y, { maxWidth: 180 });
+                    y += 6;
+
+                    doc.setFont('Helvetica', 'normal');
+                    doc.setFontSize(8);
+                    const optsText = q.options.map((o, i) => `${optLetters[i]}) ${o}`).join("   |   ");
+                    doc.text(optsText, 18, y, { maxWidth: 175 });
+                    y += 5;
+
+                    doc.setFont('Helvetica', 'bold');
+                    doc.text(`Correct: ${correctLetter} | Your Answer: ${userLetter}`, 18, y);
+                    y += 7;
+                });
+
+                progressFill.style.width = '100%';
+                progressText.textContent = 'Downloading PDF...';
+                doc.save(`UOS_Past_Paper_${currentYear}_Report.pdf`);
+
+                setTimeout(() => { progress.style.display = 'none'; }, 800);
+            } catch (err) {
+                console.error("PDF generation failed:", err);
+                alert("Error generating PDF: " + err.message);
+                progress.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>

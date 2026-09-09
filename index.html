@@ -242,17 +242,47 @@
             box-shadow: 0 4px 14px rgba(30, 64, 175, 0.35);
         }
 
-        /* Hero Mesh Background & Floating Glows */
+        /* Hero Mesh Dynamic Aurora Flow */
+        @keyframes auroraBreathe {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
         .hero-mesh {
-            background: radial-gradient(circle at 15% 25%, rgba(37, 99, 235, 0.28) 0%, transparent 45%),
-                        radial-gradient(circle at 85% 75%, rgba(99, 102, 241, 0.25) 0%, transparent 45%),
-                        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15) 0%, transparent 60%),
-                        #080c18;
+            background: radial-gradient(circle at 18% 28%, rgba(37, 99, 235, 0.32) 0%, transparent 48%),
+                        radial-gradient(circle at 82% 72%, rgba(99, 102, 241, 0.28) 0%, transparent 48%),
+                        radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.16) 0%, transparent 62%),
+                        #070b16;
+            background-size: 140% 140%;
+            animation: auroraBreathe 20s ease-in-out infinite;
         }
 
         .hero-pattern {
-            background-image: radial-gradient(rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+            background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
             background-size: 24px 24px;
+        }
+
+        /* Executive Spotlight Card Shader (Linear / Stripe style) */
+        .spotlight-card {
+            position: relative;
+            overflow: hidden;
+        }
+        .spotlight-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(59, 130, 246, 0.1), transparent 45%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: inherit;
+        }
+        html.dark .spotlight-card::after {
+            background: radial-gradient(450px circle at var(--mouse-x, 50%) var(--mouse-y, 50%), rgba(99, 102, 241, 0.18), transparent 45%);
+        }
+        .spotlight-card:hover::after {
+            opacity: 1;
         }
 
         /* Subject Stat Cards */

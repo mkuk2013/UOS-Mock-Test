@@ -1,9 +1,12 @@
-const CACHE_NAME = 'uos-mock-portal-v1.1';
+const CACHE_NAME = 'uos-mock-portal-v1.2';
 const STATIC_ASSETS = [
     './',
     './index.html',
     './admin.html',
+    './past-paper.html',
     './auth.js',
+    './uos-past-papers-data.js',
+    './uos-advanced-tools.js',
     './manifest.json',
     './site.webmanifest',
     './uos-logo.png',
@@ -59,6 +62,19 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     // Only handle http/https requests
     if (!event.request.url.startsWith('http')) return;
+
+    // Route alias: /admin or /admin/ -> admin.html
+    const reqUrl = new URL(event.request.url);
+    if (reqUrl.pathname.endsWith('/admin') || reqUrl.pathname.endsWith('/admin/')) {
+        const adminUrl = new URL('admin.html', self.location.origin).href;
+        event.respondWith(
+            caches.match(adminUrl)
+                .then(cached => cached || caches.match('./admin.html'))
+                .then(cached => cached || fetch(adminUrl))
+                .catch(() => caches.match('./admin.html'))
+        );
+        return;
+    }
 
     event.respondWith(
         caches.match(event.request).then((cachedResponse) => {

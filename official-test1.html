@@ -442,7 +442,7 @@
             { "id": 40, "subject": "General Knowledge", "topic": "Pakistani Politics", "question": "The Parliament of Pakistan is officially named:", "options": ["Majles-e Shurá-ye Eslámi", "Majlis Ash-Shura", "Majlis-e-Shoora", "Shura-e-Milli"], "correct": 2 },
             { "id": 41, "subject": "General Knowledge", "topic": "Geography", "question": "Which of the following countries is connected with Pakistan via Taftan Border?", "options": ["Afghanistan", "China", "Iran", "India"], "correct": 2 },
             { "id": 42, "subject": "General Knowledge", "topic": "Defense", "question": "Which of the following is the name given to a Pakistani missile?", "options": ["Shamshiri", "Hydri", "Akbari", "Ghouri"], "correct": 3 },
-            { "id": 43, "subject": "General Knowledge", "topic": "History", "question": "The Operation Bunyan-un-Marsoos against India was launched in:", "options": ["April-2025", "May-2025", "June-2025", "July-2025"], "correct": -1 },
+            { "id": 43, "subject": "General Knowledge", "topic": "History", "question": "The Operation Bunyan-un-Marsoos against India was launched in:", "options": ["April-2025", "May-2025", "June-2025", "July-2025"], "correct": 1 },
             { "id": 44, "subject": "General Knowledge", "topic": "History", "question": "Akbar the Great Mughal Emperor was born in:", "options": ["Umer Kot", "Agra", "Lucknow", "Delhi"], "correct": 0 },
             { "id": 45, "subject": "General Knowledge", "topic": "History", "question": "Elsa Kazi, commonly known as 'Mother Elsa', wife of Allama I.I. Kazi was born in:", "options": ["France", "England", "Germany", "Pakistan"], "correct": 2 },
             { "id": 46, "subject": "General Knowledge", "topic": "History", "question": "'Shams-ul-Ulama' title was awarded to:", "options": ["Dr. Umer Bin Mohammad Daud Pota", "Mirza Qaleech Baig", "Allama I.I. Kazi", "Both (a) and (b)"], "correct": 3 },
@@ -650,7 +650,7 @@
         function submitTest() {
             const modalEl = document.getElementById('confirmSubmitModal');
             if (modalEl) {
-                const confirmModal = new bootstrap.Modal(modalEl);
+                const confirmModal = bootstrap.Modal.getOrCreateInstance(modalEl);
                 confirmModal.show();
             } else {
                 finalizeTest();
@@ -660,8 +660,12 @@
         function confirmFinalSubmit() {
             const modalEl = document.getElementById('confirmSubmitModal');
             if (modalEl) {
-                const modalInstance = bootstrap.Modal.getInstance(modalEl);
-                if (modalInstance) modalInstance.hide();
+                try {
+                    const modalInstance = bootstrap.Modal.getInstance(modalEl);
+                    if (modalInstance) modalInstance.hide();
+                } catch (e) {
+                    console.warn(e);
+                }
             }
             finalizeTest();
         }
@@ -673,6 +677,7 @@
         
         function finalizeTest() {
             testEndTime = new Date();
+            if (!testStartTime) testStartTime = new Date();
             clearInterval(timerInterval);
             calculateResults();
         }
@@ -686,8 +691,8 @@
             });
             
             const totalAttempted = Object.keys(answers).length;
-            const isPassed = correct >= 50;
-            const timeTaken = Math.floor((testEndTime - testStartTime) / 1000);
+            const isPassed = correct >= 40;
+            const timeTaken = Math.max(1, Math.floor((testEndTime - testStartTime) / 1000));
             
             // Ensure testResults is properly set
             window.testResults = {
@@ -699,6 +704,15 @@
                 timeTaken,
                 answers: answers // Make sure answers are included
             };
+
+            // Safely record to Candidate Studio
+            if (typeof UOSAdvanced !== 'undefined' && UOSAdvanced.progress) {
+                try {
+                    UOSAdvanced.progress.recordTestResult('UOS Pre-Entry Test 2025 Official Paper', correct, totalActualQuestions);
+                } catch (e) {
+                    console.warn("Could not record test result:", e);
+                }
+            }
             
             displayResults();
         }
@@ -727,7 +741,10 @@
                     <div class="col-md-6"><h5><i class="fas fa-percentage me-2"></i>Percentage</h5><p class="lead">${(r.obtainedMarks / r.totalMarks * 100).toFixed(2)}%</p></div>
                 </div>`;
             
-            new bootstrap.Modal(document.getElementById('resultModal')).show();
+            const resModalEl = document.getElementById('resultModal');
+            if (resModalEl) {
+                bootstrap.Modal.getOrCreateInstance(resModalEl).show();
+            }
         }
 
         function retakeTest() {

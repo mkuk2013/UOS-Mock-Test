@@ -328,6 +328,7 @@
         let timerInterval = null;
         let testStartTime = null;
         let testEndTime = null;
+        let paperData = null;
 
         // Extract Year from URL
         const urlParams = new URLSearchParams(window.location.search);
@@ -339,25 +340,48 @@
         // Initialize Exam Data
         document.addEventListener('DOMContentLoaded', function() {
             if (currentStudent) {
-                document.getElementById('candidateNameText').textContent = currentStudent.name || currentStudent.username;
+                const nameEl = document.getElementById('candidateNameText');
+                if (nameEl) {
+                    nameEl.textContent = currentStudent.name || currentStudent.username;
+                }
             }
 
-            // Load Past Paper Data
-            const paperData = UOSPastPapers.getPaper(currentYear);
-            document.getElementById('headerPaperTitle').textContent = `UOS Pre-Entry Test ${currentYear} Past Paper`;
-            document.getElementById('headerPaperSubtitle').textContent = `Official Solved Archive • 100 Questions • 90 Minutes`;
-            document.getElementById('pageTitle').textContent = `UOS Past Paper ${currentYear} • Sindh University Portal`;
+            // Load Past Paper Data safely
+            paperData = (typeof UOSPastPapers !== 'undefined') ? UOSPastPapers.getPaper(currentYear) : null;
+            if (!paperData) {
+                paperData = {
+                    info: { year: currentYear, title: `UOS Pre-Entry Test ${currentYear} Past Paper`, duration: "90 minutes" },
+                    questions: {}
+                };
+            }
+
+            const title = (paperData.info && paperData.info.title) ? paperData.info.title : `UOS Pre-Entry Test ${currentYear} Past Paper`;
+            const headerTitleEl = document.getElementById('headerPaperTitle');
+            const headerSubEl = document.getElementById('headerPaperSubtitle');
+            const pageTitleEl = document.getElementById('pageTitle');
+
+            if (headerTitleEl) headerTitleEl.textContent = title;
+            if (headerSubEl) headerSubEl.textContent = `Official Solved Archive • 100 Questions • 90 Minutes`;
+            if (pageTitleEl) pageTitleEl.textContent = `${title} • Sindh University Portal`;
 
             // Flatten questions into sequential 1 to 100 array
             flatQuestions = [];
             const subjects = ["English", "General Knowledge", "General Science", "Simple Arithmetic", "Simple I.Q."];
             subjects.forEach(sub => {
-                if (paperData.questions[sub]) {
+                if (paperData.questions && paperData.questions[sub]) {
                     paperData.questions[sub].forEach(q => flatQuestions.push(q));
                 }
             });
 
-            // If flatQuestions is not 100, ensure exactly 100 questions exist
+            // Fallback if subjects had different casing or structure
+            if (flatQuestions.length === 0 && paperData.questions) {
+                Object.values(paperData.questions).forEach(arr => {
+                    if (Array.isArray(arr)) {
+                        arr.forEach(q => flatQuestions.push(q));
+                    }
+                });
+            }
+
             console.log(`[Exam] Loaded ${flatQuestions.length} questions for year ${currentYear}`);
 
             // Build Palette & Render first question
@@ -371,11 +395,17 @@
             testStartTime = new Date();
             const timerEl = document.getElementById('timer');
 
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+
             timerInterval = setInterval(() => {
                 timeRemaining--;
                 if (timeRemaining <= 0) {
                     clearInterval(timerInterval);
-                    timerEl.textContent = "00:00";
+                    timerInterval = null;
+                    if (timerEl) timerEl.textContent = "00:00";
                     alert("Time's up! Your examination is being submitted automatically.");
                     confirmFinalSubmit();
                     return;
@@ -383,62 +413,80 @@
 
                 const minutes = Math.floor(timeRemaining / 60);
                 const seconds = timeRemaining % 60;
-                timerEl.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                if (timerEl) {
+                    timerEl.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                }
             }, 1000);
         }
 
         // Render Question
         function renderQuestion(index) {
+            if (!flatQuestions || flatQuestions.length === 0) return;
             if (index < 0 || index >= flatQuestions.length) return;
             currentIndex = index;
             const q = flatQuestions[index];
 
-            document.getElementById('currentQuestionNum').textContent = index + 1;
-            document.getElementById('subjectBadge').textContent = q.subject;
-            document.getElementById('topicBadge').textContent = q.topic || "General";
+            const currentNumEl = document.getElementById('currentQuestionNum');
+            const subBadgeEl = document.getElementById('subjectBadge');
+            const topicBadgeEl = document.getElementById('topicBadge');
+
+            if (currentNumEl) currentNumEl.textContent = index + 1;
+            if (subBadgeEl) subBadgeEl.textContent = q.subject || "General";
+            if (topicBadgeEl) topicBadgeEl.textContent = q.topic || "General";
 
             // Flag state
             const flagBtn = document.getElementById('flagBtn');
-            if (flaggedIndices.has(index)) {
-                flagBtn.classList.remove('btn-warning');
-                flagBtn.classList.add('btn-danger');
-                flagBtn.innerHTML = '<i class="fas fa-flag text-white me-1"></i> Flagged';
-            } else {
-                flagBtn.classList.remove('btn-danger');
-                flagBtn.classList.add('btn-warning');
-                flagBtn.innerHTML = '<i class="fas fa-flag me-1"></i> Flag';
+            if (flagBtn) {
+                if (flaggedIndices.has(index)) {
+                    flagBtn.classList.remove('btn-warning');
+                    flagBtn.classList.add('btn-danger');
+                    flagBtn.innerHTML = '<i class="fas fa-flag text-white me-1"></i> Flagged';
+                } else {
+                    flagBtn.classList.remove('btn-danger');
+                    flagBtn.classList.add('btn-warning');
+                    flagBtn.innerHTML = '<i class="fas fa-flag me-1"></i> Flag';
+                }
             }
 
             // Question Statement
-            document.getElementById('questionContent').innerHTML = `${index + 1}. ${q.question}`;
+            const questionContentEl = document.getElementById('questionContent');
+            if (questionContentEl) {
+                questionContentEl.innerHTML = `${index + 1}. ${q.question}`;
+            }
 
             // Options
             const optionsContainer = document.getElementById('optionsContent');
-            optionsContainer.innerHTML = '';
-            const optionLabels = ["A", "B", "C", "D"];
+            if (optionsContainer) {
+                optionsContainer.innerHTML = '';
+                const optionLabels = ["A", "B", "C", "D"];
 
-            q.options.forEach((opt, optIdx) => {
-                const isSelected = userAnswers[index] === optIdx;
-                const pill = document.createElement('div');
-                pill.className = `option-pill ${isSelected ? 'selected' : ''}`;
-                pill.innerHTML = `
-                    <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-bold flex items-center justify-center me-3 shrink-0 ${isSelected ? 'bg-blue-600 text-white' : ''}">
-                        ${optionLabels[optIdx]}
-                    </span>
-                    <span class="flex-1">${opt}</span>
-                `;
-                pill.onclick = () => selectOption(index, optIdx);
-                optionsContainer.appendChild(pill);
-            });
+                (q.options || []).forEach((opt, optIdx) => {
+                    const isSelected = userAnswers[index] === optIdx;
+                    const pill = document.createElement('div');
+                    pill.className = `option-pill ${isSelected ? 'selected' : ''}`;
+                    pill.innerHTML = `
+                        <span class="w-7 h-7 rounded-lg bg-slate-100 text-slate-800 font-bold flex items-center justify-center me-3 shrink-0 ${isSelected ? 'bg-blue-600 text-white' : ''}">
+                            ${optionLabels[optIdx] || optIdx + 1}
+                        </span>
+                        <span class="flex-1">${opt}</span>
+                    `;
+                    pill.onclick = () => selectOption(index, optIdx);
+                    optionsContainer.appendChild(pill);
+                });
+            }
 
             // Nav buttons
-            document.getElementById('prevBtn').disabled = (index === 0);
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const submitBtn = document.getElementById('submitBtn');
+
+            if (prevBtn) prevBtn.disabled = (index === 0);
             if (index === flatQuestions.length - 1) {
-                document.getElementById('nextBtn').style.display = 'none';
-                document.getElementById('submitBtn').style.display = 'inline-block';
+                if (nextBtn) nextBtn.style.display = 'none';
+                if (submitBtn) submitBtn.style.display = 'inline-block';
             } else {
-                document.getElementById('nextBtn').style.display = 'inline-block';
-                document.getElementById('submitBtn').style.display = 'none';
+                if (nextBtn) nextBtn.style.display = 'inline-block';
+                if (submitBtn) submitBtn.style.display = 'none';
             }
 
             // Update Palette Active State
@@ -446,7 +494,7 @@
 
             // Re-render MathJax if present
             if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise();
+                window.MathJax.typesetPromise().catch(() => {});
             }
         }
 
@@ -482,6 +530,7 @@
         // Question Palette
         function renderPalette() {
             const palette = document.getElementById('questionPalette');
+            if (!palette) return;
             palette.innerHTML = '';
 
             flatQuestions.forEach((_, idx) => {
@@ -513,65 +562,97 @@
 
         // Submit Dialog
         function submitTest() {
-            const modal = new bootstrap.Modal(document.getElementById('confirmSubmitModal'));
-            modal.show();
+            const modalEl = document.getElementById('confirmSubmitModal');
+            if (modalEl) {
+                const modal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                modal.show();
+            } else {
+                confirmFinalSubmit();
+            }
         }
 
         // Confirm Final Submit & Score Calculation
         function confirmFinalSubmit() {
-            clearInterval(timerInterval);
+            if (timerInterval) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
             testEndTime = new Date();
 
             // Hide confirmation modal
             const confirmModalEl = document.getElementById('confirmSubmitModal');
-            const confirmModal = bootstrap.Modal.getInstance(confirmModalEl);
-            if (confirmModal) confirmModal.hide();
+            if (confirmModalEl) {
+                try {
+                    const confirmModal = bootstrap.Modal.getInstance(confirmModalEl);
+                    if (confirmModal) confirmModal.hide();
+                } catch (e) {
+                    console.warn("Could not hide confirm submit modal:", e);
+                }
+            }
 
             // Calculate Score & Subject breakdown
             let totalCorrect = 0;
             const subjectStats = {};
 
             flatQuestions.forEach((q, idx) => {
-                if (!subjectStats[q.subject]) {
-                    subjectStats[q.subject] = { correct: 0, total: 0 };
+                const sub = q.subject || "General";
+                if (!subjectStats[sub]) {
+                    subjectStats[sub] = { correct: 0, total: 0 };
                 }
-                subjectStats[q.subject].total++;
+                subjectStats[sub].total++;
 
                 if (userAnswers[idx] === q.correct) {
                     totalCorrect++;
-                    subjectStats[q.subject].correct++;
+                    subjectStats[sub].correct++;
                 }
             });
 
-            const percentage = Math.round((totalCorrect / flatQuestions.length) * 100);
+            const totalQ = flatQuestions.length || 100;
+            const percentage = Math.round((totalCorrect / totalQ) * 100);
             const isPassed = percentage >= 40;
 
-            // Record to Candidate Studio Progress History
-            if (typeof UOSAdvanced !== 'undefined') {
-                UOSAdvanced.progress.recordTestResult(
-                    paperData.title,
-                    totalCorrect,
-                    flatQuestions.length,
-                    {
-                        english: (subjectStats['English'] ? subjectStats['English'].correct : 0),
-                        science: (subjectStats['General Science'] ? subjectStats['General Science'].correct : 0),
-                        gk: (subjectStats['General Knowledge'] ? subjectStats['General Knowledge'].correct : 0),
-                        math: (subjectStats['Simple Arithmetic'] ? subjectStats['Simple Arithmetic'].correct : 0),
-                        iq: (subjectStats['Intelligence'] ? subjectStats['Intelligence'].correct : 0)
-                    }
-                );
+            const paperTitle = (paperData && paperData.info && paperData.info.title) 
+                ? paperData.info.title 
+                : `UOS Pre-Entry Test ${currentYear} Past Paper`;
 
-                if (isPassed) {
-                    UOSAdvanced.sound.fanfare();
-                    if (typeof confetti === 'function') {
-                        confetti({
-                            particleCount: 120,
-                            spread: 80,
-                            origin: { y: 0.6 }
-                        });
+            // Record to Candidate Studio Progress History safely
+            if (typeof UOSAdvanced !== 'undefined' && UOSAdvanced.progress) {
+                try {
+                    UOSAdvanced.progress.recordTestResult(
+                        paperTitle,
+                        totalCorrect,
+                        totalQ,
+                        {
+                            english: (subjectStats['English'] ? subjectStats['English'].correct : 0),
+                            science: (subjectStats['General Science'] ? subjectStats['General Science'].correct : 0),
+                            gk: (subjectStats['General Knowledge'] ? subjectStats['General Knowledge'].correct : 0),
+                            math: (subjectStats['Simple Arithmetic'] ? subjectStats['Simple Arithmetic'].correct : 0),
+                            iq: (subjectStats['Simple I.Q.'] ? subjectStats['Simple I.Q.'].correct : (subjectStats['Intelligence'] ? subjectStats['Intelligence'].correct : 0))
+                        }
+                    );
+                } catch (e) {
+                    console.error("Error recording test result in UOSAdvanced:", e);
+                }
+
+                try {
+                    if (isPassed) {
+                        if (UOSAdvanced.sound && typeof UOSAdvanced.sound.fanfare === 'function') {
+                            UOSAdvanced.sound.fanfare();
+                        }
+                        if (typeof confetti === 'function') {
+                            confetti({
+                                particleCount: 120,
+                                spread: 80,
+                                origin: { y: 0.6 }
+                            });
+                        }
+                    } else {
+                        if (UOSAdvanced.sound && typeof UOSAdvanced.sound.wrong === 'function') {
+                            UOSAdvanced.sound.wrong();
+                        }
                     }
-                } else {
-                    UOSAdvanced.sound.wrong();
+                } catch (e) {
+                    console.warn("Sound effect error:", e);
                 }
             }
 
@@ -581,7 +662,7 @@
                     <div class="inline-flex items-center space-x-2 px-4 py-1.5 rounded-full text-xs font-black uppercase mb-3 ${isPassed ? 'bg-emerald-100 text-emerald-800' : 'bg-red-100 text-red-800'}">
                         ${isPassed ? '✓ Passed (Qualified)' : '✗ Below Passing Score (Needs Review)'}
                     </div>
-                    <div class="font-heading font-black text-5xl text-slate-900 mb-1">${totalCorrect} <span class="text-2xl text-slate-400">/ ${flatQuestions.length}</span></div>
+                    <div class="font-heading font-black text-5xl text-slate-900 mb-1">${totalCorrect} <span class="text-2xl text-slate-400">/ ${totalQ}</span></div>
                     <p class="text-xs text-slate-500 font-bold">Overall Score: ${percentage}% • Minimum Passing: 40%</p>
                 </div>
 
@@ -589,7 +670,7 @@
                     <h6 class="font-heading font-black text-xs text-slate-700 uppercase tracking-wider mb-2">Subject Performance Breakdown</h6>
                     ${Object.keys(subjectStats).map(sub => {
                         const s = subjectStats[sub];
-                        const subPct = Math.round((s.correct / s.total) * 100);
+                        const subPct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
                         return `
                             <div>
                                 <div class="flex justify-between text-xs font-bold mb-1">
@@ -605,9 +686,16 @@
                 </div>
             `;
 
-            document.getElementById('resultContent').innerHTML = resultHtml;
-            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
-            resultModal.show();
+            const resultContentEl = document.getElementById('resultContent');
+            if (resultContentEl) {
+                resultContentEl.innerHTML = resultHtml;
+            }
+
+            const resultModalEl = document.getElementById('resultModal');
+            if (resultModalEl) {
+                const resultModal = bootstrap.Modal.getOrCreateInstance(resultModalEl);
+                resultModal.show();
+            }
         }
 
         // Answer Review Modal
@@ -630,23 +718,30 @@
                         </div>
                         <p class="font-bold text-slate-900 text-sm mb-3">${q.question}</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-                            ${q.options.map((opt, oIdx) => {
+                            ${(q.options || []).map((opt, oIdx) => {
                                 let optClass = 'bg-white border-slate-200 text-slate-700';
                                 if (oIdx === q.correct) optClass = 'bg-emerald-600 text-white font-bold border-emerald-600';
                                 else if (oIdx === userChoice) optClass = 'bg-red-600 text-white font-bold border-red-600';
-                                return `<div class="p-2.5 rounded-xl border ${optClass}"><strong>${optionLetters[oIdx]}.</strong> ${opt}</div>`;
+                                return `<div class="p-2.5 rounded-xl border ${optClass}"><strong>${optionLetters[oIdx] || oIdx + 1}.</strong> ${opt}</div>`;
                             }).join('')}
                         </div>
                     </div>
                 `;
             });
 
-            document.getElementById('reviewContent').innerHTML = reviewHtml;
-            const reviewModal = new bootstrap.Modal(document.getElementById('reviewModal'));
-            reviewModal.show();
+            const reviewContentEl = document.getElementById('reviewContent');
+            if (reviewContentEl) {
+                reviewContentEl.innerHTML = reviewHtml;
+            }
+
+            const reviewModalEl = document.getElementById('reviewModal');
+            if (reviewModalEl) {
+                const reviewModal = bootstrap.Modal.getOrCreateInstance(reviewModalEl);
+                reviewModal.show();
+            }
 
             if (window.MathJax && window.MathJax.typesetPromise) {
-                window.MathJax.typesetPromise();
+                window.MathJax.typesetPromise().catch(() => {});
             }
         }
 
@@ -662,11 +757,11 @@
             const progress = document.getElementById('pdfProgress');
             const progressFill = document.getElementById('progressFill');
             const progressText = document.getElementById('progressText');
-            progress.style.display = 'flex';
+            if (progress) progress.style.display = 'flex';
 
             try {
-                progressFill.style.width = '30%';
-                progressText.textContent = 'Building Examination PDF Layout...';
+                if (progressFill) progressFill.style.width = '30%';
+                if (progressText) progressText.textContent = 'Building Examination PDF Layout...';
 
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
@@ -693,18 +788,18 @@
 
                     const userChoice = userAnswers[idx];
                     const optLetters = ["A", "B", "C", "D"];
-                    const correctLetter = optLetters[q.correct];
-                    const userLetter = userChoice !== undefined ? optLetters[userChoice] : "None";
+                    const correctLetter = (q.correct >= 0 && q.correct < optLetters.length) ? optLetters[q.correct] : "N/A";
+                    const userLetter = userChoice !== undefined ? (optLetters[userChoice] || userChoice) : "None";
 
                     doc.setFont('Helvetica', 'bold');
                     doc.setFontSize(9);
-                    const cleanQ = q.question.replace(/<[^>]*>?/gm, '');
-                    doc.text(`${idx + 1}. [${q.subject}] ${cleanQ}`, 14, y, { maxWidth: 180 });
+                    const cleanQ = (q.question || '').replace(/<[^>]*>?/gm, '');
+                    doc.text(`${idx + 1}. [${q.subject || 'General'}] ${cleanQ}`, 14, y, { maxWidth: 180 });
                     y += 6;
 
                     doc.setFont('Helvetica', 'normal');
                     doc.setFontSize(8);
-                    const optsText = q.options.map((o, i) => `${optLetters[i]}) ${o}`).join("   |   ");
+                    const optsText = (q.options || []).map((o, i) => `${optLetters[i] || i + 1}) ${o}`).join("   |   ");
                     doc.text(optsText, 18, y, { maxWidth: 175 });
                     y += 5;
 
@@ -713,15 +808,15 @@
                     y += 7;
                 });
 
-                progressFill.style.width = '100%';
-                progressText.textContent = 'Downloading PDF...';
+                if (progressFill) progressFill.style.width = '100%';
+                if (progressText) progressText.textContent = 'Downloading PDF...';
                 doc.save(`UOS_Past_Paper_${currentYear}_Report.pdf`);
 
-                setTimeout(() => { progress.style.display = 'none'; }, 800);
+                setTimeout(() => { if (progress) progress.style.display = 'none'; }, 800);
             } catch (err) {
                 console.error("PDF generation failed:", err);
                 alert("Error generating PDF: " + err.message);
-                progress.style.display = 'none';
+                if (progress) progress.style.display = 'none';
             }
         }
     </script>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="refresh" content="0; url=../admin.html">
+    <title>Redirecting to UOS Admin Portal...</title>
+    <script>
+        // Seamless instant redirect to admin.html preserving any query parameters or hash
+        var target = '../admin.html' + window.location.search + window.location.hash;
+        window.location.replace(target);
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            background: #090d1a;
+            color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .box {
+            text-align: center;
+            padding: 2.5rem;
+            background: #111827;
+            border: 1px solid #374151;
+            border-radius: 1.5rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            max-width: 420px;
+            width: 90%;
+        }
+        .icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        h2 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1.25rem;
+            color: #facc15;
+        }
+        p {
+            margin: 0 0 1.5rem 0;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        a.btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #0f172a;
+            font-weight: 800;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-size: 0.95rem;
+            transition: opacity 0.2s;
+        }
+        a.btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <div class="icon">🛡️</div>
+        <h2>Admin Portal Redirect</h2>
+        <p>Loading University of Sindh Mock Portal Admin Dashboard...</p>
+        <a href="../admin.html" class="btn">Click Here to Open Admin</a>
+    </div>
+</body>
+</html>
